@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Conferences on arkadiusz wasniewski blog</title>
+    <link>https://awasn.github.io/tags/conferences/</link>
+    <description>Recent content in Conferences on arkadiusz wasniewski blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 30 Mar 2009 11:01:00 +0200</lastBuildDate>
+    
+	<atom:link href="https://awasn.github.io/tags/conferences/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Communities to Communities – nowy adres witryny</title>
+      <link>https://awasn.github.io/communities-to-communities-nowy-adres-witryny/</link>
+      <pubDate>Mon, 30 Mar 2009 11:01:00 +0200</pubDate>
+      
+      <guid>https://awasn.github.io/communities-to-communities-nowy-adres-witryny/</guid>
+      <description>Chciałbym poinformować, iż nastąpiła zmiana adresu Communities to Communities. Witryna konferencji dostępna jest obecnie pod adresem http://communities2communities.org.pl. Przepraszamy za zamieszanie i utrudnienia tym spowodowane.</description>
+    </item>
+    
+    <item>
+      <title>C2C 2008 - zmiana adresu!</title>
+      <link>https://awasn.github.io/c2c-2008-zmiana-adresu/</link>
+      <pubDate>Thu, 20 Nov 2008 10:57:00 +0100</pubDate>
+      
+      <guid>https://awasn.github.io/c2c-2008-zmiana-adresu/</guid>
+      <description>Nastąpiła zmiana adresu strony konferencji C2C 2008. Nowy adres to http://2008.c2c.org.pl. Można również skorzystać z adresu http://c2c.org.pl. Poprzedni adres niestety wygasł i nie zdążyliśmy go ponownie zarejestrować. Został już podkupiony :-(</description>
+    </item>
+    
+  </channel>
+</rss>

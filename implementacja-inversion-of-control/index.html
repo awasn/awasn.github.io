@@ -1,0 +1,423 @@
+<!DOCTYPE HTML>
+<html lang="pl-pl">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="generator" content="Hugo 0.54.0" />
+        <meta name="description" content="Własna implementacja kontenera Inversion of Control w .NET C#" />
+        <title>Implementacja Inversion of Control - arkadiusz wasniewski blog</title>
+        <link rel="canonical" href="https://awasn.github.io/implementacja-inversion-of-control/">
+        <link rel="prev" title="Refaktoryzacja metod zwrotnych" href="https://awasn.github.io/refaktoryzacja-metod-zwrotnych/">
+        <link rel="next" title="Wirtualizacja aplikacji testowych" href="https://awasn.github.io/wirtualizacja-aplikacji-testowych/">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css" integrity="sha256-Q0zCrUs2IfXWYx0uMKJfG93CvF6oVII21waYsAV4/8Q=" crossorigin="anonymous" />
+        
+        
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
+        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.f635c2298033f6f9947349ea417d9e9d94017493351f739bf1b756d5b5bccf61.css" integrity="sha256-9jXCKYAz9vmUc0nqQX2enZQBdJM1H3Ob8bdW1bW8z2E=" />
+
+    </head>
+    <body>
+        <header>
+            <nav class="container" >
+                <div class="pure-menu pure-menu-horizontal">
+                    <a class="pure-menu-heading pure-menu-link" href="https://awasn.github.io/">wasniewski</a>
+                    <ul class="right pure-menu-list">
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/blog/">blog</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/categories/">categories</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/tags/">tags</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/about/">about</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container">
+            
+    <aside class="post-published">
+        <p>This post was originally published on <a href="http://zine.net.pl/blogs/arkadiusz_wasniewski/archive/2008/08/24/implementacja-inversion-of-control.aspx" target="_blank">zine.net.pl</a> on 24 August 2008 11:49 CEST</p>
+    </aside>
+
+    <article>
+        <header>
+            <h1>Implementacja Inversion of Control</h1>
+                <div class="post-metadata">
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            24 August 2008 11:49 CEST
+            
+                &nbsp;
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon></svg>
+                17 September 2018 13:37 CEST
+            
+            &nbsp;
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            8 min read
+        </div>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+            <a href="https://awasn.github.io/categories/development">Development</a>
+            
+                &nbsp;
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+                <a href="https://awasn.github.io/tags/.net">.NET</a>, <a href="https://awasn.github.io/tags/.net-compact-framework">.NET Compact Framework</a>, <a href="https://awasn.github.io/tags/design-patterns">Design patterns</a>, <a href="https://awasn.github.io/tags/mobile">Mobile</a>
+            
+        </div>
+    </div>
+        </header>
+
+        
+
+<p>Jedną z cech dobrego oprogramowania są luźne powiązania pomiędzy klasami. Droga do tego celu ciężka i kręta. Bez dwóch zdań. Wśród technik i wzorców, które należy w tym celu stosować znajdują się fabryki (Factory) oraz lokalizatory usług (Service Locator), dzięki którym tworzeniem instancji obiektów czy implementacji zadanych interfejsów zajmują się wyspecjalizowane klasy. Z <a href="https://awasn.github.io/tworzenie-obiektow/" target="_blank">tworzeniem obiektów</a>, w kontekście wymienionych powyżej praktyk, związane są następujące koncepcje:</p>
+
+<ul>
+<li>Inversion of Control - instancje klas pobierane są z zewnętrznych zasobów;</li>
+<li>Dependency Injection - tworzenie instancji zleca się zewnętrznemu obiektowi (kontenerowi) znającemu zależności pomiędzy właściwymi klasami.</li>
+</ul>
+
+<p>Programista .NET chcący skorzystać z darmowych produktów IoC i DI ma do wyboru <a href="http://www.hanselman.com/blog/ListOfNETDependencyInjectionContainersIOC.aspx" target="_blank">wiele rozwiązań</a>. Przykładem może być <a href="http://structuremap.github.io" target="_blank">StructureMap</a>, którego autorem jest Jeremy Miller (prowadzi nota bene bardzo ciekawy <a href="https://jeremydmiller.com" target="_blank">blog</a>), czy też <a href="https://github.com/unitycontainer/unity" target="_blank">Unity</a> firmy Microsoft. W przypadku platformy .NET Compact Framework sytuacja nie wygląda już tak radośnie. Miesiące temu, kiedy poszukiwałem bezpłatnego kontenera mogącego działać w ramach aplikacji mobilnych, jedynym projektem był Mobile ObjectBuilder z <a href="http://www.codeplex.com/smartclient" target="_blank">Mobile Client Software Factory</a>, który podobnie jak w bibliotekach przeznaczonych na platformę .NET do oznaczania relacji pomiędzy klasami wykorzystywał atrybuty. Niestety rozwiązanie to nie satysfakcjonowało mnie. Między innymi z powodu wydajności.</p>
+
+<p>Z braku istniejących darmowych produktów przeznaczonych na platformę .NET Compact Framework postanowiłem zaimplementować własne rozwiązanie typu Inversion of Control. Miało ono spełniać następujące kryteria:</p>
+
+<ul>
+<li>Być wydajne i łatwe w użyciu;</li>
+<li>Używać jak najmniej refleksji;</li>
+<li>Nie używać plików konfiguracyjnych.</li>
+</ul>
+
+<p>Punkt pierwszy jest jasny i oczywisty. Pozostałe dwa założenia są konsekwencją znacznie mniejszych możliwości urządzeń mobilnych w zakresie mocy obliczeniowych czy zasobów pamięciowych w porównaniu z komputerami typu desktop, na których uruchamiana jest pełna wersja .NET. Ponieważ rozwiązanie przeznaczone było dla .NET Compact Framework, w projekcie nie zostały zupełnie uwzględnione takie kwestie jak wielowątkowość czy możliwość działania w ramach środowiska ASP.NET.</p>
+
+<p>Przy tworzeniu kontenera założyłem, iż programista jest podmiotem działania a nie przedmiotem (wiem co mówię, bo jestem politologiem). Innymi słowy założyłem, iż jest inteligentny. Stąd duża elastyczność przy konfigurowaniu rejestrowanego typu i do minimum ograniczone szukanie absurdów konfiguracyjnych. Zresztą w tym przypadku według mnie takie podejście jest z korzyścią dla czytelności i przejrzystości kodu.</p>
+
+<p>Efektem prac była biblioteka IoC nazwana dla uproszczenia&hellip; IoC. W zasobach do tego wpisu można znaleźć <a href="http://zine.net.pl/files/folders/1807/download.aspx" target="_blank">kody źródłowe</a> stworzonego rozwiązania. W dalszej części artykułu przedstawię możliwości biblioteki i opiszę w jaki sposób można z niej korzystać.</p>
+
+<p>Gwoli wyjaśnienia na koniec. Wcześniej w swoich projektach używałem <a href="https://awasn.github.io/dobre-praktyki-w-projektowaniu-aplikacji-mobilnych/" target="_blank">rozwiązania</a> opartego na wzorcu Service Locator.</p>
+
+<h2 id="ioc">IoC</h2>
+
+<p>Powstałe rozwiązanie IoC, w dalszej części nazywane również kontenerem, składa się z trzech klas, z których tylko dwie są bezpośrednio dostępne programiście, i typu wyliczeniowego:</p>
+
+<ul>
+<li><code>ObjectLocator</code> - główna klasa rozwiązania. Dostępna jako Singleton. Pozwala rejestrować typy i pobierać ich instancje;</li>
+<li><code>ObjectProfile</code> - klasa umożliwiająca skonfigurowanie rejestrowanego typu. Oparta o wzorzec Fluent Interface;</li>
+<li><code>ObjectCreator</code> - wewnętrzna klasa statyczna odpowiedzialna za tworzenie instancji zarejestrowanych typów;</li>
+<li><code>LifetimeStyle</code> - typ wyliczeniowy. Dozwolone wartości czasu życia obiektu.</li>
+</ul>
+
+    <figure itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
+        <img src="https://awasn.github.io/implementacja-inversion-of-control/images/IoC.png" alt="Implementacja Inversion of Control" itemprop="contentUrl">
+        <figcaption itemprop="caption"><h4>Implementacja Inversion of Control</h4></figcaption>
+    </figure>
+
+<p>Rozpoczęcie pracy z kontenerem polega na zarejestrowaniu typu. W najprostszej formie będzie to zarejestrowanie klasy:</p>
+
+<pre><code class="language-csharp">            ObjectLocator.Register&lt;ContactRepository&gt;();
+</code></pre>
+
+<p>Oczywiście w tym przypadku klasa nie może być abstrakcyjna ponieważ nie można utworzyć instancji takiej klasy.</p>
+
+<p>Aby móc zarejestrować interfejs, klasę abstrakcyjną czy też skonfigurować typ musimy skorzystać z bardziej wyrafinowanych metod. Aby uniknąć tworzenia wielu wersji metody rejestrującej wybrano wariant, w którym w czasie rejestracji przez metodę <code>Register</code> zwracany jest skojarzony z typem obiekt <code>ObjectProfile</code> umożliwiający konfigurację. Dzięki wzorcowi Fluent Interface (metody konfigurujące zwracają referencję do obiektu, który je zawiera) nie jest konieczne ustalanie poszczególnych właściwości tego obiektu. Wszystko można wykonać w czasie jednego wywołania. Zobaczmy więc jak wygląda rejestracja interfejsu:</p>
+
+<pre><code class="language-csharp">            ObjectLocator.Register&lt;IContactRepository&gt;().
+                WithType&lt;ContactRepository&gt;();
+</code></pre>
+
+<p>Parametrem metody <code>WithType</code> jest klasa, która implementuje rejestrowany typ. Parametr ten nie powinien być oczywiście klasą abstrakcyjną. W wywołaniu metody <code>Register</code> możliwe jest również skorzystanie z typów generic:</p>
+
+<pre><code class="language-csharp">            ObjectLocator.Register&lt;IRepository&lt;Contact&gt;&gt;().
+                WithType&lt;ContactRepository&gt;();
+</code></pre>
+
+<p>Identycznie jest w przypadku rejestrowania klas abstrakcyjnych.</p>
+
+<p>Domyślny czas życia obiektu w kontenerze to <code>LifetimeStyle.Singleton</code>, czyli wszystkie wywołania w kodzie będzie obsługiwała tylko jedna instancja klasy. Można oczywiście to zmienić tak, aby dla każdego wywołania tworzona była nowa instancja klasy:</p>
+
+<pre><code class="language-csharp">            ObjectLocator.Register&lt;IContactRepository&gt;().
+                WithType&lt;ContactRepository&gt;().
+                AsSingleCall();
+</code></pre>
+
+<p>Aby pobrać z kontenera instancję musimy wywołać metodę <code>GetInstance</code> podając w wywołaniu zarejestrowany typ. Poniżej wywołanie dla przypadku, kiedy zarejestrowaliśmy wcześniej interfejs:</p>
+
+<pre><code class="language-csharp">            var repository = ObjectLocator.GetInstance&lt;IContactRepository&gt;();
+</code></pre>
+
+<p>Oczywiście konstruktor obiektu, którego instancję tworzymy może zawierać parametry. Dla takich przypadków korzystamy z przeciążonej metody <code>GetInstance</code>:</p>
+
+<pre><code class="language-csharp">            var repository = ObjectLocator.GetInstance&lt;IContactRepository&gt;(
+                new object[] { new Database() });
+</code></pre>
+
+<p>W powyższym przykładzie przy tworzeniu obiektu korzystamy z konstruktora, który zawiera jeden parametr. Jeśli typ <code>Database</code> zostałby wcześniej zarejestrowany w kontenerze, możemy do konstruktora przekazać typ pobrany z IoC:</p>
+
+<pre><code class="language-csharp">            var repository = ObjectLocator.GetInstance&lt;IContactRepository&gt;(
+                new object[] { ObjectLocator.GetInstance&lt;Database&gt;() });
+</code></pre>
+
+<p>Wszystkie pokazane do tej pory wywołania metody <code>GetInstance</code> skutkowały utworzeniem instancji z wykorzystaniem refleksji, co nie zawsze jest dobrym rozwiązaniem. Dodatkowo wewnętrzna, statyczna klasa <code>ObjectCreator</code> może nie poradzić sobie w sytuacji kiedy klasa, której instancję chcemy utworzyć, posiada kilka konstruktorów o takiej samej liczbie parametrów i niektóre wartości przekazywane w wywołaniu metody <code>GetInstance</code> mają wartość <code>null</code>. Rozwiązaniem jest taka konfiguracja rejestrowanego typu, aby tworzenie instancji odbywało się poza kontenerem. Najprostszy sposób widzimy poniżej:</p>
+
+<pre><code class="language-csharp">            ObjectLocator.Register&lt;IContactRepository&gt;().
+                WithInstance(new ContactRepository());
+</code></pre>
+
+<p>Interfejs <code>IContactRepository</code> rejestrowany jest od razu z gotową instancją obiektu. Oczywiście powyższa konfiguracja ma sens tylko dla czasu życia obiektu <code>LifetimeStyle.Singleton</code> ponieważ przekazany obiekt będzie używany do obsługi wszystkich żądań.</p>
+
+<p>Zamiast przekazywać do kontenera gotowy obiekt, można proces tworzenia opóźnić do momentu, kiedy dana instancja rzeczywiście będzie potrzebna. Do tego służy metoda <code>CallWhenCreating</code> klasy <code>ObjectProfile</code> która jako parametr przyjmuje metodę zwrotną typu:</p>
+
+<pre><code class="language-csharp">            Func&lt;ObjectProfile&lt;TRegisteredAs&gt;, object[], TRegisteredAs&gt;
+</code></pre>
+
+<p>Delegat <code>Fun</code> wprowadzony w .NET 3.5 i zawierający powyższe parametry odpowiada następującemu delegatowi z .NET 2.0:</p>
+
+<pre><code class="language-csharp">            delegate TRegisteredAs ObjectCreatingCallback&lt;TRegisteredAs&gt;(
+                ObjectProfile&lt;TRegisteredAs&gt; profile, object[] parameters)
+                where TRegisteredAs : class;
+</code></pre>
+
+<p>Jak widzimy metoda tworząca otrzymuje z kontenera obiekt zawierający ustawienia zarejestrowanego typu oraz parametry dla konstruktora. Użycie nie jest skomplikowane. Najpierw wywołanie wykorzystujące delegat anonimowy:</p>
+
+<pre><code class="language-csharp">            ObjectLocator.Register&lt;IContactRepository&gt;().
+                WithType&lt;ContactRepository&gt;().
+                CallWhenCreating(
+                delegate(
+                    ObjectProfile&lt;IContactRepository&gt; profile,
+                    object[] parameters)
+                    {
+                        var database = (Database)parameters[0];
+                        return new ContactRepository(database);
+                    });
+</code></pre>
+
+<p>I wyrażenie lambda, nowość w ramach platformy .NET 3.5:</p>
+
+<pre><code class="language-csharp">            ObjectLocator.Register&lt;IContactRepository&gt;().
+                WithType&lt;ContactRepository&gt;().
+                CallWhenCreating((profile, parameters) =&gt;
+                    {
+                        var database = (Database)parameters[0];
+                        return new ContactRepository(database);
+                    });
+</code></pre>
+
+<p>Jeśli tworząc nowy obiekt nie potrzebujemy informacji dotyczących konfiguracji typu oraz nie przekazujemy do konstruktora wartości możemy w przypadku delegata pominąć parametry:</p>
+
+<pre><code class="language-csharp">            ObjectLocator.Register&lt;IContactRepository&gt;().
+                WithType&lt;ContactRepository&gt;().
+                CallWhenCreating(
+                delegate
+                    {
+                        return new ContactRepository();
+                    });
+</code></pre>
+
+<p>Ważna również jest możliwość wywołania zdefiniowanej metody zwrotnej po utworzenia obiektu. Przykładowo wskazane może być, aby dla każdego formularza w programie wstawić w tytule okna nazwę aplikacji, zdefiniować identyczne rozmiary itp. W celu zapewnienia spełnienia tych wymagań kontener zawiera metodę <code>CallWhenCreated</code> klasy <code>ObjectProfile</code> zadeklarowaną z następującym parametrem:</p>
+
+<pre><code class="language-csharp">            Action&lt;ObjectProfile&lt;TRegisteredAs&gt;, TRegisteredAs&gt;
+</code></pre>
+
+<p>Podobnie jak w przypadku metody zwrotnej wywoływanej w celu utworzenia obiektu, tak i tutaj delegat <code>Action</code> możemy przedstawić, jeśli chcielibyśmy korzystać z wcześniejszych wersji platformy .NET (zobacz uwagi na końcu notki), w postaci własnego delegata:</p>
+
+<pre><code class="language-csharp">            delegate void ObjectCreatedCallback&lt;TRegisteredAs&gt;(
+                ObjectProfile&lt;TRegisteredAs&gt; profile, TRegisteredAs instance)
+                where TRegisteredAs : class;
+</code></pre>
+
+<p>Tradycyjnie przykład zastosowania. Tym razem użyjemy zdefiniowanej metody zwrotnej:</p>
+
+<pre><code class="language-csharp">            ObjectLocator.Register&lt;IContactRepository&gt;().
+                WithType&lt;ContactRepository&gt;().
+                CallWhenCreated(RepositoryCreated);
+</code></pre>
+
+<p>Na koniec procesu rejestracji możemy sobie zażyczyć, aby instancja danego typu została od razu utworzona. Tę właściwość możemy wykorzystywać w przypadku dużych klas, które na pewno będą używane w czasie działania aplikacji. Oczywiście ma to sens jedynie w przypadku tych klas, dla których tylko jedna instancja będzie obsługiwała wszystkie żądania w programie. Dobrym przykładem są tutaj formularze. Poniżej stosowny przykład:</p>
+
+<pre><code class="language-csharp">            ObjectLocator.Register&lt;IContactRepository&gt;().
+                AsSingleton().
+                WithType&lt;ContactRepository&gt;().
+                AndBuildUp();
+</code></pre>
+
+<p>Oczywiście na tym etapie również istnieje możliwość przekazania do konstruktora klasy wymaganych wartości:</p>
+
+<pre><code class="language-csharp">            ObjectLocator.Register&lt;IContactRepository&gt;().
+                AsSingleton().
+                WithType&lt;ContactRepository&gt;().
+                AndBuildUp(new object[] { &quot;test&quot; });
+</code></pre>
+
+<p>Metoda <code>AndBuildUp</code> w przeciwieństwie do pozostałych metod klasy <code>ObjectProfile</code> zwraca utworzoną instancję klasy a nie wskazanie na obiekt konfigurujący.</p>
+
+<h2 id="w-praktyce">W praktyce</h2>
+
+<p>Najwłaściwsze miejsce konfiguracji kontenera to start programu. Osobiście korzystam z fabryki abstrakcyjnej, której konkretne implementacje decydują o sposobie działania programu np.:</p>
+
+<pre><code class="language-csharp">    internal abstract class ApplicationInitializer
+    {
+        /// &lt;summary&gt;
+        /// Rejestrowanie widoków.
+        /// &lt;/summary&gt;
+        public abstract void RegisterViews();
+
+        /// &lt;summary&gt;
+        /// Rejestracja fabryk abstrakcyjnych.
+        /// &lt;/summary&gt;
+        public abstract void RegisterFactories();
+
+        /// &lt;summary&gt;
+        /// Rejestracja usług - interfejsu pomiędzy modelem a prezentacją.
+        /// &lt;/summary&gt;
+        public abstract void RegisterServices();
+
+        /// &lt;summary&gt;
+        /// Rejestracja repozytoriów - klas umożliwiających dostęp do danych.
+        /// &lt;/summary&gt;
+        public abstract void RegisterRepositories();
+    }
+</code></pre>
+
+<p>Zastosowany podział, czyli nazewnictwo i przeznaczenie metod wytwórczych, wynika głównie ze wzorca <strong>Model-View-Presenter</strong> wykorzystywanego z lubością przeze mnie w aplikacjach. Poniżej kilka przykładowych rejestracji widoków, gdzie formularze są w programie traktowane jako interfejsy:</p>
+
+<pre><code class="language-csharp">        public override void RegisterViews()
+        {
+            ObjectLocator.Register&lt;IAuthenticateView&gt;().
+                WithType&lt;AuthenticateForm&gt;().
+                AsSingleCall().
+                CallWhenCreated(ViewCreated);
+            ObjectLocator.Register&lt;IDataGridView&gt;().
+                WithType&lt;DataGridForm&gt;().
+                CallWhenCreated(ViewCreated).
+                AndBuildUp();
+            ObjectLocator.Register&lt;IMessageView&gt;().
+                WithType&lt;MessageForm&gt;().
+                CallWhenCreated(ViewCreated);
+        }
+</code></pre>
+
+<p>Metoda <code>ViewCreated</code> pozwala na ustawienie parametrów wspólnych dla wszystkich formularzy takich jak widoczności wybranych kontrolek czy rozmiar. A tak wygląda rejestracja fabryk:</p>
+
+<pre><code class="language-csharp">        public override void RegisterFactories()
+        {
+            ObjectLocator.Register&lt;BusinessEntityFactory&gt;();
+            ObjectLocator.Register&lt;DataGridStyleBuilder&gt;();
+            ObjectLocator.Register&lt;DocumentHtmlFormatterFactory&gt;();
+        }
+</code></pre>
+
+<p>W powyższym kodzie wszystkie fabryki są jednocześnie klasami implementującymi. Domyślnie obiekt tworzony jest w czasie pierwszego wywołania i istnieje przez cały czas pracy aplikacji. Zauważmy, iż dzięki takiemu podejściu jedynym singletonem w naszym kodzie pozostanie kontener IoC!</p>
+
+<p>Usługi dostarczają do prezenterów model:</p>
+
+<pre><code class="language-csharp">        public override void RegisterServices()
+        {
+            ObjectLocator.Register&lt;IAuthenticateService&gt;().
+                WithType&lt;AuthenticateService&gt;().
+                AsSingleCall();
+            ObjectLocator.Register&lt;ICustomerService&gt;().
+                WithType&lt;CustomerService&gt;().
+                AsSingleCall();
+            ObjectLocator.Register&lt;ISalesService&gt;().
+                WithType&lt;SalesService&gt;().
+                AsSingleCall();
+        }
+</code></pre>
+
+<p>W przeciwieństwie do fabryk instancje usług będą tworzone dla każdego wywołania.</p>
+
+<p>Na koniec fragment odpowiadający za klasy umożliwiające dostęp do danych. Rejestracja powiązana jest z definicją delegatów odpowiedzialnych za tworzenie obiektów.</p>
+
+<pre><code class="language-csharp">        public override void RegisterRepositories()
+        {
+            ObjectLocator.Register&lt;Database&gt;().
+                AsSingleton().
+                CallWhenCreating(
+                delegate
+                    {
+                        return new Database(connectionString);
+                    });
+            ObjectLocator.Register&lt;ITransaction&gt;().
+                WithType&lt;Transaction&gt;().
+                AsSingleCall().
+                CallWhenCreating(
+                delegate
+                    {
+                        return new Transaction(
+                            ObjectLocator.Get&lt;Database&gt;());
+                    });
+
+            ObjectLocator.Register&lt;ICustomerRepository&gt;().
+                WithType&lt;CustomerRepository&gt;().
+                AsSingleCall().
+                CallWhenCreating(
+                delegate
+                    {
+                        return new CustomerRepository(
+                            new CustomerDAO(
+                                ObjectLocator.Get&lt;Database&gt;(),
+                                ObjectLocator.Get&lt;BusinessEntityFactory&gt;(),
+                                new PaymentMethodConverter()));
+                    });
+        }
+</code></pre>
+
+<h2 id="zakończenie">Zakończenie</h2>
+
+<p>Opisane powyżej rozwiązanie wykorzystuję z powodzeniem od bardzo dawna. I sprawdza się znakomicie. Udostępnione kody są oparte na nowej licencji BSD. Nie ma więc problemu aby, jeśli ktoś chce, wykorzystać zaprezentowaną przeze mnie implementację IoC we własnych rozwiązaniach - również komercyjnych. Z chęcią wysłucham również wszelkich uwag dotyczących przedstawionego rozwiązania.</p>
+
+<p>Jeśli chodzi o wersję platformy .NET i .NET Compact Framework to rozwiązanie zostało oparte o wydanie 3.5. Osoby, które chciałyby wykorzystać opisany kontener we wcześniejszych wersjach muszą zastąpić wyrażenia lambda delegatami, oraz wywołania <code>Action</code> oraz <code>Fun</code> podanymi przeze mnie odpowiednikami własnych delegatów. Oczywiście z powodu wykorzystywanych typów generic kontener ten nie będzie działać na platformie .NET 1.1.</p>
+
+<p>Pliki do artykułu:</p>
+
+<ul>
+<li><a href="http://zine.net.pl/files/folders/1807/download.aspx" target="_blank">IoC</a> - kody źródłowe.</li>
+</ul>
+
+<p>PS. Michał Grzegorzewski ogłosił jakiś czas temu <a href="http://zine.net.pl/blogs/mgrzeg/archive/2008/06/25/msdnforopensourceprojects.aspx" target="_blank">konkurs</a> na projekt Open Source z główną nagrodą w postaci MSDN w wersji Premium. Jeśli ktoś nie ma pomysłu na taki projekt to podpowiadam. Można spróbować rozbudować powyższe rozwiązanie o możliwość pracy w środowiskach wielowątkowych czy ASP.NET.</p>
+
+    </article>
+    <nav aria-label="Related posts">
+        <h4>Related Posts</h4>
+        <ul>
+            <li><a href="https://awasn.github.io/http-wlasny-serwer-komunikacji-cz1-wstep/">HTTP - Własny serwer komunikacji. Część #1 - Wstęp</a></li>
+            <li><a href="https://awasn.github.io/tworzenie-obiektow/">Tworzenie obiektów</a></li>
+            <li><a href="https://awasn.github.io/dobre-praktyki-w-projektowaniu-aplikacji-mobilnych/">Dobre praktyki w projektowaniu aplikacji mobilnych</a></li>
+            <li><a href="https://awasn.github.io/refaktoryzacja-metod-zwrotnych/">Refaktoryzacja metod zwrotnych</a></li>
+            <li><a href="https://awasn.github.io/range-t/">Range&lt;T&gt;</a></li>
+        </ul>
+    </nav>
+
+    <nav class="pure-g post-previous-next" aria-label="Previous and next posts">
+        <div class="pure-u-11-24 previous">
+            <a href="https://awasn.github.io/refaktoryzacja-metod-zwrotnych/" aria-label="Previous post"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg></span></a>
+            <a href="https://awasn.github.io/refaktoryzacja-metod-zwrotnych/">Refaktoryzacja metod zwrotnych</a>
+        </div>
+        <div class="pure-u-2-24">&nbsp;</div>
+        <div class="pure-u-11-24 next">
+            <a href="https://awasn.github.io/wirtualizacja-aplikacji-testowych/">Wirtualizacja aplikacji testowych</a>
+            <a href="https://awasn.github.io/wirtualizacja-aplikacji-testowych/" aria-label="Next post"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg></span></a>
+        </div>
+    </nav>
+
+
+        </main>
+
+        <footer>
+            <div class="center-aligned container">
+                <p>Copyright &copy; 2007-2019 Arkadiusz Waśniewski. All Rights Reserved.</p>
+            </div>
+        </footer>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/accesslog.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dockerfile.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dos.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/go.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/powershell.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/routeros.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/typescript.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/yaml.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/vbnet.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+</html>

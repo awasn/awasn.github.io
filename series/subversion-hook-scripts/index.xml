@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Subversion Hook Scripts on arkadiusz wasniewski blog</title>
+    <link>https://awasn.github.io/series/subversion-hook-scripts/</link>
+    <description>Recent content in Subversion Hook Scripts on arkadiusz wasniewski blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 22 May 2009 21:32:00 +0200</lastBuildDate>
+    
+	<atom:link href="https://awasn.github.io/series/subversion-hook-scripts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Hook scripts w PowerShell</title>
+      <link>https://awasn.github.io/hook-scripts-w-powershell/</link>
+      <pubDate>Fri, 22 May 2009 21:32:00 +0200</pubDate>
+      
+      <guid>https://awasn.github.io/hook-scripts-w-powershell/</guid>
+      <description>Dawno, dawno temu (choć może nie aż tak dawno) popełniłem notkę na temat skryptów przechwytujących (hook scripts) dla repozytoriów systemu kontroli wersji Subversion. Chodziło o uniemożliwienie zapisania w repozytorium zmian, jeśli nie został podany do nich żaden komentarz wyjaśniający. Proponowany kod wyglądał mniej więcej tak:
+private static int Main(string[] args) { string repositoryPath = args[0]; string transactionName = args[1]; var process = new Process(); process.StartInfo.FileName = &amp;quot;svnlook.exe&amp;quot;; process.StartInfo.Arguments = string.Format(&amp;quot;log -t {0} {1}&amp;quot;, transactionName, repositoryPath); process.</description>
+    </item>
+    
+    <item>
+      <title>Hook scripts w C#</title>
+      <link>https://awasn.github.io/hook-scripts-w-csharp/</link>
+      <pubDate>Tue, 12 Feb 2008 16:48:00 +0100</pubDate>
+      
+      <guid>https://awasn.github.io/hook-scripts-w-csharp/</guid>
+      <description>W strukturze katalogów składających się na repozytorium Subversion znajduje się folder o nazwie hooks. Zawiera on skrypty przechwytujące (hook scripts). Skrypty te wywoływane są w momencie zajścia w repozytorium określonego zdarzenia. Może to być np. żądanie zablokowania zasobu czy próba zatwierdzenia zmian. Przypisanie do zdarzenia następuje poprzez nadanie skryptowi odpowiedniej, rozpoznawalnej przez SVN nazwy. Mimo stosowania pojęcia skrypt, mogą to być tak naprawdę dowolne pliki wykonywalne. Nic nie stoi na przeszkodzie, abyśmy wykorzystali w tej roli język C#.</description>
+    </item>
+    
+  </channel>
+</rss>

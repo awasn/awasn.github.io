@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<html lang="pl-pl">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="generator" content="Hugo 0.54.0" />
+        <meta name="description" content="Ustawienia klienta pocztowego .NET SmtpClient w pliku konfiguracyjnym aplikacji" />
+        <title>SmtpClient i &lt;mailSettings&gt; - arkadiusz wasniewski blog</title>
+        <link rel="canonical" href="https://awasn.github.io/smtpclient-i-mailsettings/">
+        <link rel="prev" title="Wirtualizacja aplikacji testowych" href="https://awasn.github.io/wirtualizacja-aplikacji-testowych/">
+        <link rel="next" title="Bloggers Underground" href="https://awasn.github.io/bloggers-underground/">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css" integrity="sha256-Q0zCrUs2IfXWYx0uMKJfG93CvF6oVII21waYsAV4/8Q=" crossorigin="anonymous" />
+        
+        
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
+        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.f635c2298033f6f9947349ea417d9e9d94017493351f739bf1b756d5b5bccf61.css" integrity="sha256-9jXCKYAz9vmUc0nqQX2enZQBdJM1H3Ob8bdW1bW8z2E=" />
+
+    </head>
+    <body>
+        <header>
+            <nav class="container" >
+                <div class="pure-menu pure-menu-horizontal">
+                    <a class="pure-menu-heading pure-menu-link" href="https://awasn.github.io/">wasniewski</a>
+                    <ul class="right pure-menu-list">
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/blog/">blog</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/categories/">categories</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/tags/">tags</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/about/">about</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container">
+            
+    <aside class="post-published">
+        <p>This post was originally published on <a href="http://zine.net.pl/blogs/arkadiusz_wasniewski/archive/2008/09/18/smtpclient-i-mailsettings.aspx" target="_blank">zine.net.pl</a> on 18 September 2008 15:47 CEST</p>
+    </aside>
+
+    <article>
+        <header>
+            <h1>SmtpClient i &lt;mailSettings&gt;</h1>
+                <div class="post-metadata">
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            18 September 2008 15:47 CEST
+            
+                &nbsp;
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon></svg>
+                17 September 2018 13:21 CEST
+            
+            &nbsp;
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            1 min read
+        </div>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+            <a href="https://awasn.github.io/categories/development">Development</a>
+            
+                &nbsp;
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+                <a href="https://awasn.github.io/tags/.net">.NET</a>
+            
+        </div>
+    </div>
+        </header>
+
+        <p>Czasami małe rzeczy sprawiają dużo radości. Jedną z nich jest możliwość ustawienia klienta pocztowego <code>SmptClient</code> poprzez wpisy w pliku konfiguracyjnym aplikacji. Rozważmy przykład:</p>
+
+<pre><code class="language-csharp">            string mailAddresses = ConfigurationManager.
+                AppSettings[&quot;mailAddresses&quot;];
+            if (string.IsNullOrEmpty(mailAddresses)){
+                return;
+            }
+
+            MailMessage message = new MailMessage();
+            message.From = new MailAddress(&quot;wnioski@homski.pl&quot;, &quot;Wnioski&quot;);
+            foreach (string mailAddress in mailAddresses.Split(';')){
+                message.To.Add(new MailAddress(mailAddress));
+            }
+            message.SubjectEncoding = Encoding.UTF8;
+            message.Subject = &quot;Tytuł wiadomości&quot;;
+            message.BodyEncoding = Encoding.UTF8;
+            message.Body = &quot;Treść wiadomości&quot;;
+
+            SmtpClient client = new SmtpClient();
+            client.Send(message);
+</code></pre>
+
+<p>Z pliku <strong>config</strong> aplikacji pobieram informację o adresach, do których należy pocztę wysłać. Następnie buduję wiadomość i wysyłam. Nie konfiguruję w kodzie programu zupełnie danych serwera SMTP, który posłuży do wysłania poczty. Zamiast tego pozwalam klasie <code>SmptClient</code> na samodzielne pobranie tych informacji z konfiguracji:</p>
+
+<pre><code class="language-xml">          &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+          &lt;configuration&gt;
+            &lt;system.net&gt;
+              &lt;mailSettings&gt;
+                &lt;smtp deliveryMethod=&quot;Network&quot;&gt;
+                  &lt;network host=&quot;smtp.homski.pl&quot;
+                          userName=&quot;&quot;
+                          password=&quot;&quot;/&gt;
+                &lt;/smtp&gt;
+              &lt;/mailSettings&gt;
+            &lt;/system.net&gt;
+
+            &lt;appSettings&gt;
+              &lt;add key=&quot;mailAddresses&quot;
+                  value=&quot;arkadiusz.wasniewski@email.pl&quot;/&gt;
+            &lt;/appSettings&gt;
+          &lt;/configuration&gt;
+</code></pre>
+
+<p>Szczegóły schematu <code>network</code> (oraz elementów nadrzędnych) można znaleźć na stronach <a href="https://docs.microsoft.com/en-us/dotnet/framework/configure-apps/file-schema/network/network-element-network-settings" target="_blank">msdn</a>.</p>
+
+    </article>
+    <nav aria-label="Related posts">
+        <h4>Related Posts</h4>
+        <ul>
+            <li><a href="https://awasn.github.io/implementacja-inversion-of-control/">Implementacja Inversion of Control</a></li>
+            <li><a href="https://awasn.github.io/refaktoryzacja-metod-zwrotnych/">Refaktoryzacja metod zwrotnych</a></li>
+            <li><a href="https://awasn.github.io/range-t/">Range&lt;T&gt;</a></li>
+            <li><a href="https://awasn.github.io/marshalhelper-zarzadza-niezarzadzanym/">MarshalHelper zarządza niezarządzanym</a></li>
+            <li><a href="https://awasn.github.io/iteratory/">Iteratory</a></li>
+        </ul>
+    </nav>
+
+    <nav class="pure-g post-previous-next" aria-label="Previous and next posts">
+        <div class="pure-u-11-24 previous">
+            <a href="https://awasn.github.io/wirtualizacja-aplikacji-testowych/" aria-label="Previous post"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg></span></a>
+            <a href="https://awasn.github.io/wirtualizacja-aplikacji-testowych/">Wirtualizacja aplikacji testowych</a>
+        </div>
+        <div class="pure-u-2-24">&nbsp;</div>
+        <div class="pure-u-11-24 next">
+            <a href="https://awasn.github.io/bloggers-underground/">Bloggers Underground</a>
+            <a href="https://awasn.github.io/bloggers-underground/" aria-label="Next post"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg></span></a>
+        </div>
+    </nav>
+
+
+        </main>
+
+        <footer>
+            <div class="center-aligned container">
+                <p>Copyright &copy; 2007-2019 Arkadiusz Waśniewski. All Rights Reserved.</p>
+            </div>
+        </footer>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/accesslog.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dockerfile.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dos.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/go.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/powershell.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/routeros.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/typescript.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/yaml.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/vbnet.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+</html>

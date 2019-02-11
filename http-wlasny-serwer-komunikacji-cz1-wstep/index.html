@@ -1,0 +1,171 @@
+<!DOCTYPE HTML>
+<html lang="pl-pl">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="generator" content="Hugo 0.54.0" />
+        <meta name="description" content="Implementacja w pełni funkcjonalnego serwera komunikacji korzystającego z protokołu HTTP, opartego o śodowisko ASP.NET oraz IIS" />
+        <title>HTTP - Własny serwer komunikacji. Część #1 - Wstęp - arkadiusz wasniewski blog</title>
+        <link rel="canonical" href="https://awasn.github.io/http-wlasny-serwer-komunikacji-cz1-wstep/">
+        <link rel="prev" title="ReSharper ostrzega - Possible NullReferenceException" href="https://awasn.github.io/resharper-ostrzega-possible-nullreferenceexception/">
+        <link rel="next" title="Określanie dnia tygodnia z pogardą dla DATEFIRST" href="https://awasn.github.io/okreslanie-dnia-tygodnia-z-pogarda-dla-datefirst/">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css" integrity="sha256-Q0zCrUs2IfXWYx0uMKJfG93CvF6oVII21waYsAV4/8Q=" crossorigin="anonymous" />
+        
+        
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
+        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.f635c2298033f6f9947349ea417d9e9d94017493351f739bf1b756d5b5bccf61.css" integrity="sha256-9jXCKYAz9vmUc0nqQX2enZQBdJM1H3Ob8bdW1bW8z2E=" />
+
+    </head>
+    <body>
+        <header>
+            <nav class="container" >
+                <div class="pure-menu pure-menu-horizontal">
+                    <a class="pure-menu-heading pure-menu-link" href="https://awasn.github.io/">wasniewski</a>
+                    <ul class="right pure-menu-list">
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/blog/">blog</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/categories/">categories</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/tags/">tags</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/about/">about</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container">
+            
+    <aside class="post-published">
+        <p>This post was originally published on <a href="http://zine.net.pl/blogs/arkadiusz_wasniewski/archive/2008/01/14/http-w-asny-serwer-komunikacji-cz-1.aspx" target="_blank">zine.net.pl</a> on 14 January 2008 22:45 CET</p>
+    </aside>
+
+    <article>
+        <header>
+            <h1>HTTP - Własny serwer komunikacji. Część #1 - Wstęp</h1>
+                <div class="post-metadata">
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            14 January 2008 22:45 CET
+            
+            &nbsp;
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            5 min read
+        </div>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+            <a href="https://awasn.github.io/categories/development">Development</a>
+            
+                &nbsp;
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+                <a href="https://awasn.github.io/tags/.net">.NET</a>, <a href="https://awasn.github.io/tags/.net-compact-framework">.NET Compact Framework</a>, <a href="https://awasn.github.io/tags/asp.net">ASP.NET</a>, <a href="https://awasn.github.io/tags/iis">IIS</a>, <a href="https://awasn.github.io/tags/mobile">Mobile</a>
+            
+        </div>
+    </div>
+        </header>
+
+        <p>Budując rozwiązanie, które wymaga wymiany informacji z aplikacjami uruchomionymi na innych maszynach możemy skorzystać z kilku propozycji, jakich dostarcza platforma .NET. Są to między innymi gniazdka (sockets), .NET Remoting, Usługi Sieciowe (Web Services), kolejki wiadomości (MSMQ) czy łączący i uzupełniający większość z tych rozwiązań Windows Communication Foundation (WCF). Oczywiście część z tych metod działa praktycznie tylko wtedy, jeśli obie strony oparte są o .NET (.NET Remoting czy net.tcp z WCF). Inne znów mają problemy jeśli wychodzimy poza obręb danej sieci (.NET Remoting). Nawet jednak jeśli obie ze stron oparte są o platformę .NET to również mogą wystąpić kłopoty. Weźmy urządzenia mobilne, które korzystają z .NET Compact Framework. Platforma .NET CF jest podzbiorem możliwości .NET. Nie zawiera .NET Remoting, nie obsługuje serializacji binarnych etc. Oczywiście, jeśli naszym zamiarem jest przesłanie niewielkich ilości danych możemy skorzystać z Usług Sieciowych. Jest też protokół FTP czy SMTP. Nie sposób wszystkich możliwych rozwiązań wymienić bo i wiedzy zwyczajnie brak.</p>
+
+<p>Podjęcie decyzji w kwestii wyboru sposobu wymiany danych nie jest wbrew pozorom trywialne. Na początek dobrze zawsze określić swoje potrzeby i wymagania. A jakie są nasze zamiary? Załóżmy, iż po stronie serwera interesuje nas rozwiązanie, które spełni następujące warunki:</p>
+
+<ul>
+<li>Pozwoli przesłać do kilku megabajtów danych;</li>
+<li>Będzie istnieć możliwość wywoływania na żądanie klienta określonych akcji;</li>
+<li>Dostęp do danych dozwolony po podaniu właściwej nazwy użytkownika i hasła;</li>
+<li>Przesyłane informacje będą zabezpieczone;</li>
+<li>Dostęp do zasobów możliwy spoza własnej sieci (intranetu);</li>
+<li>Łatwość konfiguracji i zarządzania.</li>
+</ul>
+
+<p>Dodatkowo aplikacje klienckie:</p>
+
+<ul>
+<li>Są uruchamiane na komputerach stacjonarnych oraz na urządzeniach mobilnych;</li>
+<li>Nie są oparte tylko o .NET. Dopuszczamy możliwość korzystania z .NET Compact Framework, C++ wraz z MFC itp.;</li>
+<li>Mogą być uzupełniane o nowe formy komunikacji.</li>
+</ul>
+
+<p>Konieczność działania rozwiązania na wielu platformach i środowiskach oznacza, iż na placu boju pozostają gniazdka oraz Usługi Sieciowe oraz rozwiązania oparte o FTP.</p>
+
+<p>Rozprawmy się wpierw z drugim rozwiązaniem. Usługi sieciowe oparte są o XML. Powoduje to bardzo dużą nadmiarowość ilości przesyłanych danych. W ramach środowiska ASP.NET istnieje również ograniczenie co do ilości przesyłanych danych. Standardowo jest ono ustalone na 4 MB, aczkolwiek można je zmienić. Wprowadzenie kompresji na poziomie serwera IIS nic nie pomoże, ponieważ pakowanie jest wykonywane dopiero po załadowaniu przez ASP.NET danych przed wysłaniem do pamięci. Oznacza to, iż faktycznie danych użytecznych w pakiecie HTTP będzie, w zależności od budowy struktury XML, nawet kilkadziesiąt razy mniej niż wynosi sam rozmiar pakietu! Poza tym przesyłanie danych w postaci tekstu powoduje po stronie słabszego w zasoby klienta, a takimi są np. urządzenia oparte o Windows Mobile, duży czas oczekiwania na przetworzenie odebranych informacji. Można oczywiście przesłać dane w postaci binarnej jako strumień bajtów w oparciu o własne mechanizmy zapisu typów. Aby taka operacja była możliwa w ramach Usług Sieciowych strumień ten musi być jednak przetworzony przy pomocy protokołu <a href="http://pl.wikipedia.org/wiki/Base64" target="_blank">Base64</a>, co powoduje, iż rozmiar przesyłanych informacji wzrasta o 33%.</p>
+
+<p>File Transfer Protocol. No cóż. Mało jest implementacji klientów spełniających wymagania dotyczące bezpieczeństwa i działających na dowolnych maszynach. Tak naprawdę to nie wiem czy w ogóle takie wszechstronne implementacje istnieją. Poza tym nie ma możliwości w przeważającej większości serwerów wywoływania określonych akcji na żądanie klienta. Do tego protokół FTP ma jedną zasadniczą wadę: jest nieprzyjazny dla administratora. Klient standardowo łączy się z serwerem na porcie 21, loguje się a następnie wydaje komendy, których większość skutkuje przesłaniem strumienia danych. Dla każdego przesłania danych tworzone jest osobne połączenie. O numerze portu, na którym dany kanał do wymiany danych powstanie, decyduje się na dwa sposoby. W trybie aktywnym (ACTIVE) klient podaje adres i numer portu, z którym serwer powinien się połączyć. Z powodu NAT czyli translacji adresów metoda ta nie działa jeśli jesteśmy poza własną siecią firmową i nie mamy stałego adresu IP. Wówczas stosuje się tryb pasywny (PASSIVE), gdzie to serwer podaje numer portu, z którym klient powinien się połączyć. Oznacza to, iż reguła na ścianie ogniowej w trybie pasywnym serwera FTP musi zezwalać na wszystkie połączenia przychodzące! Oczywiście niektóre serwery umożliwiają wybór zakresu portów dostępnych dla klientów, nie mniej jednak rozwiązanie takie pozostawia wiele do życzenia. Otwarte porty na komputerze dostępnym publicznie, ze stałym adresem IP, to gwarantowane kłopoty.</p>
+
+<p>A tak na marginesie. Być może niektórzy przypomną sobie teraz problemy programu Internet Explorer z obsługą protokołu FTP i dodanie do konfiguracji opcji przełączającej przeglądarkę z trybu aktywnego na pasywny.</p>
+
+<p>Cóż wydaje się więc, iż jeśli chcemy skorzystać z wydajnego przesyłania danych pozostało nam napisanie od A do Z własnego rozwiązania wykorzystującego gniazdka. Nie jest to trudne. Silnik takiego serwera spełniający wcześniejsze założenia i pracujący w trybie asynchronicznym (wydajność!) nie powinien przekroczyć 5 000 linii kodu w języku C#. Klient takiego rozwiązania to maksimum 2 000 linii kodu. Problem pojawia się gdzie indziej. Jak ma wyglądać zarządzanie takim serwerem? Co z dostępem zdalnym? Co z kontrolą zawieszonych połączeń i wątków? Tutaj może być mało i 25 000 linii czystego kodu. No i jeszcze testy.</p>
+
+<p>Okazuje się jednak, iż środowisko Windows wraz z platformą .NET dostarczają nam bardzo wydajnej infrastruktury umożliwiającej tworzenie własnych rozwiązań do wymiany danych, których protokół oparty jest o HTTP. Internet Information Services wraz z ASP.NET i sterownikiem HTTP.SYS stanowią idealną bazę dla wszelkiego tego typu projektów. Jednocześnie zapewniają nam takie elementy jak zdalny dostęp przez WWW czy automatyczne restartowanie aplikacji. Protokół HTTP jest przy tym zrozumiały dla zapór ogniowych sprzętowych i programowych. Konfiguracja reguł dla serwera jest banalna i co najważniejsze nie wymaga zezwolenia na połączenia przychodząca na dowolnym porcie. Wystarczy tylko jeden port.</p>
+
+<p>W dalszych częściach postaram się przedstawić w jaki sposób zbudować w pełni funkcjonalny serwer komunikacji korzystający z protokołu HTTP, oparty o śodowisko ASP.NET oraz IIS. Kolejne odcinki będą poruszały takie tematy jak:</p>
+
+<ul>
+<li>Przygotowanie środowiska programistycznego oraz wybór narzędzi;</li>
+<li>Opis środowiska uruchomieniowego ASP.NET w kontekście protokołu HTTP;</li>
+<li>Przedstawienie szczegółowych założeń co do tworzonej aplikacji;</li>
+<li>Identyfikacja użytkowników i szyfrowanie przesyłanych informacji;</li>
+<li>Obsługa żądań HTTP;</li>
+<li>Synchroniczna obsługa żądań HTTP;</li>
+<li>Asynchroniczna obsługa żądań HTTP;</li>
+<li>Obsługa żądań HTTP w osobnym wątku;</li>
+<li>Wywoływanie bibliotek zewnętrznych;</li>
+<li>Konfiguracja aplikacji;</li>
+<li>Konfiguracja środowiska uruchomieniowego;</li>
+<li>Bezpieczeństwo rozwiązania.</li>
+</ul>
+
+<p>Zapraszam.</p>
+
+    </article>
+    <nav aria-label="Posts in series">
+        <h4>Posts in <a href="https://awasn.github.io/series/serwer-komunikacji">Serwer komunikacji</a> series</h4>
+        <ul>
+            <li><a href="https://awasn.github.io/http-wlasny-serwer-komunikacji-cz1-wstep/">HTTP - Własny serwer komunikacji. Część #1 - Wstęp</a></li>
+            <li><a href="https://awasn.github.io/http-wlasny-serwer-komunikacji-cz2-srodowisko-programistyczne/">HTTP - Własny serwer komunikacji. Część #2 - Środowisko programistyczne</a></li>
+        </ul>
+    </nav>
+    <nav aria-label="Related posts">
+        <h4>Related Posts</h4>
+        <ul>
+            <li><a href="https://awasn.github.io/formsauthentication-w-reporing-services/">FormsAuthentication w Reporing Services</a></li>
+            <li><a href="https://awasn.github.io/sql-server-2005-compact-edition/">SQL Server 2005 Compact Edition</a></li>
+            <li><a href="https://awasn.github.io/tworzenie-obiektow/">Tworzenie obiektów</a></li>
+            <li><a href="https://awasn.github.io/dobre-praktyki-w-projektowaniu-aplikacji-mobilnych/">Dobre praktyki w projektowaniu aplikacji mobilnych</a></li>
+            <li><a href="https://awasn.github.io/resharper-ostrzega-possible-nullreferenceexception/">ReSharper ostrzega - Possible NullReferenceException</a></li>
+        </ul>
+    </nav>
+
+    <nav class="pure-g post-previous-next" aria-label="Previous and next posts">
+        <div class="pure-u-11-24 previous">
+            <a href="https://awasn.github.io/resharper-ostrzega-possible-nullreferenceexception/" aria-label="Previous post"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg></span></a>
+            <a href="https://awasn.github.io/resharper-ostrzega-possible-nullreferenceexception/">ReSharper ostrzega - Possible NullReferenceException</a>
+        </div>
+        <div class="pure-u-2-24">&nbsp;</div>
+        <div class="pure-u-11-24 next">
+            <a href="https://awasn.github.io/okreslanie-dnia-tygodnia-z-pogarda-dla-datefirst/">Określanie dnia tygodnia z pogardą dla DATEFIRST</a>
+            <a href="https://awasn.github.io/okreslanie-dnia-tygodnia-z-pogarda-dla-datefirst/" aria-label="Next post"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg></span></a>
+        </div>
+    </nav>
+
+
+        </main>
+
+        <footer>
+            <div class="center-aligned container">
+                <p>Copyright &copy; 2007-2019 Arkadiusz Waśniewski. All Rights Reserved.</p>
+            </div>
+        </footer>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/accesslog.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dockerfile.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dos.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/go.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/powershell.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/routeros.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/typescript.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/yaml.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/vbnet.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+</html>

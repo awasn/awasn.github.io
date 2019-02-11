@@ -1,0 +1,459 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="generator" content="Hugo 0.54.0" />
+        <meta name="description" content="" />
+        <title>Blogs - arkadiusz wasniewski blog</title>
+        <link rel="canonical" href="https://awasn.github.io/blog/">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css" integrity="sha256-Q0zCrUs2IfXWYx0uMKJfG93CvF6oVII21waYsAV4/8Q=" crossorigin="anonymous" />
+        
+        
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
+        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.f635c2298033f6f9947349ea417d9e9d94017493351f739bf1b756d5b5bccf61.css" integrity="sha256-9jXCKYAz9vmUc0nqQX2enZQBdJM1H3Ob8bdW1bW8z2E=" />
+
+    </head>
+    <body>
+        <header>
+            <nav class="container" >
+                <div class="pure-menu pure-menu-horizontal">
+                    <a class="pure-menu-heading pure-menu-link" href="https://awasn.github.io/">wasniewski</a>
+                    <ul class="right pure-menu-list">
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/blog/">blog</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/categories/">categories</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/tags/">tags</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/about/">about</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container">
+            
+
+    
+    
+    <article>
+        <header>
+            <h2><a href="https://awasn.github.io/metoda-fabryki/">Metoda fabryki</a></h2>
+                <div class="post-metadata">
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            27 December 2007 21:27 CET
+            
+                &nbsp;
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon></svg>
+                17 September 2018 14:46 CEST
+            
+            &nbsp;
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            8 min read
+        </div>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+            <a href="https://awasn.github.io/categories/development">Development</a>, <a href="https://awasn.github.io/categories/events">Events</a>
+            
+                &nbsp;
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+                <a href="https://awasn.github.io/tags/.net">.NET</a>, <a href="https://awasn.github.io/tags/design-patterns">Design patterns</a>, <a href="https://awasn.github.io/tags/meetings">Meetings</a>
+            
+        </div>
+    </div>
+        </header>
+
+        <p>
+        Poniższy tekst bazuje na prezentacji, którą przeprowadziłem 13 grudnia 2007 na połączonym XVI Spotkaniu Warszawskiej Grupy .NET + VII Spotkaniu Polskiej Grupy Użytkowników SQL Server.
+Wstęp Metoda fabryki (ang. Factory Method) jest, obok signletona czy budowniczego, wzorcem kreacyjnym odpowiadającym za tworzenie obiektów - instancji klas. Główne zadanie metody fabryki to oddzielenie procesu korzystania z obiektów od ich tworzenia.
+Wyobraźmy sobie aplikację w wersji standardowej przeznaczoną do obsługi sprzedaży, w której dla kilku klientów dokonujemy modyfikacji.
+        </p>
+
+        
+        <footer class="post-continue">
+            <a href="https://awasn.github.io/metoda-fabryki/">Continue reading...&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-right"><polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline></svg></a>
+        </footer>
+        
+
+    </article>
+    
+    <article>
+        <header>
+            <h2><a href="https://awasn.github.io/dynamiczna-budowa-poprawnego-pliku-docx-w-standardzie-open-xml/">Dynamiczna budowa poprawnego pliku docx w standardzie Open XML</a></h2>
+                <div class="post-metadata">
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            24 November 2007 00:22 CET
+            
+            &nbsp;
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            6 min read
+        </div>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+            <a href="https://awasn.github.io/categories/development">Development</a>, <a href="https://awasn.github.io/categories/tools">Tools</a>
+            
+                &nbsp;
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+                <a href="https://awasn.github.io/tags/.net">.NET</a>, <a href="https://awasn.github.io/tags/open-xml">Open XML</a>, <a href="https://awasn.github.io/tags/ms-office">MS Office</a>
+            
+        </div>
+    </div>
+        </header>
+
+        <p>
+        Konieczność utworzenie dokumentu, który byłby stały w treści a gdzie tylko niektóre elementy, np. imię i nazwisko, powinny się zmieniać dynamicznie jest sytuacją nieobcą chyba każdemu programiście czy informatykowi. Rozwiązań takiego problemu jest wiele.
+Ostatnio w poszukiwaniu absolutu zainteresowałem się pakietem Microsoft Office, a konkretnie aplikacją Word 2007. Cały pakiet do zapisywania danych wykorzystuje nowy format plików bazujący na standardzie Open XML. Standardzie nota bene promowanym przez sam Microsoft. Nowe pliki łatwo poznać po literze x dodawanej do rozszerzenia znanego z wcześniejszych wersji.
+        </p>
+
+        
+        <footer class="post-continue">
+            <a href="https://awasn.github.io/dynamiczna-budowa-poprawnego-pliku-docx-w-standardzie-open-xml/">Continue reading...&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-right"><polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline></svg></a>
+        </footer>
+        
+
+    </article>
+    
+    <article>
+        <header>
+            <h2><a href="https://awasn.github.io/formsauthentication-w-reporing-services/">FormsAuthentication w Reporing Services</a></h2>
+                <div class="post-metadata">
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            15 November 2007 14:41 &#43;0200
+            
+            &nbsp;
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            2 min read
+        </div>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+            <a href="https://awasn.github.io/categories/databases">Databases</a>
+            
+                &nbsp;
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+                <a href="https://awasn.github.io/tags/.net">.NET</a>, <a href="https://awasn.github.io/tags/asp.net">ASP.NET</a>, <a href="https://awasn.github.io/tags/reporting-services">Reporting Services</a>, <a href="https://awasn.github.io/tags/sql-server">SQL Server</a>
+            
+        </div>
+    </div>
+        </header>
+
+        <p>
+        Domyślnie usługi raportujące Microsoft SQL Server 2005 obsługują jedynie identyfikację Windows. Na szczęście w przykładach dla Reporitng Services dostępnych na stronach http://www.codeplex.com dostępna jest implementacja rozszerzeń usług raportujących (interfejsy IAuthenticationExtension i IAuthorizationExtension), które umożliwiają skorzystanie z dobrodziejstw identyfikacji opartej o Forms. Jeśli zainstalujemy przykłady, to interesujące nas kody znajdziemy w katalogu C:\Program Files\Microsoft SQL Server\90\Samples\Reporting Services\Extension Samples\FormsAuthentication Sample zakładając oczywiście, iż wybraliśmy domyślną lokalizację.
+Przykładowe rozwiązanie korzysta z własnej bazy danych do przechowywania informacji o użytkownikach.
+        </p>
+
+        
+        <footer class="post-continue">
+            <a href="https://awasn.github.io/formsauthentication-w-reporing-services/">Continue reading...&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-right"><polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline></svg></a>
+        </footer>
+        
+
+    </article>
+    
+    <article>
+        <header>
+            <h2><a href="https://awasn.github.io/cdata-kills-vs2k5/">&lt;![CDATA[]]&gt; kills VS2K5</a></h2>
+                <div class="post-metadata">
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            06 November 2007 22:04 CET
+            
+                &nbsp;
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon></svg>
+                07 June 2018 16:08 CEST
+            
+            &nbsp;
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            1 min read
+        </div>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+            <a href="https://awasn.github.io/categories/development">Development</a>, <a href="https://awasn.github.io/categories/tools">Tools</a>
+            
+                &nbsp;
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+                <a href="https://awasn.github.io/tags/.net">.NET</a>, <a href="https://awasn.github.io/tags/visual-studio">Visual Studio</a>
+            
+        </div>
+    </div>
+        </header>
+
+        <p>
+        Królestwo za nawiasy ostre w komentarzu, który zawiera powyższą sekcję. Nie ma znaczenie gdzie będziemy je próbowali wstawić. Czy w samej sekcji CDATA, czy też w innym miejscu w ramach istniejącego już komentarza. Visual Studio 2005 robi kaput.
+PS. Podziękowania dla Michała, który brał udział w eksperymencie i robił za przysłowiową świnkę doświadczalną.
+Z powyższego tekstu nie wynika to jasno, ale chodzi o komentarze do kodu C#:
+/// &lt;summary&gt; /// &lt;!
+        </p>
+
+        
+        <footer class="post-continue">
+            <a href="https://awasn.github.io/cdata-kills-vs2k5/">Continue reading...&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-right"><polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline></svg></a>
+        </footer>
+        
+
+    </article>
+    
+    <article>
+        <header>
+            <h2><a href="https://awasn.github.io/visual-studio-t4-editor/">Visual Studio T4 Editor</a></h2>
+                <div class="post-metadata">
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            22 October 2007 10:06 CEST
+            
+                &nbsp;
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon></svg>
+                17 September 2018 14:19 CEST
+            
+            &nbsp;
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            1 min read
+        </div>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+            <a href="https://awasn.github.io/categories/development">Development</a>, <a href="https://awasn.github.io/categories/events">Events</a>, <a href="https://awasn.github.io/categories/tools">Tools</a>
+            
+                &nbsp;
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+                <a href="https://awasn.github.io/tags/generowanie-kodu">Generowanie kodu</a>, <a href="https://awasn.github.io/tags/.net">.NET</a>, <a href="https://awasn.github.io/tags/visual-studio">Visual Studio</a>, <a href="https://awasn.github.io/tags/meetings">Meetings</a>
+            
+        </div>
+    </div>
+        </header>
+
+        <p>
+        Wszystkim, których interesuje temat szablonów tekstowych T4 (Text Templating Transformation Toolkit), a myślę, że przynajmniej w Warszawskiej Grupie .NET po XI spotkaniu kilka osób się znajdzie, polecam stronę http://www.t4editor.net gdzie znajdziemy darmową, aczkolwiek czasową (styczeń 2008 roku) wersję beta edytora szablonów T4 instalującego się jako dodatek do Visual Studio.
+Szablony T4 wykorzystywane są przez wszystkie niemal Software Factories firmy Microsoft oraz narzędzia oparte o DSL. Dla szukających wiedzy na ten temat polecam swój artykuł w drugim numerze gazetki zine.
+        </p>
+
+        
+        <footer class="post-continue">
+            <a href="https://awasn.github.io/visual-studio-t4-editor/">Continue reading...&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-right"><polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline></svg></a>
+        </footer>
+        
+
+    </article>
+    
+    <article>
+        <header>
+            <h2><a href="https://awasn.github.io/kopia-bezpieczenstwa-svn/">Kopia bezpieczeństwa SVN</a></h2>
+                <div class="post-metadata">
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            19 October 2007 15:41 CEST
+            
+            &nbsp;
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            1 min read
+        </div>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+            <a href="https://awasn.github.io/categories/tools">Tools</a>
+            
+                &nbsp;
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+                <a href="https://awasn.github.io/tags/subversion">Subversion</a>
+            
+        </div>
+    </div>
+        </header>
+
+        <p>
+        Repozytoria Subversion, zgodnie z dokumentacją, mogą być archiwizowane w locie. Może jednak się zdarzyć, iż wykonywane w tak zwanym między czasie przez użytkowników operacje spowodują, iż otrzymana kopia, mimo swej poprawności będzie logicznie niespójna. Ze względu bowiem na czas trwania archiwizacji może dojść do sytuacji, iż w repozytorium zostaną zatwierdzone kolejne transakcje i nasza kopia części nowych danych nie uwzględni. Z tego też powodu zaleca się wcześniejsze przygotowanie repozytorium SVN do operacji archiwizacji danych.
+        </p>
+
+        
+        <footer class="post-continue">
+            <a href="https://awasn.github.io/kopia-bezpieczenstwa-svn/">Continue reading...&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-right"><polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline></svg></a>
+        </footer>
+        
+
+    </article>
+    
+    <article>
+        <header>
+            <h2><a href="https://awasn.github.io/f-a-a-k-mod-n/">F(a) = (a &#43; k) mod n</a></h2>
+                <div class="post-metadata">
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            25 September 2007 15:45 CEST
+            
+            &nbsp;
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            1 min read
+        </div>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+            <a href="https://awasn.github.io/categories/development">Development</a>
+            
+        </div>
+    </div>
+        </header>
+
+        <p>
+        Powyższy wzór umożliwia nam znalezienie nowej wartości ze zbioru n elementów, gdzie a stanowi punkt odniesienia (aktualna wartość), a k jest przesunięciem. Dzięki temu algorytmowi możemy potraktować zbiór jako bufor kołowy, dzięki czemu nie musimy sprawdzać wartości brzegowych. Oznacza to, iż po osiągnięciu ostatniego elementu zbioru, zostanie wybrany element pierwszy.
+Dobry przykład zastosowania to przeglądanie na ekranie danych szczegółowych produktu. Załóżmy, iż chcemy umożliwić użytkownikowi wyświetlenie jednocześnie tylko jednej z poniższych wartości:
+        </p>
+
+        
+        <footer class="post-continue">
+            <a href="https://awasn.github.io/f-a-a-k-mod-n/">Continue reading...&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-right"><polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline></svg></a>
+        </footer>
+        
+
+    </article>
+    
+    <article>
+        <header>
+            <h2><a href="https://awasn.github.io/konkurs-enterprise-library-logging-lab/">Konkurs Enterprise Library - Logging (LAB)</a></h2>
+                <div class="post-metadata">
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            24 September 2007 11:32 CEST
+            
+            &nbsp;
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            7 min read
+        </div>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+            <a href="https://awasn.github.io/categories/development">Development</a>
+            
+                &nbsp;
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+                <a href="https://awasn.github.io/tags/.net">.NET</a>, <a href="https://awasn.github.io/tags/design-patterns">Design patterns</a>
+            
+        </div>
+    </div>
+        </header>
+
+        <p>
+        Refaktoryzacja do Logging Application Block Potrzebujemy możliwości śledzenia zachodzących w aplikacji zdarzeń. Ważne jest, aby informacje mogły być zapisywane w jak największej liczbie miejsc takich jak pliki, bazy danych czy poczta elektroniczna, a sama konfiguracja była niezależna od kodu programu.
+Aby to osiągnąć korzystamy z możliwości Enterprise Library Logging Application Block w wersji 3.1 - May 2007.
+Uzasadnienie Możliwość rejestracji zdarzeń (logging) zachodzących w aplikacji jest cechą bardzo pożądaną. Nie należy jednak przez zdarzenia rozumieć jedynie błędy czy problemy pojawiające się w czasie działania programu.
+        </p>
+
+        
+        <footer class="post-continue">
+            <a href="https://awasn.github.io/konkurs-enterprise-library-logging-lab/">Continue reading...&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-right"><polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline></svg></a>
+        </footer>
+        
+
+    </article>
+    
+    <article>
+        <header>
+            <h2><a href="https://awasn.github.io/loopa-tv/">Loopa TV</a></h2>
+                <div class="post-metadata">
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            14 September 2007 13:43 CEST
+            
+            &nbsp;
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            2 min read
+        </div>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+            <a href="https://awasn.github.io/categories/development">Development</a>, <a href="https://awasn.github.io/categories/tools">Tools</a>
+            
+                &nbsp;
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+                <a href="https://awasn.github.io/tags/mobile">Mobile</a>, <a href="https://awasn.github.io/tags/virtualization">Virtualization</a>
+            
+        </div>
+    </div>
+        </header>
+
+        <p>
+        Programując urządzenia mobilne człowiek posiada naturalną potrzebę uruchomienia kodu na takim komputerze (komputerku?). W ramach standardowego środowiska programisty nie ma z tym zazwyczaj problemu. Bierzemy dok (vel kołyskę), wkładamy do niego urządzenie i łączymy z PC przy pomocy kabla USB. Działa. Jakaś komunikacja protokołem TCP z komputerem stacjonarnym? Nie ma problemu, działa. Robimy to samo w terenie, albo bez sieci (nie mając połączenia)&hellip; no&hellip; nie działa. Nie da rady skomunikować się poprzez TCP z urządzenia mobilnego.
+        </p>
+
+        
+        <footer class="post-continue">
+            <a href="https://awasn.github.io/loopa-tv/">Continue reading...&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-right"><polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline></svg></a>
+        </footer>
+        
+
+    </article>
+    
+    <article>
+        <header>
+            <h2><a href="https://awasn.github.io/sql-server-2005-compact-edition/">SQL Server 2005 Compact Edition</a></h2>
+                <div class="post-metadata">
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            13 September 2007 14:13 CEST
+            
+                &nbsp;
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon></svg>
+                17 September 2018 14:23 CEST
+            
+            &nbsp;
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            1 min read
+        </div>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+            <a href="https://awasn.github.io/categories/databases">Databases</a>
+            
+                &nbsp;
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+                <a href="https://awasn.github.io/tags/.net">.NET</a>, <a href="https://awasn.github.io/tags/asp.net">ASP.NET</a>, <a href="https://awasn.github.io/tags/sql-server">SQL Server</a>
+            
+        </div>
+    </div>
+        </header>
+
+        <p>
+        Pewną nowością było wprowadzenie przez Microsoft na komputery typu PC, dostępnej do tej pory we wcześniejszych wersjach w ramach urządzeń mobilnych, bazy danych SQL Server 2005 Compact Edition (http://www.microsoft.com/sql/editions/compact/default.mspx), która nie wymaga instalacji żadnego serwera bazodanowego a do obsługi potrzebuje jednej biblioteki System.Data.SqlServerCe.dll. Dzięki temu, zamiast przechowywać dane niezbędne do pracy aplikacji np. w plikach XML możemy skorzystać z możliwości silnika SQL. Z tego typu sytuacjami niejednokrotnie się spotykamy. Instalacja dowolnego serwera nie jest możliwa, a jednocześnie szukamy możliwości sprawnego zarządzania niedużą ilością danych.
+        </p>
+
+        
+        <footer class="post-continue">
+            <a href="https://awasn.github.io/sql-server-2005-compact-edition/">Continue reading...&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-right"><polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline></svg></a>
+        </footer>
+        
+
+    </article>
+    
+
+    
+    <nav class="pagination" aria-label="Page navigation">
+        <a class="page-item" href="https://awasn.github.io/blog/" aria-label="First"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-left"><polyline points="11 17 6 12 11 7"></polyline><polyline points="18 17 13 12 18 7"></polyline></svg></span></a>
+        <a class="page-item" href="https://awasn.github.io/blog/page/4/" aria-label="Previous"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg></span><span class="sr-only">Previous</span></a>
+        <a class="page-item" href="https://awasn.github.io/blog/">1</a>
+        <a class="page-item" href="https://awasn.github.io/blog/page/2/">2</a>
+        <a class="page-item" href="https://awasn.github.io/blog/page/3/">3</a>
+        <a class="page-item" href="https://awasn.github.io/blog/page/4/">4</a>
+        <a class="page-item active " href="https://awasn.github.io/blog/page/5/">5<span class="sr-only">(current)</span></a>
+        <a class="page-item" href="https://awasn.github.io/blog/page/6/">6</a>
+        <a class="page-item" href="https://awasn.github.io/blog/page/6/" aria-label="Next"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg></span><span class="sr-only">Next</span></a>
+        <a class="page-item" href="https://awasn.github.io/blog/page/6/" aria-label="Last"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-right"><polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline></svg></span></a>
+    </nav>
+
+
+        </main>
+
+        <footer>
+            <div class="center-aligned container">
+                <p>Copyright &copy; 2007-2019 Arkadiusz Waśniewski. All Rights Reserved.</p>
+            </div>
+        </footer>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/accesslog.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dockerfile.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dos.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/go.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/powershell.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/routeros.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/typescript.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/yaml.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/vbnet.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+</html>

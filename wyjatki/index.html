@@ -1,0 +1,215 @@
+<!DOCTYPE HTML>
+<html lang="pl-pl">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="generator" content="Hugo 0.54.0" />
+        <meta name="description" content="Testowanie poprawności rzucania wyjątkami w .NET C#" />
+        <title>Wyjątki - arkadiusz wasniewski blog</title>
+        <link rel="canonical" href="https://awasn.github.io/wyjatki/">
+        <link rel="prev" title="Liczby całkowite" href="https://awasn.github.io/liczby-calkowite/">
+        <link rel="next" title="DBF po ludzku" href="https://awasn.github.io/dbf-po-ludzku/">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css" integrity="sha256-Q0zCrUs2IfXWYx0uMKJfG93CvF6oVII21waYsAV4/8Q=" crossorigin="anonymous" />
+        
+        
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
+        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.f635c2298033f6f9947349ea417d9e9d94017493351f739bf1b756d5b5bccf61.css" integrity="sha256-9jXCKYAz9vmUc0nqQX2enZQBdJM1H3Ob8bdW1bW8z2E=" />
+
+    </head>
+    <body>
+        <header>
+            <nav class="container" >
+                <div class="pure-menu pure-menu-horizontal">
+                    <a class="pure-menu-heading pure-menu-link" href="https://awasn.github.io/">wasniewski</a>
+                    <ul class="right pure-menu-list">
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/blog/">blog</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/categories/">categories</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/tags/">tags</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/about/">about</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container">
+            
+    <aside class="post-published">
+        <p>This post was originally published on <a href="http://zine.net.pl/blogs/arkadiusz_wasniewski/archive/2007/05/15/wyj-tki.aspx" target="_blank">zine.net.pl</a> on 15 May 2007 13:19 CEST</p>
+    </aside>
+
+    <article>
+        <header>
+            <h1>Wyjątki</h1>
+                <div class="post-metadata">
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            15 May 2007 13:19 CEST
+            
+            &nbsp;
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            3 min read
+        </div>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+            <a href="https://awasn.github.io/categories/development">Development</a>
+            
+                &nbsp;
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+                <a href="https://awasn.github.io/tags/.net">.NET</a>, <a href="https://awasn.github.io/tags/software-testing">Software testing</a>
+            
+        </div>
+    </div>
+        </header>
+
+        <p>Jednym z elementów podlegających testowaniu jest sprawdzanie zachowania kodu w przypadku otrzymania nieprawidłowych danych. Reakcją na tego typu zdarzenia może być wyrzucanie wyjątków. Czasem jednak mogą powstać z tego tytułu pewne komplikacje. Załóżmy, że mamy do przetestowania poniższą klasę:</p>
+
+<pre><code class="language-csharp">    class CommandLibraryLocator : ICommandLibraryLocator
+    {
+        private ILibraryRepository libraryRepository;
+
+        public CommandLibraryLocator(ILibraryRepository libraryRepository)
+        {
+            if (libraryRepository == null)
+                throw new ArgumentNullException(&quot;libraryRepository&quot;);
+
+            this.libraryRepository = libraryRepository;
+        }
+
+        public string GetPath(UserIdentity identity)
+        {
+            if (identity == null)
+                throw new ArgumentNullException(&quot;identity&quot;);
+
+            ...
+
+            return path;
+        }
+    }
+</code></pre>
+
+<p>I rozważmy przykładowy kod testujący:</p>
+
+<pre><code class="language-csharp">        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void NullUserIdentityThrowsArgumentNullException()
+        {
+            CommandLibraryLocator locator =
+                new CommandLibraryLocator(libraryRepository);
+            locator.GetPath(null);
+        }
+</code></pre>
+
+<p>Naszą intencją jest sprawdzenie czy instancja klasy <code>CommandLibraryLocator</code> zwróci wyjątek <code>ArgumentNullException</code> w przypadku wywołania metody <code>GetPath</code> z pustym parametrem typu <code>UserIdentity</code>. Jeśli zmienna przekazywana w konstruktorze klasy będzie z jakiś powodów <code>null</code> (te powody to oczywiście popełniony przez nas błąd), środowisko testowe poinformuje nas, iż test ten zakończył się poprawnie, mimo iż tak naprawdę wyjątek zwrócił nam konstruktor nie zaś metoda <code>GetPath</code>.</p>
+
+<p>Jak się przed tego typu pomyłkami ustrzec? Otóż od wersji 2.4 środowisko testowe <a href="http://nunit.org" target="_blank">NUnit</a> udostępnia nam bardzo rozbudowaną wersję atrybutu <code>ExpectedException</code>, który pozwala nam, poza typem oczekiwanego wyjątku, określić również komunikat, który spodziewamy się otrzymać w ramach tegoż wyjątku. Dzięki temu, możemy zmodyfikować powyższy test do następującej postaci:</p>
+
+<pre><code class="language-csharp">        [Test]
+        [ExpectedException(typeof(ArgumentNullException),
+            ExpectedMessage = &quot;identity&quot;, MatchType = MessageMatch.Contains)]
+        public void NullUserIdentityThrowsArgumentNullException()
+        {
+            CommandLibraryLocator locator =
+                new CommandLibraryLocator(libraryRepository);
+            locator.GetPath(null);
+        }
+</code></pre>
+
+<p>Typ wyliczeniowy <code>MessageMatch</code> określa sposób interpretacji zwróconego komunikatu. Wywoływany w ramach metody <code>GetPath</code> wyjątek <code>ArgumentNullException</code> zwraca łańcuch <code>identity</code> jako część komunikatu, stąd też informuję środowisko testowe, iż spodziewana przeze mnie informacja będzie jedynie zawarta w komunikacie wyjątku.</p>
+
+<p>Powyższe możliwości przydają się nie tylko z powodu takiego, iż możemy popełnić w czasie pisania testów błąd. Przyjrzyjmy się dla przykładu poniższej metodzie:</p>
+
+<pre><code class="language-csharp">        public ProcessResult Execute(UserIdentity identity, string name,
+            string parameters, out string answer)
+        {
+            if (identity == null)
+                throw new ArgumentNullException(&quot;identity&quot;);
+            if (string.IsNullOrEmpty(identity.Name))
+                throw new InvalidOperationException(&quot;identity.Name&quot;);
+            if (string.IsNullOrEmpty(identity.LibraryDirectory))
+                throw new InvalidOperationException(&quot;identity.LibraryDirectory&quot;);
+            if (string.IsNullOrEmpty(identity.DownloadDirectory))
+                throw new InvalidOperationException(&quot;identity.DownloadDirectory&quot;);
+            if (string.IsNullOrEmpty(identity.UploadDirectory))
+                throw new InvalidOperationException(&quot;identity.UploadDirectory&quot;);
+
+            ...
+
+            return ProcessResult.OK;
+        }
+</code></pre>
+
+<p>Jak widzimy, bez możliwości określenia jaki komunikat spodziewamy się otrzymać, przetestowanie powyższego kodu bez wprowadzania własnych wyjątków nie będzie możliwe. Korzystając z nowych możliwości atrybutu <code>ExpectedException</code> testy te będą wyglądały następująco (poniżej tylko kilka pierwszych sprawdzeń):</p>
+
+<pre><code class="language-csharp">        [Test]
+        [ExpectedException(typeof(InvalidOperationException),
+            ExpectedMessage = &quot;identity.Name&quot;,
+            MatchType = MessageMatch.Contains)]
+        public void EmptyUserIdentityNameThrowsInvalidOperationException()
+        {
+            UserIdentity user = new UserIdentity();
+
+            ExecuteCommandProcess process = new ExecuteCommandProcess();
+            process.Execute(user, name, parameters, out answer);
+        }
+
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException),
+            ExpectedMessage = &quot;identity.LibraryDirectory&quot;,
+            MatchType = MessageMatch.Contains)]
+        public void NullUserIdentityLibraryDirectoryThrowsInvalidOperationException()
+        {
+            identity.LibraryDirectory = null;
+
+            ExecuteCommandProcess process = new ExecuteCommandProcess();
+            process.Execute(identity, name, parameters, out answer);
+        }
+</code></pre>
+
+<p>I to na tyle. Zapraszam do eksperymentów. Pardonsik&hellip; do testów oczywiście.</p>
+
+    </article>
+    <nav aria-label="Related posts">
+        <h4>Related Posts</h4>
+        <ul>
+            <li><a href="https://awasn.github.io/liczby-calkowite/">Liczby całkowite</a></li>
+            <li><a href="https://awasn.github.io/t4-lepsze-niz-t34/">T4 lepsze niż T34</a></li>
+        </ul>
+    </nav>
+
+    <nav class="pure-g post-previous-next" aria-label="Previous and next posts">
+        <div class="pure-u-11-24 previous">
+            <a href="https://awasn.github.io/liczby-calkowite/" aria-label="Previous post"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg></span></a>
+            <a href="https://awasn.github.io/liczby-calkowite/">Liczby całkowite</a>
+        </div>
+        <div class="pure-u-2-24">&nbsp;</div>
+        <div class="pure-u-11-24 next">
+            <a href="https://awasn.github.io/dbf-po-ludzku/">DBF po ludzku</a>
+            <a href="https://awasn.github.io/dbf-po-ludzku/" aria-label="Next post"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg></span></a>
+        </div>
+    </nav>
+
+
+        </main>
+
+        <footer>
+            <div class="center-aligned container">
+                <p>Copyright &copy; 2007-2019 Arkadiusz Waśniewski. All Rights Reserved.</p>
+            </div>
+        </footer>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/accesslog.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dockerfile.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dos.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/go.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/powershell.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/routeros.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/typescript.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/yaml.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/vbnet.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+</html>

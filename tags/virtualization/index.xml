@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Virtualization on arkadiusz wasniewski blog</title>
+    <link>https://awasn.github.io/tags/virtualization/</link>
+    <description>Recent content in Virtualization on arkadiusz wasniewski blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 11 Dec 2008 12:45:00 +0100</lastBuildDate>
+    
+	<atom:link href="https://awasn.github.io/tags/virtualization/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Rozwiązanie mobilne</title>
+      <link>https://awasn.github.io/rozwiazanie-mobilne/</link>
+      <pubDate>Thu, 11 Dec 2008 12:45:00 +0100</pubDate>
+      
+      <guid>https://awasn.github.io/rozwiazanie-mobilne/</guid>
+      <description>Kilka miesięcy temu stałem się szczęśliwym posiadaczem projektu na przygotowanie kompletnego rozwiązania z zakresu szeroko pojętej sprzedaży dla &amp;ldquo;profesjonalnych&amp;rdquo; urządzeń mobilnych, czyli komputerów odpornych na niskie temperatury i kroploszczelne. Systemy operacyjne, które znalazły się w zasięgu projektu to:
+ Microsoft Windows for Pocket PC 2003, Windows Mobile 2003; Windows Mobile 5.0 for Pocket PC, Windows Mobile 5.0 for Pocket PC Phone Edition; Windows Mobile 6 Classic, Windows Mobile 6 Professional.  Pod uwagę należało też brać możliwość pojawienia się w przyszłości konieczności działania programu w ramach Windows CE .</description>
+    </item>
+    
+    <item>
+      <title>Wirtualizacja aplikacji testowych</title>
+      <link>https://awasn.github.io/wirtualizacja-aplikacji-testowych/</link>
+      <pubDate>Mon, 15 Sep 2008 13:21:00 +0200</pubDate>
+      
+      <guid>https://awasn.github.io/wirtualizacja-aplikacji-testowych/</guid>
+      <description>Maszyn wirtualnych używam od dawna. I to korzystając zarówno z VMware Server jak i z Virtual PC. A jednak po przeczytaniu na http://wss.pl artykułu Praca z programem Virtual PC 2007, którego autorami są Robert Stuczynski i Jacek Doktór zorientowałem się, iż zupełnie nie wykorzystywałem do tej pory potęgi dysków różnicowych!
+Z racji tworzonego oprogramowania niejednokrotnie wykonuję integrację oprogramowania mobilnego z zewnętrznymi systemami np. sprzedaży. Tego typu systemy są dostępne do testów często w wersjach z ograniczeniem czasowym.</description>
+    </item>
+    
+    <item>
+      <title>HTTP - Własny serwer komunikacji. Część #2 - Środowisko programistyczne</title>
+      <link>https://awasn.github.io/http-wlasny-serwer-komunikacji-cz2-srodowisko-programistyczne/</link>
+      <pubDate>Sun, 27 Jan 2008 22:12:00 +0100</pubDate>
+      
+      <guid>https://awasn.github.io/http-wlasny-serwer-komunikacji-cz2-srodowisko-programistyczne/</guid>
+      <description>Zasadniczo całe rozwiązanie zbudowane będzie przy pomocy Microsoft Visual Studio 2005 Professional Edition w oparciu o ASP.NET Web Application jako typ projektu. Użytkownicy wersji Express będą niestety zmuszeni dokonać konwersji do projektu Web Site. Dostarczany z Visual Studio serwer WWW w zupełności wystarczy do uruchomienia prezentowanego rozwiązania. Z racji wybranego środowiska operować będziemy na platformie .NET w wersji 2.0. Nie mniej jednak bez żadnych zmian prezentowane oprogramowanie będzie działało również w wersji 1.</description>
+    </item>
+    
+    <item>
+      <title>Loopa TV</title>
+      <link>https://awasn.github.io/loopa-tv/</link>
+      <pubDate>Fri, 14 Sep 2007 13:43:00 +0200</pubDate>
+      
+      <guid>https://awasn.github.io/loopa-tv/</guid>
+      <description>Programując urządzenia mobilne człowiek posiada naturalną potrzebę uruchomienia kodu na takim komputerze (komputerku?). W ramach standardowego środowiska programisty nie ma z tym zazwyczaj problemu. Bierzemy dok (vel kołyskę), wkładamy do niego urządzenie i łączymy z PC przy pomocy kabla USB. Działa. Jakaś komunikacja protokołem TCP z komputerem stacjonarnym? Nie ma problemu, działa. Robimy to samo w terenie, albo bez sieci (nie mając połączenia)&amp;hellip; no&amp;hellip; nie działa. Nie da rady skomunikować się poprzez TCP z urządzenia mobilnego.</description>
+    </item>
+    
+    <item>
+      <title>Z Virtual PC do VMware Server</title>
+      <link>https://awasn.github.io/z-virtual-pc-do-vmware-server/</link>
+      <pubDate>Tue, 04 Sep 2007 22:47:00 +0200</pubDate>
+      
+      <guid>https://awasn.github.io/z-virtual-pc-do-vmware-server/</guid>
+      <description>Zgodnie z deklaracjami firmy VMware, narzędzia tego producenta służące do wirtualizacji komputerów i systemów bez problemu obsługują format stosowany przez aplikacje Virtual PC oraz Virtual Server firmy Microsoft. Wielkie było moje zaskoczenie kiedy okazało się, iż jednak nie do końca. Otóż nie powiedzie nam się operacja uruchomienia (czy to poprzez polecenie Open czy też Import w przypadku VMware Server) maszyny wirtualnej w formacie Microsoft, która skonfigurowana jest tak, aby używała opcji Undo disks, czyli zapisywania wszelkich modyfikacji poza wirtualnym dyskiem.</description>
+    </item>
+    
+  </channel>
+</rss>

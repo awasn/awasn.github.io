@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Powershell on arkadiusz wasniewski blog</title>
+    <link>https://awasn.github.io/tags/powershell/</link>
+    <description>Recent content in Powershell on arkadiusz wasniewski blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 18 Dec 2009 23:19:00 +0100</lastBuildDate>
+    
+	<atom:link href="https://awasn.github.io/tags/powershell/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>(K)Cultura w PowerShell</title>
+      <link>https://awasn.github.io/k-cultura-w-powershell/</link>
+      <pubDate>Fri, 18 Dec 2009 23:19:00 +0100</pubDate>
+      
+      <guid>https://awasn.github.io/k-cultura-w-powershell/</guid>
+      <description>&amp;ldquo;Bo kultura tu naprawdę jest, świadczy o tym nasz wspaniały Dom Kultury&amp;rdquo; śpiewał w 1988 roku w Jarocinie zespół &amp;ldquo;Zielone Żabki&amp;rdquo;. Ktoś pamięta? Dziś też będzie o kulturze, ale przez literę c czyli o Culture. Tekst zaś dotyczył będzie tak prozaicznej kwestii jak polskie znaki narodowe.
+Zacznijmy od początku. Utwórzmy, np. w Notatniku, plik w formacie CSV zawierający nazwy ptaków z polskimi znakami narodowymi:
+id,nazwa 1,Gżegżółka 2,Żuraw 3,Łabędź  I spróbujmy go wczytać korzystając ze standardowego polecenia PowerShell:</description>
+    </item>
+    
+    <item>
+      <title>Pobranie projektów rozwiązania czyli Regex w akcji</title>
+      <link>https://awasn.github.io/pobranie-projektow-rozwiazania-czyli-regex-w-akcji/</link>
+      <pubDate>Thu, 08 Oct 2009 00:17:00 +0200</pubDate>
+      
+      <guid>https://awasn.github.io/pobranie-projektow-rozwiazania-czyli-regex-w-akcji/</guid>
+      <description>Asumpt do poniższego rozwiązania dostarczył skrypt PowerShell, który kompiluje projekty pewnego mojego rozwiązania, i gdzie zapałałem chęcią automatycznego uaktualnienia numeru wersji we wszystkich plikach AssemblyInfo.cs. Ale gdzież są te wszystkie pliki? No w projektach…
+Najprostszy sposób dotarcia do projektów to odczytanie pliku .sln. Hm… ale to oznacza analizowanie zawartości. Z pomocą przyszły wyrażenia regularne oraz świadomość istnienia jasno określonej struktury pliku .sln.
+Project\(&amp;quot;\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC\}&amp;quot;\) = &amp;quot;(?&amp;lt;projectName&amp;gt;[^&amp;quot;]+)&amp;quot;, &amp;quot;(?&amp;lt;projectFolder&amp;gt;[^&amp;quot;]+)&amp;quot;, &amp;quot;(?&amp;lt;projectGuid&amp;gt;[^&amp;quot;]+)&amp;quot;\nEndProject  Oczywiście kilka słów wyjaśnienia.</description>
+    </item>
+    
+    <item>
+      <title>Hook scripts w PowerShell</title>
+      <link>https://awasn.github.io/hook-scripts-w-powershell/</link>
+      <pubDate>Fri, 22 May 2009 21:32:00 +0200</pubDate>
+      
+      <guid>https://awasn.github.io/hook-scripts-w-powershell/</guid>
+      <description>Dawno, dawno temu (choć może nie aż tak dawno) popełniłem notkę na temat skryptów przechwytujących (hook scripts) dla repozytoriów systemu kontroli wersji Subversion. Chodziło o uniemożliwienie zapisania w repozytorium zmian, jeśli nie został podany do nich żaden komentarz wyjaśniający. Proponowany kod wyglądał mniej więcej tak:
+private static int Main(string[] args) { string repositoryPath = args[0]; string transactionName = args[1]; var process = new Process(); process.StartInfo.FileName = &amp;quot;svnlook.exe&amp;quot;; process.StartInfo.Arguments = string.Format(&amp;quot;log -t {0} {1}&amp;quot;, transactionName, repositoryPath); process.</description>
+    </item>
+    
+    <item>
+      <title>Usuwanie informacji o lokalnej kopii roboczej Subversion</title>
+      <link>https://awasn.github.io/usuwanie-informacji-o-lokalnej-kopii-roboczej-subversion/</link>
+      <pubDate>Wed, 15 Apr 2009 14:07:00 +0200</pubDate>
+      
+      <guid>https://awasn.github.io/usuwanie-informacji-o-lokalnej-kopii-roboczej-subversion/</guid>
+      <description>Z przyczyn mniej lub bardziej zrozumiałych koniecznym było, aby usunąć z kilku projektów katalogi zawierające informacje o lokalnej kopii roboczej Subversion _svn. Przy braku połączenia z repozytorium kodu ręczne usuwanie to dłubanina i gwarantowana depresja. Z pomocą przyszedł PowerShell. Jak zwykle. Poniżej skrypt usuwający to co trzeba tam gdzie trzeba:
+Clear-Host $path = Read-Host &amp;quot;Folder przeznaczony do wyczyszenia z katalogów _svn: &amp;quot; Get-ChildItem -Path $path -Include _svn -Force -Recurse -Filter FullName | Remove-Item -Force -Recurse Write-Host &amp;quot;Operacja usuwania katalogów _svn zakończona pomyślnie.</description>
+    </item>
+    
+    <item>
+      <title>Konfiguracja Reporting Services przy pomocy PowerShell</title>
+      <link>https://awasn.github.io/konfiguracja-reporting-services-przy-pomocy-powershell/</link>
+      <pubDate>Fri, 20 Feb 2009 14:42:00 +0100</pubDate>
+      
+      <guid>https://awasn.github.io/konfiguracja-reporting-services-przy-pomocy-powershell/</guid>
+      <description>Od pewnego czasu mam przyjemność budować od podstaw system raportowy w jednej z firm finansowych. Dzięki temu możliwe jest przejście przeze mnie całej ścieżki związanej z instalacją, konfiguracją serwera i uprawnień, tworzeniem raportów oraz ich zarządzaniem.
+Pierwsze czynności są zawsze takie same. Trzeba pogrupować raporty według określonych przez właściciela biznesowego kategorii oraz nadać uprawnienia dostępu do poszczególnych raportów. Najłatwiej powiązać kategorie z działami występującymi w danej firmie oraz nałożyć uprawnienia dostępu na poziomie folderów.</description>
+    </item>
+    
+  </channel>
+</rss>

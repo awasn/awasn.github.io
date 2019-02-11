@@ -1,0 +1,165 @@
+<!DOCTYPE HTML>
+<html lang="pl-pl">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="generator" content="Hugo 0.54.0" />
+        <meta name="description" content="Tryb zgodności Windows w przypadku jeśli aplikacja samodzielnie sprawdza wersję systemu i od tego uzależnia swoją dalszą pracę" />
+        <title>Kiedy nie działa tryb zgodności w Windows 7 - arkadiusz wasniewski blog</title>
+        <link rel="canonical" href="https://awasn.github.io/kiedy-nie-dziala-tryb-zgodnosci-w-windows-7/">
+        <link rel="prev" title="Usuwanie informacji o lokalnej kopii roboczej Subversion" href="https://awasn.github.io/usuwanie-informacji-o-lokalnej-kopii-roboczej-subversion/">
+        <link rel="next" title="Hook scripts w PowerShell" href="https://awasn.github.io/hook-scripts-w-powershell/">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css" integrity="sha256-Q0zCrUs2IfXWYx0uMKJfG93CvF6oVII21waYsAV4/8Q=" crossorigin="anonymous" />
+        
+        
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
+        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.f635c2298033f6f9947349ea417d9e9d94017493351f739bf1b756d5b5bccf61.css" integrity="sha256-9jXCKYAz9vmUc0nqQX2enZQBdJM1H3Ob8bdW1bW8z2E=" />
+
+    </head>
+    <body>
+        <header>
+            <nav class="container" >
+                <div class="pure-menu pure-menu-horizontal">
+                    <a class="pure-menu-heading pure-menu-link" href="https://awasn.github.io/">wasniewski</a>
+                    <ul class="right pure-menu-list">
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/blog/">blog</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/categories/">categories</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/tags/">tags</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/about/">about</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container">
+            
+    <aside class="post-published">
+        <p>This post was originally published on <a href="http://zine.net.pl/blogs/arkadiusz_wasniewski/archive/2009/05/20/kiedy-nie-dzia-a-tryb-zgodno-ci-w-windows-7.aspx" target="_blank">zine.net.pl</a> on 20 May 2009 10:48 CEST</p>
+    </aside>
+
+    <article>
+        <header>
+            <h1>Kiedy nie działa tryb zgodności w Windows 7</h1>
+                <div class="post-metadata">
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            20 May 2009 10:48 CEST
+            
+                &nbsp;
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon></svg>
+                17 September 2018 13:59 CEST
+            
+            &nbsp;
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            2 min read
+        </div>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+            <a href="https://awasn.github.io/categories/development">Development</a>
+            
+                &nbsp;
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+                <a href="https://awasn.github.io/tags/.net">.NET</a>, <a href="https://awasn.github.io/tags/interop">Interop</a>
+            
+        </div>
+    </div>
+        </header>
+
+        <p>W razie problemów z działaniem aplikacji w systemie Windows 7 można we właściwościach danego programu (<strong>Properties –&gt; Comaptibility</strong>) włączyć tryb zgodności (<strong>Compatibility mode</strong>) poprzez wybranie wcześniejszej wersji systemu operacyjnego. Do dyspozycji mamy:</p>
+
+<ul>
+<li>Windows 95;</li>
+<li>Windows 98 / Windows Me;</li>
+<li>Windows NT 4.0 z Service Pack 5;</li>
+<li>Windows 2000;</li>
+<li>Windows XP z Service Pack w wersji 2 lub 3;</li>
+<li>Windows Server 2003 z Service Pack 1;</li>
+<li>Windows Vista;</li>
+<li>Windows Vista z Service Pack 1 lub 2.</li>
+</ul>
+
+<p>Rozwiązanie to jednak nie zadziała poprawnie jeśli aplikacja samodzielnie sprawdza wersję systemu i od tego uzależnia swoją dalszą pracę. Weźmy dla przykładu poniższy kod:</p>
+
+<pre><code class="language-csharp">    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
+    public class OSVERSIONINFO
+    {
+        public int OSVersionInfoSize;
+        public int MajorVersion;
+        public int MinorVersion;
+        public int BuildNumber;
+        public int PlatformId;
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
+        public string CSDVersion;
+    }
+
+    class Program
+    {
+        [DllImport(&quot;kernel32.dll&quot;, CharSet = CharSet.Auto, SetLastError = true)]
+        public static extern bool GetVersionEx([In, Out] OSVERSIONINFO ver);
+
+        static void Main()
+        {
+            var structure = new OSVERSIONINFO();
+            structure.OSVersionInfoSize = Marshal.SizeOf(structure);
+            GetVersionEx(structure);
+            Console.WriteLine(string.Format(&quot;Wersja systemu: {0}.{1}&quot;,
+                structure.MajorVersion,
+                structure.MinorVersion));
+            Console.ReadKey();
+        }
+    }
+</code></pre>
+
+<p>Jaki system nie wybierzemy w trybie zgodności, dla Windows 7 RC wynik zawsze będzie identyczny: <strong>Wersja systemu: 6.1</strong> (podobnie zresztą jak dla Windows Server 2008 R2).</p>
+
+<p>PS. Z powyższych przyczyn w Windows 7 póki co nie działa między innymi WD Anywhere Backup. Jest to więc kwestia aplikacji a nie problemów z samym systemem operacyjnym.</p>
+
+    </article>
+    <nav aria-label="Related posts">
+        <h4>Related Posts</h4>
+        <ul>
+            <li><a href="https://awasn.github.io/marshalhelper-zarzadza-niezarzadzanym/">MarshalHelper zarządza niezarządzanym</a></li>
+            <li><a href="https://awasn.github.io/iteratory/">Iteratory</a></li>
+            <li><a href="https://awasn.github.io/dbf-po-ludzku/">DBF po ludzku</a></li>
+            <li><a href="https://awasn.github.io/implementacja-inversion-of-control-wersja-1-1/">Implementacja Inversion of Control - wersja 1.1</a></li>
+            <li><a href="https://awasn.github.io/rozwiazanie-mobilne/">Rozwiązanie mobilne</a></li>
+        </ul>
+    </nav>
+
+    <nav class="pure-g post-previous-next" aria-label="Previous and next posts">
+        <div class="pure-u-11-24 previous">
+            <a href="https://awasn.github.io/usuwanie-informacji-o-lokalnej-kopii-roboczej-subversion/" aria-label="Previous post"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg></span></a>
+            <a href="https://awasn.github.io/usuwanie-informacji-o-lokalnej-kopii-roboczej-subversion/">Usuwanie informacji o lokalnej kopii roboczej Subversion</a>
+        </div>
+        <div class="pure-u-2-24">&nbsp;</div>
+        <div class="pure-u-11-24 next">
+            <a href="https://awasn.github.io/hook-scripts-w-powershell/">Hook scripts w PowerShell</a>
+            <a href="https://awasn.github.io/hook-scripts-w-powershell/" aria-label="Next post"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg></span></a>
+        </div>
+    </nav>
+
+
+        </main>
+
+        <footer>
+            <div class="center-aligned container">
+                <p>Copyright &copy; 2007-2019 Arkadiusz Waśniewski. All Rights Reserved.</p>
+            </div>
+        </footer>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/accesslog.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dockerfile.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dos.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/go.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/powershell.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/routeros.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/typescript.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/yaml.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/vbnet.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+</html>

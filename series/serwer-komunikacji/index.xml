@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Serwer Komunikacji on arkadiusz wasniewski blog</title>
+    <link>https://awasn.github.io/series/serwer-komunikacji/</link>
+    <description>Recent content in Serwer Komunikacji on arkadiusz wasniewski blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 27 Jan 2008 22:12:00 +0100</lastBuildDate>
+    
+	<atom:link href="https://awasn.github.io/series/serwer-komunikacji/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>HTTP - Własny serwer komunikacji. Część #2 - Środowisko programistyczne</title>
+      <link>https://awasn.github.io/http-wlasny-serwer-komunikacji-cz2-srodowisko-programistyczne/</link>
+      <pubDate>Sun, 27 Jan 2008 22:12:00 +0100</pubDate>
+      
+      <guid>https://awasn.github.io/http-wlasny-serwer-komunikacji-cz2-srodowisko-programistyczne/</guid>
+      <description>Zasadniczo całe rozwiązanie zbudowane będzie przy pomocy Microsoft Visual Studio 2005 Professional Edition w oparciu o ASP.NET Web Application jako typ projektu. Użytkownicy wersji Express będą niestety zmuszeni dokonać konwersji do projektu Web Site. Dostarczany z Visual Studio serwer WWW w zupełności wystarczy do uruchomienia prezentowanego rozwiązania. Z racji wybranego środowiska operować będziemy na platformie .NET w wersji 2.0. Nie mniej jednak bez żadnych zmian prezentowane oprogramowanie będzie działało również w wersji 1.</description>
+    </item>
+    
+    <item>
+      <title>HTTP - Własny serwer komunikacji. Część #1 - Wstęp</title>
+      <link>https://awasn.github.io/http-wlasny-serwer-komunikacji-cz1-wstep/</link>
+      <pubDate>Mon, 14 Jan 2008 22:45:00 +0100</pubDate>
+      
+      <guid>https://awasn.github.io/http-wlasny-serwer-komunikacji-cz1-wstep/</guid>
+      <description>Budując rozwiązanie, które wymaga wymiany informacji z aplikacjami uruchomionymi na innych maszynach możemy skorzystać z kilku propozycji, jakich dostarcza platforma .NET. Są to między innymi gniazdka (sockets), .NET Remoting, Usługi Sieciowe (Web Services), kolejki wiadomości (MSMQ) czy łączący i uzupełniający większość z tych rozwiązań Windows Communication Foundation (WCF). Oczywiście część z tych metod działa praktycznie tylko wtedy, jeśli obie strony oparte są o .NET (.NET Remoting czy net.tcp z WCF). Inne znów mają problemy jeśli wychodzimy poza obręb danej sieci (.</description>
+    </item>
+    
+  </channel>
+</rss>

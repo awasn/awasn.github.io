@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Regular Expressions on arkadiusz wasniewski blog</title>
+    <link>https://awasn.github.io/tags/regular-expressions/</link>
+    <description>Recent content in Regular Expressions on arkadiusz wasniewski blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 08 Oct 2009 00:17:00 +0200</lastBuildDate>
+    
+	<atom:link href="https://awasn.github.io/tags/regular-expressions/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Pobranie projektów rozwiązania czyli Regex w akcji</title>
+      <link>https://awasn.github.io/pobranie-projektow-rozwiazania-czyli-regex-w-akcji/</link>
+      <pubDate>Thu, 08 Oct 2009 00:17:00 +0200</pubDate>
+      
+      <guid>https://awasn.github.io/pobranie-projektow-rozwiazania-czyli-regex-w-akcji/</guid>
+      <description>Asumpt do poniższego rozwiązania dostarczył skrypt PowerShell, który kompiluje projekty pewnego mojego rozwiązania, i gdzie zapałałem chęcią automatycznego uaktualnienia numeru wersji we wszystkich plikach AssemblyInfo.cs. Ale gdzież są te wszystkie pliki? No w projektach…
+Najprostszy sposób dotarcia do projektów to odczytanie pliku .sln. Hm… ale to oznacza analizowanie zawartości. Z pomocą przyszły wyrażenia regularne oraz świadomość istnienia jasno określonej struktury pliku .sln.
+Project\(&amp;quot;\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC\}&amp;quot;\) = &amp;quot;(?&amp;lt;projectName&amp;gt;[^&amp;quot;]+)&amp;quot;, &amp;quot;(?&amp;lt;projectFolder&amp;gt;[^&amp;quot;]+)&amp;quot;, &amp;quot;(?&amp;lt;projectGuid&amp;gt;[^&amp;quot;]+)&amp;quot;\nEndProject  Oczywiście kilka słów wyjaśnienia.</description>
+    </item>
+    
+  </channel>
+</rss>
