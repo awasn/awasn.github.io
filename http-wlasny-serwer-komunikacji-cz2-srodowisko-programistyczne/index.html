@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="pl-pl">
     <head>
+        <meta name="theme-color" content="#405365"/>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="generator" content="Hugo 0.54.0" />
@@ -16,7 +17,7 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
-        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.f635c2298033f6f9947349ea417d9e9d94017493351f739bf1b756d5b5bccf61.css" integrity="sha256-9jXCKYAz9vmUc0nqQX2enZQBdJM1H3Ob8bdW1bW8z2E=" />
+        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.809247dcc0227e384b256fd9df3f1c82b2b752f0ca6ba0f97410d05bcdd60729.css" integrity="sha256-gJJH3MAifjhLJW/Z3z8cgrK3UvDKa6D5dBDQW83WByk=" />
 
     </head>
     <body>
@@ -84,9 +85,9 @@
 
 <p>WFetch to jedno z ciekawszych narzędzi. Zezwala na wszechstronną diagnostykę aplikacji Web poprzez umożliwienie użytkownikowi wysyłanie i oglądanie na poziomie przesyłanych pakietów HTTP komunikacji pomiędzy programem a serwerem WWW. Program można pobrać między innymi ze strony <a href="https://support.microsoft.com/en-us/help/284285/how-to-use-wfetch-exe-to-troubleshoot-http-connections" target="_blank">https://support.microsoft.com/en-us/help/284285/how-to-use-wfetch-exe-to-troubleshoot-http-connections</a>. Poniżej przykładowy efekt działania:</p>
 
-    <figure itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
-        <img src="https://awasn.github.io/http-wlasny-serwer-komunikacji-cz2-srodowisko-programistyczne/images/WFetch.png" alt="WFetch - żądanie i odpowiedź zwrotna" itemprop="contentUrl">
-        <figcaption itemprop="caption"><h4>WFetch - żądanie i odpowiedź zwrotna</h4></figcaption>
+    <figure>
+        <img class="pure-img" src="https://awasn.github.io/http-wlasny-serwer-komunikacji-cz2-srodowisko-programistyczne/images/WFetch.png" alt="WFetch - żądanie i odpowiedź zwrotna" >
+        <figcaption><h4>WFetch - żądanie i odpowiedź zwrotna</h4></figcaption>
     </figure>
 
 <p>Jak widzimy do aplikacji Web uruchomionej lokalnie na porcie 1395 (serwer testowy Visual Studio) wysyłamy żądanie wyświetlenia domyślnej strony. Reakcja serwera jest zgodna z naszymi oczekiwaniami. Dostajemy bowiem jako odpowiedź zawartość właściwego pliku.</p>
@@ -97,9 +98,9 @@
 
 <p>Po zainstalowaniu i uruchomieniu programu po lewej stronie, w części <strong>Capture Network Traffic</strong>, klikamy przycisk <strong>Create a new capture tab&hellip;</strong> dzięki czemu będziemy mogli rozpocząć przechwytywanie ruchu sieciowego. Aby nie zostać zalanym informacjami, w utworzonej zakładce, w sekcji <strong>Display Filter</strong> wpisujemy <strong>protocol.HTTP</strong> i klikamy <strong>Apply</strong>. Pozwoli nam to ograniczyć wyświetlane dane tylko do protokołu HTTP. Klawisz F10 uruchamia nasłuch, F11 zatrzymuje.</p>
 
-    <figure itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
-        <img src="https://awasn.github.io/http-wlasny-serwer-komunikacji-cz2-srodowisko-programistyczne/images/Network_Monitor_Request.png" alt="Network Monitor - Żądanie wyświetlenia domyślnej strony" itemprop="contentUrl">
-        <figcaption itemprop="caption"><h4>Network Monitor - Żądanie wyświetlenia domyślnej strony</h4></figcaption>
+    <figure>
+        <img class="pure-img" src="https://awasn.github.io/http-wlasny-serwer-komunikacji-cz2-srodowisko-programistyczne/images/Network_Monitor_Request.png" alt="Network Monitor - Żądanie wyświetlenia domyślnej strony" >
+        <figcaption><h4>Network Monitor - Żądanie wyświetlenia domyślnej strony</h4></figcaption>
     </figure>
 
 <p>Powyższy zrzut ekranu pokazuje wysłane do serwera żądanie wyświetlenie domyślnej strony dla aplikacji Sample1.</p>
@@ -128,9 +129,9 @@
 
 <p>W aplikacji VMware Server, podobnie jak w Virtual PC, musimy wpierw wirtualną maszynę dodać. Z menu <strong>File</strong> wybieramy polecenie <strong>Import&hellip;</strong> a następnie klikamy dwa razy przycisk <strong>Next</strong>. W oknie <strong>Specify the Source Image</strong> wybieramy plik konfiguracyjny maszyny wirtualnej (w naszym przypadku <strong>WS03R2EE.vmc</strong>) i klikamy <strong>Next</strong>. Import oznacza utworzenie kopii maszyny wirtualnej w formacie VMware - należy wziąć to pod uwagę i zadbać w o odpowiednią ilość wolnej przestrzeni na dysku.</p>
 
-    <figure itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
-        <img src="https://awasn.github.io/http-wlasny-serwer-komunikacji-cz2-srodowisko-programistyczne/images/VMware_Server_Console.png" alt="VMware Server - konsola zarządzająca" itemprop="contentUrl">
-        <figcaption itemprop="caption"><h4>VMware Server - konsola zarządzająca</h4></figcaption>
+    <figure>
+        <img class="pure-img" src="https://awasn.github.io/http-wlasny-serwer-komunikacji-cz2-srodowisko-programistyczne/images/VMware_Server_Console.png" alt="VMware Server - konsola zarządzająca" >
+        <figcaption><h4>VMware Server - konsola zarządzająca</h4></figcaption>
     </figure>
 
 <p>Jeśli import zakończy się klęską, należy sprawdzić, klikając łącze <strong>Show the logfile</strong>, czy w logu znajduje się informacja następującej treści: <em>TranslateError: original Description is Failed to initialize MSXML</em>. Tego typu komunikat oznacza, iż w systemie brakuje parsera XML w wersji 2.6, 3.0 lub 4.0. Stosowne wersje można pobrać ze stron firmy Microsoft. Np. wersję MSXML 4.0 Service Pack 2 można znaleźć <a href="https://www.microsoft.com/en-us/download/details.aspx?id=19662" target="_blank">tutaj</a>. Należy pobrać plik <a href="http://download.microsoft.com/download/9/6/5/9657c01e-107f-409c-baac-7d249561629c/msxml.msi" target="_blank">msxml.msi</a> i zainstalować oprogramowanie.</p>
@@ -168,9 +169,9 @@
 
 <p>badającego dostępność karty sieciowej maszyny wirtualnej zwróci nam informacje o niemożności połączenia się. Jest to spowodowane poziomem zabezpieczeń systemu gościa. Aby to zmienić należy poleceniem <strong>Start -&gt; Control Panel -&gt; Windows Firewall</strong> uruchomić okno konfiguracyjne ściany ogniowej maszyny wirtualnej. W zakładce <strong>Advanced</strong> w sekcji <strong>ICMP</strong> klikamy przycisk <strong>Settings</strong>, zaznaczamy opcję <strong>Allow incoming echo request</strong> i zatwierdzamy. Po tych zmianach wywołanie polecenia ping powinno zwrócić informacje o czasie wymiany pakietów pomiędzy konfigurowanymi systemami.</p>
 
-    <figure itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
-        <img src="https://awasn.github.io/http-wlasny-serwer-komunikacji-cz2-srodowisko-programistyczne/images/ping.png" alt="Sprawdzenie dostępności karty sieciowej maszyny wirtualnej" itemprop="contentUrl">
-        <figcaption itemprop="caption"><h4>Sprawdzenie dostępności karty sieciowej maszyny wirtualnej</h4></figcaption>
+    <figure>
+        <img class="pure-img" src="https://awasn.github.io/http-wlasny-serwer-komunikacji-cz2-srodowisko-programistyczne/images/ping.png" alt="Sprawdzenie dostępności karty sieciowej maszyny wirtualnej" >
+        <figcaption><h4>Sprawdzenie dostępności karty sieciowej maszyny wirtualnej</h4></figcaption>
     </figure>
 
 <p>Jeśli adres istniejącego połączenia sieciowego komputera hosta również jest w formacie 192.168.x.y i x wynosi 13, to aby uniknąć konfliktów z adresacją dwóch sieci karcie Loopback przypiszmy zamiast 13 dowolną inną liczbę np. 14. Aby zorientować się co do przypisanych adresów IP należy uruchomić konsolę systemu komputera rzeczywistego i wpisać polecenie:</p>
@@ -180,16 +181,16 @@
 
 <p>Zostaną wówczas wyświetlone wszystkie informacje dotyczące konfiguracji istniejących połączeń sieciowych. Poniższy zrzut ekranu pokazuje konfigurację interfejsów dla maszyny wirtualnej. Mniej więcej podobne informacje, tylko w większej ilości, będą wyświetlone po wydaniu polecenie ipconfig dla komputera rzeczywistego.</p>
 
-    <figure itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
-        <img src="https://awasn.github.io/http-wlasny-serwer-komunikacji-cz2-srodowisko-programistyczne/images/ipconfig.png" alt="Konfiguracja połączeń sieciowych maszyny wirtualnej" itemprop="contentUrl">
-        <figcaption itemprop="caption"><h4>Konfiguracja połączeń sieciowych maszyny wirtualnej</h4></figcaption>
+    <figure>
+        <img class="pure-img" src="https://awasn.github.io/http-wlasny-serwer-komunikacji-cz2-srodowisko-programistyczne/images/ipconfig.png" alt="Konfiguracja połączeń sieciowych maszyny wirtualnej" >
+        <figcaption><h4>Konfiguracja połączeń sieciowych maszyny wirtualnej</h4></figcaption>
     </figure>
 
 <p>W przypadku WMware Server parametr <strong>Ethernet</strong> maszyny wirtualnej powinien przyjąć wartość <strong>Host-only: A private network shared with host</strong> lub <strong>Custom: Specific virtual network</strong> z wybranym adapterem zawierającym w nazwie host-only np. <strong>VMnet1 (Host-only)</strong>. Ostatni sposób daje też oczywiście więcej możliwości jeśli chodzi o konfigurację działania sieci. Następnie w programie Manage Virtual Networks w zakładce <strong>Summary</strong> sprawdzamy jaki adres przypisany jest do interfejsu odpowiedzialnego za tworzenie sieci prywatnych.</p>
 
-    <figure itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
-        <img src="https://awasn.github.io/http-wlasny-serwer-komunikacji-cz2-srodowisko-programistyczne/images/Manage_Virtual_Networks_Summary.png" alt="Aplikacja Manage Virtual Networks" itemprop="contentUrl">
-        <figcaption itemprop="caption"><h4>Aplikacja Manage Virtual Networks</h4></figcaption>
+    <figure>
+        <img class="pure-img" src="https://awasn.github.io/http-wlasny-serwer-komunikacji-cz2-srodowisko-programistyczne/images/Manage_Virtual_Networks_Summary.png" alt="Aplikacja Manage Virtual Networks" >
+        <figcaption><h4>Aplikacja Manage Virtual Networks</h4></figcaption>
     </figure>
 
 <p>Kolejny krok to konfiguracja karty sieciowej maszyny wirtualnej. Powyższy zrzut ekranu pokazuje, iż przypisany po stronie komputera fizycznego adres to 192.168.157.0 z maską 255.255.255.0. Podobnie jak w przypadku konfiguracji systemu gościa uruchamianego w ramach Virtual PC, tak i teraz przypisujemy do karty sieciowej maszyny wirtualny adres z tej samej sieci. W tym przypadku 192.168.157.2. Po odblokowaniu ściany ogniowej, możemy korzystając z polecenia ping sprawdzić dostępność systemu gościa.</p>
@@ -236,6 +237,8 @@
             <a href="https://awasn.github.io/hook-scripts-w-csharp/" aria-label="Next post"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg></span></a>
         </div>
     </nav>
+
+    
 
 
         </main>

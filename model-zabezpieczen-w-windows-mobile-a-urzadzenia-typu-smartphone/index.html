@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="pl-pl">
     <head>
+        <meta name="theme-color" content="#405365"/>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="generator" content="Hugo 0.54.0" />
@@ -16,7 +17,7 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
-        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.f635c2298033f6f9947349ea417d9e9d94017493351f739bf1b756d5b5bccf61.css" integrity="sha256-9jXCKYAz9vmUc0nqQX2enZQBdJM1H3Ob8bdW1bW8z2E=" />
+        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.809247dcc0227e384b256fd9df3f1c82b2b752f0ca6ba0f97410d05bcdd60729.css" integrity="sha256-gJJH3MAifjhLJW/Z3z8cgrK3UvDKa6D5dBDQW83WByk=" />
 
     </head>
     <body>
@@ -89,9 +90,9 @@
 
 <p>Z punktu widzenia producenta lub dostawcy urządzenia ustawienie poziomu zabezpieczeń na dwuwarstwowy, z blokadą zmiany przez użytkownika właściwości tego poziomu, ogranicza do minimum problemy związane z wirusami, trojanami etc. Dla niewymagającego użytkownika ograniczenia te nie mają właściwie znaczenia. Osoba pragnąca wzbogacić urządzenie o dodatkowe oprogramowanie, przy pierwszym uruchomieniu aplikacji będzie zmuszona jedynie tę operację zaakceptować.</p>
 
-    <figure itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
-        <img src="https://awasn.github.io/model-zabezpieczen-w-windows-mobile-a-urzadzenia-typu-smartphone/images/SmartphoneSecurity_Default.png" alt="Domyślne ustawienia i poziom zabezpieczeń urządzania typu smartphone" itemprop="contentUrl">
-        <figcaption itemprop="caption"><h4>Domyślne ustawienia i poziom zabezpieczeń urządzania typu smartphone</h4></figcaption>
+    <figure>
+        <img class="pure-img" src="https://awasn.github.io/model-zabezpieczen-w-windows-mobile-a-urzadzenia-typu-smartphone/images/SmartphoneSecurity_Default.png" alt="Domyślne ustawienia i poziom zabezpieczeń urządzania typu smartphone" >
+        <figcaption><h4>Domyślne ustawienia i poziom zabezpieczeń urządzania typu smartphone</h4></figcaption>
     </figure>
 
 <p>Programista natomiast staje niestety przed poważnym problemem. Visual Studio bowiem nie jest wstanie korzystać ze wszystkich zasobów urządzenia mobilnego, które są niezbędne do przeprowadzenia operacji zdalnego dostępu. Nie istnieje również, o czym było wcześniej, możliwość wgrania własnych certyfikatów!</p>
@@ -100,18 +101,18 @@
 
 <p>Pierwszym dostawcą telefonów komórkowych wyposażonych w system Windows Mobile (Windows Mobile 5.0 for Smartphone oraz Windows Mobile 6 Standard), który wprowadził blokady na poziomie dwuwarstwowym był Orange. Na szczęście dla urządzeń sieci Orange dostępna jest strona <code>http://spvunlock.rd.francetelecom.com</code>, która po podaniu numeru EMEI urządzenia, numeru telefonu, imienia i nazwisko (prowdopodobnie weryfikacja czy telefon wykorzystywany jest w sieci Orange) oraz adresu email wysyła do nas plik <strong>remove_&lt;numer EMEI&gt;</strong>.cab umożliwiający zdjęcie zabezpieczeń z urządzenia (unlock). Po usunięciu blokady urządzenie powinno oczywiście również szybciej pracować. System ma bowiem mniejszy zakres danych do weryfikacji.</p>
 
-    <figure itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
-        <img src="https://awasn.github.io/model-zabezpieczen-w-windows-mobile-a-urzadzenia-typu-smartphone/images/SmartphoneSecurity_AfterUnlock.png" alt="Urządzenie typu smartphone po zdjęciu blokady zabezpieczeń" itemprop="contentUrl">
-        <figcaption itemprop="caption"><h4>Urządzenie typu smartphone po zdjęciu blokady zabezpieczeń</h4></figcaption>
+    <figure>
+        <img class="pure-img" src="https://awasn.github.io/model-zabezpieczen-w-windows-mobile-a-urzadzenia-typu-smartphone/images/SmartphoneSecurity_AfterUnlock.png" alt="Urządzenie typu smartphone po zdjęciu blokady zabezpieczeń" >
+        <figcaption><h4>Urządzenie typu smartphone po zdjęciu blokady zabezpieczeń</h4></figcaption>
     </figure>
 
 <p>Jak widzimy na powyższym rysunku, po zdjęciu zabezpieczeń telefon został przestawiony na jednowarstwowy poziom zabezpieczeń, skonfigurowany dodatkowo tak, iż dozwolone są wszystkie operacje bez informowania o tym użytkownika. Oczywiście teraz można i należy trochę podwyższyć poziom zabezpieczeń, chociażby poprzez wymóg pytania się przez system czy na pewno chcemy uruchomić niepodpisaną ważnym certyfikatem aplikację.</p>
 
 <p>Konfiguracja poziomu zabezpieczeń urządzenia typu smartphone przyjazna dla programisty</p>
 
-    <figure itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
-        <img src="https://awasn.github.io/model-zabezpieczen-w-windows-mobile-a-urzadzenia-typu-smartphone/images/SmartphoneSecurity_Manager.png" alt="Konfiguracja poziomu zabezpieczeń urządzenia typu smartphone przyjazna dla programisty" itemprop="contentUrl">
-        <figcaption itemprop="caption"><h4>Konfiguracja poziomu zabezpieczeń urządzenia typu smartphone przyjazna dla programisty</h4></figcaption>
+    <figure>
+        <img class="pure-img" src="https://awasn.github.io/model-zabezpieczen-w-windows-mobile-a-urzadzenia-typu-smartphone/images/SmartphoneSecurity_Manager.png" alt="Konfiguracja poziomu zabezpieczeń urządzenia typu smartphone przyjazna dla programisty" >
+        <figcaption><h4>Konfiguracja poziomu zabezpieczeń urządzenia typu smartphone przyjazna dla programisty</h4></figcaption>
     </figure>
 
 <p>Teraz możemy przystąpić do programowania.</p>
@@ -148,6 +149,8 @@
             <a href="https://awasn.github.io/nie-wyrzucamy-wyjatkow-poza-domain-model/" aria-label="Next post"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg></span></a>
         </div>
     </nav>
+
+    
 
 
         </main>

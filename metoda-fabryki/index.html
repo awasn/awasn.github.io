@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="pl-pl">
     <head>
+        <meta name="theme-color" content="#405365"/>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="generator" content="Hugo 0.54.0" />
@@ -16,7 +17,7 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
-        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.f635c2298033f6f9947349ea417d9e9d94017493351f739bf1b756d5b5bccf61.css" integrity="sha256-9jXCKYAz9vmUc0nqQX2enZQBdJM1H3Ob8bdW1bW8z2E=" />
+        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.809247dcc0227e384b256fd9df3f1c82b2b752f0ca6ba0f97410d05bcdd60729.css" integrity="sha256-gJJH3MAifjhLJW/Z3z8cgrK3UvDKa6D5dBDQW83WByk=" />
 
     </head>
     <body>
@@ -82,9 +83,9 @@
 
 <p>W celu skorzystania z wzorca Factory Method definiujemy interfejs klas tworzonych, który będzie implementowany przez konkretne rodzaje podklas oraz interfejs do tworzenia tych obiektów umożliwiający klasom dziedziczącym podejmowanie decyzji, której klasy instancja zostanie zwrócona. Jeśli brzmi to skomplikowanie lub niejasno za chwil kilka powinno być całkowicie zrozumiałe. Klasyczny już schemat wzorca metoda fabryki wygląda następująco:</p>
 
-    <figure itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
-        <img src="https://awasn.github.io/metoda-fabryki/images/FactoryMethod.png" alt="Schemat wzorca Factory Method" itemprop="contentUrl">
-        <figcaption itemprop="caption"><h4>Schemat wzorca Factory Method</h4></figcaption>
+    <figure>
+        <img class="pure-img" src="https://awasn.github.io/metoda-fabryki/images/FactoryMethod.png" alt="Schemat wzorca Factory Method" >
+        <figcaption><h4>Schemat wzorca Factory Method</h4></figcaption>
     </figure>
 
 <p>Powyższy rysunek został zaczerpnięty z historycznej już pracy &ldquo;Design Patterns. Elements Of Reusable Object-Oriented Software&rdquo;, której autorami są Erich Gamma, Richard Helm, Ralph Johnson i John Vlissides, zwani w skrócie Bandą Czworga (Gang of Four). Uczestnicy schematu to:</p>
@@ -144,9 +145,9 @@
 
 <p>Na początek modelowa implementacja wzorca. Mamy obiekt <code>Customer</code> reprezentujący klienta, dla którego chcemy obliczyć wartość dowolnego rabatu. Potrzebujemy kilku algorytmów (sposobów) określania wielkości rabatu. Konkretny obiekt implementujący daną metodę obliczającą będzie zwracany przez wybraną metodę fabryki.</p>
 
-    <figure itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
-        <img src="https://awasn.github.io/metoda-fabryki/images/FactoryMethod_Sample1.png" alt="Factory Method - Przykład 1" itemprop="contentUrl">
-        <figcaption itemprop="caption"><h4>Factory Method - Przykład 1</h4></figcaption>
+    <figure>
+        <img class="pure-img" src="https://awasn.github.io/metoda-fabryki/images/FactoryMethod_Sample1.png" alt="Factory Method - Przykład 1" >
+        <figcaption><h4>Factory Method - Przykład 1</h4></figcaption>
     </figure>
 
 <p>Zaczynamy od zdefiniowania interfejsu <code>IDiscountStrategy</code> dla obiektów obliczających rabat i tworzonych przez metodę wytwórczą. Będzie on zawierał jedną metodę o nazwie <code>Calculate</code>, która jako parametr będzie przyjmowała obiekt typu <code>Customer</code>, obliczała rabat i zwracała jego wartość w postaci liczby rzeczywistej. Klasy konkretyzujące ów interfejs to <code>SpecialDiscountStrategy</code> oraz <code>StandardDiscountStrategy</code>. Abstrakcyjna klasa zawierająca metodę fabryki, która umożliwi zwracanie konkretnego sposóbu obliczania rabatu, nazywa się <code>DiscountStrategyFactory</code>. Klasy potomne to <code>SpecialDiscountStrategyFactory</code> oraz <code>StandardDiscountStrategyFactory</code>. Proszę zwrócić uwagę na zastosowane konwencje nazewnicze. Są one zgodne z tym o czym wspominałem kilka chwil wcześniej. Przy okazji wprowadziliśmy niejawnie wzorzec strategii (ang. Strategy), którego zadaniem jest umożliwienie zbudowania rodziny algorytmów wykonujących określone zadanie i używanie ich wymiennie.</p>
@@ -167,9 +168,9 @@
 
 <p>Problem z nadmierną ilością podklas zawierających konkretną metodę wytwórczą można rozwiązać np. poprzez zastosowanie jednej klasy statycznej zawierającej wszystkie możliwe warianty metody fabryki. Wadą tego rozwiązania jest to, iż likwidujemy możliwość rozbudowy fabryki z wykorzystaniem dziedziczenia. Może mieć to zwłaszcza znaczenie jeśli pakiet zawierający fabrykę ma być zamknięty dla modyfikacji.</p>
 
-    <figure itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
-        <img src="https://awasn.github.io/metoda-fabryki/images/FactoryMethod_Sample2.png" alt="Factory Method - Przykład 2" itemprop="contentUrl">
-        <figcaption itemprop="caption"><h4>Factory Method - Przykład 2</h4></figcaption>
+    <figure>
+        <img class="pure-img" src="https://awasn.github.io/metoda-fabryki/images/FactoryMethod_Sample2.png" alt="Factory Method - Przykład 2" >
+        <figcaption><h4>Factory Method - Przykład 2</h4></figcaption>
     </figure>
 
 <p>Założenia są identyczne jak w poprzednim przykładzie. Poniżej dwa warianty kodu wykorzystującego proponowaną implementację:</p>
@@ -198,9 +199,9 @@
 
 <p>Jedno z rozwiązań prezentuje poniższy schemat:</p>
 
-    <figure itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
-        <img src="https://awasn.github.io/metoda-fabryki/images/FactoryMethod_Sample3.png" alt="Factory Method - Przykład 3" itemprop="contentUrl">
-        <figcaption itemprop="caption"><h4>Factory Method - Przykład 3</h4></figcaption>
+    <figure>
+        <img class="pure-img" src="https://awasn.github.io/metoda-fabryki/images/FactoryMethod_Sample3.png" alt="Factory Method - Przykład 3" >
+        <figcaption><h4>Factory Method - Przykład 3</h4></figcaption>
     </figure>
 
 <p>Przykład wykorzystania omawianej implementacji:</p>
@@ -220,9 +221,9 @@
 
 <p>Wraz z wersją drugą platformy .NET otrzymaliśmy możliwość skorzystania z typów <strong>generic</strong>. Dzięki temu przykład 1 oraz 2 możemy uprościć stosując statyczną klasę zawierającą pojedynczą metodę wytwórczą, która jako parametr typu może przyjmować implementacje interfejsu <code>IDiscount</code>.</p>
 
-    <figure itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
-        <img src="https://awasn.github.io/metoda-fabryki/images/FactoryMethod_Sample4.png" alt="Factory Method - Przykład 4" itemprop="contentUrl">
-        <figcaption itemprop="caption"><h4>Factory Method - Przykład 4</h4></figcaption>
+    <figure>
+        <img class="pure-img" src="https://awasn.github.io/metoda-fabryki/images/FactoryMethod_Sample4.png" alt="Factory Method - Przykład 4" >
+        <figcaption><h4>Factory Method - Przykład 4</h4></figcaption>
     </figure>
 
 <p>Uzyskany kod jest bardzo elastyczny. Zakładamy przy tym, iż programista decyduje o rodzaju rabatu w danym miejscu programu:</p>
@@ -252,9 +253,9 @@
 
 <p>Na koniec trochę bardziej skomplikowany przykład, który pokaże nam w jaki sposób wykorzystać klasy typu <strong>generic</strong> do zbudowania Factory Method, która będzie zwracać właściwą instancję obiektu na podstawie przekazanego typu interfejsu, który zwracany obiekt musi implementować.</p>
 
-    <figure itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
-        <img src="https://awasn.github.io/metoda-fabryki/images/FactoryMethod_Sample5.png" alt="Factory Method - Przykład 5" itemprop="contentUrl">
-        <figcaption itemprop="caption"><h4>Factory Method - Przykład 5</h4></figcaption>
+    <figure>
+        <img class="pure-img" src="https://awasn.github.io/metoda-fabryki/images/FactoryMethod_Sample5.png" alt="Factory Method - Przykład 5" >
+        <figcaption><h4>Factory Method - Przykład 5</h4></figcaption>
     </figure>
 
 <p>W tej implementacji znowu przekazujemy podjęcie decyzji o rodzaju konkretnego obiektu, który zostanie zwrócony do metody wytwórczej. Aczkolwiek inaczej niż w przykładzie numer 3 decyzja będzie podejmowana na podstawie interfejsu, który ma być zwrócony a nie na podstawie cech obiektu typu <code>Customer</code>:</p>
@@ -330,6 +331,8 @@
             <a href="https://awasn.github.io/resharper-ostrzega-possible-nullreferenceexception/" aria-label="Next post"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg></span></a>
         </div>
     </nav>
+
+    
 
 
         </main>
