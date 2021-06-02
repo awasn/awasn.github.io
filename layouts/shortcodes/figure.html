@@ -1,0 +1,4 @@
+    <figure>
+        <img class="pure-img" src="{{ $.Page.Permalink }}{{ .Get "src" }}" {{ if or (.Get "alt") (.Get "title") }}alt="{{ with .Get "alt"}}{{.}}{{else}}{{ .Get "title" }}{{ end }}" {{ end }}{{ with .Get "width" }}width="{{.}}" {{ end }}{{ with .Get "height" }}height="{{.}}" {{ end }}>
+        <figcaption><h4>{{ .Get "title" }}</h4></figcaption>
+    </figure>

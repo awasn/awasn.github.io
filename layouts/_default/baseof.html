@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html lang="{{ if .Params.languageCode }}{{ .Params.languageCode }}{{ else }}{{ .Site.LanguageCode | default "en" }}{{ end }}">
+    <head>
+        <meta name="theme-color" content="#405365"/>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {{ .Hugo.Generator }}
+        <meta name="description" content="{{ if .IsHome }}{{ .Site.Params.description }}{{ else }}{{ .Description }}{{ end }}" />
+        <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}</title>
+        <link rel="canonical" href="{{ .Permalink }}">
+
+        {{- with .PrevInSection }}
+        <link rel="prev" title="{{ .Title }}" href="{{ .Permalink }}">
+        {{- end }}
+        {{- with .NextInSection }}
+        <link rel="next" title="{{ .Title }}" href="{{ .Permalink }}">
+        {{- end }}
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css" integrity="sha256-Q0zCrUs2IfXWYx0uMKJfG93CvF6oVII21waYsAV4/8Q=" crossorigin="anonymous" />
+        <!--[if lte IE 8]>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css" integrity="sha256-r/sKuPk30/v587KhP6Bo+6jx9gpKQKHoGuxcA6FBhJo=" crossorigin="anonymous" />
+        <![endif]-->
+        <!--[if gt IE 8]><!-->
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
+        <!--<![endif]-->
+        <link rel="stylesheet" href="{{ .Site.Params.urls.highlight }}/styles/agate.min.css">
+        {{ $style := resources.Get "awasn.scss" | resources.ExecuteAsTemplate "awasn.scss" . | resources.ToCSS | resources.Minify | resources.Fingerprint -}}
+        <link rel="stylesheet" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}" />
+
+    </head>
+    <body>
+        <header>
+            <nav class="container" >
+                <div class="pure-menu pure-menu-horizontal">
+                    <a class="pure-menu-heading pure-menu-link" href="{{ .Site.BaseURL }}">wasniewski</a>
+                    <ul class="right pure-menu-list">
+                        {{- range .Site.Menus.main }}
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="{{ .URL | absURL }}">{{ .Name }}</a></li>
+                        {{- end }}
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container">
+            {{ block "main" . }}{{ end }}
+        </main>
+
+        <footer>
+            <div class="center-aligned container">
+                <p>Copyright &copy; 2007-{{ now.Format "2006" }} {{ .Site.Author.name }}. All Rights Reserved.</p>
+            </div>
+        </footer>
+
+        <script src="{{ .Site.Params.urls.highlight }}/highlight.min.js"></script>
+        <script src="{{ .Site.Params.urls.highlight }}/languages/accesslog.min.js"></script>
+        <script src="{{ .Site.Params.urls.highlight }}/languages/dockerfile.min.js"></script>
+        <script src="{{ .Site.Params.urls.highlight }}/languages/dos.min.js"></script>
+        <script src="{{ .Site.Params.urls.highlight }}/languages/go.min.js"></script>
+        <script src="{{ .Site.Params.urls.highlight }}/languages/powershell.min.js"></script>
+        <script src="{{ .Site.Params.urls.highlight }}/languages/routeros.min.js"></script>
+        <script src="{{ .Site.Params.urls.highlight }}/languages/typescript.min.js"></script>
+        <script src="{{ .Site.Params.urls.highlight }}/languages/yaml.min.js"></script>
+        <script src="{{ .Site.Params.urls.highlight }}/languages/vbnet.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+</html>

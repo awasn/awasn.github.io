@@ -1,0 +1,17 @@
+{{ define "main" }}
+
+    <article>
+        <header>
+            <h1>{{ .Title }}</h1>
+        </header>
+
+        <ul class="styleless horizontal">
+            {{- range .Data.Pages }}
+            <li class="item">
+                <a href="{{ .Permalink }}">{{ .Title }} ({{ len (.Pages) }})</a>
+            </li>
+            {{- end }}
+        </ul>
+    </article>
+
+{{ end }}

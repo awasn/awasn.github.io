@@ -1,0 +1,29 @@
+    <div class="post-metadata">
+        <div>
+            {{ partial "feathericons/calendar.svg" }}
+            {{ $.PublishDate.Format .Site.Params.dateFormats.postMetadata }}
+            {{ if ne .Date .Lastmod }}
+                &nbsp;
+                {{ partial "feathericons/edit.svg" }}
+                {{ $.Lastmod.Format .Site.Params.dateFormats.postMetadata }}
+            {{ end }}
+            &nbsp;
+            {{ partial "feathericons/clock.svg" }}
+            {{ .ReadingTime }} min read
+        </div>
+        <div>
+            {{ partial "feathericons/folder.svg" }}
+            {{ range $index, $category := .Params.categories }}
+                {{- if gt $index 0 }}, {{ end -}}
+                <a href="{{ $.Site.BaseURL }}categories/{{ . | urlize }}">{{ . }}</a>
+            {{- end }}
+            {{ with .Params.tags }}
+                &nbsp;
+                {{ partial "feathericons/tag.svg" }}
+                {{ range $index, $tag := . }}
+                    {{- if gt $index 0 }}, {{ end -}}
+                    <a href="{{ $.Site.BaseURL }}tags/{{ . | urlize }}">{{ . }}</a>
+                {{- end }}
+            {{ end }}
+        </div>
+    </div>

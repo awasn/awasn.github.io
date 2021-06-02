@@ -1,0 +1,35 @@
+    {{- $paginator := $.Paginator }}
+    {{- if gt $paginator.TotalPages 1 }}
+    <nav class="pagination" aria-label="Page navigation">
+        {{- if ne $paginator.PageNumber 1 }}
+        <a class="page-item" href="{{ $paginator.First.URL | absURL }}" aria-label="First"><span aria-hidden="true">{{ partial "feathericons/chevrons-left.svg" }}</span></a>
+        {{- end }}
+        {{- if $paginator.HasPrev }}
+        <a class="page-item" href="{{ $paginator.Prev.URL | absURL }}" aria-label="Previous"><span aria-hidden="true">{{ partial "feathericons/chevron-left.svg" }}</span><span class="sr-only">Previous</span></a>
+        {{- end }}
+        {{- $.Scratch.Set "__paginator.ellipsed" false }}
+        {{- range $paginator.Pagers }}
+        {{- $right := sub .TotalPages .PageNumber }}
+        {{- $showNumber := or (le .PageNumber 3) (eq $right 0) }}
+        {{- $showNumber := or $showNumber (and (gt .PageNumber (sub $paginator.PageNumber 2)) (lt .PageNumber (add $paginator.PageNumber 2)))  }}
+        {{- if $showNumber }}
+            {{- $.Scratch.Set "__paginator.ellipsed" false }}
+            {{- $.Scratch.Set "__paginator.shouldEllipse" false }}
+        {{- else }}
+            {{- $.Scratch.Set "__paginator.shouldEllipse" (not ($.Scratch.Get "__paginator.ellipsed") ) }}
+            {{- $.Scratch.Set "__paginator.ellipsed" true }}
+        {{- end }}
+        {{- if $showNumber }}
+        <a class="page-item{{ if eq . $paginator }} active {{ end }}" href="{{ .URL | absURL }}">{{ .PageNumber }}{{ if eq . $paginator }}<span class="sr-only">(current)</span>{{ end }}</a>
+        {{- else if ($.Scratch.Get "__paginator.shouldEllipse") }}
+        <div class="page-item disabled"><span aria-hidden="true">&hellip;</span></div>
+        {{- end }}
+        {{- end }}
+        {{- if $paginator.HasNext }}
+        <a class="page-item" href="{{ $paginator.Next.URL | absURL }}" aria-label="Next"><span aria-hidden="true">{{ partial "feathericons/chevron-right.svg" }}</span><span class="sr-only">Next</span></a>
+        {{- end }}
+        {{- if ne $paginator.PageNumber $paginator.TotalPages }}
+        <a class="page-item" href="{{ $paginator.Last.URL | absURL }}" aria-label="Last"><span aria-hidden="true">{{ partial "feathericons/chevrons-right.svg" }}</span></a>
+        {{- end }}
+    </nav>
+    {{- end }}
