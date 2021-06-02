@@ -1,334 +1,84 @@
-<!DOCTYPE HTML>
-<html lang="pl-pl">
-    <head>
-        <meta name="theme-color" content="#405365"/>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="generator" content="Hugo 0.54.0" />
-        <meta name="description" content="Opis wymagań konkursu dotyczącego Microsoft Enterprise Library Logging Application Block" />
-        <title>Konkurs Enterprise Library - Logging (LAB) - arkadiusz wasniewski blog</title>
-        <link rel="canonical" href="https://awasn.github.io/konkurs-enterprise-library-logging-lab/">
-        <link rel="prev" title="Loopa TV" href="https://awasn.github.io/loopa-tv/">
-        <link rel="next" title="F(a) = (a &#43; k) mod n" href="https://awasn.github.io/f-a-a-k-mod-n/">
-
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css" integrity="sha256-Q0zCrUs2IfXWYx0uMKJfG93CvF6oVII21waYsAV4/8Q=" crossorigin="anonymous" />
-        
-        
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
-        
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
-        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.809247dcc0227e384b256fd9df3f1c82b2b752f0ca6ba0f97410d05bcdd60729.css" integrity="sha256-gJJH3MAifjhLJW/Z3z8cgrK3UvDKa6D5dBDQW83WByk=" />
-
-    </head>
-    <body>
-        <header>
-            <nav class="container" >
-                <div class="pure-menu pure-menu-horizontal">
-                    <a class="pure-menu-heading pure-menu-link" href="https://awasn.github.io/">wasniewski</a>
-                    <ul class="right pure-menu-list">
-                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/blog/">blog</a></li>
-                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/categories/">categories</a></li>
-                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/tags/">tags</a></li>
-                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/about/">about</a></li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
-
-        <main class="container">
-            
-    <aside class="post-published">
-        <p>This post was originally published on <a href="http://zine.net.pl/blogs/arkadiusz_wasniewski/archive/2007/09/24/konkurs-enterprise-library-logging-lab.aspx" target="_blank">zine.net.pl</a> on 24 September 2007 11:32 CEST</p>
-    </aside>
-
-    <article>
-        <header>
-            <h1>Konkurs Enterprise Library - Logging (LAB)</h1>
-                <div class="post-metadata">
-        <div>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-            24 September 2007 11:32 CEST
-            
-            &nbsp;
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-            7 min read
-        </div>
-        <div>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
-            <a href="https://awasn.github.io/categories/development">Development</a>
-            
-                &nbsp;
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
-                <a href="https://awasn.github.io/tags/.net">.NET</a>, <a href="https://awasn.github.io/tags/design-patterns">Design patterns</a>
-            
-        </div>
-    </div>
-        </header>
-
-        
-
-<h2 id="refaktoryzacja-do-logging-application-block">Refaktoryzacja do Logging Application Block</h2>
-
-<p>Potrzebujemy możliwości śledzenia zachodzących w aplikacji zdarzeń. Ważne jest, aby informacje mogły być zapisywane w jak największej liczbie miejsc takich jak pliki, bazy danych czy poczta elektroniczna, a sama konfiguracja była niezależna od kodu programu.</p>
-
-<p>Aby to osiągnąć korzystamy z możliwości Enterprise Library Logging Application Block w wersji 3.1 - May 2007.</p>
-
-<h2 id="uzasadnienie">Uzasadnienie</h2>
-
-<p>Możliwość rejestracji zdarzeń (logging) zachodzących w aplikacji jest cechą bardzo pożądaną. Nie należy jednak przez zdarzenia rozumieć jedynie błędy czy problemy pojawiające się w czasie działania programu. W prostych aplikacjach gdzie logika jest nieskomplikowana, będzie to oczywiście główne źródło zainteresowań programistów, ale w bardziej rozbudowanych rozwiązaniach ważne będzie również w jakich stanach program się znajduje, jak następuje przechodzenie pomiędzy stanami, w jakiej kolejności są wywoływane elementy składowe aplikacji, jakie podejmowane czynności (akcje) etc. Jeśli mamy do czynienia z usługą czy warstwą biznesową aplikacji rozproszonej, generowany w czasie działania aplikacji log będzie dla osoby nadzorującej podstawowym, a często jedynym, źródłem informacji.</p>
-
-<p>Korzystając z Microsoft Enterprise Library Logging Application Block możemy raportować zdarzenia zachodzące w programie w następujących ujściach:</p>
-
-<ul>
-<li>Dziennik zdarzeń (event log);</li>
-<li>Poczta elektroniczna;</li>
-<li>Baza danych;</li>
-<li>Kolejka komunikatów (message queue);</li>
-<li>Plik tekstowy;</li>
-<li>Zdarzenie WMI;</li>
-<li>Dowolne ujście użytkownika (poprzez własne klasy rozszerzające).</li>
-</ul>
-
-<p>Każde rejestrowane zdarzenie może być opisane dużą liczbą informacji takich jak:</p>
-
-<ul>
-<li>Tytuł zdarzenia;</li>
-<li>Opis zdarzenia;</li>
-<li>Ważność (severity);</li>
-<li>Priorytet;</li>
-<li>Własne kategorie;</li>
-<li>Słownik dodatkowych właściwości (pary klucz-wartość);</li>
-</ul>
-
-<p>Jednocześnie zapis uzupełniany jest między innymi:</p>
-
-<ul>
-<li>Nazwą komputera;</li>
-<li>Informacjami dotyczącymi domeny aplikacji (AppDomain);</li>
-<li>Informacjami dotyczącymi bieżącego procesu i wątku.</li>
-</ul>
-
-<p>Zarządzanie rodzajem ujść (plik tekstowy, zdarzenie systemu etc.) oraz poziomem dokładności zdarzenia (informacje, ostrzeżenia, błędy etc.) odbywa się poprzez wpisy w plikach konfiguracyjnych aplikacji. Dopuszcza się również możliwość ustalania tych reguł na poziomie kodu źródłowego, aczkolwiek w tym przypadku, ze względu na przeznaczenie bloku, nie jest to zalecane postępowanie. Dzięki umiejscowieniu zarządzania logami w plikach konfiguracyjnych aplikacji, uniezależnia się logikę działania aplikacji od nadzorowania zachodzących w niej zdarzeń.</p>
-
-<p>Należy wziąć pod uwagę, iż Logging Application Block korzysta w czasie działania z projektu ObjectBuilder, którego zadaniem jest tworzenie instancji obiektów w oparciu o Dependency Injection. We wzorcu tym klasy są tworzone przez kontener, który dla osiągnięcia celu korzysta z refleksji oraz atrybutów opisujących zależności pomiędzy klasami. Takie podejście oznacza zapotrzebowanie na dodatkowe zasoby komputera co wskazane jest zawsze brać pod uwagę. Notabene programiści Microsoft poprzez nazwanie rozwiązania Enterprise Library wskazują pośrednio właściwe przeznaczenie użytkowania tych bloków.</p>
-
-<h2 id="sposób-wykonania">Sposób wykonania</h2>
-
-<p>Czynności, które należy wykonać, w celu skorzystania z Logging Application Block są następujące:</p>
-
-<ul>
-<li>Dodajemy w ramach projektu referencję (polecenie <strong>Add reference…</strong>) do biblioteki Microsoft.Practices.EnterpriseLibrary.Logging;</li>
-<li>Dodajemy w klasach, w których chcemy skorzystać z możliwości biblioteki, przestrzeń nazw <code>Microsoft.Practices.EnterpriseLibrary.Logging</code>;</li>
-<li>W miejscach kodu, gdzie chcemy rejestrować zdarzenia wywołujemy przeciążoną (overload) metodę statyczną <code>Logger.Write</code>, do której przekazujemy informacje o zdarzeniu;</li>
-<li>Dokonujemy właściwych wpisów w pliku konfiguracyjnym aplikacji.</li>
-</ul>
-
-<h2 id="przykład">Przykład</h2>
-
-<p>Refaktoryzacja do bloku Logging Application Block jest, w przeciwieństwie np. do Validation Application Block, wyjątkowo prosta. Polega ona tak naprawdę na wstawieniu metody rejestrującej zdarzenia w interesujących nas miejscach kodu. Jako przykład posłuży nam aplikacja Web, której zadaniem jest umożliwienie obliczania wyniku z dzielenia dwóch liczb całkowitych. Nasze rozwiązanie oprzemy o uchwyty HTTP – implementację interfejsu <code>IHttpHandler</code>, który umożliwia nam obsługę żądania opartego o protokół HTTP w ramach środowiska ASP.NET (istniejące już w .NET implementacje tego interfejsu to między innymi formularze Web oraz usługi sieciowe). Cały projekt składa się z następujących elementów:</p>
-
-<ul>
-<li><strong>Global.asax</strong> – będący miejscem kontroli przechodzących żądań;</li>
-<li><strong>DivideHandler.ashx</strong> – wykonujący właściwą operację dzielenia;</li>
-<li><strong>Web.config</strong> – zawierający konfigurację aplikacji;</li>
-<li><strong>Resources.resx</strong> – łańcuchy wyświetlane w ramach aplikacji.</li>
-</ul>
-
-<p>Aby wykonać obliczenia należy wywołać <strong>DivideHandler.ashx</strong> podając jako parametry zapytania liczbą, którą chcemy podzielić oraz liczbę dzielącą np.: <code>http://localhost:1109/DivideHandler.ashx?a=8&amp;b=2</code>.</p>
-
-<p>Dołączony kod źródłowy aplikacji jest tak skonfigurowany, iż wywołanie właściwego żądania powinno nastąpić automatycznie zaraz po uruchomieniu. Do interakcji z przykładem wystarczy zwykła przeglądarka internetowa, przy czym polecam w tym wypadku Internet Explorer. Firefox w przypadku otrzymania statusu wystąpienia błędu zgłasza informacje o błędach parsowania XML.</p>
-
-<p>Zakładamy, iż z naszego punktu widzenia ważne są następujące zdarzenia:</p>
-
-<ul>
-<li>Fakt wywołania uchwytu;</li>
-<li>Rezultat operacji;</li>
-<li>Błędy związane z parametrami np. z próbą dzielenia przez zero.</li>
-</ul>
-
-<p>Najważniejszy kod naszej aplikacji, zawierający już wymagane wpisy rejestrujące zdarzenia, wygląda następująco:</p>
-
-<pre><code class="language-csharp">        /// &lt;summary&gt;
-        /// Przetworzenia żądania klienta.
-        /// &lt;/summary&gt;
-        /// &lt;param name=&quot;context&quot;&gt;Kontekst żądania.&lt;/param&gt;
-        public void ProcessRequest(HttpContext context)
+<!doctype html><html lang=pl-pl><head><meta name=theme-color content="#405365"><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.83.1"><meta name=description content="Opis wymagań konkursu dotyczącego Microsoft Enterprise Library Logging Application Block"><title>Konkurs Enterprise Library - Logging (LAB) - arkadiusz wasniewski blog</title><link rel=canonical href=https://awasn.github.io/konkurs-enterprise-library-logging-lab/><link rel=prev title="Loopa TV" href=https://awasn.github.io/loopa-tv/><link rel=next title="F(a) = (a + k) mod n" href=https://awasn.github.io/f-a-a-k-mod-n/><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css integrity="sha256-Q0zCrUs2IfXWYx0uMKJfG93CvF6oVII21waYsAV4/8Q=" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css><link rel=stylesheet href=https://awasn.github.io/awasn.min.f45a909800924faa836a73b82a1d4cb352f8053134a426a9dcafa61cf6a8c5d0.css integrity="sha256-9FqQmACST6qDanO4Kh1Ms1L4BTE0pCap3K+mHPaoxdA="></head><body><header><nav class=container><div class="pure-menu pure-menu-horizontal"><a class="pure-menu-heading pure-menu-link" href=https://awasn.github.io/>wasniewski</a><ul class="right pure-menu-list"><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/blog/>blog</a></li><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/categories/>categories</a></li><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/tags/>tags</a></li><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/about/>about</a></li></ul></div></nav></header><main class=container><aside class=post-published><p>This post was originally published on <a href=http://zine.net.pl/blogs/arkadiusz_wasniewski/archive/2007/09/24/konkurs-enterprise-library-logging-lab.aspx target=_blank>zine.net.pl</a> on 24 September 2007 11:32 +0200</p></aside><article><header><h1>Konkurs Enterprise Library - Logging (LAB)</h1><div class=post-metadata><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>24 September 2007 11:32 +0200
+&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+7 min read</div><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg><a href=https://awasn.github.io/categories/development>Development</a>
+&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83.0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7" y2="7"/></svg>
+<a href=https://awasn.github.io/tags/.net>.NET</a>, <a href=https://awasn.github.io/tags/design-patterns>Design patterns</a></div></div></header><h2 id=refaktoryzacja-do-logging-application-block>Refaktoryzacja do Logging Application Block</h2><p>Potrzebujemy możliwości śledzenia zachodzących w aplikacji zdarzeń. Ważne jest, aby informacje mogły być zapisywane w jak największej liczbie miejsc takich jak pliki, bazy danych czy poczta elektroniczna, a sama konfiguracja była niezależna od kodu programu.</p><p>Aby to osiągnąć korzystamy z możliwości Enterprise Library Logging Application Block w wersji 3.1 - May 2007.</p><h2 id=uzasadnienie>Uzasadnienie</h2><p>Możliwość rejestracji zdarzeń (logging) zachodzących w aplikacji jest cechą bardzo pożądaną. Nie należy jednak przez zdarzenia rozumieć jedynie błędy czy problemy pojawiające się w czasie działania programu. W prostych aplikacjach gdzie logika jest nieskomplikowana, będzie to oczywiście główne źródło zainteresowań programistów, ale w bardziej rozbudowanych rozwiązaniach ważne będzie również w jakich stanach program się znajduje, jak następuje przechodzenie pomiędzy stanami, w jakiej kolejności są wywoływane elementy składowe aplikacji, jakie podejmowane czynności (akcje) etc. Jeśli mamy do czynienia z usługą czy warstwą biznesową aplikacji rozproszonej, generowany w czasie działania aplikacji log będzie dla osoby nadzorującej podstawowym, a często jedynym, źródłem informacji.</p><p>Korzystając z Microsoft Enterprise Library Logging Application Block możemy raportować zdarzenia zachodzące w programie w następujących ujściach:</p><ul><li>Dziennik zdarzeń (event log);</li><li>Poczta elektroniczna;</li><li>Baza danych;</li><li>Kolejka komunikatów (message queue);</li><li>Plik tekstowy;</li><li>Zdarzenie WMI;</li><li>Dowolne ujście użytkownika (poprzez własne klasy rozszerzające).</li></ul><p>Każde rejestrowane zdarzenie może być opisane dużą liczbą informacji takich jak:</p><ul><li>Tytuł zdarzenia;</li><li>Opis zdarzenia;</li><li>Ważność (severity);</li><li>Priorytet;</li><li>Własne kategorie;</li><li>Słownik dodatkowych właściwości (pary klucz-wartość);</li></ul><p>Jednocześnie zapis uzupełniany jest między innymi:</p><ul><li>Nazwą komputera;</li><li>Informacjami dotyczącymi domeny aplikacji (AppDomain);</li><li>Informacjami dotyczącymi bieżącego procesu i wątku.</li></ul><p>Zarządzanie rodzajem ujść (plik tekstowy, zdarzenie systemu etc.) oraz poziomem dokładności zdarzenia (informacje, ostrzeżenia, błędy etc.) odbywa się poprzez wpisy w plikach konfiguracyjnych aplikacji. Dopuszcza się również możliwość ustalania tych reguł na poziomie kodu źródłowego, aczkolwiek w tym przypadku, ze względu na przeznaczenie bloku, nie jest to zalecane postępowanie. Dzięki umiejscowieniu zarządzania logami w plikach konfiguracyjnych aplikacji, uniezależnia się logikę działania aplikacji od nadzorowania zachodzących w niej zdarzeń.</p><p>Należy wziąć pod uwagę, iż Logging Application Block korzysta w czasie działania z projektu ObjectBuilder, którego zadaniem jest tworzenie instancji obiektów w oparciu o Dependency Injection. We wzorcu tym klasy są tworzone przez kontener, który dla osiągnięcia celu korzysta z refleksji oraz atrybutów opisujących zależności pomiędzy klasami. Takie podejście oznacza zapotrzebowanie na dodatkowe zasoby komputera co wskazane jest zawsze brać pod uwagę. Notabene programiści Microsoft poprzez nazwanie rozwiązania Enterprise Library wskazują pośrednio właściwe przeznaczenie użytkowania tych bloków.</p><h2 id=sposób-wykonania>Sposób wykonania</h2><p>Czynności, które należy wykonać, w celu skorzystania z Logging Application Block są następujące:</p><ul><li>Dodajemy w ramach projektu referencję (polecenie <strong>Add reference…</strong>) do biblioteki Microsoft.Practices.EnterpriseLibrary.Logging;</li><li>Dodajemy w klasach, w których chcemy skorzystać z możliwości biblioteki, przestrzeń nazw <code>Microsoft.Practices.EnterpriseLibrary.Logging</code>;</li><li>W miejscach kodu, gdzie chcemy rejestrować zdarzenia wywołujemy przeciążoną (overload) metodę statyczną <code>Logger.Write</code>, do której przekazujemy informacje o zdarzeniu;</li><li>Dokonujemy właściwych wpisów w pliku konfiguracyjnym aplikacji.</li></ul><h2 id=przykład>Przykład</h2><p>Refaktoryzacja do bloku Logging Application Block jest, w przeciwieństwie np. do Validation Application Block, wyjątkowo prosta. Polega ona tak naprawdę na wstawieniu metody rejestrującej zdarzenia w interesujących nas miejscach kodu. Jako przykład posłuży nam aplikacja Web, której zadaniem jest umożliwienie obliczania wyniku z dzielenia dwóch liczb całkowitych. Nasze rozwiązanie oprzemy o uchwyty HTTP – implementację interfejsu <code>IHttpHandler</code>, który umożliwia nam obsługę żądania opartego o protokół HTTP w ramach środowiska ASP.NET (istniejące już w .NET implementacje tego interfejsu to między innymi formularze Web oraz usługi sieciowe). Cały projekt składa się z następujących elementów:</p><ul><li><strong>Global.asax</strong> – będący miejscem kontroli przechodzących żądań;</li><li><strong>DivideHandler.ashx</strong> – wykonujący właściwą operację dzielenia;</li><li><strong>Web.config</strong> – zawierający konfigurację aplikacji;</li><li><strong>Resources.resx</strong> – łańcuchy wyświetlane w ramach aplikacji.</li></ul><p>Aby wykonać obliczenia należy wywołać <strong>DivideHandler.ashx</strong> podając jako parametry zapytania liczbą, którą chcemy podzielić oraz liczbę dzielącą np.: <code>http://localhost:1109/DivideHandler.ashx?a=8&b=2</code>.</p><p>Dołączony kod źródłowy aplikacji jest tak skonfigurowany, iż wywołanie właściwego żądania powinno nastąpić automatycznie zaraz po uruchomieniu. Do interakcji z przykładem wystarczy zwykła przeglądarka internetowa, przy czym polecam w tym wypadku Internet Explorer. Firefox w przypadku otrzymania statusu wystąpienia błędu zgłasza informacje o błędach parsowania XML.</p><p>Zakładamy, iż z naszego punktu widzenia ważne są następujące zdarzenia:</p><ul><li>Fakt wywołania uchwytu;</li><li>Rezultat operacji;</li><li>Błędy związane z parametrami np. z próbą dzielenia przez zero.</li></ul><p>Najważniejszy kod naszej aplikacji, zawierający już wymagane wpisy rejestrujące zdarzenia, wygląda następująco:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp>        <span style=color:#75715e>/// &lt;summary&gt;
+</span><span style=color:#75715e></span>        <span style=color:#75715e>/// Przetworzenia żądania klienta.
+</span><span style=color:#75715e></span>        <span style=color:#75715e>/// &lt;/summary&gt;
+</span><span style=color:#75715e></span>        <span style=color:#75715e>/// &lt;param name=&#34;context&#34;&gt;Kontekst żądania.&lt;/param&gt;
+</span><span style=color:#75715e></span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> ProcessRequest(HttpContext context)
         {
             Logger.Write(Properties.Resources.DividesTwoIntegerValues);
 
-            int dividend = 0, divisior = 0;
+            <span style=color:#66d9ef>int</span> dividend = <span style=color:#ae81ff>0</span>, divisior = <span style=color:#ae81ff>0</span>;
 
-            try
+            <span style=color:#66d9ef>try</span>
             {
-                ReceiveRequest(context, out dividend, out divisior);
+                ReceiveRequest(context, <span style=color:#66d9ef>out</span> dividend, <span style=color:#66d9ef>out</span> divisior);
             }
-            catch (Exception ex)
+            <span style=color:#66d9ef>catch</span> (Exception ex)
             {
-                LogEntry entry = new LogEntry();
+                LogEntry entry = <span style=color:#66d9ef>new</span> LogEntry();
                 entry.Title = Properties.Resources.BadRequestParameters;
                 entry.Message = ex.Message;
                 entry.Severity = TraceEventType.Error;
-                entry.ExtendedProperties.Add(&quot;dividend&quot;, dividend);
-                entry.ExtendedProperties.Add(&quot;divisior&quot;, divisior);
+                entry.ExtendedProperties.Add(<span style=color:#e6db74>&#34;dividend&#34;</span>, dividend);
+                entry.ExtendedProperties.Add(<span style=color:#e6db74>&#34;divisior&#34;</span>, divisior);
                 Logger.Write(entry);
 
-                this.RespondBadRequest(context);
-                return;
+                <span style=color:#66d9ef>this</span>.RespondBadRequest(context);
+                <span style=color:#66d9ef>return</span>;
             }
 
             SendResponse(context, dividend / divisior);
         }
 
-        /// &lt;summary&gt;
-        /// Odczytanie parametrów żądania klienta.
-        /// &lt;/summary&gt;
-        /// &lt;param name=&quot;context&quot;&gt;Kontekst żądania.&lt;/param&gt;
-        /// &lt;param name=&quot;dividend&quot;&gt;Liczba dzielona.&lt;/param&gt;
-        /// &lt;param name=&quot;divisior&quot;&gt;Liczba dzieląca.&lt;/param&gt;
-        private void ReceiveRequest(HttpContext context, out int dividend,
-            out int divisior)
+        <span style=color:#75715e>/// &lt;summary&gt;
+</span><span style=color:#75715e></span>        <span style=color:#75715e>/// Odczytanie parametrów żądania klienta.
+</span><span style=color:#75715e></span>        <span style=color:#75715e>/// &lt;/summary&gt;
+</span><span style=color:#75715e></span>        <span style=color:#75715e>/// &lt;param name=&#34;context&#34;&gt;Kontekst żądania.&lt;/param&gt;
+</span><span style=color:#75715e></span>        <span style=color:#75715e>/// &lt;param name=&#34;dividend&#34;&gt;Liczba dzielona.&lt;/param&gt;
+</span><span style=color:#75715e></span>        <span style=color:#75715e>/// &lt;param name=&#34;divisior&#34;&gt;Liczba dzieląca.&lt;/param&gt;
+</span><span style=color:#75715e></span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> ReceiveRequest(HttpContext context, <span style=color:#66d9ef>out</span> <span style=color:#66d9ef>int</span> dividend,
+            <span style=color:#66d9ef>out</span> <span style=color:#66d9ef>int</span> divisior)
         {
-            dividend = Convert.ToInt32(context.Request.QueryString[&quot;a&quot;], null);
-            divisior = Convert.ToInt32(context.Request.QueryString[&quot;b&quot;], null);
+            dividend = Convert.ToInt32(context.Request.QueryString[<span style=color:#e6db74>&#34;a&#34;</span>], <span style=color:#66d9ef>null</span>);
+            divisior = Convert.ToInt32(context.Request.QueryString[<span style=color:#e6db74>&#34;b&#34;</span>], <span style=color:#66d9ef>null</span>);
 
-            if (divisior == 0)
-                throw new ArgumentOutOfRangeException(&quot;divisior&quot;);
+            <span style=color:#66d9ef>if</span> (divisior == <span style=color:#ae81ff>0</span>)
+                <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> ArgumentOutOfRangeException(<span style=color:#e6db74>&#34;divisior&#34;</span>);
         }
 
-        /// &lt;summary&gt;
-        /// Wysłanie odpowiedzi do klienta.
-        /// &lt;/summary&gt;
-        /// &lt;param name=&quot;context&quot;&gt;Kontekst żądania.&lt;/param&gt;
-        /// &lt;param name=&quot;result&quot;&gt;Wynik dzielenia.&lt;/param&gt;
-        private void SendResponse(HttpContext context, int result)
+        <span style=color:#75715e>/// &lt;summary&gt;
+</span><span style=color:#75715e></span>        <span style=color:#75715e>/// Wysłanie odpowiedzi do klienta.
+</span><span style=color:#75715e></span>        <span style=color:#75715e>/// &lt;/summary&gt;
+</span><span style=color:#75715e></span>        <span style=color:#75715e>/// &lt;param name=&#34;context&#34;&gt;Kontekst żądania.&lt;/param&gt;
+</span><span style=color:#75715e></span>        <span style=color:#75715e>/// &lt;param name=&#34;result&#34;&gt;Wynik dzielenia.&lt;/param&gt;
+</span><span style=color:#75715e></span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> SendResponse(HttpContext context, <span style=color:#66d9ef>int</span> result)
         {
-            string message = string.Format(Properties.Resources.DevisionResult,
+            <span style=color:#66d9ef>string</span> message = <span style=color:#66d9ef>string</span>.Format(Properties.Resources.DevisionResult,
                 result);
 
-            context.Response.ContentType = &quot;text/plain&quot;;
+            context.Response.ContentType = <span style=color:#e6db74>&#34;text/plain&#34;</span>;
             context.Response.Write(message);
 
             Logger.Write(message);
         }
-</code></pre>
-
-<p>Procedura <code>ProcessRequest</code> przetwarza żądanie klienta: odczytuje w metodzie <code>ReceiveRequest</code> przekazane w zapytaniu parametry, wykonuje obliczenia a następnie korzystając z <code>SendResponse</code> wysyła odpowiedź. Jak widzimy początek <code>ProcessRequest</code> to zarejestrowanie informacji w logu o fakcie żądania dzielenia dwóch liczb całkowitych. Następnie ma miejsce odczytanie parametrów zapytania. Jakikolwiek błąd skutkuje jego rejestracją i zakończeniem obsługi żądania. Warto zwrócić uwagę, iż w przypadku błędu próbujemy również zarejestrować odczytane parametry żądania (stąd zresztą wynika konieczność inicjacji zmiennych dividend oraz divisior mimo, iż <code>ReceiveRequest</code> zwraca parametry poprzez out). Poprawne wykonanie operacji dzielenia powoduje wysłanie odpowiedzi oraz zarejestrowanie wyniku.</p>
-
-<p>Jak już wcześniej zostało powiedziane, istnieje możliwość definiowania również własnych kategorii zdarzeń. Prezentuje to poniższy kod:</p>
-
-<pre><code class="language-csharp">        /// &lt;summary&gt;
-        /// Metoda wywoływana w momencie zajścia w aplikacji nie obsłużonego wyjątku.
-        /// &lt;/summary&gt;
-        /// &lt;param name=&quot;sender&quot;&gt;Obiekt sygnalizujący zdarzenie.&lt;/param&gt;
-        /// &lt;param name=&quot;e&quot;&gt;Parametry zdarzenia.&lt;/param&gt;
-        protected void Application_Error(object sender, EventArgs e)
+</code></pre></div><p>Procedura <code>ProcessRequest</code> przetwarza żądanie klienta: odczytuje w metodzie <code>ReceiveRequest</code> przekazane w zapytaniu parametry, wykonuje obliczenia a następnie korzystając z <code>SendResponse</code> wysyła odpowiedź. Jak widzimy początek <code>ProcessRequest</code> to zarejestrowanie informacji w logu o fakcie żądania dzielenia dwóch liczb całkowitych. Następnie ma miejsce odczytanie parametrów zapytania. Jakikolwiek błąd skutkuje jego rejestracją i zakończeniem obsługi żądania. Warto zwrócić uwagę, iż w przypadku błędu próbujemy również zarejestrować odczytane parametry żądania (stąd zresztą wynika konieczność inicjacji zmiennych dividend oraz divisior mimo, iż <code>ReceiveRequest</code> zwraca parametry poprzez out). Poprawne wykonanie operacji dzielenia powoduje wysłanie odpowiedzi oraz zarejestrowanie wyniku.</p><p>Jak już wcześniej zostało powiedziane, istnieje możliwość definiowania również własnych kategorii zdarzeń. Prezentuje to poniższy kod:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp>        <span style=color:#75715e>/// &lt;summary&gt;
+</span><span style=color:#75715e></span>        <span style=color:#75715e>/// Metoda wywoływana w momencie zajścia w aplikacji nie obsłużonego wyjątku.
+</span><span style=color:#75715e></span>        <span style=color:#75715e>/// &lt;/summary&gt;
+</span><span style=color:#75715e></span>        <span style=color:#75715e>/// &lt;param name=&#34;sender&#34;&gt;Obiekt sygnalizujący zdarzenie.&lt;/param&gt;
+</span><span style=color:#75715e></span>        <span style=color:#75715e>/// &lt;param name=&#34;e&#34;&gt;Parametry zdarzenia.&lt;/param&gt;
+</span><span style=color:#75715e></span>        <span style=color:#66d9ef>protected</span> <span style=color:#66d9ef>void</span> Application_Error(<span style=color:#66d9ef>object</span> sender, EventArgs e)
         {
-            Exception exception = this.Server.GetLastError();
+            Exception exception = <span style=color:#66d9ef>this</span>.Server.GetLastError();
 
-            LogEntry entry = new LogEntry();
-            entry.Categories.Add(&quot;Global&quot;);
+            LogEntry entry = <span style=color:#66d9ef>new</span> LogEntry();
+            entry.Categories.Add(<span style=color:#e6db74>&#34;Global&#34;</span>);
             entry.Title = Properties.Resources.UnhandledException;
             entry.Message = exception.Message;
             entry.Severity = TraceEventType.Critical;
             Logger.Write(entry);
         }
-</code></pre>
-
-<p>W tym przypadku kategoria ta nazywa się <strong>Global</strong> (choćby dlatego, iż kod pochodzi z pliku <strong>Global.asax</strong>).</p>
-
-<p>Pozostaje nam jeszcze skonfigurować bibliotekę rejestrującą zdarzenia. W przeciwnym bowiem razie aplikacja zgłosi nam wyjątek związany z niemożnością znalezienia właściwej sekcji konfiguracyjnej. Aby to zrobić klikamy prawym klawiszem na plik konfiguracyjny <strong>Web.config</strong> a następnie wybieramy polecenie <strong>Edit Enterprise Library Configuration</strong>. W oknie, które nam się pokaże wybieramy ponownie prawym klawiszem plik konfiguracyjny (tym razem podawany jest wraz z pełną ścieżką dostępu), a następnie klikamy <strong>New -&gt; Logging Application Block</strong>. Dzięki temu w pliku konfiguracyjnym zostaną utworzone odpowiednie wpisy umożliwiające uruchomienie aplikacji. Domyślne ustawienia powodują rejestrację zdarzeń w dzienniku aplikacji (application event log).</p>
-
-    <figure>
-        <img class="pure-img" src="https://awasn.github.io/konkurs-enterprise-library-logging-lab/images/LAB.png" alt="Konfiguracja Logging Application Block" >
-        <figcaption><h4>Konfiguracja Logging Application Block</h4></figcaption>
-    </figure>
-
-<p>Dodamy jeszcze możliwość rejestracji zdarzeń w pliku tekstowym. W tym celu klikamy prawym klawiszem myszy gałąź <strong>Trace Listeners</strong> a następnie <strong>New -&gt; Flat File Trace Listener</strong>. Samo dodanie elementu odbierającego zdarzenia to jeszcze za mało. Należy jeszcze dodać w gałęzi <strong>Category Sources / General</strong> odwołanie do dodanego przed chwilą ujścia plikowego (<strong>New -&gt; Trace Listener Reference</strong>).</p>
-
-<p>Ponieważ w naszej przykładowej aplikacji skorzystaliśmy również z możliwości definiowania własnych kategorii, gałąź <strong>Category Sources</strong> uzupełnimy o właściwy wpis. W tym celu po wybraniu tej gałęzi prawym przyciskiem wybierzemy polecenie <strong>New -&gt; Category</strong>, zmienimy nazwę na nowej kategorii na <strong>Global</strong> (zgodnie z przykładowym kodem pliku <strong>Global.asax</strong>). Następnie dodamy do nowej kategorii odwołanie do pliku (<strong>New -&gt; Trace Listener Reference</strong>). Dzięki temu, zdarzenia opisane kategorią <strong>Global</strong> będą rejestrowane jedynie w pliku tekstowym.</p>
-
-<p>Tak przygotowana i skonfigurowana aplikacja jest już gotowa do pracy i zapisywania zdarzeń w dzienniku aplikacji (application event log) oraz w pliku tekstowym.</p>
-
-<h2 id="zadanie-konkursowe-1-logging-application-block-enterprise-library-3-1">Zadanie konkursowe #1 - Logging Application Block, Enterprise Library 3.1</h2>
-
-<p>Zgodnie z obietnicą i założeniami konkursu na koniec zadania do wykonania:</p>
-
-<ol>
-<li>Zrefaktoryzować kod aplikacji konkursowej tak, aby rejestrowane zdarzenia można było grupować według warstwy prezentacji, logiki i danych (kategorie: UI, Model, DataServices);</li>
-<li>Logi dla warstwy prezentacji powinny być rejestrowane w jednym ujściu, a zdarzenia płynące z modelu i danych w drugim;</li>
-<li>Plik konfiguracyjny <strong>.config</strong> nie może zawierać logowania do dziennika zdarzeń (event log).</li>
-</ol>
-
-<p>Uwagi</p>
-
-<ol>
-<li>Zalecane ujście dla zdarzeń to pliki tekstowe;</li>
-<li>Jeśli w aplikacji konkursowej brak jest logów to należy je dodać. W przypadku modelu wystarczą informacje o fakcie wywołania metod wraz z wartościami zmiennych, na podstawie których podejmowane są decyzje. Dla warstwy danych wystarczy tylko powiadomienie o fakcie wywołania metody.</li>
-</ol>
-
-<p>Rozwiązane zadania należy przesyłać na adres mgrzeg at gmail kropka com. Reguły wiadomości:</p>
-
-<ol>
-<li>Temat wiadomości: [ENTLIB LAB] Rozwiązanie zadania konkursowego;</li>
-<li>Treść (może być w załączonym pliku .txt, .doc, .rtf) powinna zawierać krótki opis co zostało wykonane;</li>
-<li>Plik .zip zawierający kod  aplikacji konkursowej po refaktoryzacji. Można dołączyć również kod wykonywalny (bez bibliotek EntLib, etc. - tylko to, co niezbędne);</li>
-<li>Dane adresowe do wysyłki nagrody - NIE! Skontaktujemy się ze &ldquo;szczęśliwcem&rdquo; via email i ustalimy szczegóły.</li>
-</ol>
-
-<p>Adresy:</p>
-
-<ul>
-<li><a href="http://zine.net.pl/files/folders/entlib/entry458.aspx" target="_blank">Kod aplikacji przykładowej</a> opisywanej w powyższym tekście;</li>
-<li><a href="http://zine.net.pl/files/folders/entlib/entry459.aspx" target="_blank">Kod aplikacji konkursowej</a>, którą należy poddać refaktoryzacji.</li>
-</ul>
-
-<p>W razie wątpliwości etc. proszę zadawać pytania.</p>
-
-    </article>
-    <nav aria-label="Related posts">
-        <h4>Related Posts</h4>
-        <ul>
-            <li><a href="https://awasn.github.io/tworzenie-obiektow/">Tworzenie obiektów</a></li>
-            <li><a href="https://awasn.github.io/herr-mock-i-frau-command/">Herr Mock i Frau Command</a></li>
-            <li><a href="https://awasn.github.io/sql-server-2005-compact-edition/">SQL Server 2005 Compact Edition</a></li>
-            <li><a href="https://awasn.github.io/dbf-po-ludzku/">DBF po ludzku</a></li>
-            <li><a href="https://awasn.github.io/wyjatki/">Wyjątki</a></li>
-        </ul>
-    </nav>
-
-    <nav class="pure-g post-previous-next" aria-label="Previous and next posts">
-        <div class="pure-u-11-24 previous">
-            <a href="https://awasn.github.io/loopa-tv/" aria-label="Previous post"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg></span></a>
-            <a href="https://awasn.github.io/loopa-tv/">Loopa TV</a>
-        </div>
-        <div class="pure-u-2-24">&nbsp;</div>
-        <div class="pure-u-11-24 next">
-            <a href="https://awasn.github.io/f-a-a-k-mod-n/">F(a) = (a &#43; k) mod n</a>
-            <a href="https://awasn.github.io/f-a-a-k-mod-n/" aria-label="Next post"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg></span></a>
-        </div>
-    </nav>
-
-    
-
-
-        </main>
-
-        <footer>
-            <div class="center-aligned container">
-                <p>Copyright &copy; 2007-2019 Arkadiusz Waśniewski. All Rights Reserved.</p>
-            </div>
-        </footer>
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/accesslog.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dockerfile.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dos.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/go.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/powershell.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/routeros.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/typescript.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/yaml.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/vbnet.min.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script>
-    </body>
-</html>
+</code></pre></div><p>W tym przypadku kategoria ta nazywa się <strong>Global</strong> (choćby dlatego, iż kod pochodzi z pliku <strong>Global.asax</strong>).</p><p>Pozostaje nam jeszcze skonfigurować bibliotekę rejestrującą zdarzenia. W przeciwnym bowiem razie aplikacja zgłosi nam wyjątek związany z niemożnością znalezienia właściwej sekcji konfiguracyjnej. Aby to zrobić klikamy prawym klawiszem na plik konfiguracyjny <strong>Web.config</strong> a następnie wybieramy polecenie <strong>Edit Enterprise Library Configuration</strong>. W oknie, które nam się pokaże wybieramy ponownie prawym klawiszem plik konfiguracyjny (tym razem podawany jest wraz z pełną ścieżką dostępu), a następnie klikamy <strong>New -> Logging Application Block</strong>. Dzięki temu w pliku konfiguracyjnym zostaną utworzone odpowiednie wpisy umożliwiające uruchomienie aplikacji. Domyślne ustawienia powodują rejestrację zdarzeń w dzienniku aplikacji (application event log).</p><figure><img class=pure-img src=https://awasn.github.io/konkurs-enterprise-library-logging-lab/images/LAB.png alt="Konfiguracja Logging Application Block"><figcaption><h4>Konfiguracja Logging Application Block</h4></figcaption></figure><p>Dodamy jeszcze możliwość rejestracji zdarzeń w pliku tekstowym. W tym celu klikamy prawym klawiszem myszy gałąź <strong>Trace Listeners</strong> a następnie <strong>New -> Flat File Trace Listener</strong>. Samo dodanie elementu odbierającego zdarzenia to jeszcze za mało. Należy jeszcze dodać w gałęzi <strong>Category Sources / General</strong> odwołanie do dodanego przed chwilą ujścia plikowego (<strong>New -> Trace Listener Reference</strong>).</p><p>Ponieważ w naszej przykładowej aplikacji skorzystaliśmy również z możliwości definiowania własnych kategorii, gałąź <strong>Category Sources</strong> uzupełnimy o właściwy wpis. W tym celu po wybraniu tej gałęzi prawym przyciskiem wybierzemy polecenie <strong>New -> Category</strong>, zmienimy nazwę na nowej kategorii na <strong>Global</strong> (zgodnie z przykładowym kodem pliku <strong>Global.asax</strong>). Następnie dodamy do nowej kategorii odwołanie do pliku (<strong>New -> Trace Listener Reference</strong>). Dzięki temu, zdarzenia opisane kategorią <strong>Global</strong> będą rejestrowane jedynie w pliku tekstowym.</p><p>Tak przygotowana i skonfigurowana aplikacja jest już gotowa do pracy i zapisywania zdarzeń w dzienniku aplikacji (application event log) oraz w pliku tekstowym.</p><h2 id=zadanie-konkursowe-1---logging-application-block-enterprise-library-31>Zadanie konkursowe #1 - Logging Application Block, Enterprise Library 3.1</h2><p>Zgodnie z obietnicą i założeniami konkursu na koniec zadania do wykonania:</p><ol><li>Zrefaktoryzować kod aplikacji konkursowej tak, aby rejestrowane zdarzenia można było grupować według warstwy prezentacji, logiki i danych (kategorie: UI, Model, DataServices);</li><li>Logi dla warstwy prezentacji powinny być rejestrowane w jednym ujściu, a zdarzenia płynące z modelu i danych w drugim;</li><li>Plik konfiguracyjny <strong>.config</strong> nie może zawierać logowania do dziennika zdarzeń (event log).</li></ol><p>Uwagi</p><ol><li>Zalecane ujście dla zdarzeń to pliki tekstowe;</li><li>Jeśli w aplikacji konkursowej brak jest logów to należy je dodać. W przypadku modelu wystarczą informacje o fakcie wywołania metod wraz z wartościami zmiennych, na podstawie których podejmowane są decyzje. Dla warstwy danych wystarczy tylko powiadomienie o fakcie wywołania metody.</li></ol><p>Rozwiązane zadania należy przesyłać na adres mgrzeg at gmail kropka com. Reguły wiadomości:</p><ol><li>Temat wiadomości: [ENTLIB LAB] Rozwiązanie zadania konkursowego;</li><li>Treść (może być w załączonym pliku .txt, .doc, .rtf) powinna zawierać krótki opis co zostało wykonane;</li><li>Plik .zip zawierający kod aplikacji konkursowej po refaktoryzacji. Można dołączyć również kod wykonywalny (bez bibliotek EntLib, etc. - tylko to, co niezbędne);</li><li>Dane adresowe do wysyłki nagrody - NIE! Skontaktujemy się ze &ldquo;szczęśliwcem&rdquo; via email i ustalimy szczegóły.</li></ol><p>Adresy:</p><ul><li><a href=http://zine.net.pl/files/folders/entlib/entry458.aspx>Kod aplikacji przykładowej</a> opisywanej w powyższym tekście;</li><li><a href=http://zine.net.pl/files/folders/entlib/entry459.aspx>Kod aplikacji konkursowej</a>, którą należy poddać refaktoryzacji.</li></ul><p>W razie wątpliwości etc. proszę zadawać pytania.</p></article><nav aria-label="Related posts"><h4>Related Posts</h4><ul><li><a href=https://awasn.github.io/tworzenie-obiektow/>Tworzenie obiektów</a></li><li><a href=https://awasn.github.io/herr-mock-i-frau-command/>Herr Mock i Frau Command</a></li><li><a href=https://awasn.github.io/sql-server-2005-compact-edition/>SQL Server 2005 Compact Edition</a></li><li><a href=https://awasn.github.io/dbf-po-ludzku/>DBF po ludzku</a></li><li><a href=https://awasn.github.io/wyjatki/>Wyjątki</a></li></ul></nav><nav class="pure-g post-previous-next" aria-label="Previous and next posts"><div class="pure-u-11-24 previous"><a href=https://awasn.github.io/loopa-tv/ aria-label="Previous post"><span aria-hidden=true><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"/></svg></span></a><a href=https://awasn.github.io/loopa-tv/>Loopa TV</a></div><div class=pure-u-2-24>&nbsp;</div><div class="pure-u-11-24 next"><a href=https://awasn.github.io/f-a-a-k-mod-n/>F(a) = (a + k) mod n</a>
+<a href=https://awasn.github.io/f-a-a-k-mod-n/ aria-label="Next post"><span aria-hidden=true><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg></span></a></div></nav></main><footer><div class="center-aligned container"><p>Copyright &copy; 2007-2021 Arkadiusz Waśniewski. All Rights Reserved.</p></div></footer><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/accesslog.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dockerfile.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dos.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/go.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/powershell.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/routeros.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/typescript.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/yaml.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/vbnet.min.js></script><script>hljs.initHighlightingOnLoad()</script></body></html>

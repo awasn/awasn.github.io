@@ -1,88 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Visual Studio on arkadiusz wasniewski blog</title>
-    <link>https://awasn.github.io/tags/visual-studio/</link>
-    <description>Recent content in Visual Studio on arkadiusz wasniewski blog</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Thu, 08 Oct 2009 00:17:00 +0200</lastBuildDate>
-    
-	<atom:link href="https://awasn.github.io/tags/visual-studio/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Pobranie projektów rozwiązania czyli Regex w akcji</title>
-      <link>https://awasn.github.io/pobranie-projektow-rozwiazania-czyli-regex-w-akcji/</link>
-      <pubDate>Thu, 08 Oct 2009 00:17:00 +0200</pubDate>
-      
-      <guid>https://awasn.github.io/pobranie-projektow-rozwiazania-czyli-regex-w-akcji/</guid>
-      <description>Asumpt do poniższego rozwiązania dostarczył skrypt PowerShell, który kompiluje projekty pewnego mojego rozwiązania, i gdzie zapałałem chęcią automatycznego uaktualnienia numeru wersji we wszystkich plikach AssemblyInfo.cs. Ale gdzież są te wszystkie pliki? No w projektach…
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Visual Studio on arkadiusz wasniewski blog</title><link>https://awasn.github.io/tags/visual-studio/</link><description>Recent content in Visual Studio on arkadiusz wasniewski blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 08 Oct 2009 00:17:00 +0200</lastBuildDate><atom:link href="https://awasn.github.io/tags/visual-studio/index.xml" rel="self" type="application/rss+xml"/><item><title>Pobranie projektów rozwiązania czyli Regex w akcji</title><link>https://awasn.github.io/pobranie-projektow-rozwiazania-czyli-regex-w-akcji/</link><pubDate>Thu, 08 Oct 2009 00:17:00 +0200</pubDate><guid>https://awasn.github.io/pobranie-projektow-rozwiazania-czyli-regex-w-akcji/</guid><description>Asumpt do poniższego rozwiązania dostarczył skrypt PowerShell, który kompiluje projekty pewnego mojego rozwiązania, i gdzie zapałałem chęcią automatycznego uaktualnienia numeru wersji we wszystkich plikach AssemblyInfo.cs. Ale gdzież są te wszystkie pliki? No w projektach…
 Najprostszy sposób dotarcia do projektów to odczytanie pliku .sln. Hm… ale to oznacza analizowanie zawartości. Z pomocą przyszły wyrażenia regularne oraz świadomość istnienia jasno określonej struktury pliku .sln.
-Project\(&amp;quot;\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC\}&amp;quot;\) = &amp;quot;(?&amp;lt;projectName&amp;gt;[^&amp;quot;]+)&amp;quot;, &amp;quot;(?&amp;lt;projectFolder&amp;gt;[^&amp;quot;]+)&amp;quot;, &amp;quot;(?&amp;lt;projectGuid&amp;gt;[^&amp;quot;]+)&amp;quot;\nEndProject  Oczywiście kilka słów wyjaśnienia.</description>
-    </item>
-    
-    <item>
-      <title>Reporting Services - projekt(y) po polsku?</title>
-      <link>https://awasn.github.io/reporting-services-projekty-po-polsku/</link>
-      <pubDate>Tue, 16 Dec 2008 15:53:00 +0100</pubDate>
-      
-      <guid>https://awasn.github.io/reporting-services-projekty-po-polsku/</guid>
-      <description>Kiedy ponad rok temu zaczynałem budowanie raportów w MS SQL Server 2005 Reporting Services podszedłem do tematu jak rasowy programista. Całe nazewnictwo miało być po angielsku.
-Etap pierwszy Założyłem nowy projekt, dodałem do repozytorium (usługi raportowe były nowe, nowiuśkie, bez jakiegokolwiek raportu) i&amp;hellip; hm&amp;hellip;. Pierwsza niespodzianka to siermiężne warunki przygotowywania zapytań w Visual Studio. Nie będę się rozpisywał. Budowanie zapytań SQL w tym środowisku ma swoje ograniczenia (ma się ochotę przejść na ciemną stronę mocy).</description>
-    </item>
-    
-    <item>
-      <title>Rozwiązanie mobilne</title>
-      <link>https://awasn.github.io/rozwiazanie-mobilne/</link>
-      <pubDate>Thu, 11 Dec 2008 12:45:00 +0100</pubDate>
-      
-      <guid>https://awasn.github.io/rozwiazanie-mobilne/</guid>
-      <description>Kilka miesięcy temu stałem się szczęśliwym posiadaczem projektu na przygotowanie kompletnego rozwiązania z zakresu szeroko pojętej sprzedaży dla &amp;ldquo;profesjonalnych&amp;rdquo; urządzeń mobilnych, czyli komputerów odpornych na niskie temperatury i kroploszczelne. Systemy operacyjne, które znalazły się w zasięgu projektu to:
- Microsoft Windows for Pocket PC 2003, Windows Mobile 2003; Windows Mobile 5.0 for Pocket PC, Windows Mobile 5.0 for Pocket PC Phone Edition; Windows Mobile 6 Classic, Windows Mobile 6 Professional.  Pod uwagę należało też brać możliwość pojawienia się w przyszłości konieczności działania programu w ramach Windows CE .</description>
-    </item>
-    
-    <item>
-      <title>Debugger.Break ładuje pakiety</title>
-      <link>https://awasn.github.io/debugger-break-laduje-pakiety/</link>
-      <pubDate>Wed, 04 Jun 2008 13:34:00 +0200</pubDate>
-      
-      <guid>https://awasn.github.io/debugger-break-laduje-pakiety/</guid>
-      <description>W czasie testowania oprogramowania mobilnego zdarza się, iż zdalne debuggowie przestaje funkcjonować. Obok ustawionych punktów wstrzymania pojawia się zaś ikona, która po najechaniu kursorem wyświetla komunikat, iż zdalna praca jest niemożliwa, ponieważ dany pakiet nie został załadowany. Co ciekawe dalej może rozpocząć wykonywanie krokowe aplikacji. Restart Visual Studio w takiej sytuacji nie pomaga.
-Okazuje się, iż rozwiązanie problemu jest trywialne. Należy w kodzie programu, gdzie chcemy ustawić punkt wstrzymania wstawić następujące polecenie:</description>
-    </item>
-    
-    <item>
-      <title>Model zabezpieczeń w Windows Mobile a urządzenia typu Smartphone</title>
-      <link>https://awasn.github.io/model-zabezpieczen-w-windows-mobile-a-urzadzenia-typu-smartphone/</link>
-      <pubDate>Wed, 27 Feb 2008 16:53:00 +0100</pubDate>
-      
-      <guid>https://awasn.github.io/model-zabezpieczen-w-windows-mobile-a-urzadzenia-typu-smartphone/</guid>
-      <description>Wraz z systemami Windows Mobile 5.0 i Windows Mobile 6 wprowadzono nowych model zabezpieczeń (security model), który umożliwia przy pomocy zasad (policies), ról (roles) oraz certyfikatów (certificates) kontrolowanie konfiguracji, zdalnego dostępu oraz wykonywanie aplikacji na urządzeniu mobilnym. Ograniczeniu podlega dostęp do zasobów takich jak przestrzeń dyskowa, rejestr systemu czy API. Na podstawie ustalonego poziomu zabezpieczeń, program może być uruchomiony z uprawnieniami:
- Uprzywilejowany - możliwość wywoływania API bez ograniczeń, dokonywania modyfikacji rejestru, pełny dostęp do systemu plików; Normalny - brak możliwości wywoływania API newralgicznych dla właściwego działania systemu, brak możliwości modyfikacji niektórych gałęzi rejestru, ograniczenia w dostępie do systemu plików.</description>
-    </item>
-    
-    <item>
-      <title>&lt;![CDATA[]]&gt; kills VS2K5</title>
-      <link>https://awasn.github.io/cdata-kills-vs2k5/</link>
-      <pubDate>Tue, 06 Nov 2007 22:04:00 +0100</pubDate>
-      
-      <guid>https://awasn.github.io/cdata-kills-vs2k5/</guid>
-      <description>Królestwo za nawiasy ostre w komentarzu, który zawiera powyższą sekcję. Nie ma znaczenie gdzie będziemy je próbowali wstawić. Czy w samej sekcji CDATA, czy też w innym miejscu w ramach istniejącego już komentarza. Visual Studio 2005 robi kaput.
+Project\(&amp;#34;\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC\}&amp;#34;\) = &amp;#34;(?&amp;lt;projectName&amp;gt;[^&amp;#34;]+)&amp;#34;, &amp;#34;(?&amp;lt;projectFolder&amp;gt;[^&amp;#34;]+)&amp;#34;, &amp;#34;(?&amp;lt;projectGuid&amp;gt;[^&amp;#34;]+)&amp;#34;\nEndProject Oczywiście kilka słów wyjaśnienia.</description></item><item><title>Reporting Services - projekt(y) po polsku?</title><link>https://awasn.github.io/reporting-services-projekty-po-polsku/</link><pubDate>Tue, 16 Dec 2008 15:53:00 +0100</pubDate><guid>https://awasn.github.io/reporting-services-projekty-po-polsku/</guid><description>Kiedy ponad rok temu zaczynałem budowanie raportów w MS SQL Server 2005 Reporting Services podszedłem do tematu jak rasowy programista. Całe nazewnictwo miało być po angielsku.
+Etap pierwszy Założyłem nowy projekt, dodałem do repozytorium (usługi raportowe były nowe, nowiuśkie, bez jakiegokolwiek raportu) i&amp;hellip; hm&amp;hellip;. Pierwsza niespodzianka to siermiężne warunki przygotowywania zapytań w Visual Studio. Nie będę się rozpisywał. Budowanie zapytań SQL w tym środowisku ma swoje ograniczenia (ma się ochotę przejść na ciemną stronę mocy).</description></item><item><title>Rozwiązanie mobilne</title><link>https://awasn.github.io/rozwiazanie-mobilne/</link><pubDate>Thu, 11 Dec 2008 12:45:00 +0100</pubDate><guid>https://awasn.github.io/rozwiazanie-mobilne/</guid><description>Kilka miesięcy temu stałem się szczęśliwym posiadaczem projektu na przygotowanie kompletnego rozwiązania z zakresu szeroko pojętej sprzedaży dla &amp;ldquo;profesjonalnych&amp;rdquo; urządzeń mobilnych, czyli komputerów odpornych na niskie temperatury i kroploszczelne. Systemy operacyjne, które znalazły się w zasięgu projektu to:
+Microsoft Windows for Pocket PC 2003, Windows Mobile 2003; Windows Mobile 5.0 for Pocket PC, Windows Mobile 5.0 for Pocket PC Phone Edition; Windows Mobile 6 Classic, Windows Mobile 6 Professional. Pod uwagę należało też brać możliwość pojawienia się w przyszłości konieczności działania programu w ramach Windows CE .</description></item><item><title>Debugger.Break ładuje pakiety</title><link>https://awasn.github.io/debugger-break-laduje-pakiety/</link><pubDate>Wed, 04 Jun 2008 13:34:00 +0200</pubDate><guid>https://awasn.github.io/debugger-break-laduje-pakiety/</guid><description>W czasie testowania oprogramowania mobilnego zdarza się, iż zdalne debuggowie przestaje funkcjonować. Obok ustawionych punktów wstrzymania pojawia się zaś ikona, która po najechaniu kursorem wyświetla komunikat, iż zdalna praca jest niemożliwa, ponieważ dany pakiet nie został załadowany. Co ciekawe dalej może rozpocząć wykonywanie krokowe aplikacji. Restart Visual Studio w takiej sytuacji nie pomaga.
+Okazuje się, iż rozwiązanie problemu jest trywialne. Należy w kodzie programu, gdzie chcemy ustawić punkt wstrzymania wstawić następujące polecenie:</description></item><item><title>Model zabezpieczeń w Windows Mobile a urządzenia typu Smartphone</title><link>https://awasn.github.io/model-zabezpieczen-w-windows-mobile-a-urzadzenia-typu-smartphone/</link><pubDate>Wed, 27 Feb 2008 16:53:00 +0100</pubDate><guid>https://awasn.github.io/model-zabezpieczen-w-windows-mobile-a-urzadzenia-typu-smartphone/</guid><description>Wraz z systemami Windows Mobile 5.0 i Windows Mobile 6 wprowadzono nowych model zabezpieczeń (security model), który umożliwia przy pomocy zasad (policies), ról (roles) oraz certyfikatów (certificates) kontrolowanie konfiguracji, zdalnego dostępu oraz wykonywanie aplikacji na urządzeniu mobilnym. Ograniczeniu podlega dostęp do zasobów takich jak przestrzeń dyskowa, rejestr systemu czy API. Na podstawie ustalonego poziomu zabezpieczeń, program może być uruchomiony z uprawnieniami:
+Uprzywilejowany - możliwość wywoływania API bez ograniczeń, dokonywania modyfikacji rejestru, pełny dostęp do systemu plików; Normalny - brak możliwości wywoływania API newralgicznych dla właściwego działania systemu, brak możliwości modyfikacji niektórych gałęzi rejestru, ograniczenia w dostępie do systemu plików.</description></item><item><title>&lt;![CDATA[]]> kills VS2K5</title><link>https://awasn.github.io/cdata-kills-vs2k5/</link><pubDate>Tue, 06 Nov 2007 22:04:00 +0100</pubDate><guid>https://awasn.github.io/cdata-kills-vs2k5/</guid><description>Królestwo za nawiasy ostre w komentarzu, który zawiera powyższą sekcję. Nie ma znaczenie gdzie będziemy je próbowali wstawić. Czy w samej sekcji CDATA, czy też w innym miejscu w ramach istniejącego już komentarza. Visual Studio 2005 robi kaput.
 PS. Podziękowania dla Michała, który brał udział w eksperymencie i robił za przysłowiową świnkę doświadczalną.
 Z powyższego tekstu nie wynika to jasno, ale chodzi o komentarze do kodu C#:
-/// &amp;lt;summary&amp;gt; /// &amp;lt;!</description>
-    </item>
-    
-    <item>
-      <title>Visual Studio T4 Editor</title>
-      <link>https://awasn.github.io/visual-studio-t4-editor/</link>
-      <pubDate>Mon, 22 Oct 2007 10:06:00 +0200</pubDate>
-      
-      <guid>https://awasn.github.io/visual-studio-t4-editor/</guid>
-      <description>Wszystkim, których interesuje temat szablonów tekstowych T4 (Text Templating Transformation Toolkit), a myślę, że przynajmniej w Warszawskiej Grupie .NET po XI spotkaniu kilka osób się znajdzie, polecam stronę http://www.t4editor.net gdzie znajdziemy darmową, aczkolwiek czasową (styczeń 2008 roku) wersję beta edytora szablonów T4 instalującego się jako dodatek do Visual Studio.
-Szablony T4 wykorzystywane są przez wszystkie niemal Software Factories firmy Microsoft oraz narzędzia oparte o DSL. Dla szukających wiedzy na ten temat polecam swój artykuł w drugim numerze gazetki zine.</description>
-    </item>
-    
-  </channel>
-</rss>
+/// &amp;lt;summary&amp;gt; /// &amp;lt;!</description></item><item><title>Visual Studio T4 Editor</title><link>https://awasn.github.io/visual-studio-t4-editor/</link><pubDate>Mon, 22 Oct 2007 10:06:00 +0200</pubDate><guid>https://awasn.github.io/visual-studio-t4-editor/</guid><description>Wszystkim, których interesuje temat szablonów tekstowych T4 (Text Templating Transformation Toolkit), a myślę, że przynajmniej w Warszawskiej Grupie .NET po XI spotkaniu kilka osób się znajdzie, polecam stronę http://www.t4editor.net gdzie znajdziemy darmową, aczkolwiek czasową (styczeń 2008 roku) wersję beta edytora szablonów T4 instalującego się jako dodatek do Visual Studio.
+Szablony T4 wykorzystywane są przez wszystkie niemal Software Factories firmy Microsoft oraz narzędzia oparte o DSL. Dla szukających wiedzy na ten temat polecam swój artykuł w drugim numerze gazetki zine.</description></item></channel></rss>

@@ -1,239 +1,116 @@
-<!DOCTYPE HTML>
-<html lang="pl-pl">
-    <head>
-        <meta name="theme-color" content="#405365"/>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="generator" content="Hugo 0.54.0" />
-        <meta name="description" content="Własna implementacja struktury hierarchicznej TreeNode w .NET C#" />
-        <title>TreeNode w wersji koguciej - arkadiusz wasniewski blog</title>
-        <link rel="canonical" href="https://awasn.github.io/treenode-w-wersji-koguciej/">
-        <link rel="prev" title="(K)Cultura w PowerShell" href="https://awasn.github.io/k-cultura-w-powershell/">
-
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css" integrity="sha256-Q0zCrUs2IfXWYx0uMKJfG93CvF6oVII21waYsAV4/8Q=" crossorigin="anonymous" />
-        
-        
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
-        
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
-        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.809247dcc0227e384b256fd9df3f1c82b2b752f0ca6ba0f97410d05bcdd60729.css" integrity="sha256-gJJH3MAifjhLJW/Z3z8cgrK3UvDKa6D5dBDQW83WByk=" />
-
-    </head>
-    <body>
-        <header>
-            <nav class="container" >
-                <div class="pure-menu pure-menu-horizontal">
-                    <a class="pure-menu-heading pure-menu-link" href="https://awasn.github.io/">wasniewski</a>
-                    <ul class="right pure-menu-list">
-                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/blog/">blog</a></li>
-                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/categories/">categories</a></li>
-                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/tags/">tags</a></li>
-                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/about/">about</a></li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
-
-        <main class="container">
-            
-    <aside class="post-published">
-        <p>This post was originally published on <a href="http://zine.net.pl/blogs/arkadiusz_wasniewski/archive/2009/12/20/treenode-w-wersji-koguciej.aspx" target="_blank">zine.net.pl</a> on 20 December 2009 17:30 CET</p>
-    </aside>
-
-    <article>
-        <header>
-            <h1>TreeNode w wersji koguciej</h1>
-                <div class="post-metadata">
-        <div>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-            20 December 2009 17:30 CET
-            
-            &nbsp;
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-            2 min read
-        </div>
-        <div>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
-            <a href="https://awasn.github.io/categories/development">Development</a>
-            
-                &nbsp;
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
-                <a href="https://awasn.github.io/tags/.net">.NET</a>
-            
-        </div>
-    </div>
-        </header>
-
-        <p>Kilkukrotnie już zdarzyło się, iż potrzebowałem klasy, która umożliwiłaby zapamiętanie typowanych (typed, generic) struktur hierarchicznych (hierarchical collection) czyli dowolnego obiektu wraz z jego elementami potomnymi. W ramach platformy .NET istnieją już klasy implementujące podobną funkcjonalność. Mowa tu oczywiście o <code>TreeNode</code> z <code>TreeNodeCollection</code> oraz o, bardziej hermetycznym, <code>MenuItem</code> wraz z wewnętrznym <code>MenuItemCollection</code>. Klasy przeznaczone do obsługi menu trudno byłoby użyć do własnych rozwiązań. <code>TreeNode</code> jest zaś &ldquo;ciężka&rdquo; i brak w niej typowania, czyli możliwości określenia typu przechowywanego obiektu (precz z rzutowaniem!).</p>
-
-<p>Z tego też powodu stworzyłem razu pewnego własną implementację struktury hierarchicznej. Nie jest ona skomplikowana. Punktem wyjścia jest klasa przechowująca dane wraz z kolekcją elementów potomnych:</p>
-
-<pre><code class="language-csharp">    internal class LightTreeNode&lt;T&gt;
+<!doctype html><html lang=pl-pl><head><meta name=theme-color content="#405365"><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.83.1"><meta name=description content="Własna implementacja struktury hierarchicznej TreeNode w .NET C#"><title>TreeNode w wersji koguciej - arkadiusz wasniewski blog</title><link rel=canonical href=https://awasn.github.io/treenode-w-wersji-koguciej/><link rel=prev title="(K)Cultura w PowerShell" href=https://awasn.github.io/k-cultura-w-powershell/><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css integrity="sha256-Q0zCrUs2IfXWYx0uMKJfG93CvF6oVII21waYsAV4/8Q=" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css><link rel=stylesheet href=https://awasn.github.io/awasn.min.f45a909800924faa836a73b82a1d4cb352f8053134a426a9dcafa61cf6a8c5d0.css integrity="sha256-9FqQmACST6qDanO4Kh1Ms1L4BTE0pCap3K+mHPaoxdA="></head><body><header><nav class=container><div class="pure-menu pure-menu-horizontal"><a class="pure-menu-heading pure-menu-link" href=https://awasn.github.io/>wasniewski</a><ul class="right pure-menu-list"><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/blog/>blog</a></li><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/categories/>categories</a></li><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/tags/>tags</a></li><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/about/>about</a></li></ul></div></nav></header><main class=container><aside class=post-published><p>This post was originally published on <a href=http://zine.net.pl/blogs/arkadiusz_wasniewski/archive/2009/12/20/treenode-w-wersji-koguciej.aspx target=_blank>zine.net.pl</a> on 20 December 2009 17:30 +0100</p></aside><article><header><h1>TreeNode w wersji koguciej</h1><div class=post-metadata><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>20 December 2009 17:30 +0100
+&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+2 min read</div><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg><a href=https://awasn.github.io/categories/development>Development</a>
+&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83.0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7" y2="7"/></svg>
+<a href=https://awasn.github.io/tags/.net>.NET</a></div></div></header><p>Kilkukrotnie już zdarzyło się, iż potrzebowałem klasy, która umożliwiłaby zapamiętanie typowanych (typed, generic) struktur hierarchicznych (hierarchical collection) czyli dowolnego obiektu wraz z jego elementami potomnymi. W ramach platformy .NET istnieją już klasy implementujące podobną funkcjonalność. Mowa tu oczywiście o <code>TreeNode</code> z <code>TreeNodeCollection</code> oraz o, bardziej hermetycznym, <code>MenuItem</code> wraz z wewnętrznym <code>MenuItemCollection</code>. Klasy przeznaczone do obsługi menu trudno byłoby użyć do własnych rozwiązań. <code>TreeNode</code> jest zaś &ldquo;ciężka&rdquo; i brak w niej typowania, czyli możliwości określenia typu przechowywanego obiektu (precz z rzutowaniem!).</p><p>Z tego też powodu stworzyłem razu pewnego własną implementację struktury hierarchicznej. Nie jest ona skomplikowana. Punktem wyjścia jest klasa przechowująca dane wraz z kolekcją elementów potomnych:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp>    <span style=color:#66d9ef>internal</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>LightTreeNode</span>&lt;T&gt;
     {
-        private readonly T _item;
-        private readonly LightTreeNodeCollection&lt;T&gt; _nodes;
+        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>readonly</span> T <span style=color:#ae81ff>_</span>item;
+        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>readonly</span> LightTreeNodeCollection&lt;T&gt; <span style=color:#ae81ff>_</span>nodes;
 
-        public LightTreeNode(T item)
+        <span style=color:#66d9ef>public</span> LightTreeNode(T item)
         {
-            _item = item;
-            _nodes = new LightTreeNodeCollection&lt;T&gt;(this);
+            <span style=color:#ae81ff>_</span>item = item;
+            <span style=color:#ae81ff>_</span>nodes = <span style=color:#66d9ef>new</span> LightTreeNodeCollection&lt;T&gt;(<span style=color:#66d9ef>this</span>);
         }
 
-        public T Value
+        <span style=color:#66d9ef>public</span> T Value
         {
-            get { return _item; }
+            <span style=color:#66d9ef>get</span> { <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>_</span>item; }
         }
 
-        public LightTreeNodeCollection&lt;T&gt; Nodes
+        <span style=color:#66d9ef>public</span> LightTreeNodeCollection&lt;T&gt; Nodes
         {
-            get { return _nodes; }
+            <span style=color:#66d9ef>get</span> { <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>_</span>nodes; }
         }
     }
-</code></pre>
-
-<p>Kolekcja przechowująca potomków dla ułatwienia operowania implementuje interfejs <code>ICollection&lt;T&gt;</code>:</p>
-
-<pre><code class="language-csharp">    internal class LightTreeNodeCollection&lt;T&gt; : ICollection&lt;LightTreeNode&lt;T&gt;&gt;
+</code></pre></div><p>Kolekcja przechowująca potomków dla ułatwienia operowania implementuje interfejs <code>ICollection&lt;T></code>:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp>    <span style=color:#66d9ef>internal</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>LightTreeNodeCollection</span>&lt;T&gt; : ICollection&lt;LightTreeNode&lt;T&gt;&gt;
     {
-        private readonly List&lt;LightTreeNode&lt;T&gt;&gt; _list;
-        private readonly LightTreeNode&lt;T&gt; _owner;
+        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>readonly</span> List&lt;LightTreeNode&lt;T&gt;&gt; <span style=color:#ae81ff>_l</span>ist;
+        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>readonly</span> LightTreeNode&lt;T&gt; <span style=color:#ae81ff>_</span>owner;
 
-        public LightTreeNodeCollection(LightTreeNode&lt;T&gt; owner)
+        <span style=color:#66d9ef>public</span> LightTreeNodeCollection(LightTreeNode&lt;T&gt; owner)
         {
-            _owner = owner;
-            _list = new List&lt;LightTreeNode&lt;T&gt;&gt;();
+            <span style=color:#ae81ff>_</span>owner = owner;
+            <span style=color:#ae81ff>_l</span>ist = <span style=color:#66d9ef>new</span> List&lt;LightTreeNode&lt;T&gt;&gt;();
         }
 
-        public LightTreeNode&lt;T&gt; Owner
+        <span style=color:#66d9ef>public</span> LightTreeNode&lt;T&gt; Owner
         {
-            get { return _owner; }
+            <span style=color:#66d9ef>get</span> { <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>_</span>owner; }
         }
 
-        public LightTreeNode&lt;T&gt; Add(T item)
+        <span style=color:#66d9ef>public</span> LightTreeNode&lt;T&gt; Add(T item)
         {
-            var node = new LightTreeNode&lt;T&gt;(item);
-            _list.Add(node);
-            return node;
+            <span style=color:#66d9ef>var</span> node = <span style=color:#66d9ef>new</span> LightTreeNode&lt;T&gt;(item);
+            <span style=color:#ae81ff>_l</span>ist.Add(node);
+            <span style=color:#66d9ef>return</span> node;
         }
 
-        #region Implementation of IEnumerable
-
-        public IEnumerator&lt;LightTreeNode&lt;T&gt;&gt; GetEnumerator()
+        <span style=color:#75715e>#region Implementation of IEnumerable
+</span><span style=color:#75715e></span>
+        <span style=color:#66d9ef>public</span> IEnumerator&lt;LightTreeNode&lt;T&gt;&gt; GetEnumerator()
         {
-            return _list.GetEnumerator();
+            <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>_l</span>ist.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetEnumerator();
+            <span style=color:#66d9ef>return</span> GetEnumerator();
         }
 
-        #endregion
-
-        #region Implementation of ICollection&lt;LightTreeNode&lt;T&gt;&gt;
-
-        public void Add(LightTreeNode&lt;T&gt; item)
+        <span style=color:#75715e>#endregion
+</span><span style=color:#75715e></span>
+        <span style=color:#75715e>#region Implementation of ICollection&lt;LightTreeNode&lt;T&gt;&gt;
+</span><span style=color:#75715e></span>
+        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> Add(LightTreeNode&lt;T&gt; item)
         {
-            _list.Add(item);
+            <span style=color:#ae81ff>_l</span>ist.Add(item);
         }
 
-        public void Clear()
+        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> Clear()
         {
-            for(int i = 0; i &lt; _list.Count; i++){
-                _list[i].Nodes.Clear();
+            <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i = <span style=color:#ae81ff>0</span>; i &lt; <span style=color:#ae81ff>_l</span>ist.Count; i++){
+                <span style=color:#ae81ff>_l</span>ist[i].Nodes.Clear();
             }
-            _list.Clear();
+            <span style=color:#ae81ff>_l</span>ist.Clear();
         }
 
-        public bool Contains(LightTreeNode&lt;T&gt; item)
+        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>bool</span> Contains(LightTreeNode&lt;T&gt; item)
         {
-            return _list.Contains(item);
+            <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>_l</span>ist.Contains(item);
         }
 
-        public void CopyTo(LightTreeNode&lt;T&gt;[] array, int arrayIndex)
+        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> CopyTo(LightTreeNode&lt;T&gt;[] array, <span style=color:#66d9ef>int</span> arrayIndex)
         {
-            _list.CopyTo(array, arrayIndex);
+            <span style=color:#ae81ff>_l</span>ist.CopyTo(array, arrayIndex);
         }
 
-        public bool Remove(LightTreeNode&lt;T&gt; item)
+        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>bool</span> Remove(LightTreeNode&lt;T&gt; item)
         {
-            int index = _list.IndexOf(item);
-            if(index &lt; 0){
-                return false;
+            <span style=color:#66d9ef>int</span> index = <span style=color:#ae81ff>_l</span>ist.IndexOf(item);
+            <span style=color:#66d9ef>if</span>(index &lt; <span style=color:#ae81ff>0</span>){
+                <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>false</span>;
             }
-            _list[index].Nodes.Clear();
-            _list.Remove(item);
-            return true;
+            <span style=color:#ae81ff>_l</span>ist[index].Nodes.Clear();
+            <span style=color:#ae81ff>_l</span>ist.Remove(item);
+            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>true</span>;
         }
 
-        public int Count
+        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> Count
         {
-            get { return _list.Count; }
+            <span style=color:#66d9ef>get</span> { <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>_l</span>ist.Count; }
         }
 
-        public bool IsReadOnly
+        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>bool</span> IsReadOnly
         {
-            get { return false; }
+            <span style=color:#66d9ef>get</span> { <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>false</span>; }
         }
 
-        #endregion
-    }
-</code></pre>
-
-<p>Przykład zastosowania to chociażby przygotowanie dla widoku (<strong>View</strong>) poleceń menu z poziomu prezentera (<strong>Presenter</strong>, <strong>Presentation Model</strong>):</p>
-
-<pre><code class="language-csharp">            var menu = new LightTreeNode&lt;Command&gt;(new Command(&quot;Opcje&quot;));
+        <span style=color:#75715e>#endregion
+</span><span style=color:#75715e></span>    }
+</code></pre></div><p>Przykład zastosowania to chociażby przygotowanie dla widoku (<strong>View</strong>) poleceń menu z poziomu prezentera (<strong>Presenter</strong>, <strong>Presentation Model</strong>):</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp>            <span style=color:#66d9ef>var</span> menu = <span style=color:#66d9ef>new</span> LightTreeNode&lt;Command&gt;(<span style=color:#66d9ef>new</span> Command(<span style=color:#e6db74>&#34;Opcje&#34;</span>));
             LightTreeNode&lt;Command&gt; submenu = menu.Nodes.Add(
-                new Command(&quot;Nawigacja&quot;));
-            submenu.Nodes.Add(new Command(&quot;Pierwszy&quot;, MoveFirst));
-            submenu.Nodes.Add(new Command(&quot;Ostatni&quot;, MoveLast));
-</code></pre>
-
-<p>PS. Dla uproszczenia kodu usunięto wszystkie wywołania <code>Debug.Assert</code> sprawdzające poprawność wywołań.</p>
-
-    </article>
-    <nav aria-label="Related posts">
-        <h4>Related Posts</h4>
-        <ul>
-            <li><a href="https://awasn.github.io/k-cultura-w-powershell/">(K)Cultura w PowerShell</a></li>
-            <li><a href="https://awasn.github.io/hook-scripts-w-powershell/">Hook scripts w PowerShell</a></li>
-            <li><a href="https://awasn.github.io/kiedy-nie-dziala-tryb-zgodnosci-w-windows-7/">Kiedy nie działa tryb zgodności w Windows 7</a></li>
-            <li><a href="https://awasn.github.io/implementacja-inversion-of-control-wersja-1-1/">Implementacja Inversion of Control - wersja 1.1</a></li>
-            <li><a href="https://awasn.github.io/rozwiazanie-mobilne/">Rozwiązanie mobilne</a></li>
-        </ul>
-    </nav>
-
-    <nav class="pure-g post-previous-next" aria-label="Previous and next posts">
-        <div class="pure-u-11-24 previous">
-            <a href="https://awasn.github.io/k-cultura-w-powershell/" aria-label="Previous post"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg></span></a>
-            <a href="https://awasn.github.io/k-cultura-w-powershell/">(K)Cultura w PowerShell</a>
-        </div>
-        <div class="pure-u-2-24">&nbsp;</div>
-        <div class="pure-u-11-24 next">
-        </div>
-    </nav>
-
-    
-
-
-        </main>
-
-        <footer>
-            <div class="center-aligned container">
-                <p>Copyright &copy; 2007-2019 Arkadiusz Waśniewski. All Rights Reserved.</p>
-            </div>
-        </footer>
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/accesslog.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dockerfile.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dos.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/go.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/powershell.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/routeros.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/typescript.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/yaml.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/vbnet.min.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script>
-    </body>
-</html>
+                <span style=color:#66d9ef>new</span> Command(<span style=color:#e6db74>&#34;Nawigacja&#34;</span>));
+            submenu.Nodes.Add(<span style=color:#66d9ef>new</span> Command(<span style=color:#e6db74>&#34;Pierwszy&#34;</span>, MoveFirst));
+            submenu.Nodes.Add(<span style=color:#66d9ef>new</span> Command(<span style=color:#e6db74>&#34;Ostatni&#34;</span>, MoveLast));
+</code></pre></div><p>PS. Dla uproszczenia kodu usunięto wszystkie wywołania <code>Debug.Assert</code> sprawdzające poprawność wywołań.</p></article><nav aria-label="Related posts"><h4>Related Posts</h4><ul><li><a href=https://awasn.github.io/k-cultura-w-powershell/>(K)Cultura w PowerShell</a></li><li><a href=https://awasn.github.io/hook-scripts-w-powershell/>Hook scripts w PowerShell</a></li><li><a href=https://awasn.github.io/kiedy-nie-dziala-tryb-zgodnosci-w-windows-7/>Kiedy nie działa tryb zgodności w Windows 7</a></li><li><a href=https://awasn.github.io/implementacja-inversion-of-control-wersja-1-1/>Implementacja Inversion of Control - wersja 1.1</a></li><li><a href=https://awasn.github.io/rozwiazanie-mobilne/>Rozwiązanie mobilne</a></li></ul></nav><nav class="pure-g post-previous-next" aria-label="Previous and next posts"><div class="pure-u-11-24 previous"><a href=https://awasn.github.io/k-cultura-w-powershell/ aria-label="Previous post"><span aria-hidden=true><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"/></svg></span></a><a href=https://awasn.github.io/k-cultura-w-powershell/>(K)Cultura w PowerShell</a></div><div class=pure-u-2-24>&nbsp;</div><div class="pure-u-11-24 next"></div></nav></main><footer><div class="center-aligned container"><p>Copyright &copy; 2007-2021 Arkadiusz Waśniewski. All Rights Reserved.</p></div></footer><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/accesslog.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dockerfile.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dos.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/go.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/powershell.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/routeros.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/typescript.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/yaml.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/vbnet.min.js></script><script>hljs.initHighlightingOnLoad()</script></body></html>

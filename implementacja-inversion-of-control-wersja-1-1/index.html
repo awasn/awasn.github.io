@@ -1,135 +1,19 @@
-<!DOCTYPE HTML>
-<html lang="pl-pl">
-    <head>
-        <meta name="theme-color" content="#405365"/>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="generator" content="Hugo 0.54.0" />
-        <meta name="description" content="Własna implementacja kontenera Inversion of Control w .NET C#" />
-        <title>Implementacja Inversion of Control - wersja 1.1 - arkadiusz wasniewski blog</title>
-        <link rel="canonical" href="https://awasn.github.io/implementacja-inversion-of-control-wersja-1-1/">
-        <link rel="prev" title="Reporting Services - projekt(y) po polsku?" href="https://awasn.github.io/reporting-services-projekty-po-polsku/">
-        <link rel="next" title="Konfiguracja Reporting Services przy pomocy PowerShell" href="https://awasn.github.io/konfiguracja-reporting-services-przy-pomocy-powershell/">
-
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css" integrity="sha256-Q0zCrUs2IfXWYx0uMKJfG93CvF6oVII21waYsAV4/8Q=" crossorigin="anonymous" />
-        
-        
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
-        
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
-        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.809247dcc0227e384b256fd9df3f1c82b2b752f0ca6ba0f97410d05bcdd60729.css" integrity="sha256-gJJH3MAifjhLJW/Z3z8cgrK3UvDKa6D5dBDQW83WByk=" />
-
-    </head>
-    <body>
-        <header>
-            <nav class="container" >
-                <div class="pure-menu pure-menu-horizontal">
-                    <a class="pure-menu-heading pure-menu-link" href="https://awasn.github.io/">wasniewski</a>
-                    <ul class="right pure-menu-list">
-                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/blog/">blog</a></li>
-                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/categories/">categories</a></li>
-                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/tags/">tags</a></li>
-                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/about/">about</a></li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
-
-        <main class="container">
-            
-    <aside class="post-published">
-        <p>This post was originally published on <a href="http://zine.net.pl/blogs/arkadiusz_wasniewski/archive/2009/01/27/implementacja-inversion-of-control-wersja-1-1.aspx" target="_blank">zine.net.pl</a> on 27 January 2009 12:38 CET</p>
-    </aside>
-
-    <article>
-        <header>
-            <h1>Implementacja Inversion of Control - wersja 1.1</h1>
-                <div class="post-metadata">
-        <div>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-            27 January 2009 12:38 CET
-            
-            &nbsp;
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-            3 min read
-        </div>
-        <div>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
-            <a href="https://awasn.github.io/categories/development">Development</a>
-            
-                &nbsp;
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
-                <a href="https://awasn.github.io/tags/.net">.NET</a>, <a href="https://awasn.github.io/tags/.net-compact-framework">.NET Compact Framework</a>, <a href="https://awasn.github.io/tags/design-patterns">Design patterns</a>, <a href="https://awasn.github.io/tags/mobile">Mobile</a>
-            
-        </div>
-    </div>
-        </header>
-
-        
-
-<p>Od <a href="https://awasn.github.io/implementacja-inversion-of-control/" target="_blank">ostatniej notki</a> opisującej wykorzystywany przeze mnie własnej produkcji kontener IoC wprowadziłem kilka modyfikacji czyniących rozwiązanie bardziej elastycznym, ale wciąż pozostające wierne podstawowym założeniom:</p>
-
-<ul>
-<li>Wydajne i łatwe w użyciu;</li>
-<li>Zminimalizowane użycie refleksji;</li>
-<li>Brak plików konfiguracyjnych.</li>
-</ul>
-
-<h2 id="czymże-jest-kontener-ioc">Czymże jest kontener IoC</h2>
-
-<p>Kontener IoC umożliwia programiście wprowadzenie w aplikacji luźnych powiązań pomiędzy obiektami. Programista rejestruje interfejsy i klasy abstrakcyjne wraz z typami implementującymi, instancjami lub procedurami tworzącymi instancje klas na żądanie:</p>
-
-<pre><code class="language-csharp">            ObjectLocator.Register&lt;IContactRepository&gt;().
+<!doctype html><html lang=pl-pl><head><meta name=theme-color content="#405365"><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.83.1"><meta name=description content="Własna implementacja kontenera Inversion of Control w .NET C#"><title>Implementacja Inversion of Control - wersja 1.1 - arkadiusz wasniewski blog</title><link rel=canonical href=https://awasn.github.io/implementacja-inversion-of-control-wersja-1-1/><link rel=prev title="Reporting Services - projekt(y) po polsku?" href=https://awasn.github.io/reporting-services-projekty-po-polsku/><link rel=next title="Konfiguracja Reporting Services przy pomocy PowerShell" href=https://awasn.github.io/konfiguracja-reporting-services-przy-pomocy-powershell/><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css integrity="sha256-Q0zCrUs2IfXWYx0uMKJfG93CvF6oVII21waYsAV4/8Q=" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css><link rel=stylesheet href=https://awasn.github.io/awasn.min.f45a909800924faa836a73b82a1d4cb352f8053134a426a9dcafa61cf6a8c5d0.css integrity="sha256-9FqQmACST6qDanO4Kh1Ms1L4BTE0pCap3K+mHPaoxdA="></head><body><header><nav class=container><div class="pure-menu pure-menu-horizontal"><a class="pure-menu-heading pure-menu-link" href=https://awasn.github.io/>wasniewski</a><ul class="right pure-menu-list"><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/blog/>blog</a></li><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/categories/>categories</a></li><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/tags/>tags</a></li><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/about/>about</a></li></ul></div></nav></header><main class=container><aside class=post-published><p>This post was originally published on <a href=http://zine.net.pl/blogs/arkadiusz_wasniewski/archive/2009/01/27/implementacja-inversion-of-control-wersja-1-1.aspx target=_blank>zine.net.pl</a> on 27 January 2009 12:38 +0100</p></aside><article><header><h1>Implementacja Inversion of Control - wersja 1.1</h1><div class=post-metadata><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>27 January 2009 12:38 +0100
+&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+3 min read</div><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg><a href=https://awasn.github.io/categories/development>Development</a>
+&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83.0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7" y2="7"/></svg>
+<a href=https://awasn.github.io/tags/.net>.NET</a>, <a href=https://awasn.github.io/tags/.net-compact-framework>.NET Compact Framework</a>, <a href=https://awasn.github.io/tags/design-patterns>Design patterns</a>, <a href=https://awasn.github.io/tags/mobile>Mobile</a></div></div></header><p>Od <a href=https://awasn.github.io/implementacja-inversion-of-control/>ostatniej notki</a> opisującej wykorzystywany przeze mnie własnej produkcji kontener IoC wprowadziłem kilka modyfikacji czyniących rozwiązanie bardziej elastycznym, ale wciąż pozostające wierne podstawowym założeniom:</p><ul><li>Wydajne i łatwe w użyciu;</li><li>Zminimalizowane użycie refleksji;</li><li>Brak plików konfiguracyjnych.</li></ul><h2 id=czymże-jest-kontener-ioc>Czymże jest kontener IoC</h2><p>Kontener IoC umożliwia programiście wprowadzenie w aplikacji luźnych powiązań pomiędzy obiektami. Programista rejestruje interfejsy i klasy abstrakcyjne wraz z typami implementującymi, instancjami lub procedurami tworzącymi instancje klas na żądanie:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp>            ObjectLocator.Register&lt;IContactRepository&gt;().
                 WithType&lt;ContactRepository&gt;();
-</code></pre>
-
-<p>Możliwa jest również rejestracja typów, które mogą posiadać instancje:</p>
-
-<pre><code class="language-csharp">            ObjectLocator.Register&lt;Database&gt;();
-</code></pre>
-
-<p>Zwracany w czasie rejestracji interfejs <code>IObjectProfile</code> korzysta ze wzorca <strong>Fluent Interface</strong> w celu właściwej konfiguracji:</p>
-
-<pre><code class="language-csharp">            ObjectLocator.Register&lt;IContactRepository&gt;().
+</code></pre></div><p>Możliwa jest również rejestracja typów, które mogą posiadać instancje:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp>            ObjectLocator.Register&lt;Database&gt;();
+</code></pre></div><p>Zwracany w czasie rejestracji interfejs <code>IObjectProfile</code> korzysta ze wzorca <strong>Fluent Interface</strong> w celu właściwej konfiguracji:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp>            ObjectLocator.Register&lt;IContactRepository&gt;().
                 AsSingleton().
                 WithType&lt;ContactRepository&gt;().
-                AndBuildUp(new object[] { &quot;test&quot; });
-</code></pre>
-
-<p>Skorzystanie z obiektu zarejestrowanego w kontenerze polega na wywołaniu metody <code>GetInstance</code> z ewentualnymi parametrami, które zostaną przekazane do konstruktora:</p>
-
-<pre><code class="language-csharp">            var repository = ObjectLocator.GetInstance&lt;IContactRepository&gt;();
-</code></pre>
-
-<p>W przeciwieństwie do rozwiązań typu <strong>Dependency Injection</strong> w opisywanym kontenerze IoC nie jest możliwe skorzystanie z automatycznego uzupełniania parametrów konstruktorów czy wstrzykiwania instancji do właściwości.</p>
-
-<h2 id="zmiany">Zmiany</h2>
-
-<p>W porównaniu do wersji wcześniejszej, fasada rozwiązania, statyczna od teraz klasa <code>ObjectLocator</code> zwraca nam zamiast obiektu <code>ObjectProfile</code> interfejs <code>IObjectProfile</code>. Z punktu widzenia programisty korzystającego z IoC jest to najważniejsza zmiana. Może to bowiem oznaczać konieczność zmiany między innymi definicji metod zwrotnych wywoływanych w czasie tworzenia instancji, jeśli oczywiście z takowych korzystamy, na:</p>
-
-<pre><code class="language-csharp">        Action&lt;IObjectProfile&lt;TRegisteredAs&gt;, TRegisteredAs&gt;
-</code></pre>
-
-<p>oraz</p>
-
-<pre><code class="language-csharp">        Func&lt;IObjectProfile&lt;TRegisteredAs&gt;, object[], TRegisteredAs&gt;
-</code></pre>
-
-<p>Są to jednak zmiany na poziomie wręcz kosmetycznym. Jednym słowem nie sprawią problemów.</p>
-
-<p>Wewnętrznie <code>ObjectLocator</code> deleguje teraz wszystkie zadania do implementacji interfejsu <code>IObjectContainer</code>. Dzięki temu korzystanie z <code>ObjectLocator</code> nie determinuje nam konkretnej implementacji kontenera. Innymi słowy wykorzystanie tego rozwiązania nie przekreśla możliwości skorzystania z innego rozwiązania <strong>Inversion of Control</strong> lub nawet <strong>Dependency Injection</strong>. Wystarczy bowiem wówczas zaimplementować interfejs <code>IObjectProfile</code> w celu konfiguracji rejestrowanego typu oraz interfejs <code>IObjectContainer</code> do zarządzania rejestrowanymi typami. Podmiana kontenera oznacza przypisanie klasie <code>ObjectLocator</code> poprzez właściwość <code>Container</code> interesującej nas instancji implementującej <code>IObjectContainer</code>.</p>
-
-    <figure>
-        <img class="pure-img" src="https://awasn.github.io/implementacja-inversion-of-control-wersja-1-1/images/IoC_1_1.png" alt="Implementacja Inversion of Control" >
-        <figcaption><h4>Implementacja Inversion of Control</h4></figcaption>
-    </figure>
-
-<p>Dzięki wprowadzeniu interfejsu <code>IObjectContainer</code> prostsze stało się korzystanie z kontenera w pakietach (<strong>assemblies</strong>) zewnętrznych. Do tej pory pobieranie instancji oznaczało konieczność odwoływania się do statycznej klasy <code>ObjectLocator</code>. Teraz wystarczy przekazać do pakietu zewnętrznego zmienną typu <code>IObjectContainer</code>.</p>
-
-<p>Łatwiejsze stało się również testowanie aplikacji korzystających z rozwiązania IoC. Nie trzeba teraz przed każdym testem konfigurować klasy <code>ObjectLocator</code> poprzez rejestrowanie typów etc. Zamiast tego wystarczy obecnie przypisać do właściwości <code>ObjectLocator.Container</code> testową implementację kontenera. Poniżej przykład takiego kodu wykorzystującego bibliotekę <a href="http://ayende.com/projects/rhino-mocks.aspx" target="_blank">Rhino.Mocks</a>:</p>
-
-<pre><code class="language-csharp">            var container = MockRepository.GenerateStub&lt;IObjectContainer&gt;();
-            var repository = new CustomerRepository();
+                AndBuildUp(<span style=color:#66d9ef>new</span> <span style=color:#66d9ef>object</span>[] { <span style=color:#e6db74>&#34;test&#34;</span> });
+</code></pre></div><p>Skorzystanie z obiektu zarejestrowanego w kontenerze polega na wywołaniu metody <code>GetInstance</code> z ewentualnymi parametrami, które zostaną przekazane do konstruktora:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp>            <span style=color:#66d9ef>var</span> repository = ObjectLocator.GetInstance&lt;IContactRepository&gt;();
+</code></pre></div><p>W przeciwieństwie do rozwiązań typu <strong>Dependency Injection</strong> w opisywanym kontenerze IoC nie jest możliwe skorzystanie z automatycznego uzupełniania parametrów konstruktorów czy wstrzykiwania instancji do właściwości.</p><h2 id=zmiany>Zmiany</h2><p>W porównaniu do wersji wcześniejszej, fasada rozwiązania, statyczna od teraz klasa <code>ObjectLocator</code> zwraca nam zamiast obiektu <code>ObjectProfile</code> interfejs <code>IObjectProfile</code>. Z punktu widzenia programisty korzystającego z IoC jest to najważniejsza zmiana. Może to bowiem oznaczać konieczność zmiany między innymi definicji metod zwrotnych wywoływanych w czasie tworzenia instancji, jeśli oczywiście z takowych korzystamy, na:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp>        Action&lt;IObjectProfile&lt;TRegisteredAs&gt;, TRegisteredAs&gt;
+</code></pre></div><p>oraz</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp>        Func&lt;IObjectProfile&lt;TRegisteredAs&gt;, <span style=color:#66d9ef>object</span>[], TRegisteredAs&gt;
+</code></pre></div><p>Są to jednak zmiany na poziomie wręcz kosmetycznym. Jednym słowem nie sprawią problemów.</p><p>Wewnętrznie <code>ObjectLocator</code> deleguje teraz wszystkie zadania do implementacji interfejsu <code>IObjectContainer</code>. Dzięki temu korzystanie z <code>ObjectLocator</code> nie determinuje nam konkretnej implementacji kontenera. Innymi słowy wykorzystanie tego rozwiązania nie przekreśla możliwości skorzystania z innego rozwiązania <strong>Inversion of Control</strong> lub nawet <strong>Dependency Injection</strong>. Wystarczy bowiem wówczas zaimplementować interfejs <code>IObjectProfile</code> w celu konfiguracji rejestrowanego typu oraz interfejs <code>IObjectContainer</code> do zarządzania rejestrowanymi typami. Podmiana kontenera oznacza przypisanie klasie <code>ObjectLocator</code> poprzez właściwość <code>Container</code> interesującej nas instancji implementującej <code>IObjectContainer</code>.</p><figure><img class=pure-img src=https://awasn.github.io/implementacja-inversion-of-control-wersja-1-1/images/IoC_1_1.png alt="Implementacja Inversion of Control"><figcaption><h4>Implementacja Inversion of Control</h4></figcaption></figure><p>Dzięki wprowadzeniu interfejsu <code>IObjectContainer</code> prostsze stało się korzystanie z kontenera w pakietach (<strong>assemblies</strong>) zewnętrznych. Do tej pory pobieranie instancji oznaczało konieczność odwoływania się do statycznej klasy <code>ObjectLocator</code>. Teraz wystarczy przekazać do pakietu zewnętrznego zmienną typu <code>IObjectContainer</code>.</p><p>Łatwiejsze stało się również testowanie aplikacji korzystających z rozwiązania IoC. Nie trzeba teraz przed każdym testem konfigurować klasy <code>ObjectLocator</code> poprzez rejestrowanie typów etc. Zamiast tego wystarczy obecnie przypisać do właściwości <code>ObjectLocator.Container</code> testową implementację kontenera. Poniżej przykład takiego kodu wykorzystującego bibliotekę <a href=http://ayende.com/projects/rhino-mocks.aspx>Rhino.Mocks</a>:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp>            <span style=color:#66d9ef>var</span> container = MockRepository.GenerateStub&lt;IObjectContainer&gt;();
+            <span style=color:#66d9ef>var</span> repository = <span style=color:#66d9ef>new</span> CustomerRepository();
             container.Stub(
                 x =&gt; x.GetInstance&lt;IRepository&lt;Customer&gt;&gt;()).
                 Return(repository);
@@ -137,80 +21,12 @@
             Assert.AreEqual(
                 repository,
                 ObjectLocator.GetInstance&lt;IRepository&lt;Customer&gt;&gt;());
-</code></pre>
-
-<h2 id="nowości">Nowości</h2>
-
-<p>Poza opisaną już właściwością <code>Container</code>, w klasie <code>ObjectLocator</code> i interfejsie <code>IObjectContainer</code> pojawiła się metoda <code>Contains</code> umożliwiająca sprawdzenie czy dany typ został już zarejestrowany. Jest to cenna możliwość zwłaszcza jeśli potrzebujemy dla danego odbiorcy (użytkownika) oprogramowania przerejestrować konkretny typ. W wersji wcześniejszej konieczne było sprawdzenie czy istnieje profil dla danego typu wykorzystując metodę <code>GetProfile</code>.</p>
-
-<p>Na poziomie konfigurowania typu (interfejs <code>IObjectProfile</code>) dodano możliwość zarejestrowania parametrów domyślnych przekazywanych do konstruktora nowego obiektu. W poniższym przykładzie parametr ten jest pobierany z kontenera IoC:</p>
-
-<pre><code class="language-csharp">            ObjectLocator.Register&lt;IContactRepository&gt;().
+</code></pre></div><h2 id=nowości>Nowości</h2><p>Poza opisaną już właściwością <code>Container</code>, w klasie <code>ObjectLocator</code> i interfejsie <code>IObjectContainer</code> pojawiła się metoda <code>Contains</code> umożliwiająca sprawdzenie czy dany typ został już zarejestrowany. Jest to cenna możliwość zwłaszcza jeśli potrzebujemy dla danego odbiorcy (użytkownika) oprogramowania przerejestrować konkretny typ. W wersji wcześniejszej konieczne było sprawdzenie czy istnieje profil dla danego typu wykorzystując metodę <code>GetProfile</code>.</p><p>Na poziomie konfigurowania typu (interfejs <code>IObjectProfile</code>) dodano możliwość zarejestrowania parametrów domyślnych przekazywanych do konstruktora nowego obiektu. W poniższym przykładzie parametr ten jest pobierany z kontenera IoC:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp>            ObjectLocator.Register&lt;IContactRepository&gt;().
                 WithType&lt;ContactRepository&gt;().
-                WithParameters(new object[]
+                WithParameters(<span style=color:#66d9ef>new</span> <span style=color:#66d9ef>object</span>[]
                                    {
                                        ObjectLocator.GetInstance&lt;Database&gt;()
                                    }).
                 AsSingleCall();
-</code></pre>
-
-<p>Parametry domyślne mogą być zastępowane nowymi w czasie wywołań metody <code>GetInstance</code>.</p>
-
-<h2 id="podsumowanie">Podsumowanie</h2>
-
-<p>Opisywane rozwiązania używam z powodzeniem od ponad kilkunastu miesięcy w <a href="https://awasn.github.io/rozwiazanie-mobilne/" target="_blank">projekcie</a>, którego części składowe działają na urządzeniach mobilnych. Udostępnione kody są oparte na nowej licencji BSD co umożliwia używanie opisywanego kontenera IoC w projektach komercyjnych. Kody źródłowe zawierają testy jednostkowe, które umożliwiają dokładniejsze zapoznanie się z możliwościami rozwiązania.</p>
-
-<p>Pliki do artykułu:</p>
-
-<ul>
-<li><a href="http://zine.net.pl/files/folders/2795/download.aspx" target="_blank">IoC</a> - kody źródłowe.</li>
-</ul>
-
-    </article>
-    <nav aria-label="Related posts">
-        <h4>Related Posts</h4>
-        <ul>
-            <li><a href="https://awasn.github.io/rozwiazanie-mobilne/">Rozwiązanie mobilne</a></li>
-            <li><a href="https://awasn.github.io/implementacja-inversion-of-control/">Implementacja Inversion of Control</a></li>
-            <li><a href="https://awasn.github.io/dwie-zasady-projektowania-klas/">Dwie zasady projektowania klas</a></li>
-            <li><a href="https://awasn.github.io/http-wlasny-serwer-komunikacji-cz1-wstep/">HTTP - Własny serwer komunikacji. Część #1 - Wstęp</a></li>
-            <li><a href="https://awasn.github.io/tworzenie-obiektow/">Tworzenie obiektów</a></li>
-        </ul>
-    </nav>
-
-    <nav class="pure-g post-previous-next" aria-label="Previous and next posts">
-        <div class="pure-u-11-24 previous">
-            <a href="https://awasn.github.io/reporting-services-projekty-po-polsku/" aria-label="Previous post"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg></span></a>
-            <a href="https://awasn.github.io/reporting-services-projekty-po-polsku/">Reporting Services - projekt(y) po polsku?</a>
-        </div>
-        <div class="pure-u-2-24">&nbsp;</div>
-        <div class="pure-u-11-24 next">
-            <a href="https://awasn.github.io/konfiguracja-reporting-services-przy-pomocy-powershell/">Konfiguracja Reporting Services przy pomocy PowerShell</a>
-            <a href="https://awasn.github.io/konfiguracja-reporting-services-przy-pomocy-powershell/" aria-label="Next post"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg></span></a>
-        </div>
-    </nav>
-
-    
-
-
-        </main>
-
-        <footer>
-            <div class="center-aligned container">
-                <p>Copyright &copy; 2007-2019 Arkadiusz Waśniewski. All Rights Reserved.</p>
-            </div>
-        </footer>
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/accesslog.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dockerfile.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dos.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/go.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/powershell.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/routeros.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/typescript.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/yaml.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/vbnet.min.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script>
-    </body>
-</html>
+</code></pre></div><p>Parametry domyślne mogą być zastępowane nowymi w czasie wywołań metody <code>GetInstance</code>.</p><h2 id=podsumowanie>Podsumowanie</h2><p>Opisywane rozwiązania używam z powodzeniem od ponad kilkunastu miesięcy w <a href=https://awasn.github.io/rozwiazanie-mobilne/>projekcie</a>, którego części składowe działają na urządzeniach mobilnych. Udostępnione kody są oparte na nowej licencji BSD co umożliwia używanie opisywanego kontenera IoC w projektach komercyjnych. Kody źródłowe zawierają testy jednostkowe, które umożliwiają dokładniejsze zapoznanie się z możliwościami rozwiązania.</p><p>Pliki do artykułu:</p><ul><li><a href=http://zine.net.pl/files/folders/2795/download.aspx>IoC</a> - kody źródłowe.</li></ul></article><nav aria-label="Related posts"><h4>Related Posts</h4><ul><li><a href=https://awasn.github.io/rozwiazanie-mobilne/>Rozwiązanie mobilne</a></li><li><a href=https://awasn.github.io/implementacja-inversion-of-control/>Implementacja Inversion of Control</a></li><li><a href=https://awasn.github.io/dwie-zasady-projektowania-klas/>Dwie zasady projektowania klas</a></li><li><a href=https://awasn.github.io/http-wlasny-serwer-komunikacji-cz1-wstep/>HTTP - Własny serwer komunikacji. Część #1 - Wstęp</a></li><li><a href=https://awasn.github.io/tworzenie-obiektow/>Tworzenie obiektów</a></li></ul></nav><nav class="pure-g post-previous-next" aria-label="Previous and next posts"><div class="pure-u-11-24 previous"><a href=https://awasn.github.io/reporting-services-projekty-po-polsku/ aria-label="Previous post"><span aria-hidden=true><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"/></svg></span></a><a href=https://awasn.github.io/reporting-services-projekty-po-polsku/>Reporting Services - projekt(y) po polsku?</a></div><div class=pure-u-2-24>&nbsp;</div><div class="pure-u-11-24 next"><a href=https://awasn.github.io/konfiguracja-reporting-services-przy-pomocy-powershell/>Konfiguracja Reporting Services przy pomocy PowerShell</a>
+<a href=https://awasn.github.io/konfiguracja-reporting-services-przy-pomocy-powershell/ aria-label="Next post"><span aria-hidden=true><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg></span></a></div></nav></main><footer><div class="center-aligned container"><p>Copyright &copy; 2007-2021 Arkadiusz Waśniewski. All Rights Reserved.</p></div></footer><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/accesslog.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dockerfile.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dos.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/go.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/powershell.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/routeros.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/typescript.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/yaml.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/vbnet.min.js></script><script>hljs.initHighlightingOnLoad()</script></body></html>

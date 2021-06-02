@@ -1,241 +1,64 @@
-<!DOCTYPE HTML>
-<html lang="pl-pl">
-    <head>
-        <meta name="theme-color" content="#405365"/>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="generator" content="Hugo 0.54.0" />
-        <meta name="description" content="Definiowanie rozbudowanych stałych w programie przy wykorzystaniu typów wyliczanych i klas" />
-        <title>Typy wyliczane czy klasy - arkadiusz wasniewski blog</title>
-        <link rel="canonical" href="https://awasn.github.io/typy-wyliczane-czy-klasy/">
-        <link rel="prev" title="Y2K atakuje po latach" href="https://awasn.github.io/y2k-atakuje-po-latach/">
-        <link rel="next" title="Dwie zasady projektowania klas" href="https://awasn.github.io/dwie-zasady-projektowania-klas/">
-
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css" integrity="sha256-Q0zCrUs2IfXWYx0uMKJfG93CvF6oVII21waYsAV4/8Q=" crossorigin="anonymous" />
-        
-        
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
-        
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
-        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.809247dcc0227e384b256fd9df3f1c82b2b752f0ca6ba0f97410d05bcdd60729.css" integrity="sha256-gJJH3MAifjhLJW/Z3z8cgrK3UvDKa6D5dBDQW83WByk=" />
-
-    </head>
-    <body>
-        <header>
-            <nav class="container" >
-                <div class="pure-menu pure-menu-horizontal">
-                    <a class="pure-menu-heading pure-menu-link" href="https://awasn.github.io/">wasniewski</a>
-                    <ul class="right pure-menu-list">
-                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/blog/">blog</a></li>
-                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/categories/">categories</a></li>
-                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/tags/">tags</a></li>
-                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/about/">about</a></li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
-
-        <main class="container">
-            
-    <aside class="post-published">
-        <p>This post was originally published on <a href="http://zine.net.pl/blogs/arkadiusz_wasniewski/archive/2008/10/24/typy-wyliczane-czy-klasy.aspx" target="_blank">zine.net.pl</a> on 24 October 2008 12:20 CEST</p>
-    </aside>
-
-    <article>
-        <header>
-            <h1>Typy wyliczane czy klasy</h1>
-                <div class="post-metadata">
-        <div>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-            24 October 2008 12:20 CEST
-            
-                &nbsp;
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon></svg>
-                17 September 2018 13:28 CEST
-            
-            &nbsp;
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-            3 min read
-        </div>
-        <div>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
-            <a href="https://awasn.github.io/categories/development">Development</a>, <a href="https://awasn.github.io/categories/events">Events</a>
-            
-                &nbsp;
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
-                <a href="https://awasn.github.io/tags/.net">.NET</a>, <a href="https://awasn.github.io/tags/design-patterns">Design patterns</a>, <a href="https://awasn.github.io/tags/meetings">Meetings</a>
-            
-        </div>
-    </div>
-        </header>
-
-        <p>Tak to już jest, iż programując bardzo często stajemy przed koniecznością wyboru rozwiązania, będąc  gdzieś w połowie drogi pomiędzy &ldquo;najlepszymi technikami&rdquo;. Jeden z takich przypadków, ale bez wybrania najlepszej drogi, chciałbym opisać poniżej.</p>
-
-<p>Załóżmy, iż budujemy aplikację służącą sprzedaży  Na początek będziemy wykorzystywać dwa typy dokumentów: paragon i fakturą.  W kodzie tworzymy odpowiadający temu typ wyliczany:</p>
-
-<pre><code class="language-csharp">    internal enum DocumentType
+<!doctype html><html lang=pl-pl><head><meta name=theme-color content="#405365"><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.83.1"><meta name=description content="Definiowanie rozbudowanych stałych w programie przy wykorzystaniu typów wyliczanych i klas"><title>Typy wyliczane czy klasy - arkadiusz wasniewski blog</title><link rel=canonical href=https://awasn.github.io/typy-wyliczane-czy-klasy/><link rel=prev title="Y2K atakuje po latach" href=https://awasn.github.io/y2k-atakuje-po-latach/><link rel=next title="Dwie zasady projektowania klas" href=https://awasn.github.io/dwie-zasady-projektowania-klas/><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css integrity="sha256-Q0zCrUs2IfXWYx0uMKJfG93CvF6oVII21waYsAV4/8Q=" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css><link rel=stylesheet href=https://awasn.github.io/awasn.min.f45a909800924faa836a73b82a1d4cb352f8053134a426a9dcafa61cf6a8c5d0.css integrity="sha256-9FqQmACST6qDanO4Kh1Ms1L4BTE0pCap3K+mHPaoxdA="></head><body><header><nav class=container><div class="pure-menu pure-menu-horizontal"><a class="pure-menu-heading pure-menu-link" href=https://awasn.github.io/>wasniewski</a><ul class="right pure-menu-list"><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/blog/>blog</a></li><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/categories/>categories</a></li><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/tags/>tags</a></li><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/about/>about</a></li></ul></div></nav></header><main class=container><aside class=post-published><p>This post was originally published on <a href=http://zine.net.pl/blogs/arkadiusz_wasniewski/archive/2008/10/24/typy-wyliczane-czy-klasy.aspx target=_blank>zine.net.pl</a> on 24 October 2008 12:20 +0200</p></aside><article><header><h1>Typy wyliczane czy klasy</h1><div class=post-metadata><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>24 October 2008 12:20 +0200
+&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M20 14.66V20a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2h5.34"/><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"/></svg>
+17 September 2018 13:28 +0200
+&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+3 min read</div><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg><a href=https://awasn.github.io/categories/development>Development</a>, <a href=https://awasn.github.io/categories/events>Events</a>
+&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83.0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7" y2="7"/></svg>
+<a href=https://awasn.github.io/tags/.net>.NET</a>, <a href=https://awasn.github.io/tags/design-patterns>Design patterns</a>, <a href=https://awasn.github.io/tags/meetings>Meetings</a></div></div></header><p>Tak to już jest, iż programując bardzo często stajemy przed koniecznością wyboru rozwiązania, będąc gdzieś w połowie drogi pomiędzy &ldquo;najlepszymi technikami&rdquo;. Jeden z takich przypadków, ale bez wybrania najlepszej drogi, chciałbym opisać poniżej.</p><p>Załóżmy, iż budujemy aplikację służącą sprzedaży Na początek będziemy wykorzystywać dwa typy dokumentów: paragon i fakturą. W kodzie tworzymy odpowiadający temu typ wyliczany:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp>    <span style=color:#66d9ef>internal</span> <span style=color:#66d9ef>enum</span> DocumentType
     {
         Receipt,
         Invoice
     }
-</code></pre>
-
-<p>Następnie pojawiają się nowe wymagania. Potrzebujemy powiązać z typami dokumentów skrót, czyli kilkuznakowy identyfikator, który będzie wykorzystywany:</p>
-
-<ul>
-<li>W czasie budowania numeru dokumentu;</li>
-<li>Być może w czasie wyświetlania informacji o dokumentach;</li>
-<li>Być może w czasie konwersji danych do/z systemów zewnętrznych;</li>
-</ul>
-
-<p>oraz nazwę dokumentu, która potrzebna będzie przy:</p>
-
-<ul>
-<li>Być może drukowaniu dokumentów;</li>
-<li>Być może wyświetlaniu informacji o dokumentach.</li>
-</ul>
-
-<p>Jak widzimy wymagania te wychodzą z różnych części programu. Słowa &ldquo;być może&rdquo; są użyte powyżej ponieważ to klient (użytkownik oprogramowania) będzie decydował (przy zakupie?) co i gdzie ma mu się wyświetlać.</p>
-
-<p>Pierwsze rozwiązanie polega na zastosowaniu specjalnej klasy pomocniczej,  która przyjmując w wywołaniach metod typ dokumentu zwracałaby właściwe wartości. Prosty przykład użycia:</p>
-
-<pre><code class="language-csharp">            DocumentType documentType = DocumentType.Invoice;
+</code></pre></div><p>Następnie pojawiają się nowe wymagania. Potrzebujemy powiązać z typami dokumentów skrót, czyli kilkuznakowy identyfikator, który będzie wykorzystywany:</p><ul><li>W czasie budowania numeru dokumentu;</li><li>Być może w czasie wyświetlania informacji o dokumentach;</li><li>Być może w czasie konwersji danych do/z systemów zewnętrznych;</li></ul><p>oraz nazwę dokumentu, która potrzebna będzie przy:</p><ul><li>Być może drukowaniu dokumentów;</li><li>Być może wyświetlaniu informacji o dokumentach.</li></ul><p>Jak widzimy wymagania te wychodzą z różnych części programu. Słowa &ldquo;być może&rdquo; są użyte powyżej ponieważ to klient (użytkownik oprogramowania) będzie decydował (przy zakupie?) co i gdzie ma mu się wyświetlać.</p><p>Pierwsze rozwiązanie polega na zastosowaniu specjalnej klasy pomocniczej, która przyjmując w wywołaniach metod typ dokumentu zwracałaby właściwe wartości. Prosty przykład użycia:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp>            DocumentType documentType = DocumentType.Invoice;
             Console.WriteLine(DocumentTypeHelper.GetCode(documentType));
             Console.WriteLine(DocumentTypeHelper.GetName(documentType));
-</code></pre>
-
-<p>Oczywiścia klasa pomocnicza nie musi być statyczna. Do dyspozycji mamy również nowości języka C# w wersji trzeciej czyli metody rozszerzające (extension methods):</p>
-
-<pre><code class="language-csharp">            Console.WriteLine(documentType.GetCode());
+</code></pre></div><p>Oczywiścia klasa pomocnicza nie musi być statyczna. Do dyspozycji mamy również nowości języka C# w wersji trzeciej czyli metody rozszerzające (extension methods):</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp>            Console.WriteLine(documentType.GetCode());
             Console.WriteLine(documentType.GetName());
-</code></pre>
-
-<p>Możemy również zastosować refaktoryzację naszego typu wyliczanego do klasy. Rozwiązanie to jest bardzo popularne zwłaszcza w językach, które nie umożliwiają definiowania dozwolonych zakresów wartości dla zmiennych i parametrów metod.</p>
-
-<pre><code class="language-csharp">    internal class DocumentType
+</code></pre></div><p>Możemy również zastosować refaktoryzację naszego typu wyliczanego do klasy. Rozwiązanie to jest bardzo popularne zwłaszcza w językach, które nie umożliwiają definiowania dozwolonych zakresów wartości dla zmiennych i parametrów metod.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp>    <span style=color:#66d9ef>internal</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DocumentType</span>
     {
-        public static readonly DocumentType Receipt =
-            new DocumentType(&quot;PA&quot;, &quot;Paragon&quot;);
+        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>readonly</span> DocumentType Receipt =
+            <span style=color:#66d9ef>new</span> DocumentType(<span style=color:#e6db74>&#34;PA&#34;</span>, <span style=color:#e6db74>&#34;Paragon&#34;</span>);
 
-        public static readonly DocumentType Invoice =
-            new DocumentType(&quot;FK&quot;, &quot;Faktura VAT&quot;);
+        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>readonly</span> DocumentType Invoice =
+            <span style=color:#66d9ef>new</span> DocumentType(<span style=color:#e6db74>&#34;FK&#34;</span>, <span style=color:#e6db74>&#34;Faktura VAT&#34;</span>);
 
-        public string Code { get; private set; }
-        public string Name { get; private set; }
+        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>string</span> Code { <span style=color:#66d9ef>get</span>; <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>set</span>; }
+        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>string</span> Name { <span style=color:#66d9ef>get</span>; <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>set</span>; }
 
-        public DocumentType(string code, string name)
+        <span style=color:#66d9ef>public</span> DocumentType(<span style=color:#66d9ef>string</span> code, <span style=color:#66d9ef>string</span> name)
         {
             Code = code;
             Name = name;
         }
     }
-</code></pre>
-
-<p>Jako ciekawostkę można w tym miejscu powiedzieć, iż kompilator C# zamienia typy enumerowane na poniższe rozwiązanie  (mniej więcej):</p>
-
-<pre><code class="language-csharp">    internal struct DocumentType : System.Enum
+</code></pre></div><p>Jako ciekawostkę można w tym miejscu powiedzieć, iż kompilator C# zamienia typy enumerowane na poniższe rozwiązanie (mniej więcej):</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp>    <span style=color:#66d9ef>internal</span> <span style=color:#66d9ef>struct</span> <span style=color:#a6e22e>DocumentType</span> : System.Enum
     {
-        public const DocumentType Receipt = (DocumentType) 0;
-        public const DocumentType Invoice = (DocumentType) 1;
+        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>const</span> DocumentType Receipt = (DocumentType) <span style=color:#ae81ff>0</span>;
+        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>const</span> DocumentType Invoice = (DocumentType) <span style=color:#ae81ff>1</span>;
     }
-</code></pre>
-
-<p>Oczywiście powyższy kod (czy też raczej pseudokod) się nie skompiluje (nie można dziedziczyć po <code>System.Enum</code>), ale tak to wewnątrz CLR wygląda.</p>
-
-<p>Wracając do naszej aplikacji. A co począć jeśli pojawiają nam się dodatkowe wymagania w projekcie dotyczące typów dokumentów:</p>
-
-<ul>
-<li>Co w przypadku jeśli użytkownik aplikacji zażyczy sobie aby zamiast skrótu FK był kod FS;</li>
-<li>Co jeśli chcemy dodać nowy typ dokumentu;</li>
-<li>Co jeśli musimy dodać nową właściwość opisującą typ dokumentu.</li>
-</ul>
-
-<p>W którą stronę podążać i jakie zmiany w kodzie przeprowadzić? Pytania te wydały mi się na tyle ciekawe, iż postanowiłem na 32 spotkaniu <a href="http://www.wg.net.pl" target="_blank">Warszawskiej Grupy .NET</a> spróbować przeprowadzić małą prezentację problemu wraz dyskusją na ten temat. Całość trwała około 20 minut i oto proponowane przez uczestników dyskusji rozwiązania:</p>
-
-<ol>
-<li>Powrót do typów wyliczanych i klas pomocniczych ponieważ umieszczanie właściwości opisujących dany typ w klasie jako pól statycznych narusza zasadę pojedynczej odpowiedzialności;</li>
-<li>Pobieranie wartości łańcuchowych w momencie tworzenia instancji klas z zasobów zewnętrznych. Tudzież tworzenie klas dla danych typów w konstruktorze statycznym, który wiedziałby (zasoby zewnętrzne) z jakimi wartościami je kreować.</li>
-
-<li><p>Rezygnacja ze statycznych pól tylko do odczytu. Przeniesienie typu dokumentu do klasy:</p>
-
-<pre><code class="language-csharp">    internal class DocumentTypeValue
+</code></pre></div><p>Oczywiście powyższy kod (czy też raczej pseudokod) się nie skompiluje (nie można dziedziczyć po <code>System.Enum</code>), ale tak to wewnątrz CLR wygląda.</p><p>Wracając do naszej aplikacji. A co począć jeśli pojawiają nam się dodatkowe wymagania w projekcie dotyczące typów dokumentów:</p><ul><li>Co w przypadku jeśli użytkownik aplikacji zażyczy sobie aby zamiast skrótu FK był kod FS;</li><li>Co jeśli chcemy dodać nowy typ dokumentu;</li><li>Co jeśli musimy dodać nową właściwość opisującą typ dokumentu.</li></ul><p>W którą stronę podążać i jakie zmiany w kodzie przeprowadzić? Pytania te wydały mi się na tyle ciekawe, iż postanowiłem na 32 spotkaniu <a href=http://www.wg.net.pl>Warszawskiej Grupy .NET</a> spróbować przeprowadzić małą prezentację problemu wraz dyskusją na ten temat. Całość trwała około 20 minut i oto proponowane przez uczestników dyskusji rozwiązania:</p><ol><li><p>Powrót do typów wyliczanych i klas pomocniczych ponieważ umieszczanie właściwości opisujących dany typ w klasie jako pól statycznych narusza zasadę pojedynczej odpowiedzialności;</p></li><li><p>Pobieranie wartości łańcuchowych w momencie tworzenia instancji klas z zasobów zewnętrznych. Tudzież tworzenie klas dla danych typów w konstruktorze statycznym, który wiedziałby (zasoby zewnętrzne) z jakimi wartościami je kreować.</p></li><li><p>Rezygnacja ze statycznych pól tylko do odczytu. Przeniesienie typu dokumentu do klasy:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp>    <span style=color:#66d9ef>internal</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DocumentTypeValue</span>
     {
-        public DocumentType DocumentType { get; private set; }
-        public string Code { get; private set; }
-        public string Name { get; private set; }
+        <span style=color:#66d9ef>public</span> DocumentType DocumentType { <span style=color:#66d9ef>get</span>; <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>set</span>; }
+        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>string</span> Code { <span style=color:#66d9ef>get</span>; <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>set</span>; }
+        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>string</span> Name { <span style=color:#66d9ef>get</span>; <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>set</span>; }
 
-        public DocumentTypeValue(DocumentType documentType,
-            string code, string name)
+        <span style=color:#66d9ef>public</span> DocumentTypeValue(DocumentType documentType,
+            <span style=color:#66d9ef>string</span> code, <span style=color:#66d9ef>string</span> name)
         {
             DocumentType = documentType;
             Code = code;
             Name = name;
         }
     }
-</code></pre></li>
-
-<li><p>Opisanie elementów typu wyliczanego utworzonymi atrybutami:</p>
-
-<pre><code class="language-csharp">    internal enum DocumentType
+</code></pre></div></li><li><p>Opisanie elementów typu wyliczanego utworzonymi atrybutami:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp>    <span style=color:#66d9ef>internal</span> <span style=color:#66d9ef>enum</span> DocumentType
     {
-        [Code(&quot;PA&quot;)]
-        [Name(&quot;Paragon&quot;)]
+<span style=color:#a6e22e>        [Code(&#34;PA&#34;)]</span>
+<span style=color:#a6e22e>        [Name(&#34;Paragon&#34;)]</span>
         Receipt,
-
-        [Code(&quot;FK&quot;)]
-        [Name(&quot;Faktura VAT&quot;)]
+<span style=color:#a6e22e>
+</span><span style=color:#a6e22e>        [Code(&#34;FK&#34;)]</span>
+<span style=color:#a6e22e>        [Name(&#34;Faktura VAT&#34;)]</span>
         Invoice
     }
-</code></pre></li>
-</ol>
-
-<p>Moje subiektywne odczucia z dyskusji są takie, iż minimalnie wygrały rozwiązania numer 2 i 3. A co Wy o tym sądzicie?</p>
-
-    </article>
-    <nav aria-label="Related posts">
-        <h4>Related Posts</h4>
-        <ul>
-            <li><a href="https://awasn.github.io/metoda-fabryki/">Metoda fabryki</a></li>
-            <li><a href="https://awasn.github.io/implementacja-inversion-of-control/">Implementacja Inversion of Control</a></li>
-            <li><a href="https://awasn.github.io/refaktoryzacja-metod-zwrotnych/">Refaktoryzacja metod zwrotnych</a></li>
-            <li><a href="https://awasn.github.io/range-t/">Range&lt;T&gt;</a></li>
-            <li><a href="https://awasn.github.io/nie-wyrzucamy-wyjatkow-poza-domain-model/">Nie wyrzucamy wyjątków poza Domain Model</a></li>
-        </ul>
-    </nav>
-
-    <nav class="pure-g post-previous-next" aria-label="Previous and next posts">
-        <div class="pure-u-11-24 previous">
-            <a href="https://awasn.github.io/y2k-atakuje-po-latach/" aria-label="Previous post"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg></span></a>
-            <a href="https://awasn.github.io/y2k-atakuje-po-latach/">Y2K atakuje po latach</a>
-        </div>
-        <div class="pure-u-2-24">&nbsp;</div>
-        <div class="pure-u-11-24 next">
-            <a href="https://awasn.github.io/dwie-zasady-projektowania-klas/">Dwie zasady projektowania klas</a>
-            <a href="https://awasn.github.io/dwie-zasady-projektowania-klas/" aria-label="Next post"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg></span></a>
-        </div>
-    </nav>
-
-    
-
-
-        </main>
-
-        <footer>
-            <div class="center-aligned container">
-                <p>Copyright &copy; 2007-2019 Arkadiusz Waśniewski. All Rights Reserved.</p>
-            </div>
-        </footer>
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/accesslog.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dockerfile.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dos.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/go.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/powershell.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/routeros.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/typescript.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/yaml.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/vbnet.min.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script>
-    </body>
-</html>
+</code></pre></div></li></ol><p>Moje subiektywne odczucia z dyskusji są takie, iż minimalnie wygrały rozwiązania numer 2 i 3. A co Wy o tym sądzicie?</p></article><nav aria-label="Related posts"><h4>Related Posts</h4><ul><li><a href=https://awasn.github.io/metoda-fabryki/>Metoda fabryki</a></li><li><a href=https://awasn.github.io/implementacja-inversion-of-control/>Implementacja Inversion of Control</a></li><li><a href=https://awasn.github.io/refaktoryzacja-metod-zwrotnych/>Refaktoryzacja metod zwrotnych</a></li><li><a href=https://awasn.github.io/range-t/>Range&lt;T></a></li><li><a href=https://awasn.github.io/nie-wyrzucamy-wyjatkow-poza-domain-model/>Nie wyrzucamy wyjątków poza Domain Model</a></li></ul></nav><nav class="pure-g post-previous-next" aria-label="Previous and next posts"><div class="pure-u-11-24 previous"><a href=https://awasn.github.io/y2k-atakuje-po-latach/ aria-label="Previous post"><span aria-hidden=true><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"/></svg></span></a><a href=https://awasn.github.io/y2k-atakuje-po-latach/>Y2K atakuje po latach</a></div><div class=pure-u-2-24>&nbsp;</div><div class="pure-u-11-24 next"><a href=https://awasn.github.io/dwie-zasady-projektowania-klas/>Dwie zasady projektowania klas</a>
+<a href=https://awasn.github.io/dwie-zasady-projektowania-klas/ aria-label="Next post"><span aria-hidden=true><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg></span></a></div></nav></main><footer><div class="center-aligned container"><p>Copyright &copy; 2007-2021 Arkadiusz Waśniewski. All Rights Reserved.</p></div></footer><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/accesslog.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dockerfile.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dos.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/go.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/powershell.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/routeros.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/typescript.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/yaml.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/vbnet.min.js></script><script>hljs.initHighlightingOnLoad()</script></body></html>

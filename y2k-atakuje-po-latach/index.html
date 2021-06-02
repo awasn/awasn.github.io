@@ -1,146 +1,25 @@
-<!DOCTYPE HTML>
-<html lang="pl-pl">
-    <head>
-        <meta name="theme-color" content="#405365"/>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="generator" content="Hugo 0.54.0" />
-        <meta name="description" content="Poprawne zapisywanie roku w pliku DBF" />
-        <title>Y2K atakuje po latach - arkadiusz wasniewski blog</title>
-        <link rel="canonical" href="https://awasn.github.io/y2k-atakuje-po-latach/">
-        <link rel="prev" title="Bloggers Underground" href="https://awasn.github.io/bloggers-underground/">
-        <link rel="next" title="Typy wyliczane czy klasy" href="https://awasn.github.io/typy-wyliczane-czy-klasy/">
-
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css" integrity="sha256-Q0zCrUs2IfXWYx0uMKJfG93CvF6oVII21waYsAV4/8Q=" crossorigin="anonymous" />
-        
-        
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
-        
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
-        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.809247dcc0227e384b256fd9df3f1c82b2b752f0ca6ba0f97410d05bcdd60729.css" integrity="sha256-gJJH3MAifjhLJW/Z3z8cgrK3UvDKa6D5dBDQW83WByk=" />
-
-    </head>
-    <body>
-        <header>
-            <nav class="container" >
-                <div class="pure-menu pure-menu-horizontal">
-                    <a class="pure-menu-heading pure-menu-link" href="https://awasn.github.io/">wasniewski</a>
-                    <ul class="right pure-menu-list">
-                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/blog/">blog</a></li>
-                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/categories/">categories</a></li>
-                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/tags/">tags</a></li>
-                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/about/">about</a></li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
-
-        <main class="container">
-            
-    <aside class="post-published">
-        <p>This post was originally published on <a href="http://zine.net.pl/blogs/arkadiusz_wasniewski/archive/2008/09/25/y2k-atakuje-po-latach.aspx" target="_blank">zine.net.pl</a> on 25 September 2008 15:04 CEST</p>
-    </aside>
-
-    <article>
-        <header>
-            <h1>Y2K atakuje po latach</h1>
-                <div class="post-metadata">
-        <div>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-            25 September 2008 15:04 CEST
-            
-            &nbsp;
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-            1 min read
-        </div>
-        <div>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
-            <a href="https://awasn.github.io/categories/development">Development</a>
-            
-                &nbsp;
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
-                <a href="https://awasn.github.io/tags/.net">.NET</a>
-            
-        </div>
-    </div>
-        </header>
-
-        <p>Niektórzy pewnie pamiętają mój wpis dotyczący <a href="https://awasn.github.io/dbf-po-ludzku/" target="_blank">plików DBF</a>. Nagłówek pliku DBF zawiera datę, gdzie na rok, miesiąc i dzień przeznaczone jest po jednym bajcie.</p>
-
-<pre><code class="language-csharp">    [StructLayout(LayoutKind.Sequential)]
-    internal struct Dbf3Header
+<!doctype html><html lang=pl-pl><head><meta name=theme-color content="#405365"><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.83.1"><meta name=description content="Poprawne zapisywanie roku w pliku DBF"><title>Y2K atakuje po latach - arkadiusz wasniewski blog</title><link rel=canonical href=https://awasn.github.io/y2k-atakuje-po-latach/><link rel=prev title="Bloggers Underground" href=https://awasn.github.io/bloggers-underground/><link rel=next title="Typy wyliczane czy klasy" href=https://awasn.github.io/typy-wyliczane-czy-klasy/><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css integrity="sha256-Q0zCrUs2IfXWYx0uMKJfG93CvF6oVII21waYsAV4/8Q=" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css><link rel=stylesheet href=https://awasn.github.io/awasn.min.f45a909800924faa836a73b82a1d4cb352f8053134a426a9dcafa61cf6a8c5d0.css integrity="sha256-9FqQmACST6qDanO4Kh1Ms1L4BTE0pCap3K+mHPaoxdA="></head><body><header><nav class=container><div class="pure-menu pure-menu-horizontal"><a class="pure-menu-heading pure-menu-link" href=https://awasn.github.io/>wasniewski</a><ul class="right pure-menu-list"><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/blog/>blog</a></li><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/categories/>categories</a></li><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/tags/>tags</a></li><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/about/>about</a></li></ul></div></nav></header><main class=container><aside class=post-published><p>This post was originally published on <a href=http://zine.net.pl/blogs/arkadiusz_wasniewski/archive/2008/09/25/y2k-atakuje-po-latach.aspx target=_blank>zine.net.pl</a> on 25 September 2008 15:04 +0200</p></aside><article><header><h1>Y2K atakuje po latach</h1><div class=post-metadata><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>25 September 2008 15:04 +0200
+&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+1 min read</div><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg><a href=https://awasn.github.io/categories/development>Development</a>
+&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83.0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7" y2="7"/></svg>
+<a href=https://awasn.github.io/tags/.net>.NET</a></div></div></header><p>Niektórzy pewnie pamiętają mój wpis dotyczący <a href=https://awasn.github.io/dbf-po-ludzku/>plików DBF</a>. Nagłówek pliku DBF zawiera datę, gdzie na rok, miesiąc i dzień przeznaczone jest po jednym bajcie.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp><span style=color:#a6e22e>    [StructLayout(LayoutKind.Sequential)]</span>
+    <span style=color:#66d9ef>internal</span> <span style=color:#66d9ef>struct</span> <span style=color:#a6e22e>Dbf3Header</span>
     {
-        public const byte ReservedSize = 20;
+        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>const</span> <span style=color:#66d9ef>byte</span> ReservedSize = <span style=color:#ae81ff>20</span>;
 
-        public byte Dbf;
-        public byte Year;
-        public byte Mounth;
-        public byte Day;
-        public int RecordCount;
-        public ushort HeaderSize;
-        public ushort RecordSize;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = ReservedSize)]
-        public byte[] Reserved;
+        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>byte</span> Dbf;
+        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>byte</span> Year;
+        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>byte</span> Mounth;
+        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>byte</span> Day;
+        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> RecordCount;
+        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>ushort</span> HeaderSize;
+        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>ushort</span> RecordSize;
+<span style=color:#a6e22e>        [MarshalAs(UnmanagedType.ByValArray, SizeConst = ReservedSize)]</span>
+        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>byte</span>[] Reserved;
     }
-</code></pre>
-
-<p>W przypadku miesiąca i dnia jest to zakres wystarczający. Niestety jeśli chodzi o rok już nie. W zeszłym stuleciu (rany, ależ to poważnie brzmi) ze względu na niedostatek zasobów systemowych (pamiętacie stwierdzenie Gatesa, iż 640 KB każdemu wystarczy?) ograniczano do minimum przestrzeń dla dat zazwyczaj pamiętając dla roku tylko dwie ostatnie cyfry.</p>
-
-<p>Zamykając plik DBF wypada uaktualnić datę i czas. Fragment kodu poniżej:</p>
-
-<pre><code class="language-csharp">                    DateTime now = DateTime.Now;
-                    header.Year = (byte)(now.Year % 100);
-                    header.Mounth = (byte)now.Month;
-                    header.Day = (byte)now.Day;
-</code></pre>
-
-<p>Tak to wygląda teraz. Dzięki dzieleniu modulo % do zmiennej <code>Year</code> przypisane są jedności i dziesiątki z roku. Jednak jeszcze kilkanaście dni temu zamiast dzielenia modulo miałem w kodzie zwykłe dzielenie. Skutek? Dla roku 2008 zamiast wartości 08 wpisywana była liczba 20. Jednym słowem chwila nieuwagi i padłem ofiarą roku 2000. Kto by pomyślał.</p>
-
-    </article>
-    <nav aria-label="Related posts">
-        <h4>Related Posts</h4>
-        <ul>
-            <li><a href="https://awasn.github.io/smtpclient-i-mailsettings/">SmtpClient i &lt;mailSettings&gt;</a></li>
-            <li><a href="https://awasn.github.io/implementacja-inversion-of-control/">Implementacja Inversion of Control</a></li>
-            <li><a href="https://awasn.github.io/refaktoryzacja-metod-zwrotnych/">Refaktoryzacja metod zwrotnych</a></li>
-            <li><a href="https://awasn.github.io/range-t/">Range&lt;T&gt;</a></li>
-            <li><a href="https://awasn.github.io/marshalhelper-zarzadza-niezarzadzanym/">MarshalHelper zarządza niezarządzanym</a></li>
-        </ul>
-    </nav>
-
-    <nav class="pure-g post-previous-next" aria-label="Previous and next posts">
-        <div class="pure-u-11-24 previous">
-            <a href="https://awasn.github.io/bloggers-underground/" aria-label="Previous post"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg></span></a>
-            <a href="https://awasn.github.io/bloggers-underground/">Bloggers Underground</a>
-        </div>
-        <div class="pure-u-2-24">&nbsp;</div>
-        <div class="pure-u-11-24 next">
-            <a href="https://awasn.github.io/typy-wyliczane-czy-klasy/">Typy wyliczane czy klasy</a>
-            <a href="https://awasn.github.io/typy-wyliczane-czy-klasy/" aria-label="Next post"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg></span></a>
-        </div>
-    </nav>
-
-    
-
-
-        </main>
-
-        <footer>
-            <div class="center-aligned container">
-                <p>Copyright &copy; 2007-2019 Arkadiusz Waśniewski. All Rights Reserved.</p>
-            </div>
-        </footer>
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/accesslog.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dockerfile.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dos.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/go.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/powershell.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/routeros.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/typescript.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/yaml.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/vbnet.min.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script>
-    </body>
-</html>
+</code></pre></div><p>W przypadku miesiąca i dnia jest to zakres wystarczający. Niestety jeśli chodzi o rok już nie. W zeszłym stuleciu (rany, ależ to poważnie brzmi) ze względu na niedostatek zasobów systemowych (pamiętacie stwierdzenie Gatesa, iż 640 KB każdemu wystarczy?) ograniczano do minimum przestrzeń dla dat zazwyczaj pamiętając dla roku tylko dwie ostatnie cyfry.</p><p>Zamykając plik DBF wypada uaktualnić datę i czas. Fragment kodu poniżej:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp>                    DateTime now = DateTime.Now;
+                    header.Year = (<span style=color:#66d9ef>byte</span>)(now.Year % <span style=color:#ae81ff>100</span>);
+                    header.Mounth = (<span style=color:#66d9ef>byte</span>)now.Month;
+                    header.Day = (<span style=color:#66d9ef>byte</span>)now.Day;
+</code></pre></div><p>Tak to wygląda teraz. Dzięki dzieleniu modulo % do zmiennej <code>Year</code> przypisane są jedności i dziesiątki z roku. Jednak jeszcze kilkanaście dni temu zamiast dzielenia modulo miałem w kodzie zwykłe dzielenie. Skutek? Dla roku 2008 zamiast wartości 08 wpisywana była liczba 20. Jednym słowem chwila nieuwagi i padłem ofiarą roku 2000. Kto by pomyślał.</p></article><nav aria-label="Related posts"><h4>Related Posts</h4><ul><li><a href=https://awasn.github.io/smtpclient-i-mailsettings/>SmtpClient i &lt;mailSettings></a></li><li><a href=https://awasn.github.io/implementacja-inversion-of-control/>Implementacja Inversion of Control</a></li><li><a href=https://awasn.github.io/refaktoryzacja-metod-zwrotnych/>Refaktoryzacja metod zwrotnych</a></li><li><a href=https://awasn.github.io/range-t/>Range&lt;T></a></li><li><a href=https://awasn.github.io/marshalhelper-zarzadza-niezarzadzanym/>MarshalHelper zarządza niezarządzanym</a></li></ul></nav><nav class="pure-g post-previous-next" aria-label="Previous and next posts"><div class="pure-u-11-24 previous"><a href=https://awasn.github.io/bloggers-underground/ aria-label="Previous post"><span aria-hidden=true><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"/></svg></span></a><a href=https://awasn.github.io/bloggers-underground/>Bloggers Underground</a></div><div class=pure-u-2-24>&nbsp;</div><div class="pure-u-11-24 next"><a href=https://awasn.github.io/typy-wyliczane-czy-klasy/>Typy wyliczane czy klasy</a>
+<a href=https://awasn.github.io/typy-wyliczane-czy-klasy/ aria-label="Next post"><span aria-hidden=true><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg></span></a></div></nav></main><footer><div class="center-aligned container"><p>Copyright &copy; 2007-2021 Arkadiusz Waśniewski. All Rights Reserved.</p></div></footer><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/accesslog.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dockerfile.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dos.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/go.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/powershell.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/routeros.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/typescript.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/yaml.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/vbnet.min.js></script><script>hljs.initHighlightingOnLoad()</script></body></html>

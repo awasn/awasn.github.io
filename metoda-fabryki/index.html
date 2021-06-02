@@ -1,358 +1,64 @@
-<!DOCTYPE HTML>
-<html lang="pl-pl">
-    <head>
-        <meta name="theme-color" content="#405365"/>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="generator" content="Hugo 0.54.0" />
-        <meta name="description" content="Wzorzec metoda fabryki w .NET C#" />
-        <title>Metoda fabryki - arkadiusz wasniewski blog</title>
-        <link rel="canonical" href="https://awasn.github.io/metoda-fabryki/">
-        <link rel="prev" title="Dynamiczna budowa poprawnego pliku docx w standardzie Open XML" href="https://awasn.github.io/dynamiczna-budowa-poprawnego-pliku-docx-w-standardzie-open-xml/">
-        <link rel="next" title="ReSharper ostrzega - Possible NullReferenceException" href="https://awasn.github.io/resharper-ostrzega-possible-nullreferenceexception/">
-
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css" integrity="sha256-Q0zCrUs2IfXWYx0uMKJfG93CvF6oVII21waYsAV4/8Q=" crossorigin="anonymous" />
-        
-        
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
-        
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
-        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.809247dcc0227e384b256fd9df3f1c82b2b752f0ca6ba0f97410d05bcdd60729.css" integrity="sha256-gJJH3MAifjhLJW/Z3z8cgrK3UvDKa6D5dBDQW83WByk=" />
-
-    </head>
-    <body>
-        <header>
-            <nav class="container" >
-                <div class="pure-menu pure-menu-horizontal">
-                    <a class="pure-menu-heading pure-menu-link" href="https://awasn.github.io/">wasniewski</a>
-                    <ul class="right pure-menu-list">
-                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/blog/">blog</a></li>
-                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/categories/">categories</a></li>
-                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/tags/">tags</a></li>
-                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/about/">about</a></li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
-
-        <main class="container">
-            
-    <aside class="post-published">
-        <p>This post was originally published on <a href="http://zine.net.pl/blogs/arkadiusz_wasniewski/archive/2007/12/27/metoda-fabryki.aspx" target="_blank">zine.net.pl</a> on 27 December 2007 21:27 CET</p>
-    </aside>
-
-    <article>
-        <header>
-            <h1>Metoda fabryki</h1>
-                <div class="post-metadata">
-        <div>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-            27 December 2007 21:27 CET
-            
-                &nbsp;
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon></svg>
-                17 September 2018 14:46 CEST
-            
-            &nbsp;
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-            8 min read
-        </div>
-        <div>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
-            <a href="https://awasn.github.io/categories/development">Development</a>, <a href="https://awasn.github.io/categories/events">Events</a>
-            
-                &nbsp;
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
-                <a href="https://awasn.github.io/tags/.net">.NET</a>, <a href="https://awasn.github.io/tags/design-patterns">Design patterns</a>, <a href="https://awasn.github.io/tags/meetings">Meetings</a>
-            
-        </div>
-    </div>
-        </header>
-
-        
-
-<p>Poniższy tekst bazuje na prezentacji, którą przeprowadziłem 13 grudnia 2007 na połączonym XVI Spotkaniu <a href="http://groups.google.com/group/wg-net" target="_blank">Warszawskiej Grupy .NET</a> + VII Spotkaniu <a href="http://plssug.org.pl/" target="_blank">Polskiej Grupy Użytkowników SQL Server</a>.</p>
-
-<h2 id="wstęp">Wstęp</h2>
-
-<p>Metoda fabryki (ang. Factory Method) jest, obok signletona czy budowniczego, wzorcem kreacyjnym odpowiadającym za tworzenie obiektów - instancji klas. Główne zadanie metody fabryki to oddzielenie procesu korzystania z obiektów od ich tworzenia.</p>
-
-<p>Wyobraźmy sobie aplikację w wersji standardowej przeznaczoną do obsługi sprzedaży, w której dla kilku klientów dokonujemy modyfikacji. Każdy z nich wymaga własnej wersji klasy opisującej produkty. Ile miejsc w kodzie programu należałoby zmienić i jakie techniki zastosować (może kompilacja warunkowa)? Fakt zaś, iż dzisiejsze narzędzia programistyczne ułatwiają przeprowadzanie dużych modyfikacji źródeł nie zwalnia nas wcale od obowiązku dbania o czystość i przejrzystość kodu.</p>
-
-<h2 id="struktura">Struktura</h2>
-
-<p>W celu skorzystania z wzorca Factory Method definiujemy interfejs klas tworzonych, który będzie implementowany przez konkretne rodzaje podklas oraz interfejs do tworzenia tych obiektów umożliwiający klasom dziedziczącym podejmowanie decyzji, której klasy instancja zostanie zwrócona. Jeśli brzmi to skomplikowanie lub niejasno za chwil kilka powinno być całkowicie zrozumiałe. Klasyczny już schemat wzorca metoda fabryki wygląda następująco:</p>
-
-    <figure>
-        <img class="pure-img" src="https://awasn.github.io/metoda-fabryki/images/FactoryMethod.png" alt="Schemat wzorca Factory Method" >
-        <figcaption><h4>Schemat wzorca Factory Method</h4></figcaption>
-    </figure>
-
-<p>Powyższy rysunek został zaczerpnięty z historycznej już pracy &ldquo;Design Patterns. Elements Of Reusable Object-Oriented Software&rdquo;, której autorami są Erich Gamma, Richard Helm, Ralph Johnson i John Vlissides, zwani w skrócie Bandą Czworga (Gang of Four). Uczestnicy schematu to:</p>
-
-<ul>
-<li><code>Product</code> – definiuje interfejs obiektów tworzonych przez metodę wytwórczą. Pod pojęciem interfejsu rozumiemy klasę abstrakcyjną, klasę lub interfejs;</li>
-<li><code>ConcreteProduct</code> – implementuje interfejs obiektów tworzonych przez metodę wytwórczą;</li>
-<li><code>Creator</code> – twórca. Deklaruje metodę wytwórczą. Może zawierać domyślną implementację;</li>
-<li><code>ConcreteCreator</code> – Konkretny twórca. Przedefiniowuje metodę wytwórczą.</li>
-</ul>
-
-<p>Podobne lub niemal identyczne definicje znajdują się w każdej publikacji dotyczącej metody fabryki. Dzisiaj jednak próżno szukać w kodach źródłowych takiego nazewnictwa. W międzyczasie bowiem wykształciły się pewne konwencje, o których za chwilę.</p>
-
-<h2 id="stosowalność">Stosowalność</h2>
-
-<p>Metody fabryki używamy jeśli:</p>
-
-<ul>
-<li>Nie możemy przewidzieć jakiego rodzaju obiekty powstaną. Wiemy jedynie kiedy chcemy je utworzyć;</li>
-<li>Potrzebujemy się pozbyć odpowiedzialności za tworzenie obiektów;</li>
-<li>Podczas tworzenia obiektów chcemy wykonać dodatkowe operacje.</li>
-</ul>
-
-<h2 id="implementacje">Implementacje</h2>
-
-<p>Możemy zdefiniować dwie główne implementacje wzorca:</p>
-
-<ul>
-<li>Fabryka jest klasą abstrakcyjną, która wymaga utworzenia podklas;</li>
-<li>Fabryka jest klasą konkretną, która może dopuszczać lub nie przedefiniowanie metody wytwórczej. Może być klasą statyczną.</li>
-</ul>
-
-<p>Chciałbym zwrócić uwagę, iż zaczynamy powoli wchodzić w świat języka C# i platformy .NET, dlatego też należy mieć na uwadze, iż w innych językach programowania pewne elementy mogą być inaczej implementowane.</p>
-
-<p>Ważną konsekwencją zastosowania klasy abstrakcyjnej oraz podklas jest to, iż użytkownicy muszą wiedzieć, jaką konkretną podklasę z metodą fabryki utworzyć. Rozwiązaniem tego problemu może być sparametryzowanie metody wytwórczej.</p>
-
-<h2 id="konwencje-nazewnicze">Konwencje nazewnicze</h2>
-
-<p>Zgodnie z wcześniejszą zapowiedzią czas wspomnieć o konwencjach nazewniczych. Otóż przyjęło się, iż nazwy klas tworzących obiekty budujemy według schematu:</p>
-
-<ul>
-<li>&lt;nazwa_bazowa_intefejsu_obiektu_tworzonego&gt;<code>Factory</code></li>
-</ul>
-
-<p>Nazwa metod tworzących instancje obiektów:</p>
-
-<ul>
-<li><code>Create</code></li>
-<li><code>Create</code>&lt;nazwa_konkretnego_obiektu_tworzonego&gt;</li>
-</ul>
-
-<h2 id="przykłady">Przykłady</h2>
-
-<p>Zanim przejdziemy do przykładów kilka uwag. Po pierwsze nigdzie nie jest powiedziane, że tworzone implementacje dowolnego wzorca, nie tylko Factory Method, muszą być zgodne z podstawowym schematem definiującym dany wzorzec. Zawsze powinniśmy wykorzystywać te możliwości, które w danej sytuacji najbardziej nam odpowiadają. Nie zawsze też rozwiązanie musi nawet odpowiadać głównym założeniom danego wzorca. Czasem wystarczy fragment. Możemy wtedy mówić o refaktoryzacji do wzorców. Pamiętajmy, aby do tematu nie podchodzić w sposób doktrynalny.</p>
-
-<h3 id="przykład-1">Przykład 1</h3>
-
-<p>Na początek modelowa implementacja wzorca. Mamy obiekt <code>Customer</code> reprezentujący klienta, dla którego chcemy obliczyć wartość dowolnego rabatu. Potrzebujemy kilku algorytmów (sposobów) określania wielkości rabatu. Konkretny obiekt implementujący daną metodę obliczającą będzie zwracany przez wybraną metodę fabryki.</p>
-
-    <figure>
-        <img class="pure-img" src="https://awasn.github.io/metoda-fabryki/images/FactoryMethod_Sample1.png" alt="Factory Method - Przykład 1" >
-        <figcaption><h4>Factory Method - Przykład 1</h4></figcaption>
-    </figure>
-
-<p>Zaczynamy od zdefiniowania interfejsu <code>IDiscountStrategy</code> dla obiektów obliczających rabat i tworzonych przez metodę wytwórczą. Będzie on zawierał jedną metodę o nazwie <code>Calculate</code>, która jako parametr będzie przyjmowała obiekt typu <code>Customer</code>, obliczała rabat i zwracała jego wartość w postaci liczby rzeczywistej. Klasy konkretyzujące ów interfejs to <code>SpecialDiscountStrategy</code> oraz <code>StandardDiscountStrategy</code>. Abstrakcyjna klasa zawierająca metodę fabryki, która umożliwi zwracanie konkretnego sposóbu obliczania rabatu, nazywa się <code>DiscountStrategyFactory</code>. Klasy potomne to <code>SpecialDiscountStrategyFactory</code> oraz <code>StandardDiscountStrategyFactory</code>. Proszę zwrócić uwagę na zastosowane konwencje nazewnicze. Są one zgodne z tym o czym wspominałem kilka chwil wcześniej. Przy okazji wprowadziliśmy niejawnie wzorzec strategii (ang. Strategy), którego zadaniem jest umożliwienie zbudowania rodziny algorytmów wykonujących określone zadanie i używanie ich wymiennie.</p>
-
-<pre><code class="language-csharp">            Customer customer = new Customer();
+<!doctype html><html lang=pl-pl><head><meta name=theme-color content="#405365"><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.83.1"><meta name=description content="Wzorzec metoda fabryki w .NET C#"><title>Metoda fabryki - arkadiusz wasniewski blog</title><link rel=canonical href=https://awasn.github.io/metoda-fabryki/><link rel=prev title="Dynamiczna budowa poprawnego pliku docx w standardzie Open XML" href=https://awasn.github.io/dynamiczna-budowa-poprawnego-pliku-docx-w-standardzie-open-xml/><link rel=next title="ReSharper ostrzega - Possible NullReferenceException" href=https://awasn.github.io/resharper-ostrzega-possible-nullreferenceexception/><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css integrity="sha256-Q0zCrUs2IfXWYx0uMKJfG93CvF6oVII21waYsAV4/8Q=" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css><link rel=stylesheet href=https://awasn.github.io/awasn.min.f45a909800924faa836a73b82a1d4cb352f8053134a426a9dcafa61cf6a8c5d0.css integrity="sha256-9FqQmACST6qDanO4Kh1Ms1L4BTE0pCap3K+mHPaoxdA="></head><body><header><nav class=container><div class="pure-menu pure-menu-horizontal"><a class="pure-menu-heading pure-menu-link" href=https://awasn.github.io/>wasniewski</a><ul class="right pure-menu-list"><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/blog/>blog</a></li><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/categories/>categories</a></li><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/tags/>tags</a></li><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/about/>about</a></li></ul></div></nav></header><main class=container><aside class=post-published><p>This post was originally published on <a href=http://zine.net.pl/blogs/arkadiusz_wasniewski/archive/2007/12/27/metoda-fabryki.aspx target=_blank>zine.net.pl</a> on 27 December 2007 21:27 +0100</p></aside><article><header><h1>Metoda fabryki</h1><div class=post-metadata><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>27 December 2007 21:27 +0100
+&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M20 14.66V20a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2h5.34"/><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"/></svg>
+17 September 2018 14:46 +0200
+&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+8 min read</div><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg><a href=https://awasn.github.io/categories/development>Development</a>, <a href=https://awasn.github.io/categories/events>Events</a>
+&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83.0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7" y2="7"/></svg>
+<a href=https://awasn.github.io/tags/.net>.NET</a>, <a href=https://awasn.github.io/tags/design-patterns>Design patterns</a>, <a href=https://awasn.github.io/tags/meetings>Meetings</a></div></div></header><p>Poniższy tekst bazuje na prezentacji, którą przeprowadziłem 13 grudnia 2007 na połączonym XVI Spotkaniu <a href=http://groups.google.com/group/wg-net>Warszawskiej Grupy .NET</a> + VII Spotkaniu <a href=http://plssug.org.pl/>Polskiej Grupy Użytkowników SQL Server</a>.</p><h2 id=wstęp>Wstęp</h2><p>Metoda fabryki (ang. Factory Method) jest, obok signletona czy budowniczego, wzorcem kreacyjnym odpowiadającym za tworzenie obiektów - instancji klas. Główne zadanie metody fabryki to oddzielenie procesu korzystania z obiektów od ich tworzenia.</p><p>Wyobraźmy sobie aplikację w wersji standardowej przeznaczoną do obsługi sprzedaży, w której dla kilku klientów dokonujemy modyfikacji. Każdy z nich wymaga własnej wersji klasy opisującej produkty. Ile miejsc w kodzie programu należałoby zmienić i jakie techniki zastosować (może kompilacja warunkowa)? Fakt zaś, iż dzisiejsze narzędzia programistyczne ułatwiają przeprowadzanie dużych modyfikacji źródeł nie zwalnia nas wcale od obowiązku dbania o czystość i przejrzystość kodu.</p><h2 id=struktura>Struktura</h2><p>W celu skorzystania z wzorca Factory Method definiujemy interfejs klas tworzonych, który będzie implementowany przez konkretne rodzaje podklas oraz interfejs do tworzenia tych obiektów umożliwiający klasom dziedziczącym podejmowanie decyzji, której klasy instancja zostanie zwrócona. Jeśli brzmi to skomplikowanie lub niejasno za chwil kilka powinno być całkowicie zrozumiałe. Klasyczny już schemat wzorca metoda fabryki wygląda następująco:</p><figure><img class=pure-img src=https://awasn.github.io/metoda-fabryki/images/FactoryMethod.png alt="Schemat wzorca Factory Method"><figcaption><h4>Schemat wzorca Factory Method</h4></figcaption></figure><p>Powyższy rysunek został zaczerpnięty z historycznej już pracy &ldquo;Design Patterns. Elements Of Reusable Object-Oriented Software&rdquo;, której autorami są Erich Gamma, Richard Helm, Ralph Johnson i John Vlissides, zwani w skrócie Bandą Czworga (Gang of Four). Uczestnicy schematu to:</p><ul><li><code>Product</code> – definiuje interfejs obiektów tworzonych przez metodę wytwórczą. Pod pojęciem interfejsu rozumiemy klasę abstrakcyjną, klasę lub interfejs;</li><li><code>ConcreteProduct</code> – implementuje interfejs obiektów tworzonych przez metodę wytwórczą;</li><li><code>Creator</code> – twórca. Deklaruje metodę wytwórczą. Może zawierać domyślną implementację;</li><li><code>ConcreteCreator</code> – Konkretny twórca. Przedefiniowuje metodę wytwórczą.</li></ul><p>Podobne lub niemal identyczne definicje znajdują się w każdej publikacji dotyczącej metody fabryki. Dzisiaj jednak próżno szukać w kodach źródłowych takiego nazewnictwa. W międzyczasie bowiem wykształciły się pewne konwencje, o których za chwilę.</p><h2 id=stosowalność>Stosowalność</h2><p>Metody fabryki używamy jeśli:</p><ul><li>Nie możemy przewidzieć jakiego rodzaju obiekty powstaną. Wiemy jedynie kiedy chcemy je utworzyć;</li><li>Potrzebujemy się pozbyć odpowiedzialności za tworzenie obiektów;</li><li>Podczas tworzenia obiektów chcemy wykonać dodatkowe operacje.</li></ul><h2 id=implementacje>Implementacje</h2><p>Możemy zdefiniować dwie główne implementacje wzorca:</p><ul><li>Fabryka jest klasą abstrakcyjną, która wymaga utworzenia podklas;</li><li>Fabryka jest klasą konkretną, która może dopuszczać lub nie przedefiniowanie metody wytwórczej. Może być klasą statyczną.</li></ul><p>Chciałbym zwrócić uwagę, iż zaczynamy powoli wchodzić w świat języka C# i platformy .NET, dlatego też należy mieć na uwadze, iż w innych językach programowania pewne elementy mogą być inaczej implementowane.</p><p>Ważną konsekwencją zastosowania klasy abstrakcyjnej oraz podklas jest to, iż użytkownicy muszą wiedzieć, jaką konkretną podklasę z metodą fabryki utworzyć. Rozwiązaniem tego problemu może być sparametryzowanie metody wytwórczej.</p><h2 id=konwencje-nazewnicze>Konwencje nazewnicze</h2><p>Zgodnie z wcześniejszą zapowiedzią czas wspomnieć o konwencjach nazewniczych. Otóż przyjęło się, iż nazwy klas tworzących obiekty budujemy według schematu:</p><ul><li>&lt;nazwa_bazowa_intefejsu_obiektu_tworzonego><code>Factory</code></li></ul><p>Nazwa metod tworzących instancje obiektów:</p><ul><li><code>Create</code></li><li><code>Create</code>&lt;nazwa_konkretnego_obiektu_tworzonego></li></ul><h2 id=przykłady>Przykłady</h2><p>Zanim przejdziemy do przykładów kilka uwag. Po pierwsze nigdzie nie jest powiedziane, że tworzone implementacje dowolnego wzorca, nie tylko Factory Method, muszą być zgodne z podstawowym schematem definiującym dany wzorzec. Zawsze powinniśmy wykorzystywać te możliwości, które w danej sytuacji najbardziej nam odpowiadają. Nie zawsze też rozwiązanie musi nawet odpowiadać głównym założeniom danego wzorca. Czasem wystarczy fragment. Możemy wtedy mówić o refaktoryzacji do wzorców. Pamiętajmy, aby do tematu nie podchodzić w sposób doktrynalny.</p><h3 id=przykład-1>Przykład 1</h3><p>Na początek modelowa implementacja wzorca. Mamy obiekt <code>Customer</code> reprezentujący klienta, dla którego chcemy obliczyć wartość dowolnego rabatu. Potrzebujemy kilku algorytmów (sposobów) określania wielkości rabatu. Konkretny obiekt implementujący daną metodę obliczającą będzie zwracany przez wybraną metodę fabryki.</p><figure><img class=pure-img src=https://awasn.github.io/metoda-fabryki/images/FactoryMethod_Sample1.png alt="Factory Method - Przykład 1"><figcaption><h4>Factory Method - Przykład 1</h4></figcaption></figure><p>Zaczynamy od zdefiniowania interfejsu <code>IDiscountStrategy</code> dla obiektów obliczających rabat i tworzonych przez metodę wytwórczą. Będzie on zawierał jedną metodę o nazwie <code>Calculate</code>, która jako parametr będzie przyjmowała obiekt typu <code>Customer</code>, obliczała rabat i zwracała jego wartość w postaci liczby rzeczywistej. Klasy konkretyzujące ów interfejs to <code>SpecialDiscountStrategy</code> oraz <code>StandardDiscountStrategy</code>. Abstrakcyjna klasa zawierająca metodę fabryki, która umożliwi zwracanie konkretnego sposóbu obliczania rabatu, nazywa się <code>DiscountStrategyFactory</code>. Klasy potomne to <code>SpecialDiscountStrategyFactory</code> oraz <code>StandardDiscountStrategyFactory</code>. Proszę zwrócić uwagę na zastosowane konwencje nazewnicze. Są one zgodne z tym o czym wspominałem kilka chwil wcześniej. Przy okazji wprowadziliśmy niejawnie wzorzec strategii (ang. Strategy), którego zadaniem jest umożliwienie zbudowania rodziny algorytmów wykonujących określone zadanie i używanie ich wymiennie.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp>            Customer customer = <span style=color:#66d9ef>new</span> Customer();
 
             DiscountStrategyFactory factory =
-                new StandardDiscountStrategyFactory();
+                <span style=color:#66d9ef>new</span> StandardDiscountStrategyFactory();
             IDiscountStrategy discount = factory.Create();
-            double value = discount.Calculate(customer);
-</code></pre>
-
-<p>Jak widzimy w przykładzie, wpierw tworzymy obiekt <code>StandardDiscountStrategyFactory</code> zawierający konkretną metodę fabryki. Następnie pobieramy obiekt <code>StandardDiscountStrategy</code> typu <code>IDiscountStrategy</code> obliczający rabat dla naszego klienta. Zmiana sposobu obliczania rabatu polega jedynie na zmianie <code>StandardDiscountStrategyFactory</code> na <code>SpecialDiscountStrategyFactory</code> pozostawiając resztę kodu bez zmian.</p>
-
-<p>Konsekwencją powyższej implementacji jest mnogość podklas zawierających konkretną metodę fabryki zwracającą wybraną instancję tworzonego obiektu. Świadomie nie używam tutaj słowa wada - decyzja o tym, którą implementację metody fabryki wybierzemy powinna zależeć zawsze od założeń dotyczących tworzonego rozwiązania. Nie ma jednej idealnej implementacji.</p>
-
-<h3 id="przykład-2">Przykład 2</h3>
-
-<p>Problem z nadmierną ilością podklas zawierających konkretną metodę wytwórczą można rozwiązać np. poprzez zastosowanie jednej klasy statycznej zawierającej wszystkie możliwe warianty metody fabryki. Wadą tego rozwiązania jest to, iż likwidujemy możliwość rozbudowy fabryki z wykorzystaniem dziedziczenia. Może mieć to zwłaszcza znaczenie jeśli pakiet zawierający fabrykę ma być zamknięty dla modyfikacji.</p>
-
-    <figure>
-        <img class="pure-img" src="https://awasn.github.io/metoda-fabryki/images/FactoryMethod_Sample2.png" alt="Factory Method - Przykład 2" >
-        <figcaption><h4>Factory Method - Przykład 2</h4></figcaption>
-    </figure>
-
-<p>Założenia są identyczne jak w poprzednim przykładzie. Poniżej dwa warianty kodu wykorzystującego proponowaną implementację:</p>
-
-<pre><code class="language-csharp">            Customer customer = new Customer();
+            <span style=color:#66d9ef>double</span> <span style=color:#66d9ef>value</span> = discount.Calculate(customer);
+</code></pre></div><p>Jak widzimy w przykładzie, wpierw tworzymy obiekt <code>StandardDiscountStrategyFactory</code> zawierający konkretną metodę fabryki. Następnie pobieramy obiekt <code>StandardDiscountStrategy</code> typu <code>IDiscountStrategy</code> obliczający rabat dla naszego klienta. Zmiana sposobu obliczania rabatu polega jedynie na zmianie <code>StandardDiscountStrategyFactory</code> na <code>SpecialDiscountStrategyFactory</code> pozostawiając resztę kodu bez zmian.</p><p>Konsekwencją powyższej implementacji jest mnogość podklas zawierających konkretną metodę fabryki zwracającą wybraną instancję tworzonego obiektu. Świadomie nie używam tutaj słowa wada - decyzja o tym, którą implementację metody fabryki wybierzemy powinna zależeć zawsze od założeń dotyczących tworzonego rozwiązania. Nie ma jednej idealnej implementacji.</p><h3 id=przykład-2>Przykład 2</h3><p>Problem z nadmierną ilością podklas zawierających konkretną metodę wytwórczą można rozwiązać np. poprzez zastosowanie jednej klasy statycznej zawierającej wszystkie możliwe warianty metody fabryki. Wadą tego rozwiązania jest to, iż likwidujemy możliwość rozbudowy fabryki z wykorzystaniem dziedziczenia. Może mieć to zwłaszcza znaczenie jeśli pakiet zawierający fabrykę ma być zamknięty dla modyfikacji.</p><figure><img class=pure-img src=https://awasn.github.io/metoda-fabryki/images/FactoryMethod_Sample2.png alt="Factory Method - Przykład 2"><figcaption><h4>Factory Method - Przykład 2</h4></figcaption></figure><p>Założenia są identyczne jak w poprzednim przykładzie. Poniżej dwa warianty kodu wykorzystującego proponowaną implementację:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp>            Customer customer = <span style=color:#66d9ef>new</span> Customer();
 
             IDiscountStrategy discount =
                 DiscountStrategyFactory.CreateStandardDiscountStrategy();
-            double value = discount.Calculate(customer);
-</code></pre>
-
-<p>oraz</p>
-
-<pre><code class="language-csharp">            Customer customer = new Customer();
+            <span style=color:#66d9ef>double</span> <span style=color:#66d9ef>value</span> = discount.Calculate(customer);
+</code></pre></div><p>oraz</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp>            Customer customer = <span style=color:#66d9ef>new</span> Customer();
 
             StandardDiscountStrategy discount =
                 DiscountStrategyFactory.CreateStandardDiscountStrategy();
-            double value = discount.Calculate(customer);
-</code></pre>
-
-<p>Ze względu na czystość kodu drugie rozwiązania nie jest zalecane, nie mniej jednak można je stosować i dlatego też dla porządku je podaję. Zauważmy, iż w implementacji tej programista korzystający z klasy statycznej <code>DiscountStrategyFactory</code> zna wszystkie możliwe sposoby obliczania rabatów dla obiektu typu <code>Customer</code> poprzez proste odczytanie nazw metod wytwórczych dostępnych w fabryce.</p>
-
-<h3 id="przykład-3">Przykład 3</h3>
-
-<p>Oczywiście nie zawsze chcemy, aby programista podejmował decyzje, którą instancję klasy zawierającej metodę wytwórczą będzie używał. Lub też przyjęte założenia uniemożliwiają wybranie rodzaju fabryki w prosty sposób. Wówczas możemy wybrać taką implementację wzorca Factory Method, w której stosowne decyzje podejmuje sama metody wytwórcza.</p>
-
-<p>Jedno z rozwiązań prezentuje poniższy schemat:</p>
-
-    <figure>
-        <img class="pure-img" src="https://awasn.github.io/metoda-fabryki/images/FactoryMethod_Sample3.png" alt="Factory Method - Przykład 3" >
-        <figcaption><h4>Factory Method - Przykład 3</h4></figcaption>
-    </figure>
-
-<p>Przykład wykorzystania omawianej implementacji:</p>
-
-<pre><code class="language-csharp">            Customer customer = new Customer();
+            <span style=color:#66d9ef>double</span> <span style=color:#66d9ef>value</span> = discount.Calculate(customer);
+</code></pre></div><p>Ze względu na czystość kodu drugie rozwiązania nie jest zalecane, nie mniej jednak można je stosować i dlatego też dla porządku je podaję. Zauważmy, iż w implementacji tej programista korzystający z klasy statycznej <code>DiscountStrategyFactory</code> zna wszystkie możliwe sposoby obliczania rabatów dla obiektu typu <code>Customer</code> poprzez proste odczytanie nazw metod wytwórczych dostępnych w fabryce.</p><h3 id=przykład-3>Przykład 3</h3><p>Oczywiście nie zawsze chcemy, aby programista podejmował decyzje, którą instancję klasy zawierającej metodę wytwórczą będzie używał. Lub też przyjęte założenia uniemożliwiają wybranie rodzaju fabryki w prosty sposób. Wówczas możemy wybrać taką implementację wzorca Factory Method, w której stosowne decyzje podejmuje sama metody wytwórcza.</p><p>Jedno z rozwiązań prezentuje poniższy schemat:</p><figure><img class=pure-img src=https://awasn.github.io/metoda-fabryki/images/FactoryMethod_Sample3.png alt="Factory Method - Przykład 3"><figcaption><h4>Factory Method - Przykład 3</h4></figcaption></figure><p>Przykład wykorzystania omawianej implementacji:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp>            Customer customer = <span style=color:#66d9ef>new</span> Customer();
 
             IDiscountStrategy discount =
                 DiscountStrategyFactory.Create(customer);
-            double value = discount.Calculate(customer);
-</code></pre>
-
-<p>Tutaj programista zleca statycznej klasie zawierającej statyczną metodę fabryki utworzenie właściwego obiektu implementującego strategię udzielania rabatu. Decyzja podejmowana jest przez metodę wytwórczą na podstawie przekazywanego parametru typu <code>Customer</code>. W jaki sposób następuje podejmowanie decyzji, który obiekt obliczający zwrócić? To zależy od nas. Może to być na podstawie przypisania klienta do jakieś grupy klientów. Można wykorzystać parametry przekazywanego obiektu. Co tylko przyjdzie nam do głowy.</p>
-
-<p>Pytanie czemu fabryka w powyższym przykładzie nie może od razu obliczać rabatu? Ot choćby dlatego, iż nie należy mieszać zakresów odpowiedzialności klas. Jeśli klasa ma za zadanie tworzyć instancje obiektów to nie powinna jednocześnie wykonywać np. operacji bazodanowych. W przeciwnym razie nasz kod bardzo szybko przestałby być łatwo testowalny, modyfikowalny i w niedługim okresie poprawnie działający.</p>
-
-<h3 id="przykład-4">Przykład 4</h3>
-
-<p>Wraz z wersją drugą platformy .NET otrzymaliśmy możliwość skorzystania z typów <strong>generic</strong>. Dzięki temu przykład 1 oraz 2 możemy uprościć stosując statyczną klasę zawierającą pojedynczą metodę wytwórczą, która jako parametr typu może przyjmować implementacje interfejsu <code>IDiscount</code>.</p>
-
-    <figure>
-        <img class="pure-img" src="https://awasn.github.io/metoda-fabryki/images/FactoryMethod_Sample4.png" alt="Factory Method - Przykład 4" >
-        <figcaption><h4>Factory Method - Przykład 4</h4></figcaption>
-    </figure>
-
-<p>Uzyskany kod jest bardzo elastyczny. Zakładamy przy tym, iż programista decyduje o rodzaju rabatu w danym miejscu programu:</p>
-
-<pre><code class="language-csharp">            Customer customer = new Customer();
+            <span style=color:#66d9ef>double</span> <span style=color:#66d9ef>value</span> = discount.Calculate(customer);
+</code></pre></div><p>Tutaj programista zleca statycznej klasie zawierającej statyczną metodę fabryki utworzenie właściwego obiektu implementującego strategię udzielania rabatu. Decyzja podejmowana jest przez metodę wytwórczą na podstawie przekazywanego parametru typu <code>Customer</code>. W jaki sposób następuje podejmowanie decyzji, który obiekt obliczający zwrócić? To zależy od nas. Może to być na podstawie przypisania klienta do jakieś grupy klientów. Można wykorzystać parametry przekazywanego obiektu. Co tylko przyjdzie nam do głowy.</p><p>Pytanie czemu fabryka w powyższym przykładzie nie może od razu obliczać rabatu? Ot choćby dlatego, iż nie należy mieszać zakresów odpowiedzialności klas. Jeśli klasa ma za zadanie tworzyć instancje obiektów to nie powinna jednocześnie wykonywać np. operacji bazodanowych. W przeciwnym razie nasz kod bardzo szybko przestałby być łatwo testowalny, modyfikowalny i w niedługim okresie poprawnie działający.</p><h3 id=przykład-4>Przykład 4</h3><p>Wraz z wersją drugą platformy .NET otrzymaliśmy możliwość skorzystania z typów <strong>generic</strong>. Dzięki temu przykład 1 oraz 2 możemy uprościć stosując statyczną klasę zawierającą pojedynczą metodę wytwórczą, która jako parametr typu może przyjmować implementacje interfejsu <code>IDiscount</code>.</p><figure><img class=pure-img src=https://awasn.github.io/metoda-fabryki/images/FactoryMethod_Sample4.png alt="Factory Method - Przykład 4"><figcaption><h4>Factory Method - Przykład 4</h4></figcaption></figure><p>Uzyskany kod jest bardzo elastyczny. Zakładamy przy tym, iż programista decyduje o rodzaju rabatu w danym miejscu programu:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp>            Customer customer = <span style=color:#66d9ef>new</span> Customer();
 
             IDiscountStrategy discount = DiscountStrategyFactory.
                 Create&lt;StandardDiscountStrategy&gt;();
-            double value = discount.Calculate(customer);
-</code></pre>
-
-<p>Najprostsza z możliwych implementacji metody fabryki wykorzystuje refleksję do tworzenia instancji klas. W przypadku dużej liczby klas, które mają być tworzone i mają konstruktor domyślny lub konstruktor z takimi samymi typami parametrów etc. poniższe rozwiązanie automatyzuje tworzenie instancji klas danego typu przez co zaoszczędzamy cenny czas (ale tylko ze względu na proces wpisywania powtarzającego się wielokrotnie kodu. Refleksja sama w sobie jest bardzo czasożerna i należy ją używać z rozwagą).</p>
-
-<pre><code class="language-csharp">    public static class DiscountStrategyFactory
+            <span style=color:#66d9ef>double</span> <span style=color:#66d9ef>value</span> = discount.Calculate(customer);
+</code></pre></div><p>Najprostsza z możliwych implementacji metody fabryki wykorzystuje refleksję do tworzenia instancji klas. W przypadku dużej liczby klas, które mają być tworzone i mają konstruktor domyślny lub konstruktor z takimi samymi typami parametrów etc. poniższe rozwiązanie automatyzuje tworzenie instancji klas danego typu przez co zaoszczędzamy cenny czas (ale tylko ze względu na proces wpisywania powtarzającego się wielokrotnie kodu. Refleksja sama w sobie jest bardzo czasożerna i należy ją używać z rozwagą).</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DiscountStrategyFactory</span>
     {
-        public static TDiscount Create&lt;TDiscount&gt;()
-            where TDiscount : IDiscountStrategy, new()
+        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> TDiscount Create&lt;TDiscount&gt;()
+            <span style=color:#66d9ef>where</span> TDiscount : IDiscountStrategy, <span style=color:#66d9ef>new</span>()
         {
-            return Activator.CreateInstance&lt;TDiscount&gt;();
+            <span style=color:#66d9ef>return</span> Activator.CreateInstance&lt;TDiscount&gt;();
         }
     }
-</code></pre>
-
-<p>W celu zabezpieczenia się przed wywołaniem metody wytwórczej z niewłaściwymi parametrami nakładamy na metodę <code>Create</code> więzy, iż może ona być wywoływana z typem, który implementuje <code>IDiscountStrategy</code> oraz posiada publiczny i bezparametrowy konstruktor.</p>
-
-<h3 id="przykład-5">Przykład 5</h3>
-
-<p>Na koniec trochę bardziej skomplikowany przykład, który pokaże nam w jaki sposób wykorzystać klasy typu <strong>generic</strong> do zbudowania Factory Method, która będzie zwracać właściwą instancję obiektu na podstawie przekazanego typu interfejsu, który zwracany obiekt musi implementować.</p>
-
-    <figure>
-        <img class="pure-img" src="https://awasn.github.io/metoda-fabryki/images/FactoryMethod_Sample5.png" alt="Factory Method - Przykład 5" >
-        <figcaption><h4>Factory Method - Przykład 5</h4></figcaption>
-    </figure>
-
-<p>W tej implementacji znowu przekazujemy podjęcie decyzji o rodzaju konkretnego obiektu, który zostanie zwrócony do metody wytwórczej. Aczkolwiek inaczej niż w przykładzie numer 3 decyzja będzie podejmowana na podstawie interfejsu, który ma być zwrócony a nie na podstawie cech obiektu typu <code>Customer</code>:</p>
-
-<pre><code class="language-csharp">            Customer customer = new Customer();
+</code></pre></div><p>W celu zabezpieczenia się przed wywołaniem metody wytwórczej z niewłaściwymi parametrami nakładamy na metodę <code>Create</code> więzy, iż może ona być wywoływana z typem, który implementuje <code>IDiscountStrategy</code> oraz posiada publiczny i bezparametrowy konstruktor.</p><h3 id=przykład-5>Przykład 5</h3><p>Na koniec trochę bardziej skomplikowany przykład, który pokaże nam w jaki sposób wykorzystać klasy typu <strong>generic</strong> do zbudowania Factory Method, która będzie zwracać właściwą instancję obiektu na podstawie przekazanego typu interfejsu, który zwracany obiekt musi implementować.</p><figure><img class=pure-img src=https://awasn.github.io/metoda-fabryki/images/FactoryMethod_Sample5.png alt="Factory Method - Przykład 5"><figcaption><h4>Factory Method - Przykład 5</h4></figcaption></figure><p>W tej implementacji znowu przekazujemy podjęcie decyzji o rodzaju konkretnego obiektu, który zostanie zwrócony do metody wytwórczej. Aczkolwiek inaczej niż w przykładzie numer 3 decyzja będzie podejmowana na podstawie interfejsu, który ma być zwrócony a nie na podstawie cech obiektu typu <code>Customer</code>:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp>            Customer customer = <span style=color:#66d9ef>new</span> Customer();
 
             ICustomerRepository repository = RepositoryFactory.
                 Create&lt;ICustomerRepository&gt;();
             repository.Add(customer);
-</code></pre>
-
-<p>Podstawowa implementacja metody fabryki:</p>
-
-<pre><code class="language-csharp">    public static class RepositoryFactory
+</code></pre></div><p>Podstawowa implementacja metody fabryki:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>RepositoryFactory</span>
     {
-        public static TRepository Create&lt;TRepository&gt;()
-            where TRepository : IRepository
+        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> TRepository Create&lt;TRepository&gt;()
+            <span style=color:#66d9ef>where</span> TRepository : IRepository
         {
-            IRepository repository = default(IRepository);
+            IRepository repository = <span style=color:#66d9ef>default</span>(IRepository);
 
-            if (typeof(TRepository) ==
-                typeof(ICustomerRepository))
-                repository = new CustomerRepository();
-            if (typeof(TRepository) ==
-                typeof(IProductRepository))
-                repository = new ProductRepository();
+            <span style=color:#66d9ef>if</span> (<span style=color:#66d9ef>typeof</span>(TRepository) ==
+                <span style=color:#66d9ef>typeof</span>(ICustomerRepository))
+                repository = <span style=color:#66d9ef>new</span> CustomerRepository();
+            <span style=color:#66d9ef>if</span> (<span style=color:#66d9ef>typeof</span>(TRepository) ==
+                <span style=color:#66d9ef>typeof</span>(IProductRepository))
+                repository = <span style=color:#66d9ef>new</span> ProductRepository();
 
-            return (TRepository)repository;
+            <span style=color:#66d9ef>return</span> (TRepository)repository;
         }
     }
-</code></pre>
-
-<p>Jak widzimy wykorzystanie tego sposobu jest identyczne jak w poprzednich przykładach. Sama implementacja metody wytwórczej polega jedynie na sprawdzeniu jaki interfejs został przekazany a następnie budowana jest instancja klasy implementującej ów interfejs. Podobnie jak we wcześniejszych przykładach, tego typu sprawdzanie i podejmowanie decyzji może być bardziej skomplikowane.</p>
-
-<p>Jeśli umożliwimy przed pierwszym wykorzystaniem metody <code>Create</code> klasy <code>RepositoryFactory</code> rejestrowanie w tej klasie dozwolonych interfejsów oraz powiązanych z nimi typów, które mają być tworzone, to <code>RepositoryFactory</code> będzie również implementować wzorzec, który nazywamy Service Locator. Możemy również zastosować zewnętrzne biblioteki i aplikacje, które dostarczają standardowych fabryk zdejmujących z nas konieczność pisania kodu tworzącego instancje klas. Konfiguracja tego typu rozwiązań oparta jest o pliki xml lub o atrybuty, którymi opatrujemy tworzone obiekty. Te zewnętrzne rozwiązania określamy bardzo często pojęciami:</p>
-
-<ul>
-<li>Inversion Of Control – pobieranie obiektów z zewnętrznych zasobów;</li>
-<li>Dependency Injection – tworzenie instancji zlecamy kontenerowi znającemu zależności pomiędzy klasami.</li>
-</ul>
-
-<h2 id="zakończenie">Zakończenie</h2>
-
-<p>Wzorzec Factory Method jest jednym z najważniejszych wzorców kreacyjnych wykorzystywanych w dzisiejszym programowaniu. Należy jedynie pamiętać o właściwym wykorzystywaniu i rozsądku zwłaszcza jeśli stosujemy programowanie sterowane testami (Test-Driven Development).</p>
-
-<p>Pliki do artykułu:</p>
-
-<ul>
-<li><a href="http://zine.net.pl/files/folders/673/download.aspx" target="_blank">zine.net.pl</a> lub <a href="http://wg-net.googlegroups.com/web/20071213_XVI_AW_FactoryMethod_pptx.zip" target="_blank">wg-net</a> - prezentacja;</li>
-<li><a href="http://zine.net.pl/files/folders/674/download.aspx" target="_blank">zine.net.pl</a> lub <a href="http://wg-net.googlegroups.com/web/20071213_XVI_AW_FactoryMethod_src.zip" target="_blank">wg-net</a> - kody źródłowe.</li>
-</ul>
-
-    </article>
-    <nav aria-label="Related posts">
-        <h4>Related Posts</h4>
-        <ul>
-            <li><a href="https://awasn.github.io/visual-studio-t4-editor/">Visual Studio T4 Editor</a></li>
-            <li><a href="https://awasn.github.io/konkurs-enterprise-library-logging-lab/">Konkurs Enterprise Library - Logging (LAB)</a></li>
-            <li><a href="https://awasn.github.io/tworzenie-obiektow/">Tworzenie obiektów</a></li>
-            <li><a href="https://awasn.github.io/herr-mock-i-frau-command/">Herr Mock i Frau Command</a></li>
-            <li><a href="https://awasn.github.io/dobre-praktyki-w-projektowaniu-aplikacji-mobilnych/">Dobre praktyki w projektowaniu aplikacji mobilnych</a></li>
-        </ul>
-    </nav>
-
-    <nav class="pure-g post-previous-next" aria-label="Previous and next posts">
-        <div class="pure-u-11-24 previous">
-            <a href="https://awasn.github.io/dynamiczna-budowa-poprawnego-pliku-docx-w-standardzie-open-xml/" aria-label="Previous post"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg></span></a>
-            <a href="https://awasn.github.io/dynamiczna-budowa-poprawnego-pliku-docx-w-standardzie-open-xml/">Dynamiczna budowa poprawnego pliku docx w standardzie Open XML</a>
-        </div>
-        <div class="pure-u-2-24">&nbsp;</div>
-        <div class="pure-u-11-24 next">
-            <a href="https://awasn.github.io/resharper-ostrzega-possible-nullreferenceexception/">ReSharper ostrzega - Possible NullReferenceException</a>
-            <a href="https://awasn.github.io/resharper-ostrzega-possible-nullreferenceexception/" aria-label="Next post"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg></span></a>
-        </div>
-    </nav>
-
-    
-
-
-        </main>
-
-        <footer>
-            <div class="center-aligned container">
-                <p>Copyright &copy; 2007-2019 Arkadiusz Waśniewski. All Rights Reserved.</p>
-            </div>
-        </footer>
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/accesslog.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dockerfile.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dos.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/go.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/powershell.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/routeros.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/typescript.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/yaml.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/vbnet.min.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script>
-    </body>
-</html>
+</code></pre></div><p>Jak widzimy wykorzystanie tego sposobu jest identyczne jak w poprzednich przykładach. Sama implementacja metody wytwórczej polega jedynie na sprawdzeniu jaki interfejs został przekazany a następnie budowana jest instancja klasy implementującej ów interfejs. Podobnie jak we wcześniejszych przykładach, tego typu sprawdzanie i podejmowanie decyzji może być bardziej skomplikowane.</p><p>Jeśli umożliwimy przed pierwszym wykorzystaniem metody <code>Create</code> klasy <code>RepositoryFactory</code> rejestrowanie w tej klasie dozwolonych interfejsów oraz powiązanych z nimi typów, które mają być tworzone, to <code>RepositoryFactory</code> będzie również implementować wzorzec, który nazywamy Service Locator. Możemy również zastosować zewnętrzne biblioteki i aplikacje, które dostarczają standardowych fabryk zdejmujących z nas konieczność pisania kodu tworzącego instancje klas. Konfiguracja tego typu rozwiązań oparta jest o pliki xml lub o atrybuty, którymi opatrujemy tworzone obiekty. Te zewnętrzne rozwiązania określamy bardzo często pojęciami:</p><ul><li>Inversion Of Control – pobieranie obiektów z zewnętrznych zasobów;</li><li>Dependency Injection – tworzenie instancji zlecamy kontenerowi znającemu zależności pomiędzy klasami.</li></ul><h2 id=zakończenie>Zakończenie</h2><p>Wzorzec Factory Method jest jednym z najważniejszych wzorców kreacyjnych wykorzystywanych w dzisiejszym programowaniu. Należy jedynie pamiętać o właściwym wykorzystywaniu i rozsądku zwłaszcza jeśli stosujemy programowanie sterowane testami (Test-Driven Development).</p><p>Pliki do artykułu:</p><ul><li><a href=http://zine.net.pl/files/folders/673/download.aspx>zine.net.pl</a> lub <a href=http://wg-net.googlegroups.com/web/20071213_XVI_AW_FactoryMethod_pptx.zip>wg-net</a> - prezentacja;</li><li><a href=http://zine.net.pl/files/folders/674/download.aspx>zine.net.pl</a> lub <a href=http://wg-net.googlegroups.com/web/20071213_XVI_AW_FactoryMethod_src.zip>wg-net</a> - kody źródłowe.</li></ul></article><nav aria-label="Related posts"><h4>Related Posts</h4><ul><li><a href=https://awasn.github.io/visual-studio-t4-editor/>Visual Studio T4 Editor</a></li><li><a href=https://awasn.github.io/konkurs-enterprise-library-logging-lab/>Konkurs Enterprise Library - Logging (LAB)</a></li><li><a href=https://awasn.github.io/tworzenie-obiektow/>Tworzenie obiektów</a></li><li><a href=https://awasn.github.io/herr-mock-i-frau-command/>Herr Mock i Frau Command</a></li><li><a href=https://awasn.github.io/dobre-praktyki-w-projektowaniu-aplikacji-mobilnych/>Dobre praktyki w projektowaniu aplikacji mobilnych</a></li></ul></nav><nav class="pure-g post-previous-next" aria-label="Previous and next posts"><div class="pure-u-11-24 previous"><a href=https://awasn.github.io/dynamiczna-budowa-poprawnego-pliku-docx-w-standardzie-open-xml/ aria-label="Previous post"><span aria-hidden=true><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"/></svg></span></a><a href=https://awasn.github.io/dynamiczna-budowa-poprawnego-pliku-docx-w-standardzie-open-xml/>Dynamiczna budowa poprawnego pliku docx w standardzie Open XML</a></div><div class=pure-u-2-24>&nbsp;</div><div class="pure-u-11-24 next"><a href=https://awasn.github.io/resharper-ostrzega-possible-nullreferenceexception/>ReSharper ostrzega - Possible NullReferenceException</a>
+<a href=https://awasn.github.io/resharper-ostrzega-possible-nullreferenceexception/ aria-label="Next post"><span aria-hidden=true><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg></span></a></div></nav></main><footer><div class="center-aligned container"><p>Copyright &copy; 2007-2021 Arkadiusz Waśniewski. All Rights Reserved.</p></div></footer><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/accesslog.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dockerfile.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dos.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/go.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/powershell.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/routeros.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/typescript.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/yaml.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/vbnet.min.js></script><script>hljs.initHighlightingOnLoad()</script></body></html>

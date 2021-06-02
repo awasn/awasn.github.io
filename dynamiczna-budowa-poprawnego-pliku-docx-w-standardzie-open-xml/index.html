@@ -1,260 +1,36 @@
-<!DOCTYPE HTML>
-<html lang="pl-pl">
-    <head>
-        <meta name="theme-color" content="#405365"/>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="generator" content="Hugo 0.54.0" />
-        <meta name="description" content="Formularze i programowa dynamiczna budowa poprawnego pliku docx w standardzie Open XML" />
-        <title>Dynamiczna budowa poprawnego pliku docx w standardzie Open XML - arkadiusz wasniewski blog</title>
-        <link rel="canonical" href="https://awasn.github.io/dynamiczna-budowa-poprawnego-pliku-docx-w-standardzie-open-xml/">
-        <link rel="prev" title="FormsAuthentication w Reporing Services" href="https://awasn.github.io/formsauthentication-w-reporing-services/">
-        <link rel="next" title="Metoda fabryki" href="https://awasn.github.io/metoda-fabryki/">
-
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css" integrity="sha256-Q0zCrUs2IfXWYx0uMKJfG93CvF6oVII21waYsAV4/8Q=" crossorigin="anonymous" />
-        
-        
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
-        
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
-        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.809247dcc0227e384b256fd9df3f1c82b2b752f0ca6ba0f97410d05bcdd60729.css" integrity="sha256-gJJH3MAifjhLJW/Z3z8cgrK3UvDKa6D5dBDQW83WByk=" />
-
-    </head>
-    <body>
-        <header>
-            <nav class="container" >
-                <div class="pure-menu pure-menu-horizontal">
-                    <a class="pure-menu-heading pure-menu-link" href="https://awasn.github.io/">wasniewski</a>
-                    <ul class="right pure-menu-list">
-                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/blog/">blog</a></li>
-                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/categories/">categories</a></li>
-                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/tags/">tags</a></li>
-                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/about/">about</a></li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
-
-        <main class="container">
-            
-    <aside class="post-published">
-        <p>This post was originally published on <a href="http://zine.net.pl/blogs/arkadiusz_wasniewski/archive/2007/11/24/dynamiczna-budowa-poprawnego-pliku-docx-w-standardzie-open-xml.aspx" target="_blank">zine.net.pl</a> on 24 November 2007 00:22 CET</p>
-    </aside>
-
-    <article>
-        <header>
-            <h1>Dynamiczna budowa poprawnego pliku docx w standardzie Open XML</h1>
-                <div class="post-metadata">
-        <div>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-            24 November 2007 00:22 CET
-            
-            &nbsp;
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-            6 min read
-        </div>
-        <div>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
-            <a href="https://awasn.github.io/categories/development">Development</a>, <a href="https://awasn.github.io/categories/tools">Tools</a>
-            
-                &nbsp;
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
-                <a href="https://awasn.github.io/tags/.net">.NET</a>, <a href="https://awasn.github.io/tags/open-xml">Open XML</a>, <a href="https://awasn.github.io/tags/ms-office">MS Office</a>
-            
-        </div>
-    </div>
-        </header>
-
-        
-
-<p>Konieczność utworzenie dokumentu, który byłby stały w treści a gdzie tylko niektóre elementy, np. imię i nazwisko, powinny się zmieniać dynamicznie jest sytuacją nieobcą chyba każdemu programiście czy informatykowi. Rozwiązań takiego problemu jest wiele.</p>
-
-<p>Ostatnio w poszukiwaniu absolutu zainteresowałem się pakietem Microsoft Office, a konkretnie aplikacją Word 2007. Cały pakiet do zapisywania danych wykorzystuje nowy format plików bazujący na standardzie <a href="http://www.ecma-international.org/publications/standards/Ecma-376.htm" target="_blank">Open XML</a>. Standardzie nota bene promowanym przez sam Microsoft. Nowe pliki łatwo poznać po literze x dodawanej do rozszerzenia znanego z wcześniejszych wersji. W przypadku Worda będzie to więc docx.</p>
-
-<p>Wewnętrzna zawartość plików w formacie Open XML będzie dla wielu zaskoczeniem. Jest to bowiem ściśle określona struktura katalogów i plików, głównie w formacie xml, potraktowana pakietem kompresującym zip. Pliki te zawierają konfigurację, style oraz treść.</p>
-
-    <figure>
-        <img class="pure-img" src="https://awasn.github.io/dynamiczna-budowa-poprawnego-pliku-docx-w-standardzie-open-xml/images/OpenXML_1.png" alt="Zawartość nowego dokumentu docx" >
-        <figcaption><h4>Zawartość nowego dokumentu docx</h4></figcaption>
-    </figure>
-
-<p>Zdziwieni? Proponuję wziąć dowolny plik docx, zmienić jego rozszerzenie na zip a następnie obejrzeć zawartość. To co wpiszemy w edytorze zawarte jest zaś w pliku <strong>word/document.xml</strong>.</p>
-
-<p>Zalety nowego formatu plików to między oddzielenie prezentacji od danych. Brzmi to oczywiście bardzo znajomo. Ponieważ struktura pliku docx jest jasno określona można pokusić się o ręczne vel programowe stworzenie poprawnego dokumentu w formacie Open XML. Co prawda definicja standardu liczona jest w setkach stron, ale wymaganych elementów nie jest dużo. Na stronach <a href="https://docs.microsoft.com" target="_blank">msdn</a> można znaleźć między innymi artykuł <a href="https://docs.microsoft.com/en-us/previous-versions/office/office-12//ms771890(v=office.12)" target="_blank">Walkthrough: Word 2007 XML Format</a>, który poza opisem formatu Open XML pokazuje jak utworzyć poprawny plik docx. Jednym słowem jesteśmy wstanie dynamicznie tworzyć pliki programu Word 2007.</p>
-
-<p>Pójdźmy krok dalej. Okazuje się, iż możemy wewnątrz struktury docx pomiędzy plikiem zawierającym treść naszego dokumentu utworzyć łącznik do pliku o dowolnej, poprawnej strukturze w formacie xml, który będzie zawierał zmienne, z naszego punktu widzenia, dane. Trochę to brzmi enigmatycznie, ale już tłumaczę o co chodzi. Mianowicie możemy w dokumencie Word zdefiniować formularz, którego pola mogą być powiązane poprzez XPath z danymi umieszczonymi w pliku xml. I co ciekawe możemy plik xml zawierający dane dla formularza programowo zmieniać! Zobaczmy więc jak to osiągnąć.</p>
-
-<h2 id="szablon-dokumentu">Szablon dokumentu</h2>
-
-<p>Po pierwsze utwórzmy nowy dokument w programie Microsoft Word i nazwijmy go <strong>person_template.docx</strong>. Zanim rozpoczniemy pracę musimy jeszcze uaktywnić w programie Word zakładkę <strong>Deweloper</strong> (jakby nie można tego nazwać Programista). Klikamy <strong>Przycisk pakietu Office</strong> i wybieramy polecenie <strong>Opcje programu Word</strong>.</p>
-
-    <figure>
-        <img class="pure-img" src="https://awasn.github.io/dynamiczna-budowa-poprawnego-pliku-docx-w-standardzie-open-xml/images/OpenXML_WordOption.png" alt="Opcje programu Word - zakładka Deweloper" >
-        <figcaption><h4>Opcje programu Word - zakładka Deweloper</h4></figcaption>
-    </figure>
-
-<p>Następnie zaznaczamy opcję <strong>Pokaż kartę Deweloper na Wstążce</strong>. Dzięki temu w programie Word pojawi nam się dodatkowa zakładka.</p>
-
-<p>Mając już skonfigurowany edytor wpiszmy do dokumentu zwrot <strong>Szanowny Pan</strong>. Ze spacją na końcu. Tego typu sformułowania widnieją bardzo często na różnego rodzaju korespondencji. Teraz należy poinformować Word, iż chcemy utworzyć dwa dynamiczne pola tekstowe. Przełączamy się na zakładkę <strong>Deweloper</strong> i wybieramy kontrolkę <strong>Tekst</strong>.</p>
-
-    <figure>
-        <img class="pure-img" src="https://awasn.github.io/dynamiczna-budowa-poprawnego-pliku-docx-w-standardzie-open-xml/images/OpenXML_TextControl.png" alt="Kontrolka tekstowa formularza dokumentu docx" >
-        <figcaption><h4>Kontrolka tekstowa formularza dokumentu docx</h4></figcaption>
-    </figure>
-
-<p>W miejscu kursora program wstawi odpowiedni znacznik. Niech tekst, który będzie wyświetlany na ułatwienia tworzenia dokumentu dla uproszczenia będzie brzmiał <strong>imię</strong> (po powiązaniu z plikiem xml ten napis zostanie automatycznie usunięty). Aby ułatwić sobie pracę możemy jeszcze włączyć <strong>Tryb projektowania</strong> dzięki czemu wokół kontrolek pojawią znaczniki. Mając wstawioną kontrolkę klikamy ją  prawym klawiszem myszki i wybieramy polecenie <strong>Właściwości</strong> (polecenie to możemy również wybrać z zakładki <strong>Deweloper</strong>).</p>
-
-    <figure>
-        <img class="pure-img" src="https://awasn.github.io/dynamiczna-budowa-poprawnego-pliku-docx-w-standardzie-open-xml/images/OpneXML_ControlProperty.png" alt="Właściwości kontrolki formularza docx" >
-        <figcaption><h4>Właściwości kontrolki formularza docx</h4></figcaption>
-    </figure>
-
-<p>Wpisujemy tytuł <strong>Imię</strong>. Ten napis pojawi się jeśli wybierzemy znacznik. Etykieta <strong>Tag</strong> zawierać będzie zaś nazwę, która umożliwi nam połączenie z danymi. Dla imienia będzie to <strong>firstName</strong>. Następnie wstawiamy kontrolkę tekst, aby dodać pole identyfikujące nazwisko (etykieta <strong>Tag</strong> nazwana <strong>lastName</strong>). Nasz formularz po tych operacjach powinien wyglądać tak jak na obrazku poniżej:</p>
-
-    <figure>
-        <img class="pure-img" src="https://awasn.github.io/dynamiczna-budowa-poprawnego-pliku-docx-w-standardzie-open-xml/images/OpenXML_Template.png" alt="Szablon przykładowego dokumentu docx z formularzem" >
-        <figcaption><h4>Szablon przykładowego dokumentu docx z formularzem</h4></figcaption>
-    </figure>
-
-<p>Proponuję również obejrzeć zawartość powstałego dokumentu. Zobaczy, iż względem wersji zawierającej tylko tekst zasadniczo się on zmienił. Ale najciekawsze dopiero przed nami.</p>
-
-    <figure>
-        <img class="pure-img" src="https://awasn.github.io/dynamiczna-budowa-poprawnego-pliku-docx-w-standardzie-open-xml/images/OpenXML_2.png" alt="Dokument docx z formularzem" >
-        <figcaption><h4>Dokument docx z formularzem</h4></figcaption>
-    </figure>
-
-<p>Teraz bowiem przyszedł czas na to, aby powiązać dane na formularzu z elementami struktury xml. Wpierw zbudujmy prosty plik w formacie xml. Jak widzimy nazwy elementów odpowiadają nazwom tagów dokumentu Word. Zgodność ta nie jest konieczna, ale zasadniczo ułatwi nam to pracę, jeśli tagów byśmy mieli w dziesiątkach czy setkach. Plik będzie pusty, bez danych i będzie się nazywał <strong>person_data.xml</strong>:</p>
-
-<pre><code class="language-xml">    &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-    &lt;root&gt;
-        &lt;person&gt;
-            &lt;firstName&gt;&lt;/firstName&gt;
-            &lt;lastName&gt;&lt;/lastName&gt;
-        &lt;/person&gt;
-    &lt;/root&gt;
-</code></pre>
-
-<h2 id="powiązanie-formularza-z-danymi">Powiązanie formularza z danymi</h2>
-
-<p>Następny krok będzie od nas wymagał pobrania ze stron <a href="https://archive.codeplex.com/" target="_blank">https://archive.codeplex.com/</a> pakietu <a href="https://archive.codeplex.com/?p=dbe" target="_blank">Word 2007 Content Control Toolkit</a>, który połączy (zmapuje) nam wstawione elementy formularza (kontrolki) z konkretnymi elementami powyższego pliku xml. Po instalacji i uruchomieniu programu Word 2007 Content Control Toolkit otwieramy nasz plik w formacie docx. Lewa strona aplikacji pokaże nam wszystkie znalezione elementy formularza - kontrolki. Widzimy nazwy tagów, które nadaliśmy elementom formularza oraz pustą kolumnę <strong>XPath</strong> co oznacza brak powiązań z danymi.</p>
-
-    <figure>
-        <img class="pure-img" src="https://awasn.github.io/dynamiczna-budowa-poprawnego-pliku-docx-w-standardzie-open-xml/images/OpenXML_ContentControls.png" alt="Formularz docx - nie skojarzony z danymi" >
-        <figcaption><h4>Formularz docx - nie skojarzony z danymi</h4></figcaption>
-    </figure>
-
-<p>Teraz musimy dodać utworzoną strukturę xml. W tym celu w prawej części aplikacji wybieramy polecenie <strong>Create a new Customer XML Part</strong>. Następnie w zakładce <strong>Edit View</strong> ładujemy strukturę xml do programu. Dalej mapujemy gałęzie xml do kontrolek. W tym celu wpierw wybieramy kontrolkę, a następnie używając drag &amp; drop przenosimy wybrany element struktury na interesującą nas kontrolkę.</p>
-
-    <figure>
-        <img class="pure-img" src="https://awasn.github.io/dynamiczna-budowa-poprawnego-pliku-docx-w-standardzie-open-xml/images/OpenXML_XPath.png" alt="Formularz docx - skojarzony z danymi poprzez XPath" >
-        <figcaption><h4>Formularz docx - skojarzony z danymi poprzez XPath</h4></figcaption>
-    </figure>
-
-<p>Na koniec zapisujemy wprowadzone zmiany. Jeśli teraz obejrzelibyśmy zawartość pliku docx to zobaczymy, iż w strukturze katalogów pojawił się folder <strong>customerXml</strong>, który posiada plik <strong>item1.xml</strong> o zawartości zgodnej z naszym dodawanym plikiem xml. Oczywiście nic nie stoi na przeszkodzie, aby samemu ów formularz wypełnić z poziomu programu Word. Nie powinno być niespodzianką, iż wówczas plik <strong>item1.xml</strong> będzie uzupełniony o wartości, które wpisaliśmy.</p>
-
-    <figure>
-        <img class="pure-img" src="https://awasn.github.io/dynamiczna-budowa-poprawnego-pliku-docx-w-standardzie-open-xml/images/OpenXML_3.png" alt="Dokument docx z formularzem i danymi" >
-        <figcaption><h4>Dokument docx z formularzem i danymi</h4></figcaption>
-    </figure>
-
-<h2 id="programowa-zmiana-danych">Programowa zmiana danych</h2>
-
-<p>Przyszedł czas na ostatni etap, czyli na dynamiczną modyfikację szablonu pliku docx z uwzględnieniem danych dostarczanych z zewnętrznych źródeł. Teraz posłużymy się narzędziem Visual Studio. Wersja 3.0 platformy .NET dostarcza komponent <strong>WindowsBase.dll</strong>, który poprzez przestrzeń nazw <code>System.IO.Packaging</code> umożliwia manipulowanie zawartością plików w formacie Open XML. Wszystko co musimy zrobić to dodać referencję do tej biblioteki z naszej aplikacji. A oto przykładowe źródła:</p>
-
-<pre><code class="language-csharp">    Package package = Package.Open(&quot;person_template.docx&quot;);
-    try
+<!doctype html><html lang=pl-pl><head><meta name=theme-color content="#405365"><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.83.1"><meta name=description content="Formularze i programowa dynamiczna budowa poprawnego pliku docx w standardzie Open XML"><title>Dynamiczna budowa poprawnego pliku docx w standardzie Open XML - arkadiusz wasniewski blog</title><link rel=canonical href=https://awasn.github.io/dynamiczna-budowa-poprawnego-pliku-docx-w-standardzie-open-xml/><link rel=prev title="FormsAuthentication w Reporing Services" href=https://awasn.github.io/formsauthentication-w-reporing-services/><link rel=next title="Metoda fabryki" href=https://awasn.github.io/metoda-fabryki/><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css integrity="sha256-Q0zCrUs2IfXWYx0uMKJfG93CvF6oVII21waYsAV4/8Q=" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css><link rel=stylesheet href=https://awasn.github.io/awasn.min.f45a909800924faa836a73b82a1d4cb352f8053134a426a9dcafa61cf6a8c5d0.css integrity="sha256-9FqQmACST6qDanO4Kh1Ms1L4BTE0pCap3K+mHPaoxdA="></head><body><header><nav class=container><div class="pure-menu pure-menu-horizontal"><a class="pure-menu-heading pure-menu-link" href=https://awasn.github.io/>wasniewski</a><ul class="right pure-menu-list"><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/blog/>blog</a></li><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/categories/>categories</a></li><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/tags/>tags</a></li><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/about/>about</a></li></ul></div></nav></header><main class=container><aside class=post-published><p>This post was originally published on <a href=http://zine.net.pl/blogs/arkadiusz_wasniewski/archive/2007/11/24/dynamiczna-budowa-poprawnego-pliku-docx-w-standardzie-open-xml.aspx target=_blank>zine.net.pl</a> on 24 November 2007 00:22 +0100</p></aside><article><header><h1>Dynamiczna budowa poprawnego pliku docx w standardzie Open XML</h1><div class=post-metadata><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>24 November 2007 00:22 +0100
+&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+6 min read</div><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg><a href=https://awasn.github.io/categories/development>Development</a>, <a href=https://awasn.github.io/categories/tools>Tools</a>
+&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83.0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7" y2="7"/></svg>
+<a href=https://awasn.github.io/tags/.net>.NET</a>, <a href=https://awasn.github.io/tags/open-xml>Open XML</a>, <a href=https://awasn.github.io/tags/ms-office>MS Office</a></div></div></header><p>Konieczność utworzenie dokumentu, który byłby stały w treści a gdzie tylko niektóre elementy, np. imię i nazwisko, powinny się zmieniać dynamicznie jest sytuacją nieobcą chyba każdemu programiście czy informatykowi. Rozwiązań takiego problemu jest wiele.</p><p>Ostatnio w poszukiwaniu absolutu zainteresowałem się pakietem Microsoft Office, a konkretnie aplikacją Word 2007. Cały pakiet do zapisywania danych wykorzystuje nowy format plików bazujący na standardzie <a href=http://www.ecma-international.org/publications/standards/Ecma-376.htm>Open XML</a>. Standardzie nota bene promowanym przez sam Microsoft. Nowe pliki łatwo poznać po literze x dodawanej do rozszerzenia znanego z wcześniejszych wersji. W przypadku Worda będzie to więc docx.</p><p>Wewnętrzna zawartość plików w formacie Open XML będzie dla wielu zaskoczeniem. Jest to bowiem ściśle określona struktura katalogów i plików, głównie w formacie xml, potraktowana pakietem kompresującym zip. Pliki te zawierają konfigurację, style oraz treść.</p><figure><img class=pure-img src=https://awasn.github.io/dynamiczna-budowa-poprawnego-pliku-docx-w-standardzie-open-xml/images/OpenXML_1.png alt="Zawartość nowego dokumentu docx"><figcaption><h4>Zawartość nowego dokumentu docx</h4></figcaption></figure><p>Zdziwieni? Proponuję wziąć dowolny plik docx, zmienić jego rozszerzenie na zip a następnie obejrzeć zawartość. To co wpiszemy w edytorze zawarte jest zaś w pliku <strong>word/document.xml</strong>.</p><p>Zalety nowego formatu plików to między oddzielenie prezentacji od danych. Brzmi to oczywiście bardzo znajomo. Ponieważ struktura pliku docx jest jasno określona można pokusić się o ręczne vel programowe stworzenie poprawnego dokumentu w formacie Open XML. Co prawda definicja standardu liczona jest w setkach stron, ale wymaganych elementów nie jest dużo. Na stronach <a href=https://docs.microsoft.com>msdn</a> można znaleźć między innymi artykuł <a href="https://docs.microsoft.com/en-us/previous-versions/office/office-12//ms771890(v=office.12)">Walkthrough: Word 2007 XML Format</a>, który poza opisem formatu Open XML pokazuje jak utworzyć poprawny plik docx. Jednym słowem jesteśmy wstanie dynamicznie tworzyć pliki programu Word 2007.</p><p>Pójdźmy krok dalej. Okazuje się, iż możemy wewnątrz struktury docx pomiędzy plikiem zawierającym treść naszego dokumentu utworzyć łącznik do pliku o dowolnej, poprawnej strukturze w formacie xml, który będzie zawierał zmienne, z naszego punktu widzenia, dane. Trochę to brzmi enigmatycznie, ale już tłumaczę o co chodzi. Mianowicie możemy w dokumencie Word zdefiniować formularz, którego pola mogą być powiązane poprzez XPath z danymi umieszczonymi w pliku xml. I co ciekawe możemy plik xml zawierający dane dla formularza programowo zmieniać! Zobaczmy więc jak to osiągnąć.</p><h2 id=szablon-dokumentu>Szablon dokumentu</h2><p>Po pierwsze utwórzmy nowy dokument w programie Microsoft Word i nazwijmy go <strong>person_template.docx</strong>. Zanim rozpoczniemy pracę musimy jeszcze uaktywnić w programie Word zakładkę <strong>Deweloper</strong> (jakby nie można tego nazwać Programista). Klikamy <strong>Przycisk pakietu Office</strong> i wybieramy polecenie <strong>Opcje programu Word</strong>.</p><figure><img class=pure-img src=https://awasn.github.io/dynamiczna-budowa-poprawnego-pliku-docx-w-standardzie-open-xml/images/OpenXML_WordOption.png alt="Opcje programu Word - zakładka Deweloper"><figcaption><h4>Opcje programu Word - zakładka Deweloper</h4></figcaption></figure><p>Następnie zaznaczamy opcję <strong>Pokaż kartę Deweloper na Wstążce</strong>. Dzięki temu w programie Word pojawi nam się dodatkowa zakładka.</p><p>Mając już skonfigurowany edytor wpiszmy do dokumentu zwrot <strong>Szanowny Pan</strong>. Ze spacją na końcu. Tego typu sformułowania widnieją bardzo często na różnego rodzaju korespondencji. Teraz należy poinformować Word, iż chcemy utworzyć dwa dynamiczne pola tekstowe. Przełączamy się na zakładkę <strong>Deweloper</strong> i wybieramy kontrolkę <strong>Tekst</strong>.</p><figure><img class=pure-img src=https://awasn.github.io/dynamiczna-budowa-poprawnego-pliku-docx-w-standardzie-open-xml/images/OpenXML_TextControl.png alt="Kontrolka tekstowa formularza dokumentu docx"><figcaption><h4>Kontrolka tekstowa formularza dokumentu docx</h4></figcaption></figure><p>W miejscu kursora program wstawi odpowiedni znacznik. Niech tekst, który będzie wyświetlany na ułatwienia tworzenia dokumentu dla uproszczenia będzie brzmiał <strong>imię</strong> (po powiązaniu z plikiem xml ten napis zostanie automatycznie usunięty). Aby ułatwić sobie pracę możemy jeszcze włączyć <strong>Tryb projektowania</strong> dzięki czemu wokół kontrolek pojawią znaczniki. Mając wstawioną kontrolkę klikamy ją prawym klawiszem myszki i wybieramy polecenie <strong>Właściwości</strong> (polecenie to możemy również wybrać z zakładki <strong>Deweloper</strong>).</p><figure><img class=pure-img src=https://awasn.github.io/dynamiczna-budowa-poprawnego-pliku-docx-w-standardzie-open-xml/images/OpneXML_ControlProperty.png alt="Właściwości kontrolki formularza docx"><figcaption><h4>Właściwości kontrolki formularza docx</h4></figcaption></figure><p>Wpisujemy tytuł <strong>Imię</strong>. Ten napis pojawi się jeśli wybierzemy znacznik. Etykieta <strong>Tag</strong> zawierać będzie zaś nazwę, która umożliwi nam połączenie z danymi. Dla imienia będzie to <strong>firstName</strong>. Następnie wstawiamy kontrolkę tekst, aby dodać pole identyfikujące nazwisko (etykieta <strong>Tag</strong> nazwana <strong>lastName</strong>). Nasz formularz po tych operacjach powinien wyglądać tak jak na obrazku poniżej:</p><figure><img class=pure-img src=https://awasn.github.io/dynamiczna-budowa-poprawnego-pliku-docx-w-standardzie-open-xml/images/OpenXML_Template.png alt="Szablon przykładowego dokumentu docx z formularzem"><figcaption><h4>Szablon przykładowego dokumentu docx z formularzem</h4></figcaption></figure><p>Proponuję również obejrzeć zawartość powstałego dokumentu. Zobaczy, iż względem wersji zawierającej tylko tekst zasadniczo się on zmienił. Ale najciekawsze dopiero przed nami.</p><figure><img class=pure-img src=https://awasn.github.io/dynamiczna-budowa-poprawnego-pliku-docx-w-standardzie-open-xml/images/OpenXML_2.png alt="Dokument docx z formularzem"><figcaption><h4>Dokument docx z formularzem</h4></figcaption></figure><p>Teraz bowiem przyszedł czas na to, aby powiązać dane na formularzu z elementami struktury xml. Wpierw zbudujmy prosty plik w formacie xml. Jak widzimy nazwy elementów odpowiadają nazwom tagów dokumentu Word. Zgodność ta nie jest konieczna, ale zasadniczo ułatwi nam to pracę, jeśli tagów byśmy mieli w dziesiątkach czy setkach. Plik będzie pusty, bez danych i będzie się nazywał <strong>person_data.xml</strong>:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-xml data-lang=xml>    <span style=color:#75715e>&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+    <span style=color:#f92672>&lt;root&gt;</span>
+        <span style=color:#f92672>&lt;person&gt;</span>
+            <span style=color:#f92672>&lt;firstName&gt;&lt;/firstName&gt;</span>
+            <span style=color:#f92672>&lt;lastName&gt;&lt;/lastName&gt;</span>
+        <span style=color:#f92672>&lt;/person&gt;</span>
+    <span style=color:#f92672>&lt;/root&gt;</span>
+</code></pre></div><h2 id=powiązanie-formularza-z-danymi>Powiązanie formularza z danymi</h2><p>Następny krok będzie od nas wymagał pobrania ze stron <a href=https://archive.codeplex.com/>https://archive.codeplex.com/</a> pakietu <a href="https://archive.codeplex.com/?p=dbe">Word 2007 Content Control Toolkit</a>, który połączy (zmapuje) nam wstawione elementy formularza (kontrolki) z konkretnymi elementami powyższego pliku xml. Po instalacji i uruchomieniu programu Word 2007 Content Control Toolkit otwieramy nasz plik w formacie docx. Lewa strona aplikacji pokaże nam wszystkie znalezione elementy formularza - kontrolki. Widzimy nazwy tagów, które nadaliśmy elementom formularza oraz pustą kolumnę <strong>XPath</strong> co oznacza brak powiązań z danymi.</p><figure><img class=pure-img src=https://awasn.github.io/dynamiczna-budowa-poprawnego-pliku-docx-w-standardzie-open-xml/images/OpenXML_ContentControls.png alt="Formularz docx - nie skojarzony z danymi"><figcaption><h4>Formularz docx - nie skojarzony z danymi</h4></figcaption></figure><p>Teraz musimy dodać utworzoną strukturę xml. W tym celu w prawej części aplikacji wybieramy polecenie <strong>Create a new Customer XML Part</strong>. Następnie w zakładce <strong>Edit View</strong> ładujemy strukturę xml do programu. Dalej mapujemy gałęzie xml do kontrolek. W tym celu wpierw wybieramy kontrolkę, a następnie używając drag & drop przenosimy wybrany element struktury na interesującą nas kontrolkę.</p><figure><img class=pure-img src=https://awasn.github.io/dynamiczna-budowa-poprawnego-pliku-docx-w-standardzie-open-xml/images/OpenXML_XPath.png alt="Formularz docx - skojarzony z danymi poprzez XPath"><figcaption><h4>Formularz docx - skojarzony z danymi poprzez XPath</h4></figcaption></figure><p>Na koniec zapisujemy wprowadzone zmiany. Jeśli teraz obejrzelibyśmy zawartość pliku docx to zobaczymy, iż w strukturze katalogów pojawił się folder <strong>customerXml</strong>, który posiada plik <strong>item1.xml</strong> o zawartości zgodnej z naszym dodawanym plikiem xml. Oczywiście nic nie stoi na przeszkodzie, aby samemu ów formularz wypełnić z poziomu programu Word. Nie powinno być niespodzianką, iż wówczas plik <strong>item1.xml</strong> będzie uzupełniony o wartości, które wpisaliśmy.</p><figure><img class=pure-img src=https://awasn.github.io/dynamiczna-budowa-poprawnego-pliku-docx-w-standardzie-open-xml/images/OpenXML_3.png alt="Dokument docx z formularzem i danymi"><figcaption><h4>Dokument docx z formularzem i danymi</h4></figcaption></figure><h2 id=programowa-zmiana-danych>Programowa zmiana danych</h2><p>Przyszedł czas na ostatni etap, czyli na dynamiczną modyfikację szablonu pliku docx z uwzględnieniem danych dostarczanych z zewnętrznych źródeł. Teraz posłużymy się narzędziem Visual Studio. Wersja 3.0 platformy .NET dostarcza komponent <strong>WindowsBase.dll</strong>, który poprzez przestrzeń nazw <code>System.IO.Packaging</code> umożliwia manipulowanie zawartością plików w formacie Open XML. Wszystko co musimy zrobić to dodać referencję do tej biblioteki z naszej aplikacji. A oto przykładowe źródła:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp>    Package package = Package.Open(<span style=color:#e6db74>&#34;person_template.docx&#34;</span>);
+    <span style=color:#66d9ef>try</span>
     {
-        Uri uri = new Uri(&quot;/customXML/item1.xml&quot;, UriKind.Relative);
+        Uri uri = <span style=color:#66d9ef>new</span> Uri(<span style=color:#e6db74>&#34;/customXML/item1.xml&#34;</span>, UriKind.Relative);
         PackagePart xmlPart = package.GetPart(uri);
         Stream stream = xmlPart.GetStream();
-        stream.SetLength(0);
-        XmlDocument document = new XmlDocument();
-        document.Load(&quot;person_data.xml&quot;);
+        stream.SetLength(<span style=color:#ae81ff>0</span>);
+        XmlDocument document = <span style=color:#66d9ef>new</span> XmlDocument();
+        document.Load(<span style=color:#e6db74>&#34;person_data.xml&#34;</span>);
         document.Save(stream);
         stream.Close();
     }
-    finally
+    <span style=color:#66d9ef>finally</span>
     {
         package.Close();
     }
-</code></pre>
-
-<p>Powyższy kod tworzy obiekt reprezentujący pakiet jakim jest dokument docx i  ów dokument otwiera. Następnie wyszukuje w pakiecie plik zawierający powiązane z formularzem dane i zwraca go naszej aplikacji jako strumień. Na koniec wczytuje plik xml z nowymi danymi i uaktualnia pakiet (tak naprawdę uaktualnia odczytany wcześniej strumień).</p>
-
-<p>Jeśli wczytana struktura będzie miała poniższą zawartość:</p>
-
-<pre><code class="language-xml">    &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-    &lt;root&gt;
-        &lt;person&gt;
-            &lt;firstName&gt;Arkadiusz&lt;/firstName&gt;
-            &lt;lastName&gt;Waśniewski&lt;/lastName&gt;
-        &lt;/person&gt;
-    &lt;/root&gt;
-</code></pre>
-
-<p>to po wykonaniu kodu i otworzeniu w programie Word dokumentu docx zobaczymy, iż zawartość elementów <code>firstName</code> i <code>lastName</code> pojawi się jako dopełnienie pierwotnego napisu.</p>
-
-<h2 id="podsumowanie">Podsumowanie</h2>
-
-<p>Równie ciekawie, jeśli nie ciekawiej, prezentują się opisane powyżej możliwości jeśli mamy przygotowane dokumenty, które muszą być wypełniane przez inne osoby. Wyobraźmy sobie formularz uzupełniany przed przyjęciem do szpitala. Wpisane w określonych polach dane automatycznie lądują w pliku xml, dzięki czemu bez parsowania czy przepisywania mamy dostęp do informacji, które mogą być bardzo szybko przetworzone.</p>
-
-<p>Mam nadzieję, iż przedstawione powyżej rozwiązanie zachęci do przyjrzenia się bliżej możliwościom formatu Open XML.</p>
-
-<p>Adresy warte odwiedzenia na początek:</p>
-
-<ul>
-<li><a href="http://openxmldeveloper.org/" target="_blank">http://openxmldeveloper.org/</a>;</li>
-<li><code>http://msdn.microsoft.com/msdnmag/issues/07/02/OfficeSpace/default.aspx</code> - Building Office Open XML Files;</li>
-<li><code>http://msdn2.microsoft.com/en-us/office/aa905545.aspx</code> - XML in Office Developer Portal;</li>
-<li><a href="https://docs.microsoft.com/en-us/previous-versions/office/developer/office-2007/aa338205(v=office.12)" target="_blank">https://docs.microsoft.com/en-us/previous-versions/office/developer/office-2007/aa338205(v=office.12)</a> - Introducing the Office (2007) Open XML File Formats;</li>
-<li><code>http://www.devx.com/MicrosoftISV/Article/30907/2046</code> - 5 Cool Things You Must Know About the New Office 2007 File Formats.</li>
-</ul>
-
-    </article>
-    <nav aria-label="Related posts">
-        <h4>Related Posts</h4>
-        <ul>
-            <li><a href="https://awasn.github.io/formsauthentication-w-reporing-services/">FormsAuthentication w Reporing Services</a></li>
-            <li><a href="https://awasn.github.io/cdata-kills-vs2k5/">&lt;![CDATA[]]&gt; kills VS2K5</a></li>
-            <li><a href="https://awasn.github.io/visual-studio-t4-editor/">Visual Studio T4 Editor</a></li>
-            <li><a href="https://awasn.github.io/konkurs-enterprise-library-logging-lab/">Konkurs Enterprise Library - Logging (LAB)</a></li>
-            <li><a href="https://awasn.github.io/sql-server-2005-compact-edition/">SQL Server 2005 Compact Edition</a></li>
-        </ul>
-    </nav>
-
-    <nav class="pure-g post-previous-next" aria-label="Previous and next posts">
-        <div class="pure-u-11-24 previous">
-            <a href="https://awasn.github.io/formsauthentication-w-reporing-services/" aria-label="Previous post"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg></span></a>
-            <a href="https://awasn.github.io/formsauthentication-w-reporing-services/">FormsAuthentication w Reporing Services</a>
-        </div>
-        <div class="pure-u-2-24">&nbsp;</div>
-        <div class="pure-u-11-24 next">
-            <a href="https://awasn.github.io/metoda-fabryki/">Metoda fabryki</a>
-            <a href="https://awasn.github.io/metoda-fabryki/" aria-label="Next post"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg></span></a>
-        </div>
-    </nav>
-
-    
-
-
-        </main>
-
-        <footer>
-            <div class="center-aligned container">
-                <p>Copyright &copy; 2007-2019 Arkadiusz Waśniewski. All Rights Reserved.</p>
-            </div>
-        </footer>
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/accesslog.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dockerfile.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dos.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/go.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/powershell.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/routeros.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/typescript.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/yaml.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/vbnet.min.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script>
-    </body>
-</html>
+</code></pre></div><p>Powyższy kod tworzy obiekt reprezentujący pakiet jakim jest dokument docx i ów dokument otwiera. Następnie wyszukuje w pakiecie plik zawierający powiązane z formularzem dane i zwraca go naszej aplikacji jako strumień. Na koniec wczytuje plik xml z nowymi danymi i uaktualnia pakiet (tak naprawdę uaktualnia odczytany wcześniej strumień).</p><p>Jeśli wczytana struktura będzie miała poniższą zawartość:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-xml data-lang=xml>    <span style=color:#75715e>&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+    <span style=color:#f92672>&lt;root&gt;</span>
+        <span style=color:#f92672>&lt;person&gt;</span>
+            <span style=color:#f92672>&lt;firstName&gt;</span>Arkadiusz<span style=color:#f92672>&lt;/firstName&gt;</span>
+            <span style=color:#f92672>&lt;lastName&gt;</span>Waśniewski<span style=color:#f92672>&lt;/lastName&gt;</span>
+        <span style=color:#f92672>&lt;/person&gt;</span>
+    <span style=color:#f92672>&lt;/root&gt;</span>
+</code></pre></div><p>to po wykonaniu kodu i otworzeniu w programie Word dokumentu docx zobaczymy, iż zawartość elementów <code>firstName</code> i <code>lastName</code> pojawi się jako dopełnienie pierwotnego napisu.</p><h2 id=podsumowanie>Podsumowanie</h2><p>Równie ciekawie, jeśli nie ciekawiej, prezentują się opisane powyżej możliwości jeśli mamy przygotowane dokumenty, które muszą być wypełniane przez inne osoby. Wyobraźmy sobie formularz uzupełniany przed przyjęciem do szpitala. Wpisane w określonych polach dane automatycznie lądują w pliku xml, dzięki czemu bez parsowania czy przepisywania mamy dostęp do informacji, które mogą być bardzo szybko przetworzone.</p><p>Mam nadzieję, iż przedstawione powyżej rozwiązanie zachęci do przyjrzenia się bliżej możliwościom formatu Open XML.</p><p>Adresy warte odwiedzenia na początek:</p><ul><li><a href=http://openxmldeveloper.org/>http://openxmldeveloper.org/</a>;</li><li><code>http://msdn.microsoft.com/msdnmag/issues/07/02/OfficeSpace/default.aspx</code> - Building Office Open XML Files;</li><li><code>http://msdn2.microsoft.com/en-us/office/aa905545.aspx</code> - XML in Office Developer Portal;</li><li><a href="https://docs.microsoft.com/en-us/previous-versions/office/developer/office-2007/aa338205(v=office.12)">https://docs.microsoft.com/en-us/previous-versions/office/developer/office-2007/aa338205(v=office.12)</a> - Introducing the Office (2007) Open XML File Formats;</li><li><code>http://www.devx.com/MicrosoftISV/Article/30907/2046</code> - 5 Cool Things You Must Know About the New Office 2007 File Formats.</li></ul></article><nav aria-label="Related posts"><h4>Related Posts</h4><ul><li><a href=https://awasn.github.io/formsauthentication-w-reporing-services/>FormsAuthentication w Reporing Services</a></li><li><a href=https://awasn.github.io/cdata-kills-vs2k5/>&lt;![CDATA[]]> kills VS2K5</a></li><li><a href=https://awasn.github.io/visual-studio-t4-editor/>Visual Studio T4 Editor</a></li><li><a href=https://awasn.github.io/konkurs-enterprise-library-logging-lab/>Konkurs Enterprise Library - Logging (LAB)</a></li><li><a href=https://awasn.github.io/sql-server-2005-compact-edition/>SQL Server 2005 Compact Edition</a></li></ul></nav><nav class="pure-g post-previous-next" aria-label="Previous and next posts"><div class="pure-u-11-24 previous"><a href=https://awasn.github.io/formsauthentication-w-reporing-services/ aria-label="Previous post"><span aria-hidden=true><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"/></svg></span></a><a href=https://awasn.github.io/formsauthentication-w-reporing-services/>FormsAuthentication w Reporing Services</a></div><div class=pure-u-2-24>&nbsp;</div><div class="pure-u-11-24 next"><a href=https://awasn.github.io/metoda-fabryki/>Metoda fabryki</a>
+<a href=https://awasn.github.io/metoda-fabryki/ aria-label="Next post"><span aria-hidden=true><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg></span></a></div></nav></main><footer><div class="center-aligned container"><p>Copyright &copy; 2007-2021 Arkadiusz Waśniewski. All Rights Reserved.</p></div></footer><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/accesslog.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dockerfile.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dos.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/go.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/powershell.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/routeros.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/typescript.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/yaml.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/vbnet.min.js></script><script>hljs.initHighlightingOnLoad()</script></body></html>

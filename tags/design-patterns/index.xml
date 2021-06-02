@@ -1,149 +1,18 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Design Patterns on arkadiusz wasniewski blog</title>
-    <link>https://awasn.github.io/tags/design-patterns/</link>
-    <description>Recent content in Design Patterns on arkadiusz wasniewski blog</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Tue, 27 Jan 2009 12:38:00 +0100</lastBuildDate>
-    
-	<atom:link href="https://awasn.github.io/tags/design-patterns/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Implementacja Inversion of Control - wersja 1.1</title>
-      <link>https://awasn.github.io/implementacja-inversion-of-control-wersja-1-1/</link>
-      <pubDate>Tue, 27 Jan 2009 12:38:00 +0100</pubDate>
-      
-      <guid>https://awasn.github.io/implementacja-inversion-of-control-wersja-1-1/</guid>
-      <description>Od ostatniej notki opisującej wykorzystywany przeze mnie własnej produkcji kontener IoC wprowadziłem kilka modyfikacji czyniących rozwiązanie bardziej elastycznym, ale wciąż pozostające wierne podstawowym założeniom:
- Wydajne i łatwe w użyciu; Zminimalizowane użycie refleksji; Brak plików konfiguracyjnych.  Czymże jest kontener IoC Kontener IoC umożliwia programiście wprowadzenie w aplikacji luźnych powiązań pomiędzy obiektami. Programista rejestruje interfejsy i klasy abstrakcyjne wraz z typami implementującymi, instancjami lub procedurami tworzącymi instancje klas na żądanie:</description>
-    </item>
-    
-    <item>
-      <title>Rozwiązanie mobilne</title>
-      <link>https://awasn.github.io/rozwiazanie-mobilne/</link>
-      <pubDate>Thu, 11 Dec 2008 12:45:00 +0100</pubDate>
-      
-      <guid>https://awasn.github.io/rozwiazanie-mobilne/</guid>
-      <description>Kilka miesięcy temu stałem się szczęśliwym posiadaczem projektu na przygotowanie kompletnego rozwiązania z zakresu szeroko pojętej sprzedaży dla &amp;ldquo;profesjonalnych&amp;rdquo; urządzeń mobilnych, czyli komputerów odpornych na niskie temperatury i kroploszczelne. Systemy operacyjne, które znalazły się w zasięgu projektu to:
- Microsoft Windows for Pocket PC 2003, Windows Mobile 2003; Windows Mobile 5.0 for Pocket PC, Windows Mobile 5.0 for Pocket PC Phone Edition; Windows Mobile 6 Classic, Windows Mobile 6 Professional.  Pod uwagę należało też brać możliwość pojawienia się w przyszłości konieczności działania programu w ramach Windows CE .</description>
-    </item>
-    
-    <item>
-      <title>Dwie zasady projektowania klas</title>
-      <link>https://awasn.github.io/dwie-zasady-projektowania-klas/</link>
-      <pubDate>Thu, 06 Nov 2008 23:22:00 +0100</pubDate>
-      
-      <guid>https://awasn.github.io/dwie-zasady-projektowania-klas/</guid>
-      <description>Jedna z zasad dobrego projektowania klas to rezygnacja z pól na rzecz właściwości. Jedna z zasad wydajnego programowania (dotyczy zwłaszcza .NET Compact Framework) przy tworzeniu klas to rezygnacja z właściwości na rzecz pól.
-.NET Compact Framework version 2.0 Performance and Working Set FAQ: &amp;ldquo;Simple property access can be inlined by JIT, but no assumptions should be made about this [&amp;hellip;] Accessing fields directly normally results in better performance&amp;rdquo;</description>
-    </item>
-    
-    <item>
-      <title>Typy wyliczane czy klasy</title>
-      <link>https://awasn.github.io/typy-wyliczane-czy-klasy/</link>
-      <pubDate>Fri, 24 Oct 2008 12:20:00 +0200</pubDate>
-      
-      <guid>https://awasn.github.io/typy-wyliczane-czy-klasy/</guid>
-      <description>Tak to już jest, iż programując bardzo często stajemy przed koniecznością wyboru rozwiązania, będąc gdzieś w połowie drogi pomiędzy &amp;ldquo;najlepszymi technikami&amp;rdquo;. Jeden z takich przypadków, ale bez wybrania najlepszej drogi, chciałbym opisać poniżej.
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Design patterns on arkadiusz wasniewski blog</title><link>https://awasn.github.io/tags/design-patterns/</link><description>Recent content in Design patterns on arkadiusz wasniewski blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 27 Jan 2009 12:38:00 +0100</lastBuildDate><atom:link href="https://awasn.github.io/tags/design-patterns/index.xml" rel="self" type="application/rss+xml"/><item><title>Implementacja Inversion of Control - wersja 1.1</title><link>https://awasn.github.io/implementacja-inversion-of-control-wersja-1-1/</link><pubDate>Tue, 27 Jan 2009 12:38:00 +0100</pubDate><guid>https://awasn.github.io/implementacja-inversion-of-control-wersja-1-1/</guid><description>Od ostatniej notki opisującej wykorzystywany przeze mnie własnej produkcji kontener IoC wprowadziłem kilka modyfikacji czyniących rozwiązanie bardziej elastycznym, ale wciąż pozostające wierne podstawowym założeniom:
+Wydajne i łatwe w użyciu; Zminimalizowane użycie refleksji; Brak plików konfiguracyjnych. Czymże jest kontener IoC Kontener IoC umożliwia programiście wprowadzenie w aplikacji luźnych powiązań pomiędzy obiektami. Programista rejestruje interfejsy i klasy abstrakcyjne wraz z typami implementującymi, instancjami lub procedurami tworzącymi instancje klas na żądanie:</description></item><item><title>Rozwiązanie mobilne</title><link>https://awasn.github.io/rozwiazanie-mobilne/</link><pubDate>Thu, 11 Dec 2008 12:45:00 +0100</pubDate><guid>https://awasn.github.io/rozwiazanie-mobilne/</guid><description>Kilka miesięcy temu stałem się szczęśliwym posiadaczem projektu na przygotowanie kompletnego rozwiązania z zakresu szeroko pojętej sprzedaży dla &amp;ldquo;profesjonalnych&amp;rdquo; urządzeń mobilnych, czyli komputerów odpornych na niskie temperatury i kroploszczelne. Systemy operacyjne, które znalazły się w zasięgu projektu to:
+Microsoft Windows for Pocket PC 2003, Windows Mobile 2003; Windows Mobile 5.0 for Pocket PC, Windows Mobile 5.0 for Pocket PC Phone Edition; Windows Mobile 6 Classic, Windows Mobile 6 Professional. Pod uwagę należało też brać możliwość pojawienia się w przyszłości konieczności działania programu w ramach Windows CE .</description></item><item><title>Dwie zasady projektowania klas</title><link>https://awasn.github.io/dwie-zasady-projektowania-klas/</link><pubDate>Thu, 06 Nov 2008 23:22:00 +0100</pubDate><guid>https://awasn.github.io/dwie-zasady-projektowania-klas/</guid><description>Jedna z zasad dobrego projektowania klas to rezygnacja z pól na rzecz właściwości. Jedna z zasad wydajnego programowania (dotyczy zwłaszcza .NET Compact Framework) przy tworzeniu klas to rezygnacja z właściwości na rzecz pól.
+.NET Compact Framework version 2.0 Performance and Working Set FAQ: &amp;ldquo;Simple property access can be inlined by JIT, but no assumptions should be made about this [&amp;hellip;] Accessing fields directly normally results in better performance&amp;rdquo;</description></item><item><title>Typy wyliczane czy klasy</title><link>https://awasn.github.io/typy-wyliczane-czy-klasy/</link><pubDate>Fri, 24 Oct 2008 12:20:00 +0200</pubDate><guid>https://awasn.github.io/typy-wyliczane-czy-klasy/</guid><description>Tak to już jest, iż programując bardzo często stajemy przed koniecznością wyboru rozwiązania, będąc gdzieś w połowie drogi pomiędzy &amp;ldquo;najlepszymi technikami&amp;rdquo;. Jeden z takich przypadków, ale bez wybrania najlepszej drogi, chciałbym opisać poniżej.
 Załóżmy, iż budujemy aplikację służącą sprzedaży Na początek będziemy wykorzystywać dwa typy dokumentów: paragon i fakturą. W kodzie tworzymy odpowiadający temu typ wyliczany:
-internal enum DocumentType { Receipt, Invoice }  Następnie pojawiają się nowe wymagania. Potrzebujemy powiązać z typami dokumentów skrót, czyli kilkuznakowy identyfikator, który będzie wykorzystywany:</description>
-    </item>
-    
-    <item>
-      <title>Implementacja Inversion of Control</title>
-      <link>https://awasn.github.io/implementacja-inversion-of-control/</link>
-      <pubDate>Sun, 24 Aug 2008 11:49:00 +0200</pubDate>
-      
-      <guid>https://awasn.github.io/implementacja-inversion-of-control/</guid>
-      <description>Jedną z cech dobrego oprogramowania są luźne powiązania pomiędzy klasami. Droga do tego celu ciężka i kręta. Bez dwóch zdań. Wśród technik i wzorców, które należy w tym celu stosować znajdują się fabryki (Factory) oraz lokalizatory usług (Service Locator), dzięki którym tworzeniem instancji obiektów czy implementacji zadanych interfejsów zajmują się wyspecjalizowane klasy. Z tworzeniem obiektów, w kontekście wymienionych powyżej praktyk, związane są następujące koncepcje:
- Inversion of Control - instancje klas pobierane są z zewnętrznych zasobów; Dependency Injection - tworzenie instancji zleca się zewnętrznemu obiektowi (kontenerowi) znającemu zależności pomiędzy właściwymi klasami.</description>
-    </item>
-    
-    <item>
-      <title>Refaktoryzacja metod zwrotnych</title>
-      <link>https://awasn.github.io/refaktoryzacja-metod-zwrotnych/</link>
-      <pubDate>Sun, 20 Jul 2008 00:57:00 +0200</pubDate>
-      
-      <guid>https://awasn.github.io/refaktoryzacja-metod-zwrotnych/</guid>
-      <description>Najnowsza refaktoryzacja kodu jednego z moich projektów polegała na usunięciu wszystkich własnych definicji delegatów będących metodami zwrotnymi. Zamiast tego użyłem standardowych metod z przestrzeni nazw System:
- Action; Action&amp;lt;T&amp;gt;; Action&amp;lt;T1, T2&amp;gt;; Action&amp;lt;T1, T2, T3&amp;gt;; Action&amp;lt;T1, T2, T3, T4&amp;gt;.  dla metod zwrotnych, które nie zwracają wartości oraz:
- Func&amp;lt;TResult&amp;gt;; Func&amp;lt;T, TResult&amp;gt;; Func&amp;lt;T1, T2, TResult&amp;gt;; Func&amp;lt;T1, T2, T3, TResult&amp;gt;; Func&amp;lt;T1, T2, T3, T4, TResult&amp;gt;.  dla metod zwrotnych zwracających wartość.
-Dzięki temu zniknęło kilka klas.</description>
-    </item>
-    
-    <item>
-      <title>Range&lt;T&gt;</title>
-      <link>https://awasn.github.io/range-t/</link>
-      <pubDate>Fri, 11 Jul 2008 15:30:00 +0200</pubDate>
-      
-      <guid>https://awasn.github.io/range-t/</guid>
-      <description>Porównań i walidacji w kodzie zawsze dużo jest. Czasem, jak u mnie ostatnio, warto spreparować sobie specjalną klasę operacje tego typu ułatwiającą. Koncept nie jest nowy. Poczytać można o nim między innymi na stronie Martina Fowlera. Ciekawa natomiast jest implementacja, którą można wykonać korzystając z platformy .NET.
+internal enum DocumentType { Receipt, Invoice } Następnie pojawiają się nowe wymagania. Potrzebujemy powiązać z typami dokumentów skrót, czyli kilkuznakowy identyfikator, który będzie wykorzystywany:</description></item><item><title>Implementacja Inversion of Control</title><link>https://awasn.github.io/implementacja-inversion-of-control/</link><pubDate>Sun, 24 Aug 2008 11:49:00 +0200</pubDate><guid>https://awasn.github.io/implementacja-inversion-of-control/</guid><description>Jedną z cech dobrego oprogramowania są luźne powiązania pomiędzy klasami. Droga do tego celu ciężka i kręta. Bez dwóch zdań. Wśród technik i wzorców, które należy w tym celu stosować znajdują się fabryki (Factory) oraz lokalizatory usług (Service Locator), dzięki którym tworzeniem instancji obiektów czy implementacji zadanych interfejsów zajmują się wyspecjalizowane klasy. Z tworzeniem obiektów, w kontekście wymienionych powyżej praktyk, związane są następujące koncepcje:
+Inversion of Control - instancje klas pobierane są z zewnętrznych zasobów; Dependency Injection - tworzenie instancji zleca się zewnętrznemu obiektowi (kontenerowi) znającemu zależności pomiędzy właściwymi klasami.</description></item><item><title>Refaktoryzacja metod zwrotnych</title><link>https://awasn.github.io/refaktoryzacja-metod-zwrotnych/</link><pubDate>Sun, 20 Jul 2008 00:57:00 +0200</pubDate><guid>https://awasn.github.io/refaktoryzacja-metod-zwrotnych/</guid><description>Najnowsza refaktoryzacja kodu jednego z moich projektów polegała na usunięciu wszystkich własnych definicji delegatów będących metodami zwrotnymi. Zamiast tego użyłem standardowych metod z przestrzeni nazw System:
+Action; Action&amp;lt;T&amp;gt;; Action&amp;lt;T1, T2&amp;gt;; Action&amp;lt;T1, T2, T3&amp;gt;; Action&amp;lt;T1, T2, T3, T4&amp;gt;. dla metod zwrotnych, które nie zwracają wartości oraz:
+Func&amp;lt;TResult&amp;gt;; Func&amp;lt;T, TResult&amp;gt;; Func&amp;lt;T1, T2, TResult&amp;gt;; Func&amp;lt;T1, T2, T3, TResult&amp;gt;; Func&amp;lt;T1, T2, T3, T4, TResult&amp;gt;. dla metod zwrotnych zwracających wartość.
+Dzięki temu zniknęło kilka klas.</description></item><item><title>Range&lt;T></title><link>https://awasn.github.io/range-t/</link><pubDate>Fri, 11 Jul 2008 15:30:00 +0200</pubDate><guid>https://awasn.github.io/range-t/</guid><description>Porównań i walidacji w kodzie zawsze dużo jest. Czasem, jak u mnie ostatnio, warto spreparować sobie specjalną klasę operacje tego typu ułatwiającą. Koncept nie jest nowy. Poczytać można o nim między innymi na stronie Martina Fowlera. Ciekawa natomiast jest implementacja, którą można wykonać korzystając z platformy .NET.
 Pierwsza wersja klasy w najważniejszych swoich częściach wyglądała następująco:
-class Range&amp;lt;T&amp;gt; { private readonly T minimum; private readonly T maximum; private readonly bool rangeIsExclusive; public bool Included(T value) { Debug.</description>
-    </item>
-    
-    <item>
-      <title>Nie wyrzucamy wyjątków poza Domain Model</title>
-      <link>https://awasn.github.io/nie-wyrzucamy-wyjatkow-poza-domain-model/</link>
-      <pubDate>Tue, 25 Mar 2008 11:47:00 +0100</pubDate>
-      
-      <guid>https://awasn.github.io/nie-wyrzucamy-wyjatkow-poza-domain-model/</guid>
-      <description>Udi Dahan na swoim blogu umieścił ciekawy wpis poświęcony programowaniu według wzorca Domain Model. Jeden z wniosków płynących z tego artykułu, to rezygnacja z wyrzucania wyjątków poza Domain Model, czy też szerzej, poza całą warstwę logiki biznesowej. Jest to zdecydowanie inne podejście od większości promowanych reguł budowania aplikacji złożonych z warstw, gdzie zazwyczaj zaleca się, aby w danej warstwie zdefiniować własny wyjątek i wszystkie przez nas generowane lub wyłapane wyjątki z warstw niższych (zależnych) opakowywać wyjątkiem warstwy i przekazywać dalej.</description>
-    </item>
-    
-    <item>
-      <title>Metoda fabryki</title>
-      <link>https://awasn.github.io/metoda-fabryki/</link>
-      <pubDate>Thu, 27 Dec 2007 21:27:00 +0100</pubDate>
-      
-      <guid>https://awasn.github.io/metoda-fabryki/</guid>
-      <description>Poniższy tekst bazuje na prezentacji, którą przeprowadziłem 13 grudnia 2007 na połączonym XVI Spotkaniu Warszawskiej Grupy .NET + VII Spotkaniu Polskiej Grupy Użytkowników SQL Server.
+class Range&amp;lt;T&amp;gt; { private readonly T minimum; private readonly T maximum; private readonly bool rangeIsExclusive; public bool Included(T value) { Debug.</description></item><item><title>Nie wyrzucamy wyjątków poza Domain Model</title><link>https://awasn.github.io/nie-wyrzucamy-wyjatkow-poza-domain-model/</link><pubDate>Tue, 25 Mar 2008 11:47:00 +0100</pubDate><guid>https://awasn.github.io/nie-wyrzucamy-wyjatkow-poza-domain-model/</guid><description>Udi Dahan na swoim blogu umieścił ciekawy wpis poświęcony programowaniu według wzorca Domain Model. Jeden z wniosków płynących z tego artykułu, to rezygnacja z wyrzucania wyjątków poza Domain Model, czy też szerzej, poza całą warstwę logiki biznesowej. Jest to zdecydowanie inne podejście od większości promowanych reguł budowania aplikacji złożonych z warstw, gdzie zazwyczaj zaleca się, aby w danej warstwie zdefiniować własny wyjątek i wszystkie przez nas generowane lub wyłapane wyjątki z warstw niższych (zależnych) opakowywać wyjątkiem warstwy i przekazywać dalej.</description></item><item><title>Metoda fabryki</title><link>https://awasn.github.io/metoda-fabryki/</link><pubDate>Thu, 27 Dec 2007 21:27:00 +0100</pubDate><guid>https://awasn.github.io/metoda-fabryki/</guid><description>Poniższy tekst bazuje na prezentacji, którą przeprowadziłem 13 grudnia 2007 na połączonym XVI Spotkaniu Warszawskiej Grupy .NET + VII Spotkaniu Polskiej Grupy Użytkowników SQL Server.
 Wstęp Metoda fabryki (ang. Factory Method) jest, obok signletona czy budowniczego, wzorcem kreacyjnym odpowiadającym za tworzenie obiektów - instancji klas. Główne zadanie metody fabryki to oddzielenie procesu korzystania z obiektów od ich tworzenia.
-Wyobraźmy sobie aplikację w wersji standardowej przeznaczoną do obsługi sprzedaży, w której dla kilku klientów dokonujemy modyfikacji.</description>
-    </item>
-    
-    <item>
-      <title>Konkurs Enterprise Library - Logging (LAB)</title>
-      <link>https://awasn.github.io/konkurs-enterprise-library-logging-lab/</link>
-      <pubDate>Mon, 24 Sep 2007 11:32:00 +0200</pubDate>
-      
-      <guid>https://awasn.github.io/konkurs-enterprise-library-logging-lab/</guid>
-      <description>Refaktoryzacja do Logging Application Block Potrzebujemy możliwości śledzenia zachodzących w aplikacji zdarzeń. Ważne jest, aby informacje mogły być zapisywane w jak największej liczbie miejsc takich jak pliki, bazy danych czy poczta elektroniczna, a sama konfiguracja była niezależna od kodu programu.
+Wyobraźmy sobie aplikację w wersji standardowej przeznaczoną do obsługi sprzedaży, w której dla kilku klientów dokonujemy modyfikacji.</description></item><item><title>Konkurs Enterprise Library - Logging (LAB)</title><link>https://awasn.github.io/konkurs-enterprise-library-logging-lab/</link><pubDate>Mon, 24 Sep 2007 11:32:00 +0200</pubDate><guid>https://awasn.github.io/konkurs-enterprise-library-logging-lab/</guid><description>Refaktoryzacja do Logging Application Block Potrzebujemy możliwości śledzenia zachodzących w aplikacji zdarzeń. Ważne jest, aby informacje mogły być zapisywane w jak największej liczbie miejsc takich jak pliki, bazy danych czy poczta elektroniczna, a sama konfiguracja była niezależna od kodu programu.
 Aby to osiągnąć korzystamy z możliwości Enterprise Library Logging Application Block w wersji 3.1 - May 2007.
-Uzasadnienie Możliwość rejestracji zdarzeń (logging) zachodzących w aplikacji jest cechą bardzo pożądaną. Nie należy jednak przez zdarzenia rozumieć jedynie błędy czy problemy pojawiające się w czasie działania programu.</description>
-    </item>
-    
-    <item>
-      <title>Tworzenie obiektów</title>
-      <link>https://awasn.github.io/tworzenie-obiektow/</link>
-      <pubDate>Wed, 04 Jul 2007 13:55:00 +0200</pubDate>
-      
-      <guid>https://awasn.github.io/tworzenie-obiektow/</guid>
-      <description>W powyższej kwestii pojawiło się od czasu słowa kluczowego new trochę nowych metod i związanych z tym pojęć. W poszukiwaniu optymalnego kodu warto zwrócić uwagę na następujące pojęcia:
- Inversion of Control - obiekt nie tworzy samodzielnie żadnych wymaganych przez siebie instancji klas. Zamiast tego pobiera je z zewnętrznych zasobów; Push. Don&amp;rsquo;t Pull - obiekt nie tworzy samodzielnie żadnych wymaganych przez siebie instancji klas. Zamiast tego są mu one przekazywane jako parametry konstruktora lub właściwości; Dependency Injection - tworzenie instancji wymaganych klas zleca się obiektowi (kontenerowi) zewnętrznemu, który zna zależności pomiędzy klasami.</description>
-    </item>
-    
-    <item>
-      <title>Herr Mock i Frau Command</title>
-      <link>https://awasn.github.io/herr-mock-i-frau-command/</link>
-      <pubDate>Thu, 21 Jun 2007 17:01:00 +0200</pubDate>
-      
-      <guid>https://awasn.github.io/herr-mock-i-frau-command/</guid>
-      <description>Sławetny wzorzec Model-View-Presenter ma swoje zalety, ale ma i swoje uciążliwości. Jedna z wykorzystywanych przeze mnie implementacji tego wzorca zakłada, iż widok będzie posiadał funkcję umożliwiającą dodawanie do menu widoku kolejnych poleceń, które będą zawierały metody zwrotne wywoływane jako reakcja w przypadku wykonania polecenia. Jest to o tyle konieczne, iż np. formularz wyświetlający tabelę może zachowywać się różnie (obsługiwać różne zestawy poleceń) w zależności od danych, które ma zaszczyt prezentować. Weźmy pod uwagę fragment prezentera umożliwiającego identyfikację użytkownika.</description>
-    </item>
-    
-    <item>
-      <title>Dobre praktyki w projektowaniu aplikacji mobilnych</title>
-      <link>https://awasn.github.io/dobre-praktyki-w-projektowaniu-aplikacji-mobilnych/</link>
-      <pubDate>Mon, 23 Apr 2007 14:03:00 +0200</pubDate>
-      
-      <guid>https://awasn.github.io/dobre-praktyki-w-projektowaniu-aplikacji-mobilnych/</guid>
-      <description>W ostatnią sobotę (21.04.2007) na VI spotkaniu Warszawskiej Grupy .NET miałem przyjemność wystąpić z prezentacją dotyczącą wzorców projektowych, które warto zastosować programując urządzenia mobilne. Sam plik zawierający slajdy to oczywiście za mało, więc poniżej kilka dodatkowych opisów.
-Service Locator, slajdy 18 i 19 Klasa ObjectLocator oparta o wzorzec ServiceLocator została, ze względu na chęć umieszczenia wszystkiego na slajdzie, właściwościach pozbawiona możliwości nadawania nowych wartości. Rzeczywista klasa powinna taką możliwość udostępniać - chociażby w celu umożliwienia napisania klas testujących.</description>
-    </item>
-    
-  </channel>
-</rss>
+Uzasadnienie Możliwość rejestracji zdarzeń (logging) zachodzących w aplikacji jest cechą bardzo pożądaną. Nie należy jednak przez zdarzenia rozumieć jedynie błędy czy problemy pojawiające się w czasie działania programu.</description></item><item><title>Tworzenie obiektów</title><link>https://awasn.github.io/tworzenie-obiektow/</link><pubDate>Wed, 04 Jul 2007 13:55:00 +0200</pubDate><guid>https://awasn.github.io/tworzenie-obiektow/</guid><description>W powyższej kwestii pojawiło się od czasu słowa kluczowego new trochę nowych metod i związanych z tym pojęć. W poszukiwaniu optymalnego kodu warto zwrócić uwagę na następujące pojęcia:
+Inversion of Control - obiekt nie tworzy samodzielnie żadnych wymaganych przez siebie instancji klas. Zamiast tego pobiera je z zewnętrznych zasobów; Push. Don&amp;rsquo;t Pull - obiekt nie tworzy samodzielnie żadnych wymaganych przez siebie instancji klas. Zamiast tego są mu one przekazywane jako parametry konstruktora lub właściwości; Dependency Injection - tworzenie instancji wymaganych klas zleca się obiektowi (kontenerowi) zewnętrznemu, który zna zależności pomiędzy klasami.</description></item><item><title>Herr Mock i Frau Command</title><link>https://awasn.github.io/herr-mock-i-frau-command/</link><pubDate>Thu, 21 Jun 2007 17:01:00 +0200</pubDate><guid>https://awasn.github.io/herr-mock-i-frau-command/</guid><description>Sławetny wzorzec Model-View-Presenter ma swoje zalety, ale ma i swoje uciążliwości. Jedna z wykorzystywanych przeze mnie implementacji tego wzorca zakłada, iż widok będzie posiadał funkcję umożliwiającą dodawanie do menu widoku kolejnych poleceń, które będą zawierały metody zwrotne wywoływane jako reakcja w przypadku wykonania polecenia. Jest to o tyle konieczne, iż np. formularz wyświetlający tabelę może zachowywać się różnie (obsługiwać różne zestawy poleceń) w zależności od danych, które ma zaszczyt prezentować. Weźmy pod uwagę fragment prezentera umożliwiającego identyfikację użytkownika.</description></item><item><title>Dobre praktyki w projektowaniu aplikacji mobilnych</title><link>https://awasn.github.io/dobre-praktyki-w-projektowaniu-aplikacji-mobilnych/</link><pubDate>Mon, 23 Apr 2007 14:03:00 +0200</pubDate><guid>https://awasn.github.io/dobre-praktyki-w-projektowaniu-aplikacji-mobilnych/</guid><description>W ostatnią sobotę (21.04.2007) na VI spotkaniu Warszawskiej Grupy .NET miałem przyjemność wystąpić z prezentacją dotyczącą wzorców projektowych, które warto zastosować programując urządzenia mobilne. Sam plik zawierający slajdy to oczywiście za mało, więc poniżej kilka dodatkowych opisów.
+Service Locator, slajdy 18 i 19 Klasa ObjectLocator oparta o wzorzec ServiceLocator została, ze względu na chęć umieszczenia wszystkiego na slajdzie, właściwościach pozbawiona możliwości nadawania nowych wartości. Rzeczywista klasa powinna taką możliwość udostępniać - chociażby w celu umożliwienia napisania klas testujących.</description></item></channel></rss>

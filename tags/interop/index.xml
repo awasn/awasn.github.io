@@ -1,56 +1,6 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Interop on arkadiusz wasniewski blog</title>
-    <link>https://awasn.github.io/tags/interop/</link>
-    <description>Recent content in Interop on arkadiusz wasniewski blog</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Wed, 20 May 2009 10:48:00 +0200</lastBuildDate>
-    
-	<atom:link href="https://awasn.github.io/tags/interop/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Kiedy nie działa tryb zgodności w Windows 7</title>
-      <link>https://awasn.github.io/kiedy-nie-dziala-tryb-zgodnosci-w-windows-7/</link>
-      <pubDate>Wed, 20 May 2009 10:48:00 +0200</pubDate>
-      
-      <guid>https://awasn.github.io/kiedy-nie-dziala-tryb-zgodnosci-w-windows-7/</guid>
-      <description>W razie problemów z działaniem aplikacji w systemie Windows 7 można we właściwościach danego programu (Properties –&amp;gt; Comaptibility) włączyć tryb zgodności (Compatibility mode) poprzez wybranie wcześniejszej wersji systemu operacyjnego. Do dyspozycji mamy:
- Windows 95; Windows 98 / Windows Me; Windows NT 4.0 z Service Pack 5; Windows 2000; Windows XP z Service Pack w wersji 2 lub 3; Windows Server 2003 z Service Pack 1; Windows Vista; Windows Vista z Service Pack 1 lub 2.</description>
-    </item>
-    
-    <item>
-      <title>MarshalHelper zarządza niezarządzanym</title>
-      <link>https://awasn.github.io/marshalhelper-zarzadza-niezarzadzanym/</link>
-      <pubDate>Wed, 04 Jun 2008 14:01:00 +0200</pubDate>
-      
-      <guid>https://awasn.github.io/marshalhelper-zarzadza-niezarzadzanym/</guid>
-      <description>W notce dotyczącej iteratorów czy też kiedy opisywałem operacje na plikach DBF posługiwałem się klasą pomocniczą MarshalHelper, która wykonywała wszystkie niezbędne czynności przy konwersji typów z kodu zarządzanego do niezarządzanego i vice versa. Wykorzystanie klas przestrzeni System.Runtime.InteropServices było konieczne, ponieważ w kodzie zarządzanym nie mamy gwarancji, iż pola z danej struktury będą w pamięci ułożone w tej samej kolejności i wyrównane powiedzmy do 8 bajtów.
-Sama implementacja metod pomocniczych klasy nie jest skomplikowana.</description>
-    </item>
-    
-    <item>
-      <title>Iteratory</title>
-      <link>https://awasn.github.io/iteratory/</link>
-      <pubDate>Mon, 26 May 2008 23:06:00 +0200</pubDate>
-      
-      <guid>https://awasn.github.io/iteratory/</guid>
-      <description>Mój pierwszy blog znajdował się na portalu developers.pl. Niestety z różnych przyczyn serwis ten padł. A szkoda. Choćby dlatego, iż miałem tam kilka ciekawych wpisów. Nie chciałbym aby zostały one wszystkie stracone dlatego też postanowiłem jeden z nich przypomnieć (również sobie). Ciekawa była optymalizacja pierwotnego kodu w ramach komentarzy do tej notki&amp;hellip;
-Jedną z nowości .NET w wersji 2.0 są (dzisiaj już możemy powiedzieć, że były) iteratory. Dzięki nim przekazywanie kolekcji obiektów czy struktur pomiędzy klasami nie musi już oznaczać zajmowania nowych, pomocniczych obszarów w pamięci, co konieczne było zwłaszcza jeśli nasze oprogramowanie zbudowane było w oparciu o warstwy (dostępu do danych, logiki biznesowej czy prezentacji).</description>
-    </item>
-    
-    <item>
-      <title>DBF po ludzku</title>
-      <link>https://awasn.github.io/dbf-po-ludzku/</link>
-      <pubDate>Tue, 12 Jun 2007 15:02:00 +0200</pubDate>
-      
-      <guid>https://awasn.github.io/dbf-po-ludzku/</guid>
-      <description>Jakiś czas temu Sławek pisał o dostępie poprzez sterowniki ODBC do tabel w formacie Excel. W podobny sposób można również próbować przetwarzać pliki DBF. Ale można też prościej&amp;hellip; bardziej po ludzku&amp;hellip;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Interop on arkadiusz wasniewski blog</title><link>https://awasn.github.io/tags/interop/</link><description>Recent content in Interop on arkadiusz wasniewski blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 20 May 2009 10:48:00 +0200</lastBuildDate><atom:link href="https://awasn.github.io/tags/interop/index.xml" rel="self" type="application/rss+xml"/><item><title>Kiedy nie działa tryb zgodności w Windows 7</title><link>https://awasn.github.io/kiedy-nie-dziala-tryb-zgodnosci-w-windows-7/</link><pubDate>Wed, 20 May 2009 10:48:00 +0200</pubDate><guid>https://awasn.github.io/kiedy-nie-dziala-tryb-zgodnosci-w-windows-7/</guid><description>W razie problemów z działaniem aplikacji w systemie Windows 7 można we właściwościach danego programu (Properties –&amp;gt; Comaptibility) włączyć tryb zgodności (Compatibility mode) poprzez wybranie wcześniejszej wersji systemu operacyjnego. Do dyspozycji mamy:
+Windows 95; Windows 98 / Windows Me; Windows NT 4.0 z Service Pack 5; Windows 2000; Windows XP z Service Pack w wersji 2 lub 3; Windows Server 2003 z Service Pack 1; Windows Vista; Windows Vista z Service Pack 1 lub 2.</description></item><item><title>MarshalHelper zarządza niezarządzanym</title><link>https://awasn.github.io/marshalhelper-zarzadza-niezarzadzanym/</link><pubDate>Wed, 04 Jun 2008 14:01:00 +0200</pubDate><guid>https://awasn.github.io/marshalhelper-zarzadza-niezarzadzanym/</guid><description>W notce dotyczącej iteratorów czy też kiedy opisywałem operacje na plikach DBF posługiwałem się klasą pomocniczą MarshalHelper, która wykonywała wszystkie niezbędne czynności przy konwersji typów z kodu zarządzanego do niezarządzanego i vice versa. Wykorzystanie klas przestrzeni System.Runtime.InteropServices było konieczne, ponieważ w kodzie zarządzanym nie mamy gwarancji, iż pola z danej struktury będą w pamięci ułożone w tej samej kolejności i wyrównane powiedzmy do 8 bajtów.
+Sama implementacja metod pomocniczych klasy nie jest skomplikowana.</description></item><item><title>Iteratory</title><link>https://awasn.github.io/iteratory/</link><pubDate>Mon, 26 May 2008 23:06:00 +0200</pubDate><guid>https://awasn.github.io/iteratory/</guid><description>Mój pierwszy blog znajdował się na portalu developers.pl. Niestety z różnych przyczyn serwis ten padł. A szkoda. Choćby dlatego, iż miałem tam kilka ciekawych wpisów. Nie chciałbym aby zostały one wszystkie stracone dlatego też postanowiłem jeden z nich przypomnieć (również sobie). Ciekawa była optymalizacja pierwotnego kodu w ramach komentarzy do tej notki&amp;hellip;
+Jedną z nowości .NET w wersji 2.0 są (dzisiaj już możemy powiedzieć, że były) iteratory. Dzięki nim przekazywanie kolekcji obiektów czy struktur pomiędzy klasami nie musi już oznaczać zajmowania nowych, pomocniczych obszarów w pamięci, co konieczne było zwłaszcza jeśli nasze oprogramowanie zbudowane było w oparciu o warstwy (dostępu do danych, logiki biznesowej czy prezentacji).</description></item><item><title>DBF po ludzku</title><link>https://awasn.github.io/dbf-po-ludzku/</link><pubDate>Tue, 12 Jun 2007 15:02:00 +0200</pubDate><guid>https://awasn.github.io/dbf-po-ludzku/</guid><description>Jakiś czas temu Sławek pisał o dostępie poprzez sterowniki ODBC do tabel w formacie Excel. W podobny sposób można również próbować przetwarzać pliki DBF. Ale można też prościej&amp;hellip; bardziej po ludzku&amp;hellip;
 Wersji formatu DBF jest oczywiście wiele, ale my zajmiemy się wersją 3, bardzo popularną zwłaszcza w środowisku MS-DOS. Niezbędne będzie przy tym skorzystanie z przestrzeni nazw InteropServices umożliwiającej dostęp do kodu niezarządzanego.
-Każdy plik DBF składa się z nagłówka</description>
-    </item>
-    
-  </channel>
-</rss>
+Każdy plik DBF składa się z nagłówka</description></item></channel></rss>
