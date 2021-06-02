@@ -1,8 +1,158 @@
-<!doctype html><html lang=pl-pl><head><meta name=theme-color content="#405365"><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.83.1"><meta name=description content="Opis modelu zabezpieczeń security model w Windows Mobile. Konfiguracja urządzenia typu Smartphone"><title>Model zabezpieczeń w Windows Mobile a urządzenia typu Smartphone - arkadiusz wasniewski blog</title><link rel=canonical href=https://awasn.github.io/model-zabezpieczen-w-windows-mobile-a-urzadzenia-typu-smartphone/><link rel=prev title=Subversion href=https://awasn.github.io/subversion/><link rel=next title="Nie wyrzucamy wyjątków poza Domain Model" href=https://awasn.github.io/nie-wyrzucamy-wyjatkow-poza-domain-model/><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css integrity="sha256-Q0zCrUs2IfXWYx0uMKJfG93CvF6oVII21waYsAV4/8Q=" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css><link rel=stylesheet href=https://awasn.github.io/awasn.min.f45a909800924faa836a73b82a1d4cb352f8053134a426a9dcafa61cf6a8c5d0.css integrity="sha256-9FqQmACST6qDanO4Kh1Ms1L4BTE0pCap3K+mHPaoxdA="></head><body><header><nav class=container><div class="pure-menu pure-menu-horizontal"><a class="pure-menu-heading pure-menu-link" href=https://awasn.github.io/>wasniewski</a><ul class="right pure-menu-list"><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/blog/>blog</a></li><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/categories/>categories</a></li><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/tags/>tags</a></li><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/about/>about</a></li></ul></div></nav></header><main class=container><aside class=post-published><p>This post was originally published on <a href=http://zine.net.pl/blogs/arkadiusz_wasniewski/archive/2008/02/27/model-zabezpiecze-w-windows-mobile-a-urz-dzenia-typu-smartphone.aspx target=_blank>zine.net.pl</a> on 27 February 2008 16:53 +0100</p></aside><article><header><h1>Model zabezpieczeń w Windows Mobile a urządzenia typu Smartphone</h1><div class=post-metadata><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>27 February 2008 16:53 +0100
-&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M20 14.66V20a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2h5.34"/><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"/></svg>
-17 September 2018 13:35 +0200
-&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-4 min read</div><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg><a href=https://awasn.github.io/categories/development>Development</a>
-&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83.0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7" y2="7"/></svg>
-<a href=https://awasn.github.io/tags/mobile>Mobile</a>, <a href=https://awasn.github.io/tags/visual-studio>Visual Studio</a></div></div></header><p>Wraz z systemami Windows Mobile 5.0 i Windows Mobile 6 wprowadzono nowych model zabezpieczeń (security model), który umożliwia przy pomocy zasad (policies), ról (roles) oraz certyfikatów (certificates) kontrolowanie konfiguracji, zdalnego dostępu oraz wykonywanie aplikacji na urządzeniu mobilnym. Ograniczeniu podlega dostęp do zasobów takich jak przestrzeń dyskowa, rejestr systemu czy API. Na podstawie ustalonego poziomu zabezpieczeń, program może być uruchomiony z uprawnieniami:</p><ul><li>Uprzywilejowany - możliwość wywoływania API bez ograniczeń, dokonywania modyfikacji rejestru, pełny dostęp do systemu plików;</li><li>Normalny - brak możliwości wywoływania API newralgicznych dla właściwego działania systemu, brak możliwości modyfikacji niektórych gałęzi rejestru, ograniczenia w dostępie do systemu plików. Na tym poziomie nie ma również możliwości instalowania certyfikatów;</li><li>Blokowany - brak dostępu do jakichkolwiek zasobów systemu.</li></ul><p>Poziom zabezpieczeń ustalany jest przez producenta lub dostawcę urządzenia. Mówimy o dostępie w modelu:</p><ul><li>Jednowarstwowym - sprawdzane jest czy uruchamiana aplikacja jest podpisana cyfrowo. Jeśli certyfikat jest poprawny (znajduje się w magazynie certyfikatów urządzenia) program uruchamiany jest z uprawnieniami uprzywilejowanymi. W przypadku braku podpisu lub podpisaniu przez certyfikat, który nie może być zweryfikowany, system wyświetla użytkownikowi okno dialogowe z pytaniem o zezwolenie na uruchomienie oprogramowania. Akceptacja oznacza uruchomienie aplikacji z uprawnieniami uprzywilejowanymi;</li><li>Dwuwarstwowym - w przypadku oprogramowania podpisanego certyfikatem poprawnym i weryfikowalnym, poziom uprawnień, z którymi zostanie aplikacja uruchomiona, zależy od rodzaju certyfikatu. Certyfikaty składowane w magazynie certyfikatów uprzywilejowanych uprawniają do uruchomienia programu z uprawnieniami uprzywilejowanymi. Pozostałe certyfikaty dają możliwość uruchomienia aplikacji z uprawnieniami normalnymi. W przypadku braku podpisu lub podpisaniu przez certyfikat, który nie może być zweryfikowany, program może być uruchomiony co najwyżej z uprawnieniami normalnymi.</li></ul><p>Istnieje oczywiście możliwość takiej konfiguracji urządzenia, aby pewne czynności były wykonywane przez system automatycznie np. bez wymagania potwierdzania przez użytkownika. Ważne też jest ustawienie przez producenta lub dostawcę urządzenia roli, kto może modyfikować poziom zabezpieczeń!</p><p>Co ciekawe model dwuwarstwowy dostępny jest jedynie w Windows Mobile przeznaczonym dla telefonów komórkowych (Windows Mobile 5.0 for Smartphone oraz Windows Mobile 6 Standard). I na dodatek jest to zalecany model domyślny.</p><p>Z punktu widzenia producenta lub dostawcy urządzenia ustawienie poziomu zabezpieczeń na dwuwarstwowy, z blokadą zmiany przez użytkownika właściwości tego poziomu, ogranicza do minimum problemy związane z wirusami, trojanami etc. Dla niewymagającego użytkownika ograniczenia te nie mają właściwie znaczenia. Osoba pragnąca wzbogacić urządzenie o dodatkowe oprogramowanie, przy pierwszym uruchomieniu aplikacji będzie zmuszona jedynie tę operację zaakceptować.</p><figure><img class=pure-img src=https://awasn.github.io/model-zabezpieczen-w-windows-mobile-a-urzadzenia-typu-smartphone/images/SmartphoneSecurity_Default.png alt="Domyślne ustawienia i poziom zabezpieczeń urządzania typu smartphone"><figcaption><h4>Domyślne ustawienia i poziom zabezpieczeń urządzania typu smartphone</h4></figcaption></figure><p>Programista natomiast staje niestety przed poważnym problemem. Visual Studio bowiem nie jest wstanie korzystać ze wszystkich zasobów urządzenia mobilnego, które są niezbędne do przeprowadzenia operacji zdalnego dostępu. Nie istnieje również, o czym było wcześniej, możliwość wgrania własnych certyfikatów!</p><p>Jeśli mamy zainstalowane Windows Mobile SDK w katalogu <strong>&lt;Miejsce instalacji SDK>\Windows Mobile 6 SDK\Tools\Security\Security Powertoy</strong> znajdziemy program <strong>SecCfgMgr.msi</strong>, który wdroży na komputerze stacjonarnym aplikację <strong>Security Configuration Manager</strong> umożliwiającą sprawdzanie i modyfikacje ustawień poziomu zabezpieczeń komputerów mobilnych (w naszym przypadku telefonów). Oczywiście jeśli konfiguracja urządzenia na te modyfikacje będzie zezwalać. A co w przypadku, jeśli uprawnienia do zmiany ustawień poziomu zabezpieczeń będą przypisane do dostawcy urządzenia tak jak to widzimy na rysunku powyżej (pole <strong>Grant manager role to</strong>)? Musimy mieć nadzieję, iż istnieje szansa programowej zmiany konfiguracji z wykorzystaniem narzędzi (aplikacji) podpisanych uprzywilejowanymi certyfikatami.</p><p>Pierwszym dostawcą telefonów komórkowych wyposażonych w system Windows Mobile (Windows Mobile 5.0 for Smartphone oraz Windows Mobile 6 Standard), który wprowadził blokady na poziomie dwuwarstwowym był Orange. Na szczęście dla urządzeń sieci Orange dostępna jest strona <code>http://spvunlock.rd.francetelecom.com</code>, która po podaniu numeru EMEI urządzenia, numeru telefonu, imienia i nazwisko (prowdopodobnie weryfikacja czy telefon wykorzystywany jest w sieci Orange) oraz adresu email wysyła do nas plik **remove_&lt;numer EMEI>**.cab umożliwiający zdjęcie zabezpieczeń z urządzenia (unlock). Po usunięciu blokady urządzenie powinno oczywiście również szybciej pracować. System ma bowiem mniejszy zakres danych do weryfikacji.</p><figure><img class=pure-img src=https://awasn.github.io/model-zabezpieczen-w-windows-mobile-a-urzadzenia-typu-smartphone/images/SmartphoneSecurity_AfterUnlock.png alt="Urządzenie typu smartphone po zdjęciu blokady zabezpieczeń"><figcaption><h4>Urządzenie typu smartphone po zdjęciu blokady zabezpieczeń</h4></figcaption></figure><p>Jak widzimy na powyższym rysunku, po zdjęciu zabezpieczeń telefon został przestawiony na jednowarstwowy poziom zabezpieczeń, skonfigurowany dodatkowo tak, iż dozwolone są wszystkie operacje bez informowania o tym użytkownika. Oczywiście teraz można i należy trochę podwyższyć poziom zabezpieczeń, chociażby poprzez wymóg pytania się przez system czy na pewno chcemy uruchomić niepodpisaną ważnym certyfikatem aplikację.</p><p>Konfiguracja poziomu zabezpieczeń urządzenia typu smartphone przyjazna dla programisty</p><figure><img class=pure-img src=https://awasn.github.io/model-zabezpieczen-w-windows-mobile-a-urzadzenia-typu-smartphone/images/SmartphoneSecurity_Manager.png alt="Konfiguracja poziomu zabezpieczeń urządzenia typu smartphone przyjazna dla programisty"><figcaption><h4>Konfiguracja poziomu zabezpieczeń urządzenia typu smartphone przyjazna dla programisty</h4></figcaption></figure><p>Teraz możemy przystąpić do programowania.</p><p>Na koniec możemy również uzupełnić jeszcze urządzenie mobilne o kilka certyfikatów. W katalogu <strong>&lt;Miejsce instalacji SDK>\Windows Mobile 6 SDK\Tools\Security\SDK Development Certificates</strong> znajduje się plik <strong>Certs.cab</strong>, który po wgraniu i uruchomieniu na urządzeniu mobilnym instaluje certyfikaty umożliwiające bez przeszkód korzystanie z narzędzi dostępnych w ramach SDK. Zgodnie z tym co było powiedziane wcześniej, przed zdjęciem blokady i zmianą ustawień poziomu zabezpieczeń instalacja ta zakończyłaby się niepowodzeniem.</p><p>Adresy i dodatkowe informacje:</p><ul><li><a href=https://blogs.msdn.microsoft.com/windowsmobile/2007/05/29/all-about-application-locked>All About &ldquo;Application Locked&rdquo;</a>;</li><li>Security Model for Windows Mobile 5.0 and Windows Mobile (<code>http://www.microsoft.com/technet/solutionaccelerators/mobile/maintain/SecModel/aff7cf7f-0e11-4ef4-8626-f33bd969b35a.mspx?mfr=true</code>).</li></ul></article><nav aria-label="Related posts"><h4>Related Posts</h4><ul><li><a href=https://awasn.github.io/http-wlasny-serwer-komunikacji-cz1-wstep/>HTTP - Własny serwer komunikacji. Część #1 - Wstęp</a></li><li><a href=https://awasn.github.io/cdata-kills-vs2k5/>&lt;![CDATA[]]> kills VS2K5</a></li><li><a href=https://awasn.github.io/visual-studio-t4-editor/>Visual Studio T4 Editor</a></li><li><a href=https://awasn.github.io/loopa-tv/>Loopa TV</a></li><li><a href=https://awasn.github.io/mobilne-mfc-a-protokol-http/>Mobilne MFC a protokół HTTP</a></li></ul></nav><nav class="pure-g post-previous-next" aria-label="Previous and next posts"><div class="pure-u-11-24 previous"><a href=https://awasn.github.io/subversion/ aria-label="Previous post"><span aria-hidden=true><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"/></svg></span></a><a href=https://awasn.github.io/subversion/>Subversion</a></div><div class=pure-u-2-24>&nbsp;</div><div class="pure-u-11-24 next"><a href=https://awasn.github.io/nie-wyrzucamy-wyjatkow-poza-domain-model/>Nie wyrzucamy wyjątków poza Domain Model</a>
-<a href=https://awasn.github.io/nie-wyrzucamy-wyjatkow-poza-domain-model/ aria-label="Next post"><span aria-hidden=true><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg></span></a></div></nav></main><footer><div class="center-aligned container"><p>Copyright &copy; 2007-2021 Arkadiusz Waśniewski. All Rights Reserved.</p></div></footer><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/accesslog.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dockerfile.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dos.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/go.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/powershell.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/routeros.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/typescript.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/yaml.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/vbnet.min.js></script><script>hljs.initHighlightingOnLoad()</script></body></html>
+<!DOCTYPE HTML>
+<html lang="pl-pl">
+    <head>
+        <meta name="theme-color" content="#405365"/>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="generator" content="Hugo 0.83.1" />
+        <meta name="description" content="Opis modelu zabezpieczeń security model w Windows Mobile. Konfiguracja urządzenia typu Smartphone" />
+        <title>Model zabezpieczeń w Windows Mobile a urządzenia typu Smartphone - arkadiusz wasniewski blog</title>
+        <link rel="canonical" href="https://awasn.github.io/model-zabezpieczen-w-windows-mobile-a-urzadzenia-typu-smartphone/">
+        <link rel="prev" title="Subversion" href="https://awasn.github.io/subversion/">
+        <link rel="next" title="Nie wyrzucamy wyjątków poza Domain Model" href="https://awasn.github.io/nie-wyrzucamy-wyjatkow-poza-domain-model/">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css" integrity="sha256-Q0zCrUs2IfXWYx0uMKJfG93CvF6oVII21waYsAV4/8Q=" crossorigin="anonymous" />
+        
+        
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
+        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.f45a909800924faa836a73b82a1d4cb352f8053134a426a9dcafa61cf6a8c5d0.css" integrity="sha256-9FqQmACST6qDanO4Kh1Ms1L4BTE0pCap3K&#43;mHPaoxdA=" />
+
+    </head>
+    <body>
+        <header>
+            <nav class="container" >
+                <div class="pure-menu pure-menu-horizontal">
+                    <a class="pure-menu-heading pure-menu-link" href="https://awasn.github.io/">wasniewski</a>
+                    <ul class="right pure-menu-list">
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/blog/">blog</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/categories/">categories</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/tags/">tags</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/about/">about</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container">
+            
+    <aside class="post-published">
+        <p>This post was originally published on <a href="http://zine.net.pl/blogs/arkadiusz_wasniewski/archive/2008/02/27/model-zabezpiecze-w-windows-mobile-a-urz-dzenia-typu-smartphone.aspx" target="_blank">zine.net.pl</a> on 27 February 2008 16:53 &#43;0100</p>
+    </aside>
+
+    <article>
+        <header>
+            <h1>Model zabezpieczeń w Windows Mobile a urządzenia typu Smartphone</h1>
+                <div class="post-metadata">
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            27 February 2008 16:53 &#43;0100
+            
+                &nbsp;
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon></svg>
+                17 September 2018 13:35 &#43;0200
+            
+            &nbsp;
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            4 min read
+        </div>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+            <a href="https://awasn.github.io/categories/development">Development</a>
+            
+                &nbsp;
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+                <a href="https://awasn.github.io/tags/mobile">Mobile</a>, <a href="https://awasn.github.io/tags/visual-studio">Visual Studio</a>
+            
+        </div>
+    </div>
+        </header>
+
+        <p>Wraz z systemami Windows Mobile 5.0 i Windows Mobile 6 wprowadzono nowych model zabezpieczeń (security model), który umożliwia przy pomocy zasad (policies), ról (roles) oraz certyfikatów (certificates) kontrolowanie konfiguracji, zdalnego dostępu oraz wykonywanie aplikacji na urządzeniu mobilnym. Ograniczeniu podlega dostęp do zasobów takich jak przestrzeń dyskowa, rejestr systemu czy API. Na podstawie ustalonego poziomu zabezpieczeń, program może być uruchomiony z uprawnieniami:</p>
+<ul>
+<li>Uprzywilejowany - możliwość wywoływania API bez ograniczeń, dokonywania modyfikacji rejestru, pełny dostęp do systemu plików;</li>
+<li>Normalny - brak możliwości wywoływania API newralgicznych dla właściwego działania systemu, brak możliwości modyfikacji niektórych gałęzi rejestru, ograniczenia w dostępie do systemu plików. Na tym poziomie nie ma również możliwości instalowania certyfikatów;</li>
+<li>Blokowany - brak dostępu do jakichkolwiek zasobów systemu.</li>
+</ul>
+<p>Poziom zabezpieczeń ustalany jest przez producenta lub dostawcę urządzenia. Mówimy o dostępie w modelu:</p>
+<ul>
+<li>Jednowarstwowym - sprawdzane jest czy uruchamiana aplikacja jest podpisana cyfrowo. Jeśli certyfikat jest poprawny (znajduje się w magazynie certyfikatów urządzenia) program uruchamiany jest z uprawnieniami uprzywilejowanymi. W przypadku braku podpisu lub podpisaniu przez certyfikat, który nie może być zweryfikowany, system wyświetla użytkownikowi okno dialogowe z pytaniem o zezwolenie na uruchomienie oprogramowania. Akceptacja oznacza uruchomienie aplikacji z uprawnieniami uprzywilejowanymi;</li>
+<li>Dwuwarstwowym - w przypadku oprogramowania podpisanego certyfikatem poprawnym i weryfikowalnym, poziom uprawnień, z którymi zostanie aplikacja uruchomiona, zależy od rodzaju certyfikatu. Certyfikaty składowane w magazynie certyfikatów uprzywilejowanych uprawniają do uruchomienia programu z uprawnieniami uprzywilejowanymi. Pozostałe certyfikaty dają możliwość uruchomienia aplikacji z uprawnieniami normalnymi. W przypadku braku podpisu lub podpisaniu przez certyfikat, który nie może być zweryfikowany, program może być uruchomiony co najwyżej z uprawnieniami normalnymi.</li>
+</ul>
+<p>Istnieje oczywiście możliwość takiej konfiguracji urządzenia, aby pewne czynności były wykonywane przez system automatycznie np. bez wymagania potwierdzania przez użytkownika. Ważne też jest ustawienie przez producenta lub dostawcę urządzenia roli, kto może modyfikować poziom zabezpieczeń!</p>
+<p>Co ciekawe model dwuwarstwowy dostępny jest jedynie w Windows Mobile przeznaczonym dla telefonów komórkowych (Windows Mobile 5.0 for Smartphone oraz Windows Mobile 6 Standard). I na dodatek jest to zalecany model domyślny.</p>
+<p>Z punktu widzenia producenta lub dostawcy urządzenia ustawienie poziomu zabezpieczeń na dwuwarstwowy, z blokadą zmiany przez użytkownika właściwości tego poziomu, ogranicza do minimum problemy związane z wirusami, trojanami etc. Dla niewymagającego użytkownika ograniczenia te nie mają właściwie znaczenia. Osoba pragnąca wzbogacić urządzenie o dodatkowe oprogramowanie, przy pierwszym uruchomieniu aplikacji będzie zmuszona jedynie tę operację zaakceptować.</p>
+    <figure>
+        <img class="pure-img" src="https://awasn.github.io/model-zabezpieczen-w-windows-mobile-a-urzadzenia-typu-smartphone/images/SmartphoneSecurity_Default.png" alt="Domyślne ustawienia i poziom zabezpieczeń urządzania typu smartphone" >
+        <figcaption><h4>Domyślne ustawienia i poziom zabezpieczeń urządzania typu smartphone</h4></figcaption>
+    </figure>
+<p>Programista natomiast staje niestety przed poważnym problemem. Visual Studio bowiem nie jest wstanie korzystać ze wszystkich zasobów urządzenia mobilnego, które są niezbędne do przeprowadzenia operacji zdalnego dostępu. Nie istnieje również, o czym było wcześniej, możliwość wgrania własnych certyfikatów!</p>
+<p>Jeśli mamy zainstalowane Windows Mobile SDK w katalogu <strong>&lt;Miejsce instalacji SDK&gt;\Windows Mobile 6 SDK\Tools\Security\Security Powertoy</strong> znajdziemy program <strong>SecCfgMgr.msi</strong>, który wdroży na komputerze stacjonarnym aplikację <strong>Security Configuration Manager</strong> umożliwiającą sprawdzanie i modyfikacje ustawień poziomu zabezpieczeń komputerów mobilnych (w naszym przypadku telefonów). Oczywiście jeśli konfiguracja urządzenia na te modyfikacje będzie zezwalać. A co w przypadku, jeśli uprawnienia do zmiany ustawień poziomu zabezpieczeń będą przypisane do dostawcy urządzenia tak jak to widzimy na rysunku powyżej (pole <strong>Grant manager role to</strong>)? Musimy mieć nadzieję, iż istnieje szansa programowej zmiany konfiguracji z wykorzystaniem narzędzi (aplikacji) podpisanych uprzywilejowanymi certyfikatami.</p>
+<p>Pierwszym dostawcą telefonów komórkowych wyposażonych w system Windows Mobile (Windows Mobile 5.0 for Smartphone oraz Windows Mobile 6 Standard), który wprowadził blokady na poziomie dwuwarstwowym był Orange. Na szczęście dla urządzeń sieci Orange dostępna jest strona <code>http://spvunlock.rd.francetelecom.com</code>, która po podaniu numeru EMEI urządzenia, numeru telefonu, imienia i nazwisko (prowdopodobnie weryfikacja czy telefon wykorzystywany jest w sieci Orange) oraz adresu email wysyła do nas plik **remove_&lt;numer EMEI&gt;**.cab umożliwiający zdjęcie zabezpieczeń z urządzenia (unlock). Po usunięciu blokady urządzenie powinno oczywiście również szybciej pracować. System ma bowiem mniejszy zakres danych do weryfikacji.</p>
+    <figure>
+        <img class="pure-img" src="https://awasn.github.io/model-zabezpieczen-w-windows-mobile-a-urzadzenia-typu-smartphone/images/SmartphoneSecurity_AfterUnlock.png" alt="Urządzenie typu smartphone po zdjęciu blokady zabezpieczeń" >
+        <figcaption><h4>Urządzenie typu smartphone po zdjęciu blokady zabezpieczeń</h4></figcaption>
+    </figure>
+<p>Jak widzimy na powyższym rysunku, po zdjęciu zabezpieczeń telefon został przestawiony na jednowarstwowy poziom zabezpieczeń, skonfigurowany dodatkowo tak, iż dozwolone są wszystkie operacje bez informowania o tym użytkownika. Oczywiście teraz można i należy trochę podwyższyć poziom zabezpieczeń, chociażby poprzez wymóg pytania się przez system czy na pewno chcemy uruchomić niepodpisaną ważnym certyfikatem aplikację.</p>
+<p>Konfiguracja poziomu zabezpieczeń urządzenia typu smartphone przyjazna dla programisty</p>
+    <figure>
+        <img class="pure-img" src="https://awasn.github.io/model-zabezpieczen-w-windows-mobile-a-urzadzenia-typu-smartphone/images/SmartphoneSecurity_Manager.png" alt="Konfiguracja poziomu zabezpieczeń urządzenia typu smartphone przyjazna dla programisty" >
+        <figcaption><h4>Konfiguracja poziomu zabezpieczeń urządzenia typu smartphone przyjazna dla programisty</h4></figcaption>
+    </figure>
+<p>Teraz możemy przystąpić do programowania.</p>
+<p>Na koniec możemy również uzupełnić jeszcze urządzenie mobilne o kilka certyfikatów. W katalogu <strong>&lt;Miejsce instalacji SDK&gt;\Windows Mobile 6 SDK\Tools\Security\SDK Development Certificates</strong> znajduje się plik <strong>Certs.cab</strong>, który po wgraniu i uruchomieniu na urządzeniu mobilnym instaluje certyfikaty umożliwiające bez przeszkód korzystanie z narzędzi dostępnych w ramach SDK. Zgodnie z tym co było powiedziane wcześniej, przed zdjęciem blokady i zmianą ustawień poziomu zabezpieczeń instalacja ta zakończyłaby się niepowodzeniem.</p>
+<p>Adresy i dodatkowe informacje:</p>
+<ul>
+<li><a href="https://blogs.msdn.microsoft.com/windowsmobile/2007/05/29/all-about-application-locked">All About &ldquo;Application Locked&rdquo;</a>;</li>
+<li>Security Model for Windows Mobile 5.0 and Windows Mobile  (<code>http://www.microsoft.com/technet/solutionaccelerators/mobile/maintain/SecModel/aff7cf7f-0e11-4ef4-8626-f33bd969b35a.mspx?mfr=true</code>).</li>
+</ul>
+
+    </article>
+    <nav aria-label="Related posts">
+        <h4>Related Posts</h4>
+        <ul>
+            <li><a href="https://awasn.github.io/http-wlasny-serwer-komunikacji-cz1-wstep/">HTTP - Własny serwer komunikacji. Część #1 - Wstęp</a></li>
+            <li><a href="https://awasn.github.io/cdata-kills-vs2k5/">&lt;![CDATA[]]&gt; kills VS2K5</a></li>
+            <li><a href="https://awasn.github.io/visual-studio-t4-editor/">Visual Studio T4 Editor</a></li>
+            <li><a href="https://awasn.github.io/loopa-tv/">Loopa TV</a></li>
+            <li><a href="https://awasn.github.io/mobilne-mfc-a-protokol-http/">Mobilne MFC a protokół HTTP</a></li>
+        </ul>
+    </nav>
+
+    <nav class="pure-g post-previous-next" aria-label="Previous and next posts">
+        <div class="pure-u-11-24 previous">
+            <a href="https://awasn.github.io/subversion/" aria-label="Previous post"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg></span></a>
+            <a href="https://awasn.github.io/subversion/">Subversion</a>
+        </div>
+        <div class="pure-u-2-24">&nbsp;</div>
+        <div class="pure-u-11-24 next">
+            <a href="https://awasn.github.io/nie-wyrzucamy-wyjatkow-poza-domain-model/">Nie wyrzucamy wyjątków poza Domain Model</a>
+            <a href="https://awasn.github.io/nie-wyrzucamy-wyjatkow-poza-domain-model/" aria-label="Next post"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg></span></a>
+        </div>
+    </nav>
+
+    
+
+
+        </main>
+
+        <footer>
+            <div class="center-aligned container">
+                <p>Copyright &copy; 2007-2021 Arkadiusz Waśniewski. All Rights Reserved.</p>
+            </div>
+        </footer>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/accesslog.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dockerfile.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dos.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/go.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/powershell.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/routeros.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/typescript.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/yaml.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/vbnet.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+</html>

@@ -1,1 +1,20 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>General on arkadiusz wasniewski blog</title><link>https://awasn.github.io/categories/general/</link><description>Recent content in General on arkadiusz wasniewski blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 01 Apr 2009 09:50:00 +0200</lastBuildDate><atom:link href="https://awasn.github.io/categories/general/index.xml" rel="self" type="application/rss+xml"/><item><title>Pokaż wszystkim swoje hasło</title><link>https://awasn.github.io/pokaz-wszystkim-swoje-haslo/</link><pubDate>Wed, 01 Apr 2009 09:50:00 +0200</pubDate><guid>https://awasn.github.io/pokaz-wszystkim-swoje-haslo/</guid><description>Aneta Sidorowicz na swoim blogu (a jakże!) zrobiła małe, subiektywne zestawienie osób organizujących (mających wkład w) konferencję C2C 2009 (http://2009.communities2communities.org.pl). Zestawienie przeczytałem i ponieważ zabrakło mi w nim jednej osoby, popełniłem komentarz do wpisu. Jakież było moje zdziwienia (przerażenie wręcz) kiedy jako podpis osoby wystawiającej komentarz wyświetliła się moja nazwa użytkownika i hasło (!!!) mojego profilu Windows Live. Zgroza, to po prostu jest zgroza. Dobrze, że użytkownik dodający komentarz może też go usunąć.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>General on arkadiusz wasniewski blog</title>
+    <link>https://awasn.github.io/categories/general/</link>
+    <description>Recent content in General on arkadiusz wasniewski blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 01 Apr 2009 09:50:00 +0200</lastBuildDate><atom:link href="https://awasn.github.io/categories/general/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Pokaż wszystkim swoje hasło</title>
+      <link>https://awasn.github.io/pokaz-wszystkim-swoje-haslo/</link>
+      <pubDate>Wed, 01 Apr 2009 09:50:00 +0200</pubDate>
+      
+      <guid>https://awasn.github.io/pokaz-wszystkim-swoje-haslo/</guid>
+      <description>Aneta Sidorowicz na swoim blogu (a jakże!) zrobiła małe, subiektywne zestawienie osób organizujących (mających wkład w) konferencję C2C 2009 (http://2009.communities2communities.org.pl). Zestawienie przeczytałem i ponieważ zabrakło mi w nim jednej osoby, popełniłem komentarz do wpisu. Jakież było moje zdziwienia (przerażenie wręcz) kiedy jako podpis osoby wystawiającej komentarz wyświetliła się moja nazwa użytkownika i hasło (!!!) mojego profilu Windows Live. Zgroza, to po prostu jest zgroza. Dobrze, że użytkownik dodający komentarz może też go usunąć.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,12 +1,85 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Meetings on arkadiusz wasniewski blog</title><link>https://awasn.github.io/tags/meetings/</link><description>Recent content in Meetings on arkadiusz wasniewski blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 09 Mar 2009 23:45:00 +0100</lastBuildDate><atom:link href="https://awasn.github.io/tags/meetings/index.xml" rel="self" type="application/rss+xml"/><item><title>Raymond Lewallen w Polsce</title><link>https://awasn.github.io/raymond-lewallen-w-polsce/</link><pubDate>Mon, 09 Mar 2009 23:45:00 +0100</pubDate><guid>https://awasn.github.io/raymond-lewallen-w-polsce/</guid><description>Wraz z konferencją 4Developers swoje tourne po Polsce rozpoczął Raymond Lewallen - znany bloger portalu CodeBetter.com. W czasie wizyty odwiedzi i spotka się z grupami off-line z następujących miast:
-Kraków: 8 marca; Katowice: 9 marca; Warszawa: 10 marca; Poznań: 11 marca; Toruń: 12 marca; Gdańsk: 13 marca. Zaprezentuje on między innymi następujące tematy:
-Behavior Driven Development; Building DSLs and Fluent Interfaces in C#. Więcej informacji można znaleźć na stronach grup w ramach portalu ms-groups.</description></item><item><title>Typy wyliczane czy klasy</title><link>https://awasn.github.io/typy-wyliczane-czy-klasy/</link><pubDate>Fri, 24 Oct 2008 12:20:00 +0200</pubDate><guid>https://awasn.github.io/typy-wyliczane-czy-klasy/</guid><description>Tak to już jest, iż programując bardzo często stajemy przed koniecznością wyboru rozwiązania, będąc gdzieś w połowie drogi pomiędzy &amp;ldquo;najlepszymi technikami&amp;rdquo;. Jeden z takich przypadków, ale bez wybrania najlepszej drogi, chciałbym opisać poniżej.
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Meetings on arkadiusz wasniewski blog</title>
+    <link>https://awasn.github.io/tags/meetings/</link>
+    <description>Recent content in Meetings on arkadiusz wasniewski blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 09 Mar 2009 23:45:00 +0100</lastBuildDate><atom:link href="https://awasn.github.io/tags/meetings/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Raymond Lewallen w Polsce</title>
+      <link>https://awasn.github.io/raymond-lewallen-w-polsce/</link>
+      <pubDate>Mon, 09 Mar 2009 23:45:00 +0100</pubDate>
+      
+      <guid>https://awasn.github.io/raymond-lewallen-w-polsce/</guid>
+      <description>Wraz z konferencją 4Developers swoje tourne po Polsce rozpoczął Raymond Lewallen - znany bloger portalu CodeBetter.com. W czasie wizyty odwiedzi i spotka się z grupami off-line z następujących miast:
+ Kraków: 8 marca; Katowice: 9 marca; Warszawa: 10 marca; Poznań: 11 marca; Toruń: 12 marca; Gdańsk: 13 marca.  Zaprezentuje on między innymi następujące tematy:
+ Behavior Driven Development; Building DSLs and Fluent Interfaces in C#.  Więcej informacji można znaleźć na stronach grup w ramach portalu ms-groups.</description>
+    </item>
+    
+    <item>
+      <title>Typy wyliczane czy klasy</title>
+      <link>https://awasn.github.io/typy-wyliczane-czy-klasy/</link>
+      <pubDate>Fri, 24 Oct 2008 12:20:00 +0200</pubDate>
+      
+      <guid>https://awasn.github.io/typy-wyliczane-czy-klasy/</guid>
+      <description>Tak to już jest, iż programując bardzo często stajemy przed koniecznością wyboru rozwiązania, będąc gdzieś w połowie drogi pomiędzy &amp;ldquo;najlepszymi technikami&amp;rdquo;. Jeden z takich przypadków, ale bez wybrania najlepszej drogi, chciałbym opisać poniżej.
 Załóżmy, iż budujemy aplikację służącą sprzedaży Na początek będziemy wykorzystywać dwa typy dokumentów: paragon i fakturą. W kodzie tworzymy odpowiadający temu typ wyliczany:
-internal enum DocumentType { Receipt, Invoice } Następnie pojawiają się nowe wymagania. Potrzebujemy powiązać z typami dokumentów skrót, czyli kilkuznakowy identyfikator, który będzie wykorzystywany:</description></item><item><title>Bloggers Underground</title><link>https://awasn.github.io/bloggers-underground/</link><pubDate>Sun, 21 Sep 2008 16:46:00 +0200</pubDate><guid>https://awasn.github.io/bloggers-underground/</guid><description>Paweł Potasiński chwil temu kilka rzucił zajawkę w kwestii spotkania o jakże wymownej nazwie Bloggers Underground. Zdecydowanie również wybieram się tam. Patrząc na listę uczestników zapowiada się ciekawie ;-) Może z tego powstanie jakaś nowa świecka tradycja?
+internal enum DocumentType { Receipt, Invoice } Następnie pojawiają się nowe wymagania. Potrzebujemy powiązać z typami dokumentów skrót, czyli kilkuznakowy identyfikator, który będzie wykorzystywany:</description>
+    </item>
+    
+    <item>
+      <title>Bloggers Underground</title>
+      <link>https://awasn.github.io/bloggers-underground/</link>
+      <pubDate>Sun, 21 Sep 2008 16:46:00 +0200</pubDate>
+      
+      <guid>https://awasn.github.io/bloggers-underground/</guid>
+      <description>Paweł Potasiński chwil temu kilka rzucił zajawkę w kwestii spotkania o jakże wymownej nazwie Bloggers Underground. Zdecydowanie również wybieram się tam. Patrząc na listę uczestników zapowiada się ciekawie ;-) Może z tego powstanie jakaś nowa świecka tradycja?
 Jeśli chodzi o moją pogadankę to zajrzymy być może delikatnie w trzewia IHttpModule i IHttpHandler.
-http://bloggersunderground.spaces.live.com - oficjalna strona spotkania.</description></item><item><title>Subversion</title><link>https://awasn.github.io/subversion/</link><pubDate>Fri, 15 Feb 2008 11:56:00 +0100</pubDate><guid>https://awasn.github.io/subversion/</guid><description>Kolejna przeprowadzona przeze mnie prezentacja na połączonym XX Spotkaniu Warszawskiej Grupy .NET i XI Spotkaniu Polskiej Grupy Użytkowników SQL Server. Tym razem tematem był system kontroli wersji Subversion. W nasze spotkania wkroczyła technika i sesja była nagrywana. Niestety z powodów technicznych i czasoprzestrzennych ostatnia część prezentacji, czyli demo musiało zostać co nieco skrócone i nie wszystko zostało pokazane.
-Na koniec informacja dla wszystkich zainteresowanych uczestnictwem w spotkaniach Warszawskiej Grupy .NET. Do grupy należeć może każdy zainteresowany tematyką programowania w ramach platformy .</description></item><item><title>Metoda fabryki</title><link>https://awasn.github.io/metoda-fabryki/</link><pubDate>Thu, 27 Dec 2007 21:27:00 +0100</pubDate><guid>https://awasn.github.io/metoda-fabryki/</guid><description>Poniższy tekst bazuje na prezentacji, którą przeprowadziłem 13 grudnia 2007 na połączonym XVI Spotkaniu Warszawskiej Grupy .NET + VII Spotkaniu Polskiej Grupy Użytkowników SQL Server.
+ http://bloggersunderground.spaces.live.com - oficjalna strona spotkania.  </description>
+    </item>
+    
+    <item>
+      <title>Subversion</title>
+      <link>https://awasn.github.io/subversion/</link>
+      <pubDate>Fri, 15 Feb 2008 11:56:00 +0100</pubDate>
+      
+      <guid>https://awasn.github.io/subversion/</guid>
+      <description>Kolejna przeprowadzona przeze mnie prezentacja na połączonym XX Spotkaniu Warszawskiej Grupy .NET i XI Spotkaniu Polskiej Grupy Użytkowników SQL Server. Tym razem tematem był system kontroli wersji Subversion. W nasze spotkania wkroczyła technika i sesja była nagrywana. Niestety z powodów technicznych i czasoprzestrzennych ostatnia część prezentacji, czyli demo musiało zostać co nieco skrócone i nie wszystko zostało pokazane.
+Na koniec informacja dla wszystkich zainteresowanych uczestnictwem w spotkaniach Warszawskiej Grupy .NET. Do grupy należeć może każdy zainteresowany tematyką programowania w ramach platformy .</description>
+    </item>
+    
+    <item>
+      <title>Metoda fabryki</title>
+      <link>https://awasn.github.io/metoda-fabryki/</link>
+      <pubDate>Thu, 27 Dec 2007 21:27:00 +0100</pubDate>
+      
+      <guid>https://awasn.github.io/metoda-fabryki/</guid>
+      <description>Poniższy tekst bazuje na prezentacji, którą przeprowadziłem 13 grudnia 2007 na połączonym XVI Spotkaniu Warszawskiej Grupy .NET + VII Spotkaniu Polskiej Grupy Użytkowników SQL Server.
 Wstęp Metoda fabryki (ang. Factory Method) jest, obok signletona czy budowniczego, wzorcem kreacyjnym odpowiadającym za tworzenie obiektów - instancji klas. Główne zadanie metody fabryki to oddzielenie procesu korzystania z obiektów od ich tworzenia.
-Wyobraźmy sobie aplikację w wersji standardowej przeznaczoną do obsługi sprzedaży, w której dla kilku klientów dokonujemy modyfikacji.</description></item><item><title>Visual Studio T4 Editor</title><link>https://awasn.github.io/visual-studio-t4-editor/</link><pubDate>Mon, 22 Oct 2007 10:06:00 +0200</pubDate><guid>https://awasn.github.io/visual-studio-t4-editor/</guid><description>Wszystkim, których interesuje temat szablonów tekstowych T4 (Text Templating Transformation Toolkit), a myślę, że przynajmniej w Warszawskiej Grupie .NET po XI spotkaniu kilka osób się znajdzie, polecam stronę http://www.t4editor.net gdzie znajdziemy darmową, aczkolwiek czasową (styczeń 2008 roku) wersję beta edytora szablonów T4 instalującego się jako dodatek do Visual Studio.
-Szablony T4 wykorzystywane są przez wszystkie niemal Software Factories firmy Microsoft oraz narzędzia oparte o DSL. Dla szukających wiedzy na ten temat polecam swój artykuł w drugim numerze gazetki zine.</description></item><item><title>Dobre praktyki w projektowaniu aplikacji mobilnych</title><link>https://awasn.github.io/dobre-praktyki-w-projektowaniu-aplikacji-mobilnych/</link><pubDate>Mon, 23 Apr 2007 14:03:00 +0200</pubDate><guid>https://awasn.github.io/dobre-praktyki-w-projektowaniu-aplikacji-mobilnych/</guid><description>W ostatnią sobotę (21.04.2007) na VI spotkaniu Warszawskiej Grupy .NET miałem przyjemność wystąpić z prezentacją dotyczącą wzorców projektowych, które warto zastosować programując urządzenia mobilne. Sam plik zawierający slajdy to oczywiście za mało, więc poniżej kilka dodatkowych opisów.
-Service Locator, slajdy 18 i 19 Klasa ObjectLocator oparta o wzorzec ServiceLocator została, ze względu na chęć umieszczenia wszystkiego na slajdzie, właściwościach pozbawiona możliwości nadawania nowych wartości. Rzeczywista klasa powinna taką możliwość udostępniać - chociażby w celu umożliwienia napisania klas testujących.</description></item></channel></rss>
+Wyobraźmy sobie aplikację w wersji standardowej przeznaczoną do obsługi sprzedaży, w której dla kilku klientów dokonujemy modyfikacji.</description>
+    </item>
+    
+    <item>
+      <title>Visual Studio T4 Editor</title>
+      <link>https://awasn.github.io/visual-studio-t4-editor/</link>
+      <pubDate>Mon, 22 Oct 2007 10:06:00 +0200</pubDate>
+      
+      <guid>https://awasn.github.io/visual-studio-t4-editor/</guid>
+      <description>Wszystkim, których interesuje temat szablonów tekstowych T4 (Text Templating Transformation Toolkit), a myślę, że przynajmniej w Warszawskiej Grupie .NET po XI spotkaniu kilka osób się znajdzie, polecam stronę http://www.t4editor.net gdzie znajdziemy darmową, aczkolwiek czasową (styczeń 2008 roku) wersję beta edytora szablonów T4 instalującego się jako dodatek do Visual Studio.
+Szablony T4 wykorzystywane są przez wszystkie niemal Software Factories firmy Microsoft oraz narzędzia oparte o DSL. Dla szukających wiedzy na ten temat polecam swój artykuł w drugim numerze gazetki zine.</description>
+    </item>
+    
+    <item>
+      <title>Dobre praktyki w projektowaniu aplikacji mobilnych</title>
+      <link>https://awasn.github.io/dobre-praktyki-w-projektowaniu-aplikacji-mobilnych/</link>
+      <pubDate>Mon, 23 Apr 2007 14:03:00 +0200</pubDate>
+      
+      <guid>https://awasn.github.io/dobre-praktyki-w-projektowaniu-aplikacji-mobilnych/</guid>
+      <description>W ostatnią sobotę (21.04.2007) na VI spotkaniu Warszawskiej Grupy .NET miałem przyjemność wystąpić z prezentacją dotyczącą wzorców projektowych, które warto zastosować programując urządzenia mobilne. Sam plik zawierający slajdy to oczywiście za mało, więc poniżej kilka dodatkowych opisów.
+Service Locator, slajdy 18 i 19 Klasa ObjectLocator oparta o wzorzec ServiceLocator została, ze względu na chęć umieszczenia wszystkiego na slajdzie, właściwościach pozbawiona możliwości nadawania nowych wartości. Rzeczywista klasa powinna taką możliwość udostępniać - chociażby w celu umożliwienia napisania klas testujących.</description>
+    </item>
+    
+  </channel>
+</rss>

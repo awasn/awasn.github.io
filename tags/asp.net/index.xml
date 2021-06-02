@@ -1,3 +1,58 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ASP.NET on arkadiusz wasniewski blog</title><link>https://awasn.github.io/tags/asp.net/</link><description>Recent content in ASP.NET on arkadiusz wasniewski blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 11 Dec 2008 12:45:00 +0100</lastBuildDate><atom:link href="https://awasn.github.io/tags/asp.net/index.xml" rel="self" type="application/rss+xml"/><item><title>Rozwiązanie mobilne</title><link>https://awasn.github.io/rozwiazanie-mobilne/</link><pubDate>Thu, 11 Dec 2008 12:45:00 +0100</pubDate><guid>https://awasn.github.io/rozwiazanie-mobilne/</guid><description>Kilka miesięcy temu stałem się szczęśliwym posiadaczem projektu na przygotowanie kompletnego rozwiązania z zakresu szeroko pojętej sprzedaży dla &amp;ldquo;profesjonalnych&amp;rdquo; urządzeń mobilnych, czyli komputerów odpornych na niskie temperatury i kroploszczelne. Systemy operacyjne, które znalazły się w zasięgu projektu to:
-Microsoft Windows for Pocket PC 2003, Windows Mobile 2003; Windows Mobile 5.0 for Pocket PC, Windows Mobile 5.0 for Pocket PC Phone Edition; Windows Mobile 6 Classic, Windows Mobile 6 Professional. Pod uwagę należało też brać możliwość pojawienia się w przyszłości konieczności działania programu w ramach Windows CE .</description></item><item><title>HTTP - Własny serwer komunikacji. Część #2 - Środowisko programistyczne</title><link>https://awasn.github.io/http-wlasny-serwer-komunikacji-cz2-srodowisko-programistyczne/</link><pubDate>Sun, 27 Jan 2008 22:12:00 +0100</pubDate><guid>https://awasn.github.io/http-wlasny-serwer-komunikacji-cz2-srodowisko-programistyczne/</guid><description>Zasadniczo całe rozwiązanie zbudowane będzie przy pomocy Microsoft Visual Studio 2005 Professional Edition w oparciu o ASP.NET Web Application jako typ projektu. Użytkownicy wersji Express będą niestety zmuszeni dokonać konwersji do projektu Web Site. Dostarczany z Visual Studio serwer WWW w zupełności wystarczy do uruchomienia prezentowanego rozwiązania. Z racji wybranego środowiska operować będziemy na platformie .NET w wersji 2.0. Nie mniej jednak bez żadnych zmian prezentowane oprogramowanie będzie działało również w wersji 1.</description></item><item><title>HTTP - Własny serwer komunikacji. Część #1 - Wstęp</title><link>https://awasn.github.io/http-wlasny-serwer-komunikacji-cz1-wstep/</link><pubDate>Mon, 14 Jan 2008 22:45:00 +0100</pubDate><guid>https://awasn.github.io/http-wlasny-serwer-komunikacji-cz1-wstep/</guid><description>Budując rozwiązanie, które wymaga wymiany informacji z aplikacjami uruchomionymi na innych maszynach możemy skorzystać z kilku propozycji, jakich dostarcza platforma .NET. Są to między innymi gniazdka (sockets), .NET Remoting, Usługi Sieciowe (Web Services), kolejki wiadomości (MSMQ) czy łączący i uzupełniający większość z tych rozwiązań Windows Communication Foundation (WCF). Oczywiście część z tych metod działa praktycznie tylko wtedy, jeśli obie strony oparte są o .NET (.NET Remoting czy net.tcp z WCF). Inne znów mają problemy jeśli wychodzimy poza obręb danej sieci (.</description></item><item><title>FormsAuthentication w Reporing Services</title><link>https://awasn.github.io/formsauthentication-w-reporing-services/</link><pubDate>Thu, 15 Nov 2007 14:41:00 +0200</pubDate><guid>https://awasn.github.io/formsauthentication-w-reporing-services/</guid><description>Domyślnie usługi raportujące Microsoft SQL Server 2005 obsługują jedynie identyfikację Windows. Na szczęście w przykładach dla Reporitng Services dostępnych na stronach http://www.codeplex.com dostępna jest implementacja rozszerzeń usług raportujących (interfejsy IAuthenticationExtension i IAuthorizationExtension), które umożliwiają skorzystanie z dobrodziejstw identyfikacji opartej o Forms. Jeśli zainstalujemy przykłady, to interesujące nas kody znajdziemy w katalogu C:\Program Files\Microsoft SQL Server\90\Samples\Reporting Services\Extension Samples\FormsAuthentication Sample zakładając oczywiście, iż wybraliśmy domyślną lokalizację.
-Przykładowe rozwiązanie korzysta z własnej bazy danych do przechowywania informacji o użytkownikach.</description></item><item><title>SQL Server 2005 Compact Edition</title><link>https://awasn.github.io/sql-server-2005-compact-edition/</link><pubDate>Thu, 13 Sep 2007 14:13:00 +0200</pubDate><guid>https://awasn.github.io/sql-server-2005-compact-edition/</guid><description>Pewną nowością było wprowadzenie przez Microsoft na komputery typu PC, dostępnej do tej pory we wcześniejszych wersjach w ramach urządzeń mobilnych, bazy danych SQL Server 2005 Compact Edition (http://www.microsoft.com/sql/editions/compact/default.mspx), która nie wymaga instalacji żadnego serwera bazodanowego a do obsługi potrzebuje jednej biblioteki System.Data.SqlServerCe.dll. Dzięki temu, zamiast przechowywać dane niezbędne do pracy aplikacji np. w plikach XML możemy skorzystać z możliwości silnika SQL. Z tego typu sytuacjami niejednokrotnie się spotykamy. Instalacja dowolnego serwera nie jest możliwa, a jednocześnie szukamy możliwości sprawnego zarządzania niedużą ilością danych.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ASP.NET on arkadiusz wasniewski blog</title>
+    <link>https://awasn.github.io/tags/asp.net/</link>
+    <description>Recent content in ASP.NET on arkadiusz wasniewski blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 11 Dec 2008 12:45:00 +0100</lastBuildDate><atom:link href="https://awasn.github.io/tags/asp.net/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Rozwiązanie mobilne</title>
+      <link>https://awasn.github.io/rozwiazanie-mobilne/</link>
+      <pubDate>Thu, 11 Dec 2008 12:45:00 +0100</pubDate>
+      
+      <guid>https://awasn.github.io/rozwiazanie-mobilne/</guid>
+      <description>Kilka miesięcy temu stałem się szczęśliwym posiadaczem projektu na przygotowanie kompletnego rozwiązania z zakresu szeroko pojętej sprzedaży dla &amp;ldquo;profesjonalnych&amp;rdquo; urządzeń mobilnych, czyli komputerów odpornych na niskie temperatury i kroploszczelne. Systemy operacyjne, które znalazły się w zasięgu projektu to:
+ Microsoft Windows for Pocket PC 2003, Windows Mobile 2003; Windows Mobile 5.0 for Pocket PC, Windows Mobile 5.0 for Pocket PC Phone Edition; Windows Mobile 6 Classic, Windows Mobile 6 Professional.  Pod uwagę należało też brać możliwość pojawienia się w przyszłości konieczności działania programu w ramach Windows CE .</description>
+    </item>
+    
+    <item>
+      <title>HTTP - Własny serwer komunikacji. Część #2 - Środowisko programistyczne</title>
+      <link>https://awasn.github.io/http-wlasny-serwer-komunikacji-cz2-srodowisko-programistyczne/</link>
+      <pubDate>Sun, 27 Jan 2008 22:12:00 +0100</pubDate>
+      
+      <guid>https://awasn.github.io/http-wlasny-serwer-komunikacji-cz2-srodowisko-programistyczne/</guid>
+      <description>Zasadniczo całe rozwiązanie zbudowane będzie przy pomocy Microsoft Visual Studio 2005 Professional Edition w oparciu o ASP.NET Web Application jako typ projektu. Użytkownicy wersji Express będą niestety zmuszeni dokonać konwersji do projektu Web Site. Dostarczany z Visual Studio serwer WWW w zupełności wystarczy do uruchomienia prezentowanego rozwiązania. Z racji wybranego środowiska operować będziemy na platformie .NET w wersji 2.0. Nie mniej jednak bez żadnych zmian prezentowane oprogramowanie będzie działało również w wersji 1.</description>
+    </item>
+    
+    <item>
+      <title>HTTP - Własny serwer komunikacji. Część #1 - Wstęp</title>
+      <link>https://awasn.github.io/http-wlasny-serwer-komunikacji-cz1-wstep/</link>
+      <pubDate>Mon, 14 Jan 2008 22:45:00 +0100</pubDate>
+      
+      <guid>https://awasn.github.io/http-wlasny-serwer-komunikacji-cz1-wstep/</guid>
+      <description>Budując rozwiązanie, które wymaga wymiany informacji z aplikacjami uruchomionymi na innych maszynach możemy skorzystać z kilku propozycji, jakich dostarcza platforma .NET. Są to między innymi gniazdka (sockets), .NET Remoting, Usługi Sieciowe (Web Services), kolejki wiadomości (MSMQ) czy łączący i uzupełniający większość z tych rozwiązań Windows Communication Foundation (WCF). Oczywiście część z tych metod działa praktycznie tylko wtedy, jeśli obie strony oparte są o .NET (.NET Remoting czy net.tcp z WCF). Inne znów mają problemy jeśli wychodzimy poza obręb danej sieci (.</description>
+    </item>
+    
+    <item>
+      <title>FormsAuthentication w Reporing Services</title>
+      <link>https://awasn.github.io/formsauthentication-w-reporing-services/</link>
+      <pubDate>Thu, 15 Nov 2007 14:41:00 +0200</pubDate>
+      
+      <guid>https://awasn.github.io/formsauthentication-w-reporing-services/</guid>
+      <description>Domyślnie usługi raportujące Microsoft SQL Server 2005 obsługują jedynie identyfikację Windows. Na szczęście w przykładach dla Reporitng Services dostępnych na stronach http://www.codeplex.com dostępna jest implementacja rozszerzeń usług raportujących (interfejsy IAuthenticationExtension i IAuthorizationExtension), które umożliwiają skorzystanie z dobrodziejstw identyfikacji opartej o Forms. Jeśli zainstalujemy przykłady, to interesujące nas kody znajdziemy w katalogu C:\Program Files\Microsoft SQL Server\90\Samples\Reporting Services\Extension Samples\FormsAuthentication Sample zakładając oczywiście, iż wybraliśmy domyślną lokalizację.
+Przykładowe rozwiązanie korzysta z własnej bazy danych do przechowywania informacji o użytkownikach.</description>
+    </item>
+    
+    <item>
+      <title>SQL Server 2005 Compact Edition</title>
+      <link>https://awasn.github.io/sql-server-2005-compact-edition/</link>
+      <pubDate>Thu, 13 Sep 2007 14:13:00 +0200</pubDate>
+      
+      <guid>https://awasn.github.io/sql-server-2005-compact-edition/</guid>
+      <description>Pewną nowością było wprowadzenie przez Microsoft na komputery typu PC, dostępnej do tej pory we wcześniejszych wersjach w ramach urządzeń mobilnych, bazy danych SQL Server 2005 Compact Edition (http://www.microsoft.com/sql/editions/compact/default.mspx), która nie wymaga instalacji żadnego serwera bazodanowego a do obsługi potrzebuje jednej biblioteki System.Data.SqlServerCe.dll. Dzięki temu, zamiast przechowywać dane niezbędne do pracy aplikacji np. w plikach XML możemy skorzystać z możliwości silnika SQL. Z tego typu sytuacjami niejednokrotnie się spotykamy. Instalacja dowolnego serwera nie jest możliwa, a jednocześnie szukamy możliwości sprawnego zarządzania niedużą ilością danych.</description>
+    </item>
+    
+  </channel>
+</rss>

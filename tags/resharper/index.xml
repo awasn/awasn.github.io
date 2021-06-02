@@ -1,3 +1,31 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ReSharper on arkadiusz wasniewski blog</title><link>https://awasn.github.io/tags/resharper/</link><description>Recent content in ReSharper on arkadiusz wasniewski blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 11 Dec 2008 12:45:00 +0100</lastBuildDate><atom:link href="https://awasn.github.io/tags/resharper/index.xml" rel="self" type="application/rss+xml"/><item><title>Rozwiązanie mobilne</title><link>https://awasn.github.io/rozwiazanie-mobilne/</link><pubDate>Thu, 11 Dec 2008 12:45:00 +0100</pubDate><guid>https://awasn.github.io/rozwiazanie-mobilne/</guid><description>Kilka miesięcy temu stałem się szczęśliwym posiadaczem projektu na przygotowanie kompletnego rozwiązania z zakresu szeroko pojętej sprzedaży dla &amp;ldquo;profesjonalnych&amp;rdquo; urządzeń mobilnych, czyli komputerów odpornych na niskie temperatury i kroploszczelne. Systemy operacyjne, które znalazły się w zasięgu projektu to:
-Microsoft Windows for Pocket PC 2003, Windows Mobile 2003; Windows Mobile 5.0 for Pocket PC, Windows Mobile 5.0 for Pocket PC Phone Edition; Windows Mobile 6 Classic, Windows Mobile 6 Professional. Pod uwagę należało też brać możliwość pojawienia się w przyszłości konieczności działania programu w ramach Windows CE .</description></item><item><title>ReSharper ostrzega - Possible NullReferenceException</title><link>https://awasn.github.io/resharper-ostrzega-possible-nullreferenceexception/</link><pubDate>Wed, 09 Jan 2008 23:15:00 +0100</pubDate><guid>https://awasn.github.io/resharper-ostrzega-possible-nullreferenceexception/</guid><description>Kontekst rozważań jest następujący. Metoda (wersja uproszczona poniżej) buduje ściśle określoną sekwencję sterującą. Dokumentacja mówi, iż sekwencja ta musi zawierać dokładnie osiem parametrów oddzielonych średnikiem. Dopuszcza się przy tym parametry puste. Użytkownik nie jest karany (np. wyjątek) za brak parametrów. Nie spotka go też przykra niespodzianka, jeśli poda zbyt dużo parametrów.
-public void SampleReport(string[] names) { const byte maxNumberOfNames = 8; int numberOfNames = names == null ? 0 : names.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ReSharper on arkadiusz wasniewski blog</title>
+    <link>https://awasn.github.io/tags/resharper/</link>
+    <description>Recent content in ReSharper on arkadiusz wasniewski blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 11 Dec 2008 12:45:00 +0100</lastBuildDate><atom:link href="https://awasn.github.io/tags/resharper/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Rozwiązanie mobilne</title>
+      <link>https://awasn.github.io/rozwiazanie-mobilne/</link>
+      <pubDate>Thu, 11 Dec 2008 12:45:00 +0100</pubDate>
+      
+      <guid>https://awasn.github.io/rozwiazanie-mobilne/</guid>
+      <description>Kilka miesięcy temu stałem się szczęśliwym posiadaczem projektu na przygotowanie kompletnego rozwiązania z zakresu szeroko pojętej sprzedaży dla &amp;ldquo;profesjonalnych&amp;rdquo; urządzeń mobilnych, czyli komputerów odpornych na niskie temperatury i kroploszczelne. Systemy operacyjne, które znalazły się w zasięgu projektu to:
+ Microsoft Windows for Pocket PC 2003, Windows Mobile 2003; Windows Mobile 5.0 for Pocket PC, Windows Mobile 5.0 for Pocket PC Phone Edition; Windows Mobile 6 Classic, Windows Mobile 6 Professional.  Pod uwagę należało też brać możliwość pojawienia się w przyszłości konieczności działania programu w ramach Windows CE .</description>
+    </item>
+    
+    <item>
+      <title>ReSharper ostrzega - Possible NullReferenceException</title>
+      <link>https://awasn.github.io/resharper-ostrzega-possible-nullreferenceexception/</link>
+      <pubDate>Wed, 09 Jan 2008 23:15:00 +0100</pubDate>
+      
+      <guid>https://awasn.github.io/resharper-ostrzega-possible-nullreferenceexception/</guid>
+      <description>Kontekst rozważań jest następujący. Metoda (wersja uproszczona poniżej) buduje ściśle określoną sekwencję sterującą. Dokumentacja mówi, iż sekwencja ta musi zawierać dokładnie osiem parametrów oddzielonych średnikiem. Dopuszcza się przy tym parametry puste. Użytkownik nie jest karany (np. wyjątek) za brak parametrów. Nie spotka go też przykra niespodzianka, jeśli poda zbyt dużo parametrów.
+public void SampleReport(string[] names) { const byte maxNumberOfNames = 8; int numberOfNames = names == null ? 0 : names.</description>
+    </item>
+    
+  </channel>
+</rss>

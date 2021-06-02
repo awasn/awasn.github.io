@@ -1,36 +1,106 @@
-<!doctype html><html lang=pl-pl><head><meta name=theme-color content="#405365"><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.83.1"><meta name=description content="Mniejsze zużycie pamięci .NET przy korzystaniu z iteratorów"><title>Iteratory - arkadiusz wasniewski blog</title><link rel=canonical href=https://awasn.github.io/iteratory/><link rel=prev title="Stub, Fake, Mock" href=https://awasn.github.io/stub-fake-mock/><link rel=next title="Debugger.Break ładuje pakiety" href=https://awasn.github.io/debugger-break-laduje-pakiety/><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css integrity="sha256-Q0zCrUs2IfXWYx0uMKJfG93CvF6oVII21waYsAV4/8Q=" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css><link rel=stylesheet href=https://awasn.github.io/awasn.min.f45a909800924faa836a73b82a1d4cb352f8053134a426a9dcafa61cf6a8c5d0.css integrity="sha256-9FqQmACST6qDanO4Kh1Ms1L4BTE0pCap3K+mHPaoxdA="></head><body><header><nav class=container><div class="pure-menu pure-menu-horizontal"><a class="pure-menu-heading pure-menu-link" href=https://awasn.github.io/>wasniewski</a><ul class="right pure-menu-list"><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/blog/>blog</a></li><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/categories/>categories</a></li><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/tags/>tags</a></li><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/about/>about</a></li></ul></div></nav></header><main class=container><aside class=post-published><p>This post was originally published on <a href=http://zine.net.pl/blogs/arkadiusz_wasniewski/archive/2008/05/26/iteratory.aspx target=_blank>zine.net.pl</a> on 26 May 2008 23:06 +0200</p></aside><article><header><h1>Iteratory</h1><div class=post-metadata><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>26 May 2008 23:06 +0200
-&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M20 14.66V20a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2h5.34"/><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"/></svg>
-17 September 2018 12:18 +0200
-&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-4 min read</div><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg><a href=https://awasn.github.io/categories/development>Development</a>
-&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83.0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7" y2="7"/></svg>
-<a href=https://awasn.github.io/tags/.net>.NET</a>, <a href=https://awasn.github.io/tags/.net-compact-framework>.NET Compact Framework</a>, <a href=https://awasn.github.io/tags/interop>Interop</a></div></div></header><p>Mój pierwszy blog znajdował się na portalu <code>developers.pl</code>. Niestety z różnych przyczyn serwis ten padł. A szkoda. Choćby dlatego, iż miałem tam kilka ciekawych wpisów. Nie chciałbym aby zostały one wszystkie stracone dlatego też postanowiłem jeden z nich przypomnieć (również sobie). Ciekawa była optymalizacja pierwotnego kodu w ramach komentarzy do tej notki&mldr;</p><p>Jedną z nowości .NET w wersji 2.0 są (dzisiaj już możemy powiedzieć, że były) iteratory. Dzięki nim przekazywanie kolekcji obiektów czy struktur pomiędzy klasami nie musi już oznaczać zajmowania nowych, pomocniczych obszarów w pamięci, co konieczne było zwłaszcza jeśli nasze oprogramowanie zbudowane było w oparciu o warstwy (dostępu do danych, logiki biznesowej czy prezentacji).</p><p>Załóżmy, iż tworzymy rozwiązanie, które będzie zapisywało różne obiekty do pliku. Strumień z danymi wyjściowymi będzie zawsze ten sam, ale dane wejściowe możemy odbierać różnymi kanałami: z bazy danych, innych plików itd. Jedna z zapisywanych klas wyglądać będzie następująco:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp><span style=color:#a6e22e>    [StructLayout(LayoutKind.Sequential, Pack = 4)]</span>
-    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ProductCategory</span>
-    {
-        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>const</span> <span style=color:#66d9ef>byte</span> CodeSize = <span style=color:#ae81ff>21</span>;
-        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>const</span> <span style=color:#66d9ef>byte</span> NameSize = <span style=color:#ae81ff>41</span>;
+<!DOCTYPE HTML>
+<html lang="pl-pl">
+    <head>
+        <meta name="theme-color" content="#405365"/>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="generator" content="Hugo 0.83.1" />
+        <meta name="description" content="Mniejsze zużycie pamięci .NET przy korzystaniu z iteratorów" />
+        <title>Iteratory - arkadiusz wasniewski blog</title>
+        <link rel="canonical" href="https://awasn.github.io/iteratory/">
+        <link rel="prev" title="Stub, Fake, Mock" href="https://awasn.github.io/stub-fake-mock/">
+        <link rel="next" title="Debugger.Break ładuje pakiety" href="https://awasn.github.io/debugger-break-laduje-pakiety/">
 
-        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> Id;
-<span style=color:#a6e22e>
-</span><span style=color:#a6e22e>        [MarshalAs(UnmanagedType.ByValArray, SizeConst = ProductCategory.CodeSize)]</span>
-        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>byte</span>[] Code;
-<span style=color:#a6e22e>
-</span><span style=color:#a6e22e>        [MarshalAs(UnmanagedType.ByValArray, SizeConst = ProductCategory.NameSize)]</span>
-        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>byte</span>[] Name;
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css" integrity="sha256-Q0zCrUs2IfXWYx0uMKJfG93CvF6oVII21waYsAV4/8Q=" crossorigin="anonymous" />
+        
+        
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
+        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.f45a909800924faa836a73b82a1d4cb352f8053134a426a9dcafa61cf6a8c5d0.css" integrity="sha256-9FqQmACST6qDanO4Kh1Ms1L4BTE0pCap3K&#43;mHPaoxdA=" />
+
+    </head>
+    <body>
+        <header>
+            <nav class="container" >
+                <div class="pure-menu pure-menu-horizontal">
+                    <a class="pure-menu-heading pure-menu-link" href="https://awasn.github.io/">wasniewski</a>
+                    <ul class="right pure-menu-list">
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/blog/">blog</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/categories/">categories</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/tags/">tags</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/about/">about</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container">
+            
+    <aside class="post-published">
+        <p>This post was originally published on <a href="http://zine.net.pl/blogs/arkadiusz_wasniewski/archive/2008/05/26/iteratory.aspx" target="_blank">zine.net.pl</a> on 26 May 2008 23:06 &#43;0200</p>
+    </aside>
+
+    <article>
+        <header>
+            <h1>Iteratory</h1>
+                <div class="post-metadata">
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            26 May 2008 23:06 &#43;0200
+            
+                &nbsp;
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon></svg>
+                17 September 2018 12:18 &#43;0200
+            
+            &nbsp;
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            4 min read
+        </div>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+            <a href="https://awasn.github.io/categories/development">Development</a>
+            
+                &nbsp;
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+                <a href="https://awasn.github.io/tags/.net">.NET</a>, <a href="https://awasn.github.io/tags/.net-compact-framework">.NET Compact Framework</a>, <a href="https://awasn.github.io/tags/interop">Interop</a>
+            
+        </div>
+    </div>
+        </header>
+
+        <p>Mój pierwszy blog znajdował się na portalu <code>developers.pl</code>. Niestety z różnych przyczyn serwis ten padł. A szkoda. Choćby dlatego, iż miałem tam kilka ciekawych wpisów. Nie chciałbym aby zostały one wszystkie stracone dlatego też postanowiłem jeden z nich przypomnieć (również sobie). Ciekawa była optymalizacja pierwotnego kodu w ramach komentarzy do tej notki&hellip;</p>
+<p>Jedną z nowości .NET w wersji 2.0 są (dzisiaj już możemy powiedzieć, że były) iteratory. Dzięki nim przekazywanie kolekcji obiektów czy struktur pomiędzy klasami nie musi już oznaczać zajmowania nowych, pomocniczych obszarów w pamięci, co konieczne było zwłaszcza jeśli nasze oprogramowanie zbudowane było w oparciu o warstwy (dostępu do danych, logiki biznesowej czy prezentacji).</p>
+<p>Załóżmy, iż tworzymy rozwiązanie, które będzie zapisywało różne obiekty do pliku. Strumień z danymi wyjściowymi będzie zawsze ten sam, ale dane wejściowe możemy odbierać różnymi kanałami: z bazy danych, innych plików itd. Jedna z zapisywanych klas wyglądać będzie następująco:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#a6e22e">    [StructLayout(LayoutKind.Sequential, Pack = 4)]</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ProductCategory</span>
+    {
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">byte</span> CodeSize = <span style="color:#ae81ff">21</span>;
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">byte</span> NameSize = <span style="color:#ae81ff">41</span>;
+
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> Id;
+<span style="color:#a6e22e">
+</span><span style="color:#a6e22e">        [MarshalAs(UnmanagedType.ByValArray, SizeConst = ProductCategory.CodeSize)]</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">byte</span>[] Code;
+<span style="color:#a6e22e">
+</span><span style="color:#a6e22e">        [MarshalAs(UnmanagedType.ByValArray, SizeConst = ProductCategory.NameSize)]</span>
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">byte</span>[] Name;
     }
-</code></pre></div><p>Zamiast klas można również próbować wykorzystać struktury. Okazuje się jednak, iż nie jest to dobry sposób, zwłaszcza jeśli będziemy korzystać z pętli <code>foreach</code>. Powodem są operacje <strong>boxing</strong> i <strong>unboxing</strong> (czyli rzutowania w obie strony pomiędzy klasą <code>Object</code> a naszym typem), które wykonywane są w czasie przechodzenia po kolejnych elementach dla <strong>value type</strong>, do których poza typami prymitywnymi należą właśnie struktury. Może się okazać, iż straty na tych operacjach będą nie do zaakceptowania.</p><p>Obiekt zapisujący dane do strumienia wyjściowego, czyli do pliku będzie wspólny dla wszystkich struktur i będzie zawierał między innymi metodę <code>WriteEntities</code>.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp>    <span style=color:#66d9ef>internal</span> <span style=color:#66d9ef>sealed</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>BusinessEntityProcess</span>
+</code></pre></div><p>Zamiast klas można również próbować wykorzystać struktury. Okazuje się jednak, iż nie jest to dobry sposób, zwłaszcza jeśli będziemy korzystać z pętli <code>foreach</code>. Powodem są operacje <strong>boxing</strong> i <strong>unboxing</strong> (czyli rzutowania w obie strony pomiędzy klasą <code>Object</code> a naszym typem), które wykonywane są w czasie przechodzenia po kolejnych elementach dla <strong>value type</strong>, do których poza typami prymitywnymi należą właśnie struktury. Może się okazać, iż straty na tych operacjach będą nie do zaakceptowania.</p>
+<p>Obiekt zapisujący dane do strumienia wyjściowego, czyli do pliku będzie wspólny dla wszystkich struktur i będzie zawierał między innymi metodę <code>WriteEntities</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BusinessEntityProcess</span>
     {
 
         ...
 
-        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> WriteEntities(<span style=color:#66d9ef>string</span> filePath, IEnumerable entities)
+        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> WriteEntities(<span style="color:#66d9ef">string</span> filePath, IEnumerable entities)
         {
-            <span style=color:#66d9ef>using</span> (FileStream fs = File.Create(filePath))
+            <span style="color:#66d9ef">using</span> (FileStream fs = File.Create(filePath))
             {
-                <span style=color:#66d9ef>foreach</span> (<span style=color:#66d9ef>object</span> entity <span style=color:#66d9ef>in</span> entities)
+                <span style="color:#66d9ef">foreach</span> (<span style="color:#66d9ef">object</span> entity <span style="color:#66d9ef">in</span> entities)
                 {
-                    <span style=color:#66d9ef>byte</span>[] buffer = MarshalHelper.ToByteArray(entity);
-                    fs.Write(buffer, <span style=color:#ae81ff>0</span>, buffer.Length);
+                    <span style="color:#66d9ef">byte</span>[] buffer = MarshalHelper.ToByteArray(entity);
+                    fs.Write(buffer, <span style="color:#ae81ff">0</span>, buffer.Length);
                 }
             }
         }
@@ -38,49 +108,52 @@
         ...
 
     }
-</code></pre></div><p>Metoda <code>MarshalHelper.ToByteArray</code> korzysta z klasy <code>Marshal</code> aby miejsce w pamięci zajmowane przez dowolny obiekt zapisać do bufora bajtów. Jak widzimy, do metody <code>WriteEntities</code> przekazujemy obiekt implementujący interfejs <code>IEnumerable</code>. W .NET 1.1 obiekt tworzący odpowiednią kolekcję, która standardowo implementuje wymagany interfejs, mógł wyglądać następująco:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp>    <span style=color:#66d9ef>internal</span> <span style=color:#66d9ef>sealed</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ProductCategoryData</span> : IProductCategoryData
+</code></pre></div><p>Metoda <code>MarshalHelper.ToByteArray</code> korzysta z klasy <code>Marshal</code> aby miejsce w pamięci zajmowane przez dowolny obiekt zapisać do bufora bajtów. Jak widzimy, do metody <code>WriteEntities</code> przekazujemy obiekt implementujący interfejs <code>IEnumerable</code>. W .NET 1.1 obiekt tworzący odpowiednią kolekcję, która standardowo implementuje wymagany interfejs, mógł wyglądać następująco:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ProductCategoryData</span> : IProductCategoryData
     {
-        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>const</span> <span style=color:#66d9ef>string</span> SqlSelect =
-            <span style=color:#e6db74>&#34;SELECT Id, Skrot, Nazwa FROM P_Kategoria&#34;</span>;
+        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">string</span> SqlSelect =
+            <span style="color:#e6db74">&#34;SELECT Id, Skrot, Nazwa FROM P_Kategoria&#34;</span>;
 
-        <span style=color:#75715e>#region IProductCategoryData Members
-</span><span style=color:#75715e></span>
-        <span style=color:#66d9ef>public</span> ArrayList GetProductCategories(Database database)
+        <span style="color:#75715e">#region IProductCategoryData Members
+</span><span style="color:#75715e"></span>
+        <span style="color:#66d9ef">public</span> ArrayList GetProductCategories(Database database)
         {
-            ArrayList list = <span style=color:#66d9ef>new</span> ArrayList();
+            ArrayList list = <span style="color:#66d9ef">new</span> ArrayList();
 
-            <span style=color:#66d9ef>using</span> (DbDataReader reader = database.ExecuteReader(SqlSelect, <span style=color:#66d9ef>null</span>))
+            <span style="color:#66d9ef">using</span> (DbDataReader reader = database.ExecuteReader(SqlSelect, <span style="color:#66d9ef">null</span>))
             {
-                <span style=color:#66d9ef>while</span> (reader.Read())
+                <span style="color:#66d9ef">while</span> (reader.Read())
                 {
-                    ProductCategory productCategory = <span style=color:#66d9ef>new</span> ProductCategory();
-                    productCategory.Id = reader.GetInt32(<span style=color:#ae81ff>0</span>);
+                    ProductCategory productCategory = <span style="color:#66d9ef">new</span> ProductCategory();
+                    productCategory.Id = reader.GetInt32(<span style="color:#ae81ff">0</span>);
                     productCategory.Code = MarshalHelper.EncodeToByteArray(
-                    reader.GetString(<span style=color:#ae81ff>1</span>), ProductCategory.CodeSize);
+                    reader.GetString(<span style="color:#ae81ff">1</span>), ProductCategory.CodeSize);
                     productCategory.Name = MarshalHelper.EncodeToByteArray(
-                    reader.GetString(<span style=color:#ae81ff>2</span>), ProductCategory.NameSize);
+                    reader.GetString(<span style="color:#ae81ff">2</span>), ProductCategory.NameSize);
                     list.Add(productCategory);
                 }
             }
 
-            <span style=color:#66d9ef>return</span> list;
+            <span style="color:#66d9ef">return</span> list;
         }
 
-        <span style=color:#75715e>#endregion
-</span><span style=color:#75715e></span>    }
-</code></pre></div><p>Obiekt <code>Database</code> zapewnia nam obsługę połączenia z bazą danych a metoda <code>MarshalHelper.EncodeToByteArray</code> dokonuje konwersji pomiędzy łańcuchem Unicode a dowolną stroną kodową. Zmienna <code>database</code> umożliwia nam wywołanie polecenia zwracającego nam z bazy SQL strumień danych typu <code>DbDataReader</code>. Pamięć dla tych elementów została już przydzielona. Wykonanie powyższej metody zwróci nam wymagany przez metodę <code>WriteEntities</code> interfejs <code>IEnumerable</code>. Ale skutkować to będzie zajęciem pamięci tym razem dla elementów listy. Zmienna <code>reader</code> jest zamykana, co nie oznacza, iż pamięć jest czyszczona. Przy dużych ilościach danych lub przy małej ilości pamięci (urządzenia mobilne) może mieć to spore znaczenie.</p><p>Wprowadzone w .NET 2.0 iteratory diametralnie tę sytuację zmieniają. Poniżej klasy implementujące nowe możliwości języka C#:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp>    <span style=color:#66d9ef>internal</span> <span style=color:#66d9ef>sealed</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>BusinessEntityProcess</span>
+        <span style="color:#75715e">#endregion
+</span><span style="color:#75715e"></span>    }
+</code></pre></div><p>Obiekt <code>Database</code> zapewnia nam obsługę połączenia z bazą danych a metoda <code>MarshalHelper.EncodeToByteArray</code> dokonuje konwersji pomiędzy łańcuchem Unicode a dowolną stroną kodową. Zmienna <code>database</code> umożliwia nam wywołanie polecenia zwracającego nam z bazy SQL strumień danych typu <code>DbDataReader</code>. Pamięć dla tych elementów została już przydzielona. Wykonanie powyższej metody zwróci nam wymagany przez metodę <code>WriteEntities</code> interfejs <code>IEnumerable</code>. Ale skutkować to będzie zajęciem pamięci tym razem dla elementów listy. Zmienna <code>reader</code> jest zamykana, co nie oznacza, iż pamięć jest czyszczona. Przy dużych ilościach danych lub przy małej ilości pamięci (urządzenia mobilne) może mieć to spore znaczenie.</p>
+<p>Wprowadzone w .NET 2.0 iteratory diametralnie tę sytuację zmieniają. Poniżej klasy implementujące nowe możliwości języka C#:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BusinessEntityProcess</span>
     {
 
         ...
 
-        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> WriteEntities&lt;T&gt;(<span style=color:#66d9ef>string</span> filePath, IEnumerable&lt;T&gt; entities)
+        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> WriteEntities&lt;T&gt;(<span style="color:#66d9ef">string</span> filePath, IEnumerable&lt;T&gt; entities)
         {
-            <span style=color:#66d9ef>using</span> (FileStream fs = File.Create(filePath))
+            <span style="color:#66d9ef">using</span> (FileStream fs = File.Create(filePath))
             {
-                <span style=color:#66d9ef>foreach</span> (T entity <span style=color:#66d9ef>in</span> entities)
+                <span style="color:#66d9ef">foreach</span> (T entity <span style="color:#66d9ef">in</span> entities)
                 {
-                    <span style=color:#66d9ef>byte</span>[] buffer = MarshalHelper.ToByteArray(entity);
-                    fs.Write(buffer, <span style=color:#ae81ff>0</span>, buffer.Length);
+                    <span style="color:#66d9ef">byte</span>[] buffer = MarshalHelper.ToByteArray(entity);
+                    fs.Write(buffer, <span style="color:#ae81ff">0</span>, buffer.Length);
                 }
             }
         }
@@ -88,31 +161,82 @@
         ...
 
     }
-</code></pre></div><p>oraz</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp>    <span style=color:#66d9ef>internal</span> <span style=color:#66d9ef>sealed</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ProductCategoryData</span> : IProductCategoryData
+</code></pre></div><p>oraz</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ProductCategoryData</span> : IProductCategoryData
     {
-        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>const</span> <span style=color:#66d9ef>string</span> SqlSelect =
-            <span style=color:#e6db74>&#34;SELECT Id, Skrot, Nazwa FROM P_Kategoria&#34;</span>;
+        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">string</span> SqlSelect =
+            <span style="color:#e6db74">&#34;SELECT Id, Skrot, Nazwa FROM P_Kategoria&#34;</span>;
 
-        <span style=color:#75715e>#region IProductCategoryData Members
-</span><span style=color:#75715e></span>
-        <span style=color:#66d9ef>public</span> IEnumerable&lt;ProductCategory&gt; GetProductCategories(Database database)
+        <span style="color:#75715e">#region IProductCategoryData Members
+</span><span style="color:#75715e"></span>
+        <span style="color:#66d9ef">public</span> IEnumerable&lt;ProductCategory&gt; GetProductCategories(Database database)
         {
-            <span style=color:#66d9ef>using</span> (DbDataReader reader = database.ExecuteReader(SqlSelect, <span style=color:#66d9ef>null</span>))
+            <span style="color:#66d9ef">using</span> (DbDataReader reader = database.ExecuteReader(SqlSelect, <span style="color:#66d9ef">null</span>))
             {
-                <span style=color:#66d9ef>while</span> (reader.Read())
+                <span style="color:#66d9ef">while</span> (reader.Read())
                 {
-                    ProductCategory productCategory = <span style=color:#66d9ef>new</span> ProductCategory();
-                    productCategory.Id = reader.GetInt32(<span style=color:#ae81ff>0</span>);
+                    ProductCategory productCategory = <span style="color:#66d9ef">new</span> ProductCategory();
+                    productCategory.Id = reader.GetInt32(<span style="color:#ae81ff">0</span>);
                     productCategory.Code = MarshalHelper.EncodeToByteArray(
-                    reader.GetString(<span style=color:#ae81ff>1</span>), ProductCategory.CodeSize);
+                    reader.GetString(<span style="color:#ae81ff">1</span>), ProductCategory.CodeSize);
                     productCategory.Name = MarshalHelper.EncodeToByteArray(
-                    reader.GetString(<span style=color:#ae81ff>2</span>), ProductCategory.NameSize);
-                    <span style=color:#66d9ef>yield</span> <span style=color:#66d9ef>return</span> productCategory;
+                    reader.GetString(<span style="color:#ae81ff">2</span>), ProductCategory.NameSize);
+                    <span style="color:#66d9ef">yield</span> <span style="color:#66d9ef">return</span> productCategory;
                 }
             }
         }
 
-        <span style=color:#75715e>#endregion
-</span><span style=color:#75715e></span>    }
-</code></pre></div><p>Cała tajemnica tkwi w słowie kluczowym <code>yield</code>. Powoduje ono przerwanie chwilowe wykonania <code>while</code> i zwrócenie sterowania do pętli <code>foreach</code>. Dzięki takiemu podejściu unikamy ciągłego przydzielania i zwalniania pamięci dla niedużych elementów kolekcji.</p><p>Jednocześnie zostały wprowadzone typy generic. Pętla <code>foreach</code> domyślnie rzutuje wszystkie elementy kolekcji na object. Wprowadzenie więc typów generic spowoduje, iż żadnego rzutowania nie będzie, dzięki czemu nasz kod powinien zaoszczędzić jeszcze kilka dodatkowych taktów zegara.</p><p>PS. Wielkie dzięki dla wszystkich, którzy komentowali tę notatkę przed odtworzeniem jej po Wielkim Padzie Systemu.</p></article><nav aria-label="Related posts"><h4>Related Posts</h4><ul><li><a href=https://awasn.github.io/http-wlasny-serwer-komunikacji-cz1-wstep/>HTTP - Własny serwer komunikacji. Część #1 - Wstęp</a></li><li><a href=https://awasn.github.io/tworzenie-obiektow/>Tworzenie obiektów</a></li><li><a href=https://awasn.github.io/dbf-po-ludzku/>DBF po ludzku</a></li><li><a href=https://awasn.github.io/nie-wyrzucamy-wyjatkow-poza-domain-model/>Nie wyrzucamy wyjątków poza Domain Model</a></li><li><a href=https://awasn.github.io/hook-scripts-w-csharp/>Hook scripts w C#</a></li></ul></nav><nav class="pure-g post-previous-next" aria-label="Previous and next posts"><div class="pure-u-11-24 previous"><a href=https://awasn.github.io/stub-fake-mock/ aria-label="Previous post"><span aria-hidden=true><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"/></svg></span></a><a href=https://awasn.github.io/stub-fake-mock/>Stub, Fake, Mock</a></div><div class=pure-u-2-24>&nbsp;</div><div class="pure-u-11-24 next"><a href=https://awasn.github.io/debugger-break-laduje-pakiety/>Debugger.Break ładuje pakiety</a>
-<a href=https://awasn.github.io/debugger-break-laduje-pakiety/ aria-label="Next post"><span aria-hidden=true><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg></span></a></div></nav></main><footer><div class="center-aligned container"><p>Copyright &copy; 2007-2021 Arkadiusz Waśniewski. All Rights Reserved.</p></div></footer><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/accesslog.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dockerfile.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dos.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/go.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/powershell.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/routeros.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/typescript.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/yaml.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/vbnet.min.js></script><script>hljs.initHighlightingOnLoad()</script></body></html>
+        <span style="color:#75715e">#endregion
+</span><span style="color:#75715e"></span>    }
+</code></pre></div><p>Cała tajemnica tkwi w słowie kluczowym <code>yield</code>. Powoduje ono przerwanie chwilowe wykonania <code>while</code> i zwrócenie sterowania do pętli <code>foreach</code>. Dzięki takiemu podejściu unikamy ciągłego przydzielania i zwalniania pamięci dla niedużych elementów kolekcji.</p>
+<p>Jednocześnie zostały wprowadzone typy generic. Pętla <code>foreach</code> domyślnie rzutuje wszystkie elementy kolekcji na object. Wprowadzenie więc typów generic spowoduje, iż żadnego rzutowania nie będzie, dzięki czemu nasz kod powinien zaoszczędzić jeszcze kilka dodatkowych taktów zegara.</p>
+<p>PS. Wielkie dzięki dla wszystkich, którzy komentowali tę notatkę przed odtworzeniem jej po Wielkim Padzie Systemu.</p>
+
+    </article>
+    <nav aria-label="Related posts">
+        <h4>Related Posts</h4>
+        <ul>
+            <li><a href="https://awasn.github.io/http-wlasny-serwer-komunikacji-cz1-wstep/">HTTP - Własny serwer komunikacji. Część #1 - Wstęp</a></li>
+            <li><a href="https://awasn.github.io/tworzenie-obiektow/">Tworzenie obiektów</a></li>
+            <li><a href="https://awasn.github.io/dbf-po-ludzku/">DBF po ludzku</a></li>
+            <li><a href="https://awasn.github.io/nie-wyrzucamy-wyjatkow-poza-domain-model/">Nie wyrzucamy wyjątków poza Domain Model</a></li>
+            <li><a href="https://awasn.github.io/hook-scripts-w-csharp/">Hook scripts w C#</a></li>
+        </ul>
+    </nav>
+
+    <nav class="pure-g post-previous-next" aria-label="Previous and next posts">
+        <div class="pure-u-11-24 previous">
+            <a href="https://awasn.github.io/stub-fake-mock/" aria-label="Previous post"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg></span></a>
+            <a href="https://awasn.github.io/stub-fake-mock/">Stub, Fake, Mock</a>
+        </div>
+        <div class="pure-u-2-24">&nbsp;</div>
+        <div class="pure-u-11-24 next">
+            <a href="https://awasn.github.io/debugger-break-laduje-pakiety/">Debugger.Break ładuje pakiety</a>
+            <a href="https://awasn.github.io/debugger-break-laduje-pakiety/" aria-label="Next post"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg></span></a>
+        </div>
+    </nav>
+
+    
+
+
+        </main>
+
+        <footer>
+            <div class="center-aligned container">
+                <p>Copyright &copy; 2007-2021 Arkadiusz Waśniewski. All Rights Reserved.</p>
+            </div>
+        </footer>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/accesslog.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dockerfile.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dos.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/go.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/powershell.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/routeros.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/typescript.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/yaml.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/vbnet.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+</html>

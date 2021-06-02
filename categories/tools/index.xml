@@ -1,11 +1,129 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tools on arkadiusz wasniewski blog</title><link>https://awasn.github.io/categories/tools/</link><description>Recent content in Tools on arkadiusz wasniewski blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 08 Oct 2009 00:17:00 +0200</lastBuildDate><atom:link href="https://awasn.github.io/categories/tools/index.xml" rel="self" type="application/rss+xml"/><item><title>Pobranie projektów rozwiązania czyli Regex w akcji</title><link>https://awasn.github.io/pobranie-projektow-rozwiazania-czyli-regex-w-akcji/</link><pubDate>Thu, 08 Oct 2009 00:17:00 +0200</pubDate><guid>https://awasn.github.io/pobranie-projektow-rozwiazania-czyli-regex-w-akcji/</guid><description>Asumpt do poniższego rozwiązania dostarczył skrypt PowerShell, który kompiluje projekty pewnego mojego rozwiązania, i gdzie zapałałem chęcią automatycznego uaktualnienia numeru wersji we wszystkich plikach AssemblyInfo.cs. Ale gdzież są te wszystkie pliki? No w projektach…
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tools on arkadiusz wasniewski blog</title>
+    <link>https://awasn.github.io/categories/tools/</link>
+    <description>Recent content in Tools on arkadiusz wasniewski blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 08 Oct 2009 00:17:00 +0200</lastBuildDate><atom:link href="https://awasn.github.io/categories/tools/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Pobranie projektów rozwiązania czyli Regex w akcji</title>
+      <link>https://awasn.github.io/pobranie-projektow-rozwiazania-czyli-regex-w-akcji/</link>
+      <pubDate>Thu, 08 Oct 2009 00:17:00 +0200</pubDate>
+      
+      <guid>https://awasn.github.io/pobranie-projektow-rozwiazania-czyli-regex-w-akcji/</guid>
+      <description>Asumpt do poniższego rozwiązania dostarczył skrypt PowerShell, który kompiluje projekty pewnego mojego rozwiązania, i gdzie zapałałem chęcią automatycznego uaktualnienia numeru wersji we wszystkich plikach AssemblyInfo.cs. Ale gdzież są te wszystkie pliki? No w projektach…
 Najprostszy sposób dotarcia do projektów to odczytanie pliku .sln. Hm… ale to oznacza analizowanie zawartości. Z pomocą przyszły wyrażenia regularne oraz świadomość istnienia jasno określonej struktury pliku .sln.
-Project\(&amp;#34;\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC\}&amp;#34;\) = &amp;#34;(?&amp;lt;projectName&amp;gt;[^&amp;#34;]+)&amp;#34;, &amp;#34;(?&amp;lt;projectFolder&amp;gt;[^&amp;#34;]+)&amp;#34;, &amp;#34;(?&amp;lt;projectGuid&amp;gt;[^&amp;#34;]+)&amp;#34;\nEndProject Oczywiście kilka słów wyjaśnienia.</description></item><item><title>Wirtualizacja aplikacji testowych</title><link>https://awasn.github.io/wirtualizacja-aplikacji-testowych/</link><pubDate>Mon, 15 Sep 2008 13:21:00 +0200</pubDate><guid>https://awasn.github.io/wirtualizacja-aplikacji-testowych/</guid><description>Maszyn wirtualnych używam od dawna. I to korzystając zarówno z VMware Server jak i z Virtual PC. A jednak po przeczytaniu na http://wss.pl artykułu Praca z programem Virtual PC 2007, którego autorami są Robert Stuczynski i Jacek Doktór zorientowałem się, iż zupełnie nie wykorzystywałem do tej pory potęgi dysków różnicowych!
-Z racji tworzonego oprogramowania niejednokrotnie wykonuję integrację oprogramowania mobilnego z zewnętrznymi systemami np. sprzedaży. Tego typu systemy są dostępne do testów często w wersjach z ograniczeniem czasowym.</description></item><item><title>tsvn:logminsize, tsvn:logtemplate</title><link>https://awasn.github.io/tsvn-logminsize-tsvn-logtemplate/</link><pubDate>Thu, 14 Feb 2008 16:00:00 +0100</pubDate><guid>https://awasn.github.io/tsvn-logminsize-tsvn-logtemplate/</guid><description>Ostatni wpis dotyczył wykorzystania skryptów przechwytujących do zablokowania dokonywania modyfikacji w ramach repozytorium Subversion jeśli nie zostanie podana informacja opisująca przyczynę zmian. Opisywana metoda działa na poziomie repozytorium. Jeśli jako klienta Subversion wykorzystujemy TortoiseSVN, możemy zamiast tego wykorzystać możliwości, jakie oferują specjalne właściwości, które można przypisać do katalogu objętego kontrolą SVN. Ponieważ są to rozszerzenia TortoiseSVN, które podobnie jak właściwości Subversion mogą być przez użytkownika modyfikowane i usuwane, nie są one mocnym zabezpieczeniem.</description></item><item><title>HTTP - Własny serwer komunikacji. Część #2 - Środowisko programistyczne</title><link>https://awasn.github.io/http-wlasny-serwer-komunikacji-cz2-srodowisko-programistyczne/</link><pubDate>Sun, 27 Jan 2008 22:12:00 +0100</pubDate><guid>https://awasn.github.io/http-wlasny-serwer-komunikacji-cz2-srodowisko-programistyczne/</guid><description>Zasadniczo całe rozwiązanie zbudowane będzie przy pomocy Microsoft Visual Studio 2005 Professional Edition w oparciu o ASP.NET Web Application jako typ projektu. Użytkownicy wersji Express będą niestety zmuszeni dokonać konwersji do projektu Web Site. Dostarczany z Visual Studio serwer WWW w zupełności wystarczy do uruchomienia prezentowanego rozwiązania. Z racji wybranego środowiska operować będziemy na platformie .NET w wersji 2.0. Nie mniej jednak bez żadnych zmian prezentowane oprogramowanie będzie działało również w wersji 1.</description></item><item><title>ReSharper ostrzega - Possible NullReferenceException</title><link>https://awasn.github.io/resharper-ostrzega-possible-nullreferenceexception/</link><pubDate>Wed, 09 Jan 2008 23:15:00 +0100</pubDate><guid>https://awasn.github.io/resharper-ostrzega-possible-nullreferenceexception/</guid><description>Kontekst rozważań jest następujący. Metoda (wersja uproszczona poniżej) buduje ściśle określoną sekwencję sterującą. Dokumentacja mówi, iż sekwencja ta musi zawierać dokładnie osiem parametrów oddzielonych średnikiem. Dopuszcza się przy tym parametry puste. Użytkownik nie jest karany (np. wyjątek) za brak parametrów. Nie spotka go też przykra niespodzianka, jeśli poda zbyt dużo parametrów.
-public void SampleReport(string[] names) { const byte maxNumberOfNames = 8; int numberOfNames = names == null ? 0 : names.</description></item><item><title>Dynamiczna budowa poprawnego pliku docx w standardzie Open XML</title><link>https://awasn.github.io/dynamiczna-budowa-poprawnego-pliku-docx-w-standardzie-open-xml/</link><pubDate>Sat, 24 Nov 2007 00:22:00 +0100</pubDate><guid>https://awasn.github.io/dynamiczna-budowa-poprawnego-pliku-docx-w-standardzie-open-xml/</guid><description>Konieczność utworzenie dokumentu, który byłby stały w treści a gdzie tylko niektóre elementy, np. imię i nazwisko, powinny się zmieniać dynamicznie jest sytuacją nieobcą chyba każdemu programiście czy informatykowi. Rozwiązań takiego problemu jest wiele.
-Ostatnio w poszukiwaniu absolutu zainteresowałem się pakietem Microsoft Office, a konkretnie aplikacją Word 2007. Cały pakiet do zapisywania danych wykorzystuje nowy format plików bazujący na standardzie Open XML. Standardzie nota bene promowanym przez sam Microsoft. Nowe pliki łatwo poznać po literze x dodawanej do rozszerzenia znanego z wcześniejszych wersji.</description></item><item><title>&lt;![CDATA[]]> kills VS2K5</title><link>https://awasn.github.io/cdata-kills-vs2k5/</link><pubDate>Tue, 06 Nov 2007 22:04:00 +0100</pubDate><guid>https://awasn.github.io/cdata-kills-vs2k5/</guid><description>Królestwo za nawiasy ostre w komentarzu, który zawiera powyższą sekcję. Nie ma znaczenie gdzie będziemy je próbowali wstawić. Czy w samej sekcji CDATA, czy też w innym miejscu w ramach istniejącego już komentarza. Visual Studio 2005 robi kaput.
+Project\(&amp;#34;\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC\}&amp;#34;\) = &amp;#34;(?&amp;lt;projectName&amp;gt;[^&amp;#34;]+)&amp;#34;, &amp;#34;(?&amp;lt;projectFolder&amp;gt;[^&amp;#34;]+)&amp;#34;, &amp;#34;(?&amp;lt;projectGuid&amp;gt;[^&amp;#34;]+)&amp;#34;\nEndProject Oczywiście kilka słów wyjaśnienia.</description>
+    </item>
+    
+    <item>
+      <title>Wirtualizacja aplikacji testowych</title>
+      <link>https://awasn.github.io/wirtualizacja-aplikacji-testowych/</link>
+      <pubDate>Mon, 15 Sep 2008 13:21:00 +0200</pubDate>
+      
+      <guid>https://awasn.github.io/wirtualizacja-aplikacji-testowych/</guid>
+      <description>Maszyn wirtualnych używam od dawna. I to korzystając zarówno z VMware Server jak i z Virtual PC. A jednak po przeczytaniu na http://wss.pl artykułu Praca z programem Virtual PC 2007, którego autorami są Robert Stuczynski i Jacek Doktór zorientowałem się, iż zupełnie nie wykorzystywałem do tej pory potęgi dysków różnicowych!
+Z racji tworzonego oprogramowania niejednokrotnie wykonuję integrację oprogramowania mobilnego z zewnętrznymi systemami np. sprzedaży. Tego typu systemy są dostępne do testów często w wersjach z ograniczeniem czasowym.</description>
+    </item>
+    
+    <item>
+      <title>tsvn:logminsize, tsvn:logtemplate</title>
+      <link>https://awasn.github.io/tsvn-logminsize-tsvn-logtemplate/</link>
+      <pubDate>Thu, 14 Feb 2008 16:00:00 +0100</pubDate>
+      
+      <guid>https://awasn.github.io/tsvn-logminsize-tsvn-logtemplate/</guid>
+      <description>Ostatni wpis dotyczył wykorzystania skryptów przechwytujących do zablokowania dokonywania modyfikacji w ramach repozytorium Subversion jeśli nie zostanie podana informacja opisująca przyczynę zmian. Opisywana metoda działa na poziomie repozytorium. Jeśli jako klienta Subversion wykorzystujemy TortoiseSVN, możemy zamiast tego wykorzystać możliwości, jakie oferują specjalne właściwości, które można przypisać do katalogu objętego kontrolą SVN. Ponieważ są to rozszerzenia TortoiseSVN, które podobnie jak właściwości Subversion mogą być przez użytkownika modyfikowane i usuwane, nie są one mocnym zabezpieczeniem.</description>
+    </item>
+    
+    <item>
+      <title>HTTP - Własny serwer komunikacji. Część #2 - Środowisko programistyczne</title>
+      <link>https://awasn.github.io/http-wlasny-serwer-komunikacji-cz2-srodowisko-programistyczne/</link>
+      <pubDate>Sun, 27 Jan 2008 22:12:00 +0100</pubDate>
+      
+      <guid>https://awasn.github.io/http-wlasny-serwer-komunikacji-cz2-srodowisko-programistyczne/</guid>
+      <description>Zasadniczo całe rozwiązanie zbudowane będzie przy pomocy Microsoft Visual Studio 2005 Professional Edition w oparciu o ASP.NET Web Application jako typ projektu. Użytkownicy wersji Express będą niestety zmuszeni dokonać konwersji do projektu Web Site. Dostarczany z Visual Studio serwer WWW w zupełności wystarczy do uruchomienia prezentowanego rozwiązania. Z racji wybranego środowiska operować będziemy na platformie .NET w wersji 2.0. Nie mniej jednak bez żadnych zmian prezentowane oprogramowanie będzie działało również w wersji 1.</description>
+    </item>
+    
+    <item>
+      <title>ReSharper ostrzega - Possible NullReferenceException</title>
+      <link>https://awasn.github.io/resharper-ostrzega-possible-nullreferenceexception/</link>
+      <pubDate>Wed, 09 Jan 2008 23:15:00 +0100</pubDate>
+      
+      <guid>https://awasn.github.io/resharper-ostrzega-possible-nullreferenceexception/</guid>
+      <description>Kontekst rozważań jest następujący. Metoda (wersja uproszczona poniżej) buduje ściśle określoną sekwencję sterującą. Dokumentacja mówi, iż sekwencja ta musi zawierać dokładnie osiem parametrów oddzielonych średnikiem. Dopuszcza się przy tym parametry puste. Użytkownik nie jest karany (np. wyjątek) za brak parametrów. Nie spotka go też przykra niespodzianka, jeśli poda zbyt dużo parametrów.
+public void SampleReport(string[] names) { const byte maxNumberOfNames = 8; int numberOfNames = names == null ? 0 : names.</description>
+    </item>
+    
+    <item>
+      <title>Dynamiczna budowa poprawnego pliku docx w standardzie Open XML</title>
+      <link>https://awasn.github.io/dynamiczna-budowa-poprawnego-pliku-docx-w-standardzie-open-xml/</link>
+      <pubDate>Sat, 24 Nov 2007 00:22:00 +0100</pubDate>
+      
+      <guid>https://awasn.github.io/dynamiczna-budowa-poprawnego-pliku-docx-w-standardzie-open-xml/</guid>
+      <description>Konieczność utworzenie dokumentu, który byłby stały w treści a gdzie tylko niektóre elementy, np. imię i nazwisko, powinny się zmieniać dynamicznie jest sytuacją nieobcą chyba każdemu programiście czy informatykowi. Rozwiązań takiego problemu jest wiele.
+Ostatnio w poszukiwaniu absolutu zainteresowałem się pakietem Microsoft Office, a konkretnie aplikacją Word 2007. Cały pakiet do zapisywania danych wykorzystuje nowy format plików bazujący na standardzie Open XML. Standardzie nota bene promowanym przez sam Microsoft. Nowe pliki łatwo poznać po literze x dodawanej do rozszerzenia znanego z wcześniejszych wersji.</description>
+    </item>
+    
+    <item>
+      <title>&lt;![CDATA[]]&gt; kills VS2K5</title>
+      <link>https://awasn.github.io/cdata-kills-vs2k5/</link>
+      <pubDate>Tue, 06 Nov 2007 22:04:00 +0100</pubDate>
+      
+      <guid>https://awasn.github.io/cdata-kills-vs2k5/</guid>
+      <description>Królestwo za nawiasy ostre w komentarzu, który zawiera powyższą sekcję. Nie ma znaczenie gdzie będziemy je próbowali wstawić. Czy w samej sekcji CDATA, czy też w innym miejscu w ramach istniejącego już komentarza. Visual Studio 2005 robi kaput.
 PS. Podziękowania dla Michała, który brał udział w eksperymencie i robił za przysłowiową świnkę doświadczalną.
-Z powyższego tekstu nie wynika to jasno, ale chodzi o komentarze do kodu C#:
-/// &amp;lt;summary&amp;gt; /// &amp;lt;!</description></item><item><title>Visual Studio T4 Editor</title><link>https://awasn.github.io/visual-studio-t4-editor/</link><pubDate>Mon, 22 Oct 2007 10:06:00 +0200</pubDate><guid>https://awasn.github.io/visual-studio-t4-editor/</guid><description>Wszystkim, których interesuje temat szablonów tekstowych T4 (Text Templating Transformation Toolkit), a myślę, że przynajmniej w Warszawskiej Grupie .NET po XI spotkaniu kilka osób się znajdzie, polecam stronę http://www.t4editor.net gdzie znajdziemy darmową, aczkolwiek czasową (styczeń 2008 roku) wersję beta edytora szablonów T4 instalującego się jako dodatek do Visual Studio.
-Szablony T4 wykorzystywane są przez wszystkie niemal Software Factories firmy Microsoft oraz narzędzia oparte o DSL. Dla szukających wiedzy na ten temat polecam swój artykuł w drugim numerze gazetki zine.</description></item><item><title>Kopia bezpieczeństwa SVN</title><link>https://awasn.github.io/kopia-bezpieczenstwa-svn/</link><pubDate>Fri, 19 Oct 2007 15:41:00 +0200</pubDate><guid>https://awasn.github.io/kopia-bezpieczenstwa-svn/</guid><description>Repozytoria Subversion, zgodnie z dokumentacją, mogą być archiwizowane w locie. Może jednak się zdarzyć, iż wykonywane w tak zwanym między czasie przez użytkowników operacje spowodują, iż otrzymana kopia, mimo swej poprawności będzie logicznie niespójna. Ze względu bowiem na czas trwania archiwizacji może dojść do sytuacji, iż w repozytorium zostaną zatwierdzone kolejne transakcje i nasza kopia części nowych danych nie uwzględni. Z tego też powodu zaleca się wcześniejsze przygotowanie repozytorium SVN do operacji archiwizacji danych.</description></item><item><title>Loopa TV</title><link>https://awasn.github.io/loopa-tv/</link><pubDate>Fri, 14 Sep 2007 13:43:00 +0200</pubDate><guid>https://awasn.github.io/loopa-tv/</guid><description>Programując urządzenia mobilne człowiek posiada naturalną potrzebę uruchomienia kodu na takim komputerze (komputerku?). W ramach standardowego środowiska programisty nie ma z tym zazwyczaj problemu. Bierzemy dok (vel kołyskę), wkładamy do niego urządzenie i łączymy z PC przy pomocy kabla USB. Działa. Jakaś komunikacja protokołem TCP z komputerem stacjonarnym? Nie ma problemu, działa. Robimy to samo w terenie, albo bez sieci (nie mając połączenia)&amp;hellip; no&amp;hellip; nie działa. Nie da rady skomunikować się poprzez TCP z urządzenia mobilnego.</description></item><item><title>Z Virtual PC do VMware Server</title><link>https://awasn.github.io/z-virtual-pc-do-vmware-server/</link><pubDate>Tue, 04 Sep 2007 22:47:00 +0200</pubDate><guid>https://awasn.github.io/z-virtual-pc-do-vmware-server/</guid><description>Zgodnie z deklaracjami firmy VMware, narzędzia tego producenta służące do wirtualizacji komputerów i systemów bez problemu obsługują format stosowany przez aplikacje Virtual PC oraz Virtual Server firmy Microsoft. Wielkie było moje zaskoczenie kiedy okazało się, iż jednak nie do końca. Otóż nie powiedzie nam się operacja uruchomienia (czy to poprzez polecenie Open czy też Import w przypadku VMware Server) maszyny wirtualnej w formacie Microsoft, która skonfigurowana jest tak, aby używała opcji Undo disks, czyli zapisywania wszelkich modyfikacji poza wirtualnym dyskiem.</description></item><item><title>Zadzwoń sam do siebie</title><link>https://awasn.github.io/zadzwon-sam-do-siebie/</link><pubDate>Wed, 04 Jul 2007 22:23:00 +0200</pubDate><guid>https://awasn.github.io/zadzwon-sam-do-siebie/</guid><description>Dennis Hayes pod koniec lat siedemdziesiątych wraz z modemem Hayes 300 baud Smartmodem zaproponował zestaw poleceń sterujących tymi urządzeniami. Polecenia te nazywamy dzisiaj komendami AT i są one obsługiwane między innymi przez telefony komórkowe. Jeśli mamy możliwość podłączenia komórki do komputera - czy to przez dongla Bluetooth, czy też korzystając z kabla USB - możemy spróbować zdalnie pozarządzać telefonem.
-Wpierw jednak mała uwaga. Zarządzanie modemem odbywa się poprzez standard RS-232. Dlatego też Bluetooth, z którego zamierzamy skorzystać powinien obsługiwać profil portu szeregowego.</description></item></channel></rss>
+ Z powyższego tekstu nie wynika to jasno, ale chodzi o komentarze do kodu C#:
+/// &amp;lt;summary&amp;gt;  /// &amp;lt;!</description>
+    </item>
+    
+    <item>
+      <title>Visual Studio T4 Editor</title>
+      <link>https://awasn.github.io/visual-studio-t4-editor/</link>
+      <pubDate>Mon, 22 Oct 2007 10:06:00 +0200</pubDate>
+      
+      <guid>https://awasn.github.io/visual-studio-t4-editor/</guid>
+      <description>Wszystkim, których interesuje temat szablonów tekstowych T4 (Text Templating Transformation Toolkit), a myślę, że przynajmniej w Warszawskiej Grupie .NET po XI spotkaniu kilka osób się znajdzie, polecam stronę http://www.t4editor.net gdzie znajdziemy darmową, aczkolwiek czasową (styczeń 2008 roku) wersję beta edytora szablonów T4 instalującego się jako dodatek do Visual Studio.
+Szablony T4 wykorzystywane są przez wszystkie niemal Software Factories firmy Microsoft oraz narzędzia oparte o DSL. Dla szukających wiedzy na ten temat polecam swój artykuł w drugim numerze gazetki zine.</description>
+    </item>
+    
+    <item>
+      <title>Kopia bezpieczeństwa SVN</title>
+      <link>https://awasn.github.io/kopia-bezpieczenstwa-svn/</link>
+      <pubDate>Fri, 19 Oct 2007 15:41:00 +0200</pubDate>
+      
+      <guid>https://awasn.github.io/kopia-bezpieczenstwa-svn/</guid>
+      <description>Repozytoria Subversion, zgodnie z dokumentacją, mogą być archiwizowane w locie. Może jednak się zdarzyć, iż wykonywane w tak zwanym między czasie przez użytkowników operacje spowodują, iż otrzymana kopia, mimo swej poprawności będzie logicznie niespójna. Ze względu bowiem na czas trwania archiwizacji może dojść do sytuacji, iż w repozytorium zostaną zatwierdzone kolejne transakcje i nasza kopia części nowych danych nie uwzględni. Z tego też powodu zaleca się wcześniejsze przygotowanie repozytorium SVN do operacji archiwizacji danych.</description>
+    </item>
+    
+    <item>
+      <title>Loopa TV</title>
+      <link>https://awasn.github.io/loopa-tv/</link>
+      <pubDate>Fri, 14 Sep 2007 13:43:00 +0200</pubDate>
+      
+      <guid>https://awasn.github.io/loopa-tv/</guid>
+      <description>Programując urządzenia mobilne człowiek posiada naturalną potrzebę uruchomienia kodu na takim komputerze (komputerku?). W ramach standardowego środowiska programisty nie ma z tym zazwyczaj problemu. Bierzemy dok (vel kołyskę), wkładamy do niego urządzenie i łączymy z PC przy pomocy kabla USB. Działa. Jakaś komunikacja protokołem TCP z komputerem stacjonarnym? Nie ma problemu, działa. Robimy to samo w terenie, albo bez sieci (nie mając połączenia)&amp;hellip; no&amp;hellip; nie działa. Nie da rady skomunikować się poprzez TCP z urządzenia mobilnego.</description>
+    </item>
+    
+    <item>
+      <title>Z Virtual PC do VMware Server</title>
+      <link>https://awasn.github.io/z-virtual-pc-do-vmware-server/</link>
+      <pubDate>Tue, 04 Sep 2007 22:47:00 +0200</pubDate>
+      
+      <guid>https://awasn.github.io/z-virtual-pc-do-vmware-server/</guid>
+      <description>Zgodnie z deklaracjami firmy VMware, narzędzia tego producenta służące do wirtualizacji komputerów i systemów bez problemu obsługują format stosowany przez aplikacje Virtual PC oraz Virtual Server firmy Microsoft. Wielkie było moje zaskoczenie kiedy okazało się, iż jednak nie do końca. Otóż nie powiedzie nam się operacja uruchomienia (czy to poprzez polecenie Open czy też Import w przypadku VMware Server) maszyny wirtualnej w formacie Microsoft, która skonfigurowana jest tak, aby używała opcji Undo disks, czyli zapisywania wszelkich modyfikacji poza wirtualnym dyskiem.</description>
+    </item>
+    
+    <item>
+      <title>Zadzwoń sam do siebie</title>
+      <link>https://awasn.github.io/zadzwon-sam-do-siebie/</link>
+      <pubDate>Wed, 04 Jul 2007 22:23:00 +0200</pubDate>
+      
+      <guid>https://awasn.github.io/zadzwon-sam-do-siebie/</guid>
+      <description>Dennis Hayes pod koniec lat siedemdziesiątych wraz z modemem Hayes 300 baud Smartmodem zaproponował zestaw poleceń sterujących tymi urządzeniami. Polecenia te nazywamy dzisiaj komendami AT i są one obsługiwane między innymi przez telefony komórkowe. Jeśli mamy możliwość podłączenia komórki do komputera - czy to przez dongla Bluetooth, czy też korzystając z kabla USB - możemy spróbować zdalnie pozarządzać telefonem.
+Wpierw jednak mała uwaga. Zarządzanie modemem odbywa się poprzez standard RS-232. Dlatego też Bluetooth, z którego zamierzamy skorzystać powinien obsługiwać profil portu szeregowego.</description>
+    </item>
+    
+  </channel>
+</rss>

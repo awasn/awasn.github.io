@@ -1,9 +1,118 @@
-<!doctype html><html lang=pl-pl><head><meta name=theme-color content="#405365"><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.83.1"><meta name=description content="Wykorzystanie komend AT do sterowania telefonem komórkowym"><title>Zadzwoń sam do siebie - arkadiusz wasniewski blog</title><link rel=canonical href=https://awasn.github.io/zadzwon-sam-do-siebie/><link rel=prev title="Tworzenie obiektów" href=https://awasn.github.io/tworzenie-obiektow/><link rel=next title="Mobilne MFC a protokół HTTP" href=https://awasn.github.io/mobilne-mfc-a-protokol-http/><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css integrity="sha256-Q0zCrUs2IfXWYx0uMKJfG93CvF6oVII21waYsAV4/8Q=" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css><link rel=stylesheet href=https://awasn.github.io/awasn.min.f45a909800924faa836a73b82a1d4cb352f8053134a426a9dcafa61cf6a8c5d0.css integrity="sha256-9FqQmACST6qDanO4Kh1Ms1L4BTE0pCap3K+mHPaoxdA="></head><body><header><nav class=container><div class="pure-menu pure-menu-horizontal"><a class="pure-menu-heading pure-menu-link" href=https://awasn.github.io/>wasniewski</a><ul class="right pure-menu-list"><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/blog/>blog</a></li><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/categories/>categories</a></li><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/tags/>tags</a></li><li class=pure-menu-item><a class=pure-menu-link href=https://awasn.github.io/about/>about</a></li></ul></div></nav></header><main class=container><aside class=post-published><p>This post was originally published on <a href=http://zine.net.pl/blogs/arkadiusz_wasniewski/archive/2007/07/04/zadzwo-sam-do-siebie.aspx target=_blank>zine.net.pl</a> on 4 July 2007 22:23 +0200</p></aside><article><header><h1>Zadzwoń sam do siebie</h1><div class=post-metadata><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>04 July 2007 22:23 +0200
-&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-2 min read</div><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg><a href=https://awasn.github.io/categories/tools>Tools</a></div></div></header><p>Dennis Hayes pod koniec lat siedemdziesiątych wraz z modemem <em>Hayes 300 baud Smartmodem</em> zaproponował zestaw poleceń sterujących tymi urządzeniami. Polecenia te nazywamy dzisiaj komendami AT i są one obsługiwane między innymi przez telefony komórkowe. Jeśli mamy możliwość podłączenia komórki do komputera - czy to przez dongla Bluetooth, czy też korzystając z kabla USB - możemy spróbować zdalnie pozarządzać telefonem.</p><p>Wpierw jednak mała uwaga. Zarządzanie modemem odbywa się poprzez standard RS-232. Dlatego też Bluetooth, z którego zamierzamy skorzystać powinien obsługiwać profil portu szeregowego. Ponieważ każdy producent Bluetooth czy telefonu komórkowego posiada własne oprogramowanie, czeka nas pewien wysiłek związany z instalacją i konfiguracją sterowników jeśli dane urządzenie tego wymaga. Osobiście do tej pory łączyłem następujące urządzenia:</p><ul><li>Siemens S65 poprzez Bluetooth z komputerem PC, który do portu USB miał włożonego odpowiedniego dongla. Bluetooth w PC wymagał zainstalowania sterowników i podania portu szeregowego, który miał być z donglem skojarzony;</li><li>Sony Ericsson K750i poprzez kabel USB z notebookiem. W komputerze miałem zainstalowane oprogramowanie producenta do zarządzania telefonem komórkowym.</li></ul><p>Generalnie rzecz biorąc Menedżer urządzeń powinien pokazywać nam jeden z portów szeregowych przypisany do urządzenia, z którym będziemy się komunikować.</p><p>Do wydawania poleceń wykorzystać możemy stary, poczciwy HyperTerminal. Tworzymy w nim nowe połączenie, dla którego wybieramy właściwy port. I możemy zaczynać. Najprostszą metodą umożliwiającą sprawdzenie czy połączenie zostało faktycznie nawiązane jest wpisanie w terminalu komendy (pamiętajmy, iż zatwierdzenie polecenia następuję po wciśnięciu klawisza Enter):</p><pre><code class=language-dos data-lang=dos>AT
-</code></pre><p>Telefon powinien zwrócić nam odpowiedź OK. Jeśli ktoś już się pobudził i marzy o zalewaniu bliźnich wiadomościami SMS to pragnę ostudzić zapał. Kodowanie SMS do formatu wymaganego przez telefon komórkowy jest nie do wykonania w pamięci operacyjnej człowieka. Trzeba skorzystać z dodatkowych narzędzi. Warto również poszukać w sieci zestawu komend AT dla posiadanego modelu telefonu. Oczywiście istnieje duża część wspólna zwana standardem implementowana przez każde urządzenie.</p><p>Na koniec jeszcze jeden przykład. Poniższa sekwencja pokazuje nawiązanie i zerwanie połączenia:</p><pre><code class=language-dos data-lang=dos>ATD555123456;
+<!DOCTYPE HTML>
+<html lang="pl-pl">
+    <head>
+        <meta name="theme-color" content="#405365"/>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="generator" content="Hugo 0.83.1" />
+        <meta name="description" content="Wykorzystanie komend AT do sterowania telefonem komórkowym" />
+        <title>Zadzwoń sam do siebie - arkadiusz wasniewski blog</title>
+        <link rel="canonical" href="https://awasn.github.io/zadzwon-sam-do-siebie/">
+        <link rel="prev" title="Tworzenie obiektów" href="https://awasn.github.io/tworzenie-obiektow/">
+        <link rel="next" title="Mobilne MFC a protokół HTTP" href="https://awasn.github.io/mobilne-mfc-a-protokol-http/">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css" integrity="sha256-Q0zCrUs2IfXWYx0uMKJfG93CvF6oVII21waYsAV4/8Q=" crossorigin="anonymous" />
+        
+        
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
+        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.f45a909800924faa836a73b82a1d4cb352f8053134a426a9dcafa61cf6a8c5d0.css" integrity="sha256-9FqQmACST6qDanO4Kh1Ms1L4BTE0pCap3K&#43;mHPaoxdA=" />
+
+    </head>
+    <body>
+        <header>
+            <nav class="container" >
+                <div class="pure-menu pure-menu-horizontal">
+                    <a class="pure-menu-heading pure-menu-link" href="https://awasn.github.io/">wasniewski</a>
+                    <ul class="right pure-menu-list">
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/blog/">blog</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/categories/">categories</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/tags/">tags</a></li>
+                        <li class="pure-menu-item"><a class="pure-menu-link" href="https://awasn.github.io/about/">about</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container">
+            
+    <aside class="post-published">
+        <p>This post was originally published on <a href="http://zine.net.pl/blogs/arkadiusz_wasniewski/archive/2007/07/04/zadzwo-sam-do-siebie.aspx" target="_blank">zine.net.pl</a> on 4 July 2007 22:23 &#43;0200</p>
+    </aside>
+
+    <article>
+        <header>
+            <h1>Zadzwoń sam do siebie</h1>
+                <div class="post-metadata">
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            04 July 2007 22:23 &#43;0200
+            
+            &nbsp;
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            2 min read
+        </div>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+            <a href="https://awasn.github.io/categories/tools">Tools</a>
+            
+        </div>
+    </div>
+        </header>
+
+        <p>Dennis Hayes pod koniec lat siedemdziesiątych wraz z modemem <em>Hayes 300 baud Smartmodem</em> zaproponował zestaw poleceń sterujących tymi urządzeniami. Polecenia te nazywamy dzisiaj komendami AT i są one obsługiwane między innymi przez telefony komórkowe. Jeśli mamy możliwość podłączenia komórki do komputera - czy to przez dongla Bluetooth, czy też korzystając z kabla USB - możemy spróbować zdalnie pozarządzać telefonem.</p>
+<p>Wpierw jednak mała uwaga. Zarządzanie modemem odbywa się poprzez standard RS-232. Dlatego też Bluetooth, z którego zamierzamy skorzystać powinien obsługiwać profil portu szeregowego. Ponieważ każdy producent Bluetooth czy telefonu komórkowego posiada własne oprogramowanie, czeka nas pewien wysiłek związany z instalacją i konfiguracją sterowników jeśli dane urządzenie tego wymaga. Osobiście do tej pory łączyłem następujące urządzenia:</p>
+<ul>
+<li>Siemens S65 poprzez Bluetooth z komputerem PC, który do portu USB miał włożonego odpowiedniego dongla. Bluetooth w PC wymagał zainstalowania sterowników i podania portu szeregowego, który miał być z donglem skojarzony;</li>
+<li>Sony Ericsson K750i poprzez kabel USB z notebookiem. W komputerze miałem zainstalowane oprogramowanie producenta do zarządzania telefonem komórkowym.</li>
+</ul>
+<p>Generalnie rzecz biorąc Menedżer urządzeń powinien pokazywać nam jeden z portów szeregowych przypisany do urządzenia, z którym będziemy się komunikować.</p>
+<p>Do wydawania poleceń wykorzystać możemy stary, poczciwy HyperTerminal. Tworzymy w nim nowe połączenie, dla którego wybieramy właściwy port. I możemy zaczynać. Najprostszą metodą umożliwiającą sprawdzenie czy połączenie zostało faktycznie nawiązane jest wpisanie w terminalu komendy (pamiętajmy, iż zatwierdzenie polecenia następuję po wciśnięciu klawisza Enter):</p>
+<pre><code class="language-dos" data-lang="dos">AT
+</code></pre><p>Telefon powinien zwrócić nam odpowiedź OK. Jeśli ktoś już się pobudził i marzy o zalewaniu bliźnich wiadomościami SMS to pragnę ostudzić zapał. Kodowanie SMS do formatu wymaganego przez telefon komórkowy jest nie do wykonania w pamięci operacyjnej człowieka. Trzeba skorzystać z dodatkowych narzędzi. Warto również poszukać w sieci zestawu komend AT dla posiadanego modelu telefonu. Oczywiście istnieje duża część wspólna zwana standardem implementowana przez każde urządzenie.</p>
+<p>Na koniec jeszcze jeden przykład. Poniższa sekwencja pokazuje nawiązanie i zerwanie połączenia:</p>
+<pre><code class="language-dos" data-lang="dos">ATD555123456;
 OK
 AT+CHUP
 OK
-</code></pre><p>Korzystając z kontrolki <code>SerialPort</code> w ramach .NET możemy za pomocą powyższej kombinacji&mldr; A swoją drogą, czy ktoś wie, iż można zadzwonić do samego siebie?</p></article><nav class="pure-g post-previous-next" aria-label="Previous and next posts"><div class="pure-u-11-24 previous"><a href=https://awasn.github.io/tworzenie-obiektow/ aria-label="Previous post"><span aria-hidden=true><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"/></svg></span></a><a href=https://awasn.github.io/tworzenie-obiektow/>Tworzenie obiektów</a></div><div class=pure-u-2-24>&nbsp;</div><div class="pure-u-11-24 next"><a href=https://awasn.github.io/mobilne-mfc-a-protokol-http/>Mobilne MFC a protokół HTTP</a>
-<a href=https://awasn.github.io/mobilne-mfc-a-protokol-http/ aria-label="Next post"><span aria-hidden=true><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg></span></a></div></nav></main><footer><div class="center-aligned container"><p>Copyright &copy; 2007-2021 Arkadiusz Waśniewski. All Rights Reserved.</p></div></footer><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/accesslog.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dockerfile.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dos.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/go.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/powershell.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/routeros.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/typescript.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/yaml.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/vbnet.min.js></script><script>hljs.initHighlightingOnLoad()</script></body></html>
+</code></pre><p>Korzystając z kontrolki <code>SerialPort</code> w ramach .NET możemy za pomocą powyższej kombinacji&hellip; A swoją drogą, czy ktoś wie, iż można zadzwonić do samego siebie?</p>
+
+    </article>
+
+    <nav class="pure-g post-previous-next" aria-label="Previous and next posts">
+        <div class="pure-u-11-24 previous">
+            <a href="https://awasn.github.io/tworzenie-obiektow/" aria-label="Previous post"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg></span></a>
+            <a href="https://awasn.github.io/tworzenie-obiektow/">Tworzenie obiektów</a>
+        </div>
+        <div class="pure-u-2-24">&nbsp;</div>
+        <div class="pure-u-11-24 next">
+            <a href="https://awasn.github.io/mobilne-mfc-a-protokol-http/">Mobilne MFC a protokół HTTP</a>
+            <a href="https://awasn.github.io/mobilne-mfc-a-protokol-http/" aria-label="Next post"><span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg></span></a>
+        </div>
+    </nav>
+
+    
+
+
+        </main>
+
+        <footer>
+            <div class="center-aligned container">
+                <p>Copyright &copy; 2007-2021 Arkadiusz Waśniewski. All Rights Reserved.</p>
+            </div>
+        </footer>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/accesslog.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dockerfile.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/dos.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/go.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/powershell.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/routeros.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/typescript.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/yaml.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/languages/vbnet.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </body>
+</html>

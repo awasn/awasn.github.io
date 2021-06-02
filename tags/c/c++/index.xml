@@ -1,2 +1,20 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>C/C++ on arkadiusz wasniewski blog</title><link>https://awasn.github.io/tags/c/c++/</link><description>Recent content in C/C++ on arkadiusz wasniewski blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://awasn.github.io/tags/c/c++/index.xml" rel="self" type="application/rss+xml"/><item><title>Mobilne MFC a protokół HTTP</title><link>https://awasn.github.io/mobilne-mfc-a-protokol-http/</link><pubDate>Fri, 31 Aug 2007 10:37:00 +0200</pubDate><guid>https://awasn.github.io/mobilne-mfc-a-protokol-http/</guid><description>Wakacje nie wakacje, szukanie pracy czy nie, wypadałoby zadbać o swój blog. Dzisiaj trochę z innej beczki (chociaż jak się zastanowić to nie znajduję argumentów czemu z innej niby beczki) ale wciąż w temacie mobilnym. Po to aby nie zapomnieć.
-Osoby programujące urządzenia mobilne i korzystające z klas MFC w ramach Microsoft eMbedded Visual C++ i chcące do wymiany danych wykorzystać protokół HTTP natkną się na niemiłą niespodziankę. Każda odebrana odpowiedź z serwera zmniejsza nam ilość dostępnej pamięci na dysku.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>C/C&#43;&#43; on arkadiusz wasniewski blog</title>
+    <link>https://awasn.github.io/tags/c/c&#43;&#43;/</link>
+    <description>Recent content in C/C&#43;&#43; on arkadiusz wasniewski blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="https://awasn.github.io/tags/c/c++/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mobilne MFC a protokół HTTP</title>
+      <link>https://awasn.github.io/mobilne-mfc-a-protokol-http/</link>
+      <pubDate>Fri, 31 Aug 2007 10:37:00 +0200</pubDate>
+      
+      <guid>https://awasn.github.io/mobilne-mfc-a-protokol-http/</guid>
+      <description>Wakacje nie wakacje, szukanie pracy czy nie, wypadałoby zadbać o swój blog. Dzisiaj trochę z innej beczki (chociaż jak się zastanowić to nie znajduję argumentów czemu z innej niby beczki) ale wciąż w temacie mobilnym. Po to aby nie zapomnieć.
+Osoby programujące urządzenia mobilne i korzystające z klas MFC w ramach Microsoft eMbedded Visual C++ i chcące do wymiany danych wykorzystać protokół HTTP natkną się na niemiłą niespodziankę. Każda odebrana odpowiedź z serwera zmniejsza nam ilość dostępnej pamięci na dysku.</description>
+    </item>
+    
+  </channel>
+</rss>

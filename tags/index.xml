@@ -1,1 +1,209 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tags on arkadiusz wasniewski blog</title><link>https://awasn.github.io/tags/</link><description>Recent content in Tags on arkadiusz wasniewski blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 20 Dec 2009 17:30:00 +0100</lastBuildDate><atom:link href="https://awasn.github.io/tags/index.xml" rel="self" type="application/rss+xml"/><item><title>.NET</title><link>https://awasn.github.io/tags/.net/</link><pubDate>Sun, 20 Dec 2009 17:30:00 +0100</pubDate><guid>https://awasn.github.io/tags/.net/</guid><description/></item><item><title>PowerShell</title><link>https://awasn.github.io/tags/powershell/</link><pubDate>Fri, 18 Dec 2009 23:19:00 +0100</pubDate><guid>https://awasn.github.io/tags/powershell/</guid><description/></item><item><title>Regular Expressions</title><link>https://awasn.github.io/tags/regular-expressions/</link><pubDate>Thu, 08 Oct 2009 00:17:00 +0200</pubDate><guid>https://awasn.github.io/tags/regular-expressions/</guid><description/></item><item><title>Visual Studio</title><link>https://awasn.github.io/tags/visual-studio/</link><pubDate>Thu, 08 Oct 2009 00:17:00 +0200</pubDate><guid>https://awasn.github.io/tags/visual-studio/</guid><description/></item><item><title>Reporting Services</title><link>https://awasn.github.io/tags/reporting-services/</link><pubDate>Wed, 27 May 2009 11:43:00 +0200</pubDate><guid>https://awasn.github.io/tags/reporting-services/</guid><description/></item><item><title>Subversion</title><link>https://awasn.github.io/tags/subversion/</link><pubDate>Fri, 22 May 2009 21:32:00 +0200</pubDate><guid>https://awasn.github.io/tags/subversion/</guid><description/></item><item><title>Interop</title><link>https://awasn.github.io/tags/interop/</link><pubDate>Wed, 20 May 2009 10:48:00 +0200</pubDate><guid>https://awasn.github.io/tags/interop/</guid><description/></item><item><title>Conferences</title><link>https://awasn.github.io/tags/conferences/</link><pubDate>Mon, 30 Mar 2009 11:01:00 +0200</pubDate><guid>https://awasn.github.io/tags/conferences/</guid><description/></item><item><title>Software testing</title><link>https://awasn.github.io/tags/software-testing/</link><pubDate>Tue, 17 Mar 2009 12:02:00 +0100</pubDate><guid>https://awasn.github.io/tags/software-testing/</guid><description/></item><item><title>Meetings</title><link>https://awasn.github.io/tags/meetings/</link><pubDate>Mon, 09 Mar 2009 23:45:00 +0100</pubDate><guid>https://awasn.github.io/tags/meetings/</guid><description/></item><item><title>.NET Compact Framework</title><link>https://awasn.github.io/tags/.net-compact-framework/</link><pubDate>Tue, 27 Jan 2009 12:38:00 +0100</pubDate><guid>https://awasn.github.io/tags/.net-compact-framework/</guid><description/></item><item><title>Design patterns</title><link>https://awasn.github.io/tags/design-patterns/</link><pubDate>Tue, 27 Jan 2009 12:38:00 +0100</pubDate><guid>https://awasn.github.io/tags/design-patterns/</guid><description/></item><item><title>Mobile</title><link>https://awasn.github.io/tags/mobile/</link><pubDate>Tue, 27 Jan 2009 12:38:00 +0100</pubDate><guid>https://awasn.github.io/tags/mobile/</guid><description/></item><item><title>SQL Server</title><link>https://awasn.github.io/tags/sql-server/</link><pubDate>Tue, 16 Dec 2008 15:53:00 +0100</pubDate><guid>https://awasn.github.io/tags/sql-server/</guid><description/></item><item><title>ASP.NET</title><link>https://awasn.github.io/tags/asp.net/</link><pubDate>Thu, 11 Dec 2008 12:45:00 +0100</pubDate><guid>https://awasn.github.io/tags/asp.net/</guid><description/></item><item><title>IIS</title><link>https://awasn.github.io/tags/iis/</link><pubDate>Thu, 11 Dec 2008 12:45:00 +0100</pubDate><guid>https://awasn.github.io/tags/iis/</guid><description/></item><item><title>ReSharper</title><link>https://awasn.github.io/tags/resharper/</link><pubDate>Thu, 11 Dec 2008 12:45:00 +0100</pubDate><guid>https://awasn.github.io/tags/resharper/</guid><description/></item><item><title>Virtualization</title><link>https://awasn.github.io/tags/virtualization/</link><pubDate>Thu, 11 Dec 2008 12:45:00 +0100</pubDate><guid>https://awasn.github.io/tags/virtualization/</guid><description/></item><item><title>MS Office</title><link>https://awasn.github.io/tags/ms-office/</link><pubDate>Sat, 24 Nov 2007 00:22:00 +0100</pubDate><guid>https://awasn.github.io/tags/ms-office/</guid><description/></item><item><title>Open XML</title><link>https://awasn.github.io/tags/open-xml/</link><pubDate>Sat, 24 Nov 2007 00:22:00 +0100</pubDate><guid>https://awasn.github.io/tags/open-xml/</guid><description/></item><item><title>Generowanie kodu</title><link>https://awasn.github.io/tags/generowanie-kodu/</link><pubDate>Mon, 22 Oct 2007 10:06:00 +0200</pubDate><guid>https://awasn.github.io/tags/generowanie-kodu/</guid><description/></item><item><title>C/C++</title><link>https://awasn.github.io/tags/c/c++/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://awasn.github.io/tags/c/c++/</guid><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on arkadiusz wasniewski blog</title>
+    <link>https://awasn.github.io/tags/</link>
+    <description>Recent content in Tags on arkadiusz wasniewski blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 20 Dec 2009 17:30:00 +0100</lastBuildDate><atom:link href="https://awasn.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>.NET</title>
+      <link>https://awasn.github.io/tags/.net/</link>
+      <pubDate>Sun, 20 Dec 2009 17:30:00 +0100</pubDate>
+      
+      <guid>https://awasn.github.io/tags/.net/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PowerShell</title>
+      <link>https://awasn.github.io/tags/powershell/</link>
+      <pubDate>Fri, 18 Dec 2009 23:19:00 +0100</pubDate>
+      
+      <guid>https://awasn.github.io/tags/powershell/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Regular Expressions</title>
+      <link>https://awasn.github.io/tags/regular-expressions/</link>
+      <pubDate>Thu, 08 Oct 2009 00:17:00 +0200</pubDate>
+      
+      <guid>https://awasn.github.io/tags/regular-expressions/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Visual Studio</title>
+      <link>https://awasn.github.io/tags/visual-studio/</link>
+      <pubDate>Thu, 08 Oct 2009 00:17:00 +0200</pubDate>
+      
+      <guid>https://awasn.github.io/tags/visual-studio/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Reporting Services</title>
+      <link>https://awasn.github.io/tags/reporting-services/</link>
+      <pubDate>Wed, 27 May 2009 11:43:00 +0200</pubDate>
+      
+      <guid>https://awasn.github.io/tags/reporting-services/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Subversion</title>
+      <link>https://awasn.github.io/tags/subversion/</link>
+      <pubDate>Fri, 22 May 2009 21:32:00 +0200</pubDate>
+      
+      <guid>https://awasn.github.io/tags/subversion/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Interop</title>
+      <link>https://awasn.github.io/tags/interop/</link>
+      <pubDate>Wed, 20 May 2009 10:48:00 +0200</pubDate>
+      
+      <guid>https://awasn.github.io/tags/interop/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Conferences</title>
+      <link>https://awasn.github.io/tags/conferences/</link>
+      <pubDate>Mon, 30 Mar 2009 11:01:00 +0200</pubDate>
+      
+      <guid>https://awasn.github.io/tags/conferences/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Software testing</title>
+      <link>https://awasn.github.io/tags/software-testing/</link>
+      <pubDate>Tue, 17 Mar 2009 12:02:00 +0100</pubDate>
+      
+      <guid>https://awasn.github.io/tags/software-testing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Meetings</title>
+      <link>https://awasn.github.io/tags/meetings/</link>
+      <pubDate>Mon, 09 Mar 2009 23:45:00 +0100</pubDate>
+      
+      <guid>https://awasn.github.io/tags/meetings/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>.NET Compact Framework</title>
+      <link>https://awasn.github.io/tags/.net-compact-framework/</link>
+      <pubDate>Tue, 27 Jan 2009 12:38:00 +0100</pubDate>
+      
+      <guid>https://awasn.github.io/tags/.net-compact-framework/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Design patterns</title>
+      <link>https://awasn.github.io/tags/design-patterns/</link>
+      <pubDate>Tue, 27 Jan 2009 12:38:00 +0100</pubDate>
+      
+      <guid>https://awasn.github.io/tags/design-patterns/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mobile</title>
+      <link>https://awasn.github.io/tags/mobile/</link>
+      <pubDate>Tue, 27 Jan 2009 12:38:00 +0100</pubDate>
+      
+      <guid>https://awasn.github.io/tags/mobile/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL Server</title>
+      <link>https://awasn.github.io/tags/sql-server/</link>
+      <pubDate>Tue, 16 Dec 2008 15:53:00 +0100</pubDate>
+      
+      <guid>https://awasn.github.io/tags/sql-server/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ASP.NET</title>
+      <link>https://awasn.github.io/tags/asp.net/</link>
+      <pubDate>Thu, 11 Dec 2008 12:45:00 +0100</pubDate>
+      
+      <guid>https://awasn.github.io/tags/asp.net/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>IIS</title>
+      <link>https://awasn.github.io/tags/iis/</link>
+      <pubDate>Thu, 11 Dec 2008 12:45:00 +0100</pubDate>
+      
+      <guid>https://awasn.github.io/tags/iis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ReSharper</title>
+      <link>https://awasn.github.io/tags/resharper/</link>
+      <pubDate>Thu, 11 Dec 2008 12:45:00 +0100</pubDate>
+      
+      <guid>https://awasn.github.io/tags/resharper/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Virtualization</title>
+      <link>https://awasn.github.io/tags/virtualization/</link>
+      <pubDate>Thu, 11 Dec 2008 12:45:00 +0100</pubDate>
+      
+      <guid>https://awasn.github.io/tags/virtualization/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MS Office</title>
+      <link>https://awasn.github.io/tags/ms-office/</link>
+      <pubDate>Sat, 24 Nov 2007 00:22:00 +0100</pubDate>
+      
+      <guid>https://awasn.github.io/tags/ms-office/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Open XML</title>
+      <link>https://awasn.github.io/tags/open-xml/</link>
+      <pubDate>Sat, 24 Nov 2007 00:22:00 +0100</pubDate>
+      
+      <guid>https://awasn.github.io/tags/open-xml/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Generowanie kodu</title>
+      <link>https://awasn.github.io/tags/generowanie-kodu/</link>
+      <pubDate>Mon, 22 Oct 2007 10:06:00 +0200</pubDate>
+      
+      <guid>https://awasn.github.io/tags/generowanie-kodu/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>C/C&#43;&#43;</title>
+      <link>https://awasn.github.io/tags/c/c&#43;&#43;/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://awasn.github.io/tags/c/c&#43;&#43;/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
