@@ -4,7 +4,7 @@
         <meta name="theme-color" content="#405365"/>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="generator" content="Hugo 0.83.1" />
+        <meta name="generator" content="Hugo 0.90.1" />
         <meta name="description" content="Testowanie poleceń Command we wzorcu Model-View-Presenter" />
         <title>Herr Mock i Frau Command - arkadiusz wasniewski blog</title>
         <link rel="canonical" href="https://awasn.github.io/herr-mock-i-frau-command/">
@@ -17,7 +17,7 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
-        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.f45a909800924faa836a73b82a1d4cb352f8053134a426a9dcafa61cf6a8c5d0.css" integrity="sha256-9FqQmACST6qDanO4Kh1Ms1L4BTE0pCap3K&#43;mHPaoxdA=" />
+        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.809247dcc0227e384b256fd9df3f1c82b2b752f0ca6ba0f97410d05bcdd60729.css" integrity="sha256-gJJH3MAifjhLJW/Z3z8cgrK3UvDKa6D5dBDQW83WByk=" />
 
     </head>
     <body>
@@ -70,7 +70,7 @@
         </header>
 
         <p>Sławetny wzorzec Model-View-Presenter ma swoje zalety, ale ma i swoje uciążliwości. Jedna z wykorzystywanych przeze mnie implementacji tego wzorca zakłada, iż widok będzie posiadał funkcję umożliwiającą dodawanie do menu widoku kolejnych poleceń, które będą zawierały metody zwrotne wywoływane jako reakcja w przypadku wykonania polecenia. Jest to o tyle konieczne, iż np. formularz wyświetlający tabelę może zachowywać się różnie (obsługiwać różne zestawy poleceń) w zależności od danych, które ma zaszczyt prezentować. Weźmy pod uwagę fragment prezentera umożliwiającego identyfikację użytkownika.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> Initialize()
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> Initialize()
         {
             view.AddActionCommand(<span style="color:#66d9ef">new</span> Command(<span style="color:#e6db74">&#34;Zaloguj&#34;</span>,
                 <span style="color:#66d9ef">this</span>.Authenticate));
@@ -87,9 +87,9 @@
         }
 </code></pre></div><p>Do widoku, do hipotetycznego menu Akcja, dodaję dwa polecenia. W jaki sposób widok to przetworzy w chwili obecnej nas nie interesuje. Problem w tym, iż metody wywoływane jako reakcja na wybrane przez użytkownika zdarzenia są prywatne. Oczywiście mogę je uczynić publicznymi, albo chronionymi w celu umożliwienia testowania (dziedziczenie prezentera), ale takie rozwiązanie nie przekonuje mnie. Nie chcę udostępniać nic co nie powinno być widoczne.</p>
 <p>Rozwiązanie problemy zależy oczywiście od tego z jakich narzędzi korzystamy. W tym projekcie mogłem sobie na szczęści pozwolić na korzystanie z dobrodziejstw <a href="https://github.com/ayende/rhino-mocks">Rhino Mocks</a>. Wykorzystałem więc możliwości funkcji <a href="http://www.ayende.com/Wiki/Rhino+Mocks+The+Do()+Handler.ashx">Do</a>, która umożliwia zastąpienie wywołania metody własnym kodem. Zadeklarowałem w związku z tym grzecznie typ wymaganej akcji:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">delegate</span> <span style="color:#66d9ef">void</span> AddActionCommandDelegate(Command command);
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">delegate</span> <span style="color:#66d9ef">void</span> AddActionCommandDelegate(Command command);
 </code></pre></div><p>A następnie wykonałem pierwsze podejście:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            AuthenticatePresenter presenter = <span style="color:#66d9ef">new</span> AuthenticatePresenter(
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            AuthenticatePresenter presenter = <span style="color:#66d9ef">new</span> AuthenticatePresenter(
                 service, controller, view);
             List&lt;Command&gt; commands = <span style="color:#66d9ef">new</span> List&lt;Command&gt;();
 
@@ -106,7 +106,7 @@
 
             mocks.VerifyAll();
 </code></pre></div><p>Zadziałało, ale nie do końca mnie usatysfakcjonowało. Dowolnie duża liczba widoków i prezenterów oznaczać będzie powtórzenia kodu jeśli chodzi o tworzenie listy poleceń i wywoływanie własnego kodu. Znacznie lepszym podejściem wydawało mi się stworzenie klasy pomocniczej, której zastosowanie mogłoby uprościć kod do następującego:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            AuthenticatePresenter presenter = <span style="color:#66d9ef">new</span> AuthenticatePresenter(
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            AuthenticatePresenter presenter = <span style="color:#66d9ef">new</span> AuthenticatePresenter(
                 service, controller, view);
             CommandMockHelper helper = <span style="color:#66d9ef">new</span> CommandMockHelper();
 
@@ -122,7 +122,7 @@
 
             mocks.VerifyAll();
 </code></pre></div><p>A oto klasa pomocnicza. Jej zadaniem jest stworzenie listy dodanych do widoku poleceń, w celu łatwego wywoływania ich w czasie testów.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CommandMockHelper</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CommandMockHelper</span>
     {
         <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">delegate</span> <span style="color:#66d9ef">void</span> AddActionCommandDelegate(Command command);
 

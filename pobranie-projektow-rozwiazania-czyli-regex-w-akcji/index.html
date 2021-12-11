@@ -4,7 +4,7 @@
         <meta name="theme-color" content="#405365"/>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="generator" content="Hugo 0.83.1" />
+        <meta name="generator" content="Hugo 0.90.1" />
         <meta name="description" content="Pobranie przy pomocy PowerShell i wyrażeń regularnych regex projektów z pliku rozwiązania sln środowiska Visual Studio" />
         <title>Pobranie projektów rozwiązania czyli Regex w akcji - arkadiusz wasniewski blog</title>
         <link rel="canonical" href="https://awasn.github.io/pobranie-projektow-rozwiazania-czyli-regex-w-akcji/">
@@ -17,7 +17,7 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
-        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.f45a909800924faa836a73b82a1d4cb352f8053134a426a9dcafa61cf6a8c5d0.css" integrity="sha256-9FqQmACST6qDanO4Kh1Ms1L4BTE0pCap3K&#43;mHPaoxdA=" />
+        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.809247dcc0227e384b256fd9df3f1c82b2b752f0ca6ba0f97410d05bcdd60729.css" integrity="sha256-gJJH3MAifjhLJW/Z3z8cgrK3UvDKa6D5dBDQW83WByk=" />
 
     </head>
     <body>
@@ -67,9 +67,9 @@
 
         <p>Asumpt do poniższego rozwiązania dostarczył skrypt PowerShell, który kompiluje projekty pewnego mojego rozwiązania, i gdzie zapałałem chęcią automatycznego uaktualnienia numeru wersji we wszystkich plikach <strong>AssemblyInfo.cs</strong>. Ale gdzież są te wszystkie pliki? No w projektach…</p>
 <p>Najprostszy sposób dotarcia do projektów to odczytanie pliku <strong>.sln</strong>. Hm… ale to oznacza analizowanie zawartości. Z pomocą przyszły wyrażenia regularne oraz świadomość istnienia jasno określonej struktury pliku <strong>.sln</strong>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">Project\(<span style="color:#e6db74">&#34;\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC\}&#34;</span>\) = <span style="color:#e6db74">&#34;(?&lt;projectName&gt;[^&#34;</span>]+)<span style="color:#e6db74">&#34;, &#34;</span>(?&lt;projectFolder&gt;[^<span style="color:#e6db74">&#34;]+)&#34;</span>, <span style="color:#e6db74">&#34;(?&lt;projectGuid&gt;[^&#34;</span>]+)<span style="color:#e6db74">&#34;\nEndProject
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">Project\(<span style="color:#e6db74">&#34;\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC\}&#34;</span>\) = <span style="color:#e6db74">&#34;(?&lt;projectName&gt;[^&#34;</span>]+)<span style="color:#e6db74">&#34;, &#34;</span>(?&lt;projectFolder&gt;[^<span style="color:#e6db74">&#34;]+)&#34;</span>, <span style="color:#e6db74">&#34;(?&lt;projectGuid&gt;[^&#34;</span>]+)<span style="color:#e6db74">&#34;\nEndProject
 </span></code></pre></div><p>Oczywiście kilka słów wyjaśnienia. Po pierwsze wszystkie projekty rozwiązania jak i również foldery (<strong>Solution Folders</strong>) są umieszczane w sekcji zaczynającej się od słów <code>Project</code> a kończącej się na <code>EndProject</code>. Elementy będące projektami są oznaczone odpowiednim identyfikatorem Guid (konkretnie <code>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</code>). Następnie w cudzysłowach danej sekcji mamy kolejno nazwę projektu, ścieżkę względną do projektu oraz unikalny identyfikator Guid przypisany do danego projektu. Dla ułatwienia pobierania informacji zastosowałem grupy nazwane. Czas na prosty przykład użycia:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">$pattern =
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">$pattern =
     <span style="color:#e6db74">&#34;Project\(</span><span style="color:#ae81ff">`&#34;</span><span style="color:#e6db74">\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC\}</span><span style="color:#ae81ff">`&#34;</span><span style="color:#e6db74">\) = &#34;</span> +
     <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">`&#34;</span><span style="color:#e6db74">(?&lt;projectName&gt;[^</span><span style="color:#ae81ff">`&#34;</span><span style="color:#e6db74">]+)</span><span style="color:#ae81ff">`&#34;</span><span style="color:#e6db74">, &#34;</span> +
     <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">`&#34;</span><span style="color:#e6db74">(?&lt;projectFolder&gt;[^</span><span style="color:#ae81ff">`&#34;</span><span style="color:#e6db74">]+)</span><span style="color:#ae81ff">`&#34;</span><span style="color:#e6db74">, &#34;</span> +
@@ -84,9 +84,9 @@ $regex.Matches($solution) | ForEach-Object {
 }
 </code></pre></div><p>Ze względu na składnię PowerShell wzorzec wyrażenia regularnego został nieco zmodyfikowany.</p>
 <p>PS. Oczywiście można również zastosować prostsze wyrażenie regularne:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC\}<span style="color:#e6db74">&#34;\) = &#34;</span>(?&lt;projectName&gt;[^<span style="color:#e6db74">&#34;]+)&#34;</span>, <span style="color:#e6db74">&#34;(?&lt;projectFolder&gt;[^&#34;</span>]+)<span style="color:#e6db74">&#34;, &#34;</span>(?&lt;projectGuid&gt;[^<span style="color:#e6db74">&#34;]+)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC\}<span style="color:#e6db74">&#34;\) = &#34;</span>(?&lt;projectName&gt;[^<span style="color:#e6db74">&#34;]+)&#34;</span>, <span style="color:#e6db74">&#34;(?&lt;projectFolder&gt;[^&#34;</span>]+)<span style="color:#e6db74">&#34;, &#34;</span>(?&lt;projectGuid&gt;[^<span style="color:#e6db74">&#34;]+)
 </span></code></pre></div><p>lub też bardziej odporne na potencjalne błędy (czy aby na pewno takie będą?):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC\}<span style="color:#e6db74">&#34;\)\s*=\s*&#34;</span>(?&lt;projectName&gt;[^<span style="color:#e6db74">&#34;]+)&#34;</span>,\s*<span style="color:#e6db74">&#34;(?&lt;projectFolder&gt;[^&#34;</span>]+)<span style="color:#e6db74">&#34;,\s*&#34;</span>(?&lt;projectGuid&gt;[^<span style="color:#e6db74">&#34;]+)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC\}<span style="color:#e6db74">&#34;\)\s*=\s*&#34;</span>(?&lt;projectName&gt;[^<span style="color:#e6db74">&#34;]+)&#34;</span>,\s*<span style="color:#e6db74">&#34;(?&lt;projectFolder&gt;[^&#34;</span>]+)<span style="color:#e6db74">&#34;,\s*&#34;</span>(?&lt;projectGuid&gt;[^<span style="color:#e6db74">&#34;]+)
 </span></code></pre></div><p>Ale to już sztuka dla sztuki.</p>
 
     </article>

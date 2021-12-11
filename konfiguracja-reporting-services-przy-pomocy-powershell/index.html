@@ -4,7 +4,7 @@
         <meta name="theme-color" content="#405365"/>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="generator" content="Hugo 0.83.1" />
+        <meta name="generator" content="Hugo 0.90.1" />
         <meta name="description" content="Konfiguracja struktury i uprawnień raportów Reporting Services przy pomocy skryptów PowerShell" />
         <title>Konfiguracja Reporting Services przy pomocy PowerShell - arkadiusz wasniewski blog</title>
         <link rel="canonical" href="https://awasn.github.io/konfiguracja-reporting-services-przy-pomocy-powershell/">
@@ -17,7 +17,7 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
-        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.f45a909800924faa836a73b82a1d4cb352f8053134a426a9dcafa61cf6a8c5d0.css" integrity="sha256-9FqQmACST6qDanO4Kh1Ms1L4BTE0pCap3K&#43;mHPaoxdA=" />
+        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.809247dcc0227e384b256fd9df3f1c82b2b752f0ca6ba0f97410d05bcdd60729.css" integrity="sha256-gJJH3MAifjhLJW/Z3z8cgrK3UvDKa6D5dBDQW83WByk=" />
 
     </head>
     <body>
@@ -96,11 +96,11 @@
 <li><code>Unrestricted</code>.</li>
 </ul>
 <p>Domyślne ograniczenie może być dla nas zbyt bolesne. Dlatego też jeśli mamy ustawiony poziom zabezpieczeń jako <code>Restricted</code> lub <code>AllSigned</code> możemy go zmienić na mniej restrykcyjny:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">Set-ExecutionPolicy RemoteSigned
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">Set-ExecutionPolicy RemoteSigned
 </code></pre></div><p>Istnieje również możliwość skorzystania z <strong>Group Policy</strong> o czym można przeczytać na stronach <a href="http://www.windowsecurity.com/articles/PowerShell-Security.html">WindowSecurity.com</a>.</p>
 <h2 id="parametry-startowe">Parametry startowe</h2>
 <p>Rozpoczęcie wykonywania skryptu rozpoczynamy między innymi od zdefiniowania stałych:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    <span style="color:#75715e"># Adres serwera raportów</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    <span style="color:#75715e"># Adres serwera raportów</span>
     <span style="color:#66d9ef">[string]</span> $reportServerAddress = <span style="color:#e6db74">&#34;http://localhost/reportserver/reportservice2005.asmx?WSDL&#34;</span>
 
     <span style="color:#75715e"># Miejsce składowania definicji raportów</span>
@@ -112,13 +112,13 @@
     <span style="color:#75715e"># Miejsce nadrzędne dla konfigurowanych raportów. Katalog startowy</span>
     <span style="color:#66d9ef">[string]</span> $global:root = <span style="color:#e6db74">&#34;/&#34;</span>
 </code></pre></div><p>oraz zmiennych globalnych:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    $global:assembly = $null
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    $global:assembly = $null
     $global:proxy = $null
 </code></pre></div><p>Adres serwera raportów zawsze będzie taki sam. Jedynie w przypadku konfiguracji zdalnej serwera raportów nazwę <strong>localhost</strong> należy zastąpić nazwą lub adresem właściwego komputera. Jeśli chodzi o źródła danych to zakładam, iż są one już utworzone w ramach usług raportujących. Dzięki temu unikam zapisywania w pliku konfigurującym ścieżek dostępu i haseł do serwerów baz danych. W powyższym przykładzie zdefiniowane jest tylko jedno źródło danych, ale w może być ich (tak jak u mnie w systemie produkcyjnym) oczywiście więcej. Zmienne <code>$global:assembly</code> oraz <code>$global:proxy</code> będą zawierać klasy umożliwiające zarządzanie serwerem raportów.</p>
 <h2 id="przygotowanie-połączenia-z-serwerem-raportów">Przygotowanie połączenia z serwerem raportów</h2>
 <p>Część rozwiązań, między innymi funkcja <code>New-WebServiceProxy</code> dostępna od PowerShell V2 (CTP3), zwraca obiekt proxy umożliwiający jedynie wykonywanie operacji udostępnianych przez usługi sieciowe serwera raportów. Jest to za mało, ponieważ potrzebować będziemy również możliwości tworzenia nowych obiektów. Dlatego też jako rozwiązanie właściwe wybrałem propozycję Christiana Glessnera. Szczegóły można znaleźć we wpisie <a href="http://cglessner.blogspot.com/2008/07/powershell-webservices-sharepoint.html">PowerShell, WebServices &amp; SharePoint</a> na jego blogu. Źródła można pobrać z witryny <a href="http://www.codeplex.com/iLoveSharePoint/Release/ProjectReleases.aspx">http://www.codeplex.com/iLoveSharePoint/Release/ProjectReleases.aspx</a>.</p>
 <p>W swoim rozwiązaniu wykorzystuję zmodyfikowaną wersję metody <code>Get-WebServiceProxy</code> ze skryptu Christiana Glessnera:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    <span style="color:#66d9ef">function</span> Create-WebServiceProxy(
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    <span style="color:#66d9ef">function</span> Create-WebServiceProxy(
         <span style="color:#66d9ef">[string]</span> $url = $(<span style="color:#66d9ef">throw</span> <span style="color:#e6db74">&#39;Brak adresu serwera raportów!&#39;</span>))
     {
         Write-Host <span style="color:#e6db74">&#34;Nawiązywanie połączenia z serwerem $url&#34;</span>
@@ -143,20 +143,20 @@
 </code></pre></div><p>Jak widzimy, w powyższym kodzie tworzona, ładowana do pamięci i przechowywana w zmiennej globalnej <code>$global:assembly</code> jest biblioteka <strong>Proxy.ReportingServices2005.dll</strong> zawierająca wszystkie potrzebne typy. Zmienna globalna <code>$global:proxy</code> zawiera instancję klasy umożliwiającej odpytywanie usług sieciowych serwera raportowego znajdującego się w określonej przez nas lokalizacji.</p>
 <p>Utworzenie biblioteki <strong>Proxy.ReportingServices2005.dll</strong> wymaga <strong>Microsoft SDKs</strong>, które wgrywane do systemu jest automatycznie w czasie instalacji Visual Studio. Jeśli z jakiś przyczyn na serwerze, na którym uruchamiamy powyższy skrypt nie ma i nie może być zainstalowane <strong>Microsoft SDKs</strong>, należy bibliotekę <strong>Proxy.ReportingServices2005.dll</strong> utworzyć na komputerze programisty, a następnie przekopiować razem ze skryptem w miejsce docelowe. Rozwiązanie zadziała. Dzięki warunkowi <code>if(!(Test-Path &quot;$fileName.dll&quot;))</code> biblioteka nie będzie ponownie tworzona jeśli już istnieje.</p>
 <p>Czas na przygotowanie połączenia z serwerem raportów:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    Create-WebServiceProxy $reportServerAddress
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    Create-WebServiceProxy $reportServerAddress
     $global:proxy.Credentials = <span style="color:#66d9ef">[System.Net.CredentialCache]</span>::DefaultCredentials
 </code></pre></div><p>Koniecznie musimy pamiętać o przypisaniu danych uprawnionego użytkownika. W przypadku kiedy konfigurujemy <strong>localhost</strong> wystarczy przypisać aktualnie zalogowanego do komputera użytkownika – z definicji użytkownicy lokalni mają bowiem uprawnienia administracyjne w ramach usług raportowych.</p>
 <h2 id="konfiguracja-folderu-startowego">Konfiguracja folderu startowego</h2>
 <p>Po nawiązaniu połączenia z serwerem raportów czyścimy uprawnienia głównego katalogu, w ramach którego będziemy tworzyć foldery i wgrywać raporty.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    $policies = Create-Policy $adminGroups <span style="color:#e6db74">&#34;WAW-RS\ReportUser&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    $policies = Create-Policy $adminGroups <span style="color:#e6db74">&#34;WAW-RS\ReportUser&#34;</span>
     $global:proxy.SetPolicies(<span style="color:#e6db74">&#34;$root&#34;</span>, $policies)
 </code></pre></div><p>Funkcja <code>Create-Policy</code> na podstawie przekazanych tablic zawierających łańcuchy z nazwami uprawnień tworzy odpowiednią kolekcję obiektów, którą możemy przekazać do usługi sieciowej <strong>SetPolicies</strong>. Zmienna <code>$adminGroups</code> zawiera minimalne uprawnienia administratora:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    $adminGroups = <span style="color:#e6db74">&#34;BUILTIN\Administrators&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    $adminGroups = <span style="color:#e6db74">&#34;BUILTIN\Administrators&#34;</span>
 </code></pre></div><p>jeśli system, na którym uruchamiamy skrypt jest w angielskiej wersji językowej lub:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    $adminGroups = <span style="color:#e6db74">&#34;BUILTIN\Administratorzy&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    $adminGroups = <span style="color:#e6db74">&#34;BUILTIN\Administratorzy&#34;</span>
 </code></pre></div><p>jeśli system jest w polskiej wersji językowej. W powyższym przykładzie do metody <code>Create-Policy</code> przekazujemy również uprawnienia do przeglądania raportów dla użytkownika <strong>&ldquo;WAW-RS\ReportUser&rdquo;</strong>. Serwer raportów może bowiem zawierać raporty dla innych aplikacji webowych, których nie będziemy konfigurować. Ważne jest, aby uprawnienia przekazywane do funkcji <code>Create-Policy</code> w skrypcie podawać zawsze z nazwą komputera!</p>
 <p>Co natomiast robi funkcja <code>Create-Policy</code>? Oto jej kod:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    <span style="color:#66d9ef">function</span> Create-Policy(<span style="color:#66d9ef">[string[]]</span> $adminGroups, <span style="color:#66d9ef">[string[]]</span> $browseGroups)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    <span style="color:#66d9ef">function</span> Create-Policy(<span style="color:#66d9ef">[string[]]</span> $adminGroups, <span style="color:#66d9ef">[string[]]</span> $browseGroups)
     {
         <span style="color:#66d9ef">[Proxy.Policy[]]</span> $policies = Create-AdminPolicy $adminGroups
         <span style="color:#66d9ef">foreach</span>($browseGroup <span style="color:#66d9ef">in</span> $browseGroups){
@@ -170,7 +170,7 @@
         <span style="color:#66d9ef">return</span> $policies
     }
 </code></pre></div><p>Oraz kod metody <code>Create-AdminPolicy</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    <span style="color:#66d9ef">function</span> Create-AdminPolicy(<span style="color:#66d9ef">[string[]]</span> $adminGroups)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    <span style="color:#66d9ef">function</span> Create-AdminPolicy(<span style="color:#66d9ef">[string[]]</span> $adminGroups)
     {
         <span style="color:#66d9ef">[Proxy.Policy[]]</span> $policies = @()
         <span style="color:#66d9ef">foreach</span>($adminGroup <span style="color:#66d9ef">in</span> $adminGroups){
@@ -196,7 +196,7 @@
 <li>Dodanie do folderów nadrzędnych uprawnień koniecznych do dostępu do raportu.</li>
 </ul>
 <p>Przykład załadowania i konfiguracji kilku kombinacji raportów:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    Write-Host
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    Write-Host
     Write-Host <span style="color:#e6db74">&#34;Konfigurowanie raportów przykładowych&#34;</span>
     $folder = <span style="color:#e6db74">&#34;Raporty przykładowe&#34;</span>
     $reportPath = <span style="color:#e6db74">&#34;$reportProjectFolder\Raporty przykładowe&#34;</span>
@@ -217,7 +217,7 @@
         $browseGroups $null
 </code></pre></div><p>Stała pomocnicza <code>$hide</code> zwraca wartość <code>$true</code> i podawana jako parametr funkcji <code>Create-Report</code> umożliwia ukrycie raportu.</p>
 <p>Po zdefiniowaniu wartości zmiennych zaczynamy od utworzenia i aktualizacji uprawnień folderu. Do tego wykorzystujemy metodę <code>Create-Folder</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    <span style="color:#66d9ef">function</span> Create-Folder(<span style="color:#66d9ef">[string]</span> $folder, <span style="color:#66d9ef">[string]</span> $parent = <span style="color:#e6db74">&#34;/&#34;</span>, <span style="color:#66d9ef">[string[]]</span> $adminGroups)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    <span style="color:#66d9ef">function</span> Create-Folder(<span style="color:#66d9ef">[string]</span> $folder, <span style="color:#66d9ef">[string]</span> $parent = <span style="color:#e6db74">&#34;/&#34;</span>, <span style="color:#66d9ef">[string[]]</span> $adminGroups)
     {
         <span style="color:#66d9ef">[string]</span> $path = Combine-Path $parent $folder
         <span style="color:#66d9ef">if</span>(!(ItemExists $parent $folder)){
@@ -230,13 +230,13 @@
         $global:proxy.SetPolicies(<span style="color:#e6db74">&#34;$path&#34;</span>, $policies)
     }
 </code></pre></div><p>Dwie metody pomocnicze wywoływane przez funkcję <code>Create-Folder</code> to:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    <span style="color:#66d9ef">function</span> Combine-Path(<span style="color:#66d9ef">[string]</span> $path1, <span style="color:#66d9ef">[string]</span> $path2)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    <span style="color:#66d9ef">function</span> Combine-Path(<span style="color:#66d9ef">[string]</span> $path1, <span style="color:#66d9ef">[string]</span> $path2)
     {
         <span style="color:#66d9ef">[string]</span> $path = <span style="color:#66d9ef">[System.IO.Path]</span>::Combine($path1, $path2)
         <span style="color:#66d9ef">return</span> $path.Replace(<span style="color:#e6db74">&#34;\&#34;</span>, <span style="color:#e6db74">&#34;/&#34;</span>)
     }
 </code></pre></div><p>umożliwiająca budowanie poprawnych ścieżek dostępu, oraz <code>ItemExists</code>, której zadaniem jest sprawdzenie czy w danej lokalizacji istnieje szukany przez nas element: folder, raport, źródło danych&hellip;</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    <span style="color:#66d9ef">function</span> ItemExists(<span style="color:#66d9ef">[string]</span> $folder, <span style="color:#66d9ef">[string]</span> $name)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    <span style="color:#66d9ef">function</span> ItemExists(<span style="color:#66d9ef">[string]</span> $folder, <span style="color:#66d9ef">[string]</span> $name)
     {
         <span style="color:#66d9ef">[Proxy.BooleanOperatorEnum]</span> $operator = 0
         <span style="color:#66d9ef">[Proxy.ConditionEnum]</span> $condition = 1
@@ -250,7 +250,7 @@
         <span style="color:#66d9ef">return</span> $items <span style="color:#f92672">-and</span> ($items.Length <span style="color:#f92672">-cgt</span> 0)
     }
 </code></pre></div><p>Największe jednak czynności są wykonywane w czasie wgrywania i konfigurowania konkretnego raportu:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    <span style="color:#66d9ef">function</span> Create-Report(<span style="color:#66d9ef">[string]</span> $parent, <span style="color:#66d9ef">[string]</span> $path,
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    <span style="color:#66d9ef">function</span> Create-Report(<span style="color:#66d9ef">[string]</span> $parent, <span style="color:#66d9ef">[string]</span> $path,
         <span style="color:#66d9ef">[string[]]</span> $adminGroups, <span style="color:#66d9ef">[string[]]</span> $browseGroups,
         <span style="color:#66d9ef">[string]</span> $dataSourceReferenceName,
         $hide = $false, $overwrite = $false)
@@ -273,7 +273,7 @@
     }
 </code></pre></div><p>Domyślnie jeśli dany raport już istnieje to nie jest aktualizowana jego definicja. Poprzez modyfikację wartości domyślnej dla parametru <code>$overwrite</code> możemy zmienić zachowanie skryptu. Pamiętajmy, iż nie należy usuwać raportów w celu modyfikacji definicji aby nie stracić istniejących historii i subskrypcji. Domyślne zachowanie skryptu jest takie, aby można było go uruchamiać w dowolnym (no prawie) momencie w celu sprawdzenia i korekcji uprawnień.</p>
 <p>Funkcja wgrywająca definicję raportu wygląda zaś następująco:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    <span style="color:#66d9ef">function</span> Upload-Report(<span style="color:#66d9ef">[string]</span> $parent, <span style="color:#66d9ef">[string]</span> $path,
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    <span style="color:#66d9ef">function</span> Upload-Report(<span style="color:#66d9ef">[string]</span> $parent, <span style="color:#66d9ef">[string]</span> $path,
         <span style="color:#66d9ef">[string]</span> $name, <span style="color:#66d9ef">[bool]</span> $overwrite)
     {
         Write-Host <span style="color:#e6db74">&#34;Utworzenie raportu $report&#34;</span>
@@ -286,7 +286,7 @@
     }
 </code></pre></div><p>Jak widzimy ułatwiamy sobie życie korzystając z bibliotek platformy .NET!</p>
 <p>Właściwości, które ustawiamy są skromne.W chwili obecnej jest to jedynie ukrywanie raportu. Ma to sens na przykład w przypadku podraportów, które nie stanowią jednocześnie samodzielnego raportu:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    <span style="color:#66d9ef">function</span> Set-ReportProperty(<span style="color:#66d9ef">[string]</span> $report, <span style="color:#66d9ef">[bool]</span> $hidden)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    <span style="color:#66d9ef">function</span> Set-ReportProperty(<span style="color:#66d9ef">[string]</span> $report, <span style="color:#66d9ef">[bool]</span> $hidden)
     {
         Write-Host <span style="color:#e6db74">&#34;Aktualizacja właściwości raportu $name&#34;</span>
         $property = New-Object <span style="color:#e6db74">&#34;Proxy.Property&#34;</span>
@@ -296,7 +296,7 @@
         $global:proxy.SetProperties($report, $properties)
     }
 </code></pre></div><p>Po ustawieniu właściwości następuje przypisanie źródła danych do raportu. Oczywiście nie każdy raport musi posiadać źródło danych. Stąd warunek na początku funkcji:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    <span style="color:#66d9ef">function</span> Set-ReportReferenceDataSource(<span style="color:#66d9ef">[string]</span> $report,
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    <span style="color:#66d9ef">function</span> Set-ReportReferenceDataSource(<span style="color:#66d9ef">[string]</span> $report,
         <span style="color:#66d9ef">[string]</span> $dataSourceReferenceName)
     {
         <span style="color:#66d9ef">if</span>($dataSourceReferenceName <span style="color:#f92672">-eq</span> $null <span style="color:#f92672">-or</span>
@@ -320,14 +320,14 @@
     }
 </code></pre></div><p>W powyższym kodzie dokonuję kilku ważnych założeń. Po pierwsze jak już wcześniej mówiłem, zakładam, iż źródła danych w ramach usług raportowych są już utworzone. Dlatego też stosuję typ <code>Proxy.DataSourceReference</code>. Po drugie każdy raport korzysta docelowo tylko z jednego źródła danych. Nawet jeśli w czasie tworzenia raportu i jego testów wykorzystywałem dwa czy trzy źródła danych to na serwerze produkcyjnym mam tylko jedno źródło. Jeśli to założenie w Waszym przypadku nie będzie prawdziwe należy dokonać modyfikacji funkcji <code>Set-ReportReferenceDataSource</code> tak, aby parametr <code>$dataSourceReferenceName</code> był tablicą.</p>
 <p>Przypisanie uprawnień do raportu:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    <span style="color:#66d9ef">function</span> Set-ReportPolicy(<span style="color:#66d9ef">[string]</span> $report, <span style="color:#66d9ef">[string]</span> $name,
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    <span style="color:#66d9ef">function</span> Set-ReportPolicy(<span style="color:#66d9ef">[string]</span> $report, <span style="color:#66d9ef">[string]</span> $name,
         <span style="color:#66d9ef">[Proxy.Policy[]]</span> $policies)
     {
         Write-Host <span style="color:#e6db74">&#34;Nadanie uprawnień do raportu $name&#34;</span>
         $global:proxy.SetPolicies($report, $policies)
     }
 </code></pre></div><p>I na koniec rekurencyjne ustawienia właściwości folderu zawierającego konfigurowany raport. Znak <code>%</code> jest skrótowym zapisem polecenia <code>Foreach-Object</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    <span style="color:#66d9ef">function</span> Set-FolderPolicy(<span style="color:#66d9ef">[string]</span> $parent, <span style="color:#66d9ef">[Proxy.Policy[]]</span> $policies)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    <span style="color:#66d9ef">function</span> Set-FolderPolicy(<span style="color:#66d9ef">[string]</span> $parent, <span style="color:#66d9ef">[Proxy.Policy[]]</span> $policies)
     {
         $folderPolicies = @()
         $folderPoliciesInherited = <span style="color:#66d9ef">[ref]</span> $false

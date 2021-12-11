@@ -4,7 +4,7 @@
         <meta name="theme-color" content="#405365"/>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="generator" content="Hugo 0.83.1" />
+        <meta name="generator" content="Hugo 0.90.1" />
         <meta name="description" content="" />
         <title>Blogs - arkadiusz wasniewski blog</title>
         <link rel="canonical" href="https://awasn.github.io/blog/">
@@ -15,7 +15,7 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
-        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.f45a909800924faa836a73b82a1d4cb352f8053134a426a9dcafa61cf6a8c5d0.css" integrity="sha256-9FqQmACST6qDanO4Kh1Ms1L4BTE0pCap3K&#43;mHPaoxdA=" />
+        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.809247dcc0227e384b256fd9df3f1c82b2b752f0ca6ba0f97410d05bcdd60729.css" integrity="sha256-gJJH3MAifjhLJW/Z3z8cgrK3UvDKa6D5dBDQW83WByk=" />
 
     </head>
     <body>
@@ -61,7 +61,7 @@
         </div>
     </div>
         </header>
-
+        <p>workflow test</p>
         <p>
         Niektórzy pewnie pamiętają mój wpis dotyczący plików DBF. Nagłówek pliku DBF zawiera datę, gdzie na rok, miesiąc i dzień przeznaczone jest po jednym bajcie.
 [StructLayout(LayoutKind.Sequential)] internal struct Dbf3Header { public const byte ReservedSize = 20; public byte Dbf; public byte Year; public byte Mounth; public byte Day; public int RecordCount; public ushort HeaderSize; public ushort RecordSize; [MarshalAs(UnmanagedType.ByValArray, SizeConst = ReservedSize)] public byte[] Reserved; } W przypadku miesiąca i dnia jest to zakres wystarczający.
@@ -102,7 +102,7 @@
         </div>
     </div>
         </header>
-
+        <p>workflow test</p>
         <p>
         Paweł Potasiński chwil temu kilka rzucił zajawkę w kwestii spotkania o jakże wymownej nazwie Bloggers Underground. Zdecydowanie również wybieram się tam. Patrząc na listę uczestników zapowiada się ciekawie ;-) Może z tego powstanie jakaś nowa świecka tradycja?
 Jeśli chodzi o moją pogadankę to zajrzymy być może delikatnie w trzewia IHttpModule i IHttpHandler.
@@ -140,7 +140,7 @@ Jeśli chodzi o moją pogadankę to zajrzymy być może delikatnie w trzewia IHt
         </div>
     </div>
         </header>
-
+        <p>workflow test</p>
         <p>
         Czasami małe rzeczy sprawiają dużo radości. Jedną z nich jest możliwość ustawienia klienta pocztowego SmptClient poprzez wpisy w pliku konfiguracyjnym aplikacji. Rozważmy przykład:
 string mailAddresses = ConfigurationManager. AppSettings[&#34;mailAddresses&#34;]; if (string.IsNullOrEmpty(mailAddresses)){ return; } MailMessage message = new MailMessage(); message.From = new MailAddress(&#34;wnioski@homski.pl&#34;, &#34;Wnioski&#34;); foreach (string mailAddress in mailAddresses.Split(&#39;;&#39;)){ message.To.Add(new MailAddress(mailAddress)); } message.SubjectEncoding = Encoding.UTF8; message.Subject = &#34;Tytuł wiadomości&#34;; message.BodyEncoding = Encoding.UTF8; message.Body = &#34;Treść wiadomości&#34;; SmtpClient client = new SmtpClient(); client.Send(message); Z pliku config aplikacji pobieram informację o adresach, do których należy pocztę wysłać.
@@ -181,7 +181,7 @@ string mailAddresses = ConfigurationManager. AppSettings[&#34;mailAddresses&#34;
         </div>
     </div>
         </header>
-
+        <p>workflow test</p>
         <p>
         Maszyn wirtualnych używam od dawna. I to korzystając zarówno z VMware Server jak i z Virtual PC. A jednak po przeczytaniu na http://wss.pl artykułu Praca z programem Virtual PC 2007, którego autorami są Robert Stuczynski i Jacek Doktór zorientowałem się, iż zupełnie nie wykorzystywałem do tej pory potęgi dysków różnicowych!
 Z racji tworzonego oprogramowania niejednokrotnie wykonuję integrację oprogramowania mobilnego z zewnętrznymi systemami np. sprzedaży. Tego typu systemy są dostępne do testów często w wersjach z ograniczeniem czasowym.
@@ -222,7 +222,7 @@ Z racji tworzonego oprogramowania niejednokrotnie wykonuję integrację oprogram
         </div>
     </div>
         </header>
-
+        <p>workflow test</p>
         <p>
         Jedną z cech dobrego oprogramowania są luźne powiązania pomiędzy klasami. Droga do tego celu ciężka i kręta. Bez dwóch zdań. Wśród technik i wzorców, które należy w tym celu stosować znajdują się fabryki (Factory) oraz lokalizatory usług (Service Locator), dzięki którym tworzeniem instancji obiektów czy implementacji zadanych interfejsów zajmują się wyspecjalizowane klasy. Z tworzeniem obiektów, w kontekście wymienionych powyżej praktyk, związane są następujące koncepcje:
  Inversion of Control - instancje klas pobierane są z zewnętrznych zasobów; Dependency Injection - tworzenie instancji zleca się zewnętrznemu obiektowi (kontenerowi) znającemu zależności pomiędzy właściwymi klasami.
@@ -259,7 +259,7 @@ Z racji tworzonego oprogramowania niejednokrotnie wykonuję integrację oprogram
         </div>
     </div>
         </header>
-
+        <p>workflow test</p>
         <p>
         Najnowsza refaktoryzacja kodu jednego z moich projektów polegała na usunięciu wszystkich własnych definicji delegatów będących metodami zwrotnymi. Zamiast tego użyłem standardowych metod z przestrzeni nazw System:
  Action; Action&lt;T&gt;; Action&lt;T1, T2&gt;; Action&lt;T1, T2, T3&gt;; Action&lt;T1, T2, T3, T4&gt;.  dla metod zwrotnych, które nie zwracają wartości oraz:
@@ -302,7 +302,7 @@ Dzięki temu zniknęło kilka klas.
         </div>
     </div>
         </header>
-
+        <p>workflow test</p>
         <p>
         Porównań i walidacji w kodzie zawsze dużo jest. Czasem, jak u mnie ostatnio, warto spreparować sobie specjalną klasę operacje tego typu ułatwiającą. Koncept nie jest nowy. Poczytać można o nim między innymi na stronie Martina Fowlera. Ciekawa natomiast jest implementacja, którą można wykonać korzystając z platformy .NET.
 Pierwsza wersja klasy w najważniejszych swoich częściach wyglądała następująco:
@@ -340,7 +340,7 @@ class Range&lt;T&gt; { private readonly T minimum; private readonly T maximum; p
         </div>
     </div>
         </header>
-
+        <p>workflow test</p>
         <p>
         W notce dotyczącej iteratorów czy też kiedy opisywałem operacje na plikach DBF posługiwałem się klasą pomocniczą MarshalHelper, która wykonywała wszystkie niezbędne czynności przy konwersji typów z kodu zarządzanego do niezarządzanego i vice versa. Wykorzystanie klas przestrzeni System.Runtime.InteropServices było konieczne, ponieważ w kodzie zarządzanym nie mamy gwarancji, iż pola z danej struktury będą w pamięci ułożone w tej samej kolejności i wyrównane powiedzmy do 8 bajtów.
 Sama implementacja metod pomocniczych klasy nie jest skomplikowana.
@@ -377,7 +377,7 @@ Sama implementacja metod pomocniczych klasy nie jest skomplikowana.
         </div>
     </div>
         </header>
-
+        <p>workflow test</p>
         <p>
         W czasie testowania oprogramowania mobilnego zdarza się, iż zdalne debuggowie przestaje funkcjonować. Obok ustawionych punktów wstrzymania pojawia się zaś ikona, która po najechaniu kursorem wyświetla komunikat, iż zdalna praca jest niemożliwa, ponieważ dany pakiet nie został załadowany. Co ciekawe dalej może rozpocząć wykonywanie krokowe aplikacji. Restart Visual Studio w takiej sytuacji nie pomaga.
 Okazuje się, iż rozwiązanie problemu jest trywialne. Należy w kodzie programu, gdzie chcemy ustawić punkt wstrzymania wstawić następujące polecenie:
@@ -418,7 +418,7 @@ Okazuje się, iż rozwiązanie problemu jest trywialne. Należy w kodzie program
         </div>
     </div>
         </header>
-
+        <p>workflow test</p>
         <p>
         Mój pierwszy blog znajdował się na portalu developers.pl. Niestety z różnych przyczyn serwis ten padł. A szkoda. Choćby dlatego, iż miałem tam kilka ciekawych wpisów. Nie chciałbym aby zostały one wszystkie stracone dlatego też postanowiłem jeden z nich przypomnieć (również sobie). Ciekawa była optymalizacja pierwotnego kodu w ramach komentarzy do tej notki&hellip;
 Jedną z nowości .NET w wersji 2.0 są (dzisiaj już możemy powiedzieć, że były) iteratory. Dzięki nim przekazywanie kolekcji obiektów czy struktur pomiędzy klasami nie musi już oznaczać zajmowania nowych, pomocniczych obszarów w pamięci, co konieczne było zwłaszcza jeśli nasze oprogramowanie zbudowane było w oparciu o warstwy (dostępu do danych, logiki biznesowej czy prezentacji).

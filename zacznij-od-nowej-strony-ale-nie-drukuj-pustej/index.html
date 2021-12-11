@@ -4,7 +4,7 @@
         <meta name="theme-color" content="#405365"/>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="generator" content="Hugo 0.83.1" />
+        <meta name="generator" content="Hugo 0.90.1" />
         <meta name="description" content="Tips and tricks. Rozwiązanie problemu drukowania w Reporting Services niepotrzebnej pustej strony" />
         <title>Zacznij od nowej strony, ale nie drukuj pustej - arkadiusz wasniewski blog</title>
         <link rel="canonical" href="https://awasn.github.io/zacznij-od-nowej-strony-ale-nie-drukuj-pustej/">
@@ -17,7 +17,7 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
-        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.f45a909800924faa836a73b82a1d4cb352f8053134a426a9dcafa61cf6a8c5d0.css" integrity="sha256-9FqQmACST6qDanO4Kh1Ms1L4BTE0pCap3K&#43;mHPaoxdA=" />
+        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.809247dcc0227e384b256fd9df3f1c82b2b752f0ca6ba0f97410d05bcdd60729.css" integrity="sha256-gJJH3MAifjhLJW/Z3z8cgrK3UvDKa6D5dBDQW83WByk=" />
 
     </head>
     <body>
@@ -66,7 +66,7 @@
         </header>
 
         <p>Jakiś czas temu podałem sposób na <a href="https://awasn.github.io/zacznij-od-nowej-strony/">rozwiązanie problemu</a> drukowania w ramach kontrolki <strong>List</strong> podraportów zaczynając każdorazowo od nowej strony. Efektem było niestety drukowanie na koniec pustej strony. Wydawałoby się, iż wystarczy jedynie kontrolkę <strong>Rectangle</strong> na koniec wyłączyć i marnotrawstwo papieru oraz nadszarpywanie naszej reputacji zostanie zlikwidowane. W tym celu właściwości <strong>Hidden</strong> przypisałem wyrażenie:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vbnet" data-lang="vbnet">    <span style="color:#f92672">=</span>IIF(RowNumber(<span style="color:#960050;background-color:#1e0010">“</span>DataSet<span style="color:#960050;background-color:#1e0010">”</span>) <span style="color:#f92672">&lt;</span> CountRows(<span style="color:#960050;background-color:#1e0010">“</span>DataSet<span style="color:#960050;background-color:#1e0010">”</span>), <span style="color:#66d9ef">False</span>, <span style="color:#66d9ef">True</span>)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vbnet" data-lang="vbnet">    <span style="color:#f92672">=</span>IIF(RowNumber(<span style="color:#960050;background-color:#1e0010">“</span>DataSet<span style="color:#960050;background-color:#1e0010">”</span>) <span style="color:#f92672">&lt;</span> CountRows(<span style="color:#960050;background-color:#1e0010">“</span>DataSet<span style="color:#960050;background-color:#1e0010">”</span>), <span style="color:#66d9ef">False</span>, <span style="color:#66d9ef">True</span>)
 </code></pre></div><p>Analiza jest trywialna: dopóki bieżący numer wiersza jest mniejszy od liczby wszystkich wierszy w danym zbiorze danych kontrolka <strong>Rectangle</strong> jest wyświetlana.</p>
     <figure>
         <img class="pure-img" src="https://awasn.github.io/zacznij-od-nowej-strony-ale-nie-drukuj-pustej/images/Rectangle.png" alt="Właściwości kontrolki Rectangle" >

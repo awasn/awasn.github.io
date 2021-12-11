@@ -4,7 +4,7 @@
         <meta name="theme-color" content="#405365"/>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="generator" content="Hugo 0.83.1" />
+        <meta name="generator" content="Hugo 0.90.1" />
         <meta name="description" content="Wykorzystanie komend AT do sterowania telefonem komórkowym" />
         <title>Zadzwoń sam do siebie - arkadiusz wasniewski blog</title>
         <link rel="canonical" href="https://awasn.github.io/zadzwon-sam-do-siebie/">
@@ -17,7 +17,7 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
-        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.f45a909800924faa836a73b82a1d4cb352f8053134a426a9dcafa61cf6a8c5d0.css" integrity="sha256-9FqQmACST6qDanO4Kh1Ms1L4BTE0pCap3K&#43;mHPaoxdA=" />
+        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.809247dcc0227e384b256fd9df3f1c82b2b752f0ca6ba0f97410d05bcdd60729.css" integrity="sha256-gJJH3MAifjhLJW/Z3z8cgrK3UvDKa6D5dBDQW83WByk=" />
 
     </head>
     <body>
@@ -69,10 +69,10 @@
 </ul>
 <p>Generalnie rzecz biorąc Menedżer urządzeń powinien pokazywać nam jeden z portów szeregowych przypisany do urządzenia, z którym będziemy się komunikować.</p>
 <p>Do wydawania poleceń wykorzystać możemy stary, poczciwy HyperTerminal. Tworzymy w nim nowe połączenie, dla którego wybieramy właściwy port. I możemy zaczynać. Najprostszą metodą umożliwiającą sprawdzenie czy połączenie zostało faktycznie nawiązane jest wpisanie w terminalu komendy (pamiętajmy, iż zatwierdzenie polecenia następuję po wciśnięciu klawisza Enter):</p>
-<pre><code class="language-dos" data-lang="dos">AT
+<pre tabindex="0"><code class="language-dos" data-lang="dos">AT
 </code></pre><p>Telefon powinien zwrócić nam odpowiedź OK. Jeśli ktoś już się pobudził i marzy o zalewaniu bliźnich wiadomościami SMS to pragnę ostudzić zapał. Kodowanie SMS do formatu wymaganego przez telefon komórkowy jest nie do wykonania w pamięci operacyjnej człowieka. Trzeba skorzystać z dodatkowych narzędzi. Warto również poszukać w sieci zestawu komend AT dla posiadanego modelu telefonu. Oczywiście istnieje duża część wspólna zwana standardem implementowana przez każde urządzenie.</p>
 <p>Na koniec jeszcze jeden przykład. Poniższa sekwencja pokazuje nawiązanie i zerwanie połączenia:</p>
-<pre><code class="language-dos" data-lang="dos">ATD555123456;
+<pre tabindex="0"><code class="language-dos" data-lang="dos">ATD555123456;
 OK
 AT+CHUP
 OK

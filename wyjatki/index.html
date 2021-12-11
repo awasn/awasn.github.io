@@ -4,7 +4,7 @@
         <meta name="theme-color" content="#405365"/>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="generator" content="Hugo 0.83.1" />
+        <meta name="generator" content="Hugo 0.90.1" />
         <meta name="description" content="Testowanie poprawności rzucania wyjątkami w .NET C#" />
         <title>Wyjątki - arkadiusz wasniewski blog</title>
         <link rel="canonical" href="https://awasn.github.io/wyjatki/">
@@ -17,7 +17,7 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
-        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.f45a909800924faa836a73b82a1d4cb352f8053134a426a9dcafa61cf6a8c5d0.css" integrity="sha256-9FqQmACST6qDanO4Kh1Ms1L4BTE0pCap3K&#43;mHPaoxdA=" />
+        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.809247dcc0227e384b256fd9df3f1c82b2b752f0ca6ba0f97410d05bcdd60729.css" integrity="sha256-gJJH3MAifjhLJW/Z3z8cgrK3UvDKa6D5dBDQW83WByk=" />
 
     </head>
     <body>
@@ -66,7 +66,7 @@
         </header>
 
         <p>Jednym z elementów podlegających testowaniu jest sprawdzanie zachowania kodu w przypadku otrzymania nieprawidłowych danych. Reakcją na tego typu zdarzenia może być wyrzucanie wyjątków. Czasem jednak mogą powstać z tego tytułu pewne komplikacje. Załóżmy, że mamy do przetestowania poniższą klasę:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CommandLibraryLocator</span> : ICommandLibraryLocator
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CommandLibraryLocator</span> : ICommandLibraryLocator
     {
         <span style="color:#66d9ef">private</span> ILibraryRepository libraryRepository;
 
@@ -89,7 +89,7 @@
         }
     }
 </code></pre></div><p>I rozważmy przykładowy kod testujący:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#a6e22e">        [Test]</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#a6e22e">        [Test]</span>
 <span style="color:#a6e22e">        [ExpectedException(typeof(ArgumentNullException))]</span>
         <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> NullUserIdentityThrowsArgumentNullException()
         {
@@ -99,7 +99,7 @@
         }
 </code></pre></div><p>Naszą intencją jest sprawdzenie czy instancja klasy <code>CommandLibraryLocator</code> zwróci wyjątek <code>ArgumentNullException</code> w przypadku wywołania metody <code>GetPath</code> z pustym parametrem typu <code>UserIdentity</code>. Jeśli zmienna przekazywana w konstruktorze klasy będzie z jakiś powodów <code>null</code> (te powody to oczywiście popełniony przez nas błąd), środowisko testowe poinformuje nas, iż test ten zakończył się poprawnie, mimo iż tak naprawdę wyjątek zwrócił nam konstruktor nie zaś metoda <code>GetPath</code>.</p>
 <p>Jak się przed tego typu pomyłkami ustrzec? Otóż od wersji 2.4 środowisko testowe <a href="http://nunit.org">NUnit</a> udostępnia nam bardzo rozbudowaną wersję atrybutu <code>ExpectedException</code>, który pozwala nam, poza typem oczekiwanego wyjątku, określić również komunikat, który spodziewamy się otrzymać w ramach tegoż wyjątku. Dzięki temu, możemy zmodyfikować powyższy test do następującej postaci:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#a6e22e">        [Test]</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#a6e22e">        [Test]</span>
 <span style="color:#a6e22e">        [ExpectedException(typeof(ArgumentNullException),
 </span><span style="color:#a6e22e">            ExpectedMessage = &#34;identity&#34;, MatchType = MessageMatch.Contains)]</span>
         <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> NullUserIdentityThrowsArgumentNullException()
@@ -110,7 +110,7 @@
         }
 </code></pre></div><p>Typ wyliczeniowy <code>MessageMatch</code> określa sposób interpretacji zwróconego komunikatu. Wywoływany w ramach metody <code>GetPath</code> wyjątek <code>ArgumentNullException</code> zwraca łańcuch <code>identity</code> jako część komunikatu, stąd też informuję środowisko testowe, iż spodziewana przeze mnie informacja będzie jedynie zawarta w komunikacie wyjątku.</p>
 <p>Powyższe możliwości przydają się nie tylko z powodu takiego, iż możemy popełnić w czasie pisania testów błąd. Przyjrzyjmy się dla przykładu poniższej metodzie:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">        <span style="color:#66d9ef">public</span> ProcessResult Execute(UserIdentity identity, <span style="color:#66d9ef">string</span> name,
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">        <span style="color:#66d9ef">public</span> ProcessResult Execute(UserIdentity identity, <span style="color:#66d9ef">string</span> name,
             <span style="color:#66d9ef">string</span> parameters, <span style="color:#66d9ef">out</span> <span style="color:#66d9ef">string</span> answer)
         {
             <span style="color:#66d9ef">if</span> (identity == <span style="color:#66d9ef">null</span>)
@@ -129,7 +129,7 @@
             <span style="color:#66d9ef">return</span> ProcessResult.OK;
         }
 </code></pre></div><p>Jak widzimy, bez możliwości określenia jaki komunikat spodziewamy się otrzymać, przetestowanie powyższego kodu bez wprowadzania własnych wyjątków nie będzie możliwe. Korzystając z nowych możliwości atrybutu <code>ExpectedException</code> testy te będą wyglądały następująco (poniżej tylko kilka pierwszych sprawdzeń):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#a6e22e">        [Test]</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#a6e22e">        [Test]</span>
 <span style="color:#a6e22e">        [ExpectedException(typeof(InvalidOperationException),
 </span><span style="color:#a6e22e">            ExpectedMessage = &#34;identity.Name&#34;,
 </span><span style="color:#a6e22e">            MatchType = MessageMatch.Contains)]</span>

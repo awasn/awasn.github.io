@@ -4,7 +4,7 @@
         <meta name="theme-color" content="#405365"/>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="generator" content="Hugo 0.83.1" />
+        <meta name="generator" content="Hugo 0.90.1" />
         <meta name="description" content="Definiowanie rozbudowanych stałych w programie przy wykorzystaniu typów wyliczanych i klas" />
         <title>Typy wyliczane czy klasy - arkadiusz wasniewski blog</title>
         <link rel="canonical" href="https://awasn.github.io/typy-wyliczane-czy-klasy/">
@@ -17,7 +17,7 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
-        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.f45a909800924faa836a73b82a1d4cb352f8053134a426a9dcafa61cf6a8c5d0.css" integrity="sha256-9FqQmACST6qDanO4Kh1Ms1L4BTE0pCap3K&#43;mHPaoxdA=" />
+        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.809247dcc0227e384b256fd9df3f1c82b2b752f0ca6ba0f97410d05bcdd60729.css" integrity="sha256-gJJH3MAifjhLJW/Z3z8cgrK3UvDKa6D5dBDQW83WByk=" />
 
     </head>
     <body>
@@ -71,7 +71,7 @@
 
         <p>Tak to już jest, iż programując bardzo często stajemy przed koniecznością wyboru rozwiązania, będąc  gdzieś w połowie drogi pomiędzy &ldquo;najlepszymi technikami&rdquo;. Jeden z takich przypadków, ale bez wybrania najlepszej drogi, chciałbym opisać poniżej.</p>
 <p>Załóżmy, iż budujemy aplikację służącą sprzedaży  Na początek będziemy wykorzystywać dwa typy dokumentów: paragon i fakturą.  W kodzie tworzymy odpowiadający temu typ wyliczany:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">enum</span> DocumentType
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">enum</span> DocumentType
     {
         Receipt,
         Invoice
@@ -89,14 +89,14 @@
 </ul>
 <p>Jak widzimy wymagania te wychodzą z różnych części programu. Słowa &ldquo;być może&rdquo; są użyte powyżej ponieważ to klient (użytkownik oprogramowania) będzie decydował (przy zakupie?) co i gdzie ma mu się wyświetlać.</p>
 <p>Pierwsze rozwiązanie polega na zastosowaniu specjalnej klasy pomocniczej,  która przyjmując w wywołaniach metod typ dokumentu zwracałaby właściwe wartości. Prosty przykład użycia:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            DocumentType documentType = DocumentType.Invoice;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            DocumentType documentType = DocumentType.Invoice;
             Console.WriteLine(DocumentTypeHelper.GetCode(documentType));
             Console.WriteLine(DocumentTypeHelper.GetName(documentType));
 </code></pre></div><p>Oczywiścia klasa pomocnicza nie musi być statyczna. Do dyspozycji mamy również nowości języka C# w wersji trzeciej czyli metody rozszerzające (extension methods):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            Console.WriteLine(documentType.GetCode());
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            Console.WriteLine(documentType.GetCode());
             Console.WriteLine(documentType.GetName());
 </code></pre></div><p>Możemy również zastosować refaktoryzację naszego typu wyliczanego do klasy. Rozwiązanie to jest bardzo popularne zwłaszcza w językach, które nie umożliwiają definiowania dozwolonych zakresów wartości dla zmiennych i parametrów metod.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DocumentType</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DocumentType</span>
     {
         <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">readonly</span> DocumentType Receipt =
             <span style="color:#66d9ef">new</span> DocumentType(<span style="color:#e6db74">&#34;PA&#34;</span>, <span style="color:#e6db74">&#34;Paragon&#34;</span>);
@@ -114,7 +114,7 @@
         }
     }
 </code></pre></div><p>Jako ciekawostkę można w tym miejscu powiedzieć, iż kompilator C# zamienia typy enumerowane na poniższe rozwiązanie  (mniej więcej):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">DocumentType</span> : System.Enum
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">DocumentType</span> : System.Enum
     {
         <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">const</span> DocumentType Receipt = (DocumentType) <span style="color:#ae81ff">0</span>;
         <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">const</span> DocumentType Invoice = (DocumentType) <span style="color:#ae81ff">1</span>;
@@ -136,7 +136,7 @@
 </li>
 <li>
 <p>Rezygnacja ze statycznych pól tylko do odczytu. Przeniesienie typu dokumentu do klasy:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DocumentTypeValue</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DocumentTypeValue</span>
     {
         <span style="color:#66d9ef">public</span> DocumentType DocumentType { <span style="color:#66d9ef">get</span>; <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">set</span>; }
         <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">string</span> Code { <span style="color:#66d9ef">get</span>; <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">set</span>; }
@@ -153,7 +153,7 @@
 </code></pre></div></li>
 <li>
 <p>Opisanie elementów typu wyliczanego utworzonymi atrybutami:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">enum</span> DocumentType
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">enum</span> DocumentType
     {
 <span style="color:#a6e22e">        [Code(&#34;PA&#34;)]</span>
 <span style="color:#a6e22e">        [Name(&#34;Paragon&#34;)]</span>

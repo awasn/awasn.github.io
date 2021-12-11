@@ -4,7 +4,7 @@
         <meta name="theme-color" content="#405365"/>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="generator" content="Hugo 0.83.1" />
+        <meta name="generator" content="Hugo 0.90.1" />
         <meta name="description" content="Skrypty przechwytujące hook scripts w .NET C# dla repozytoriów systemu kontroli wersji Subversion" />
         <title>Hook scripts w C# - arkadiusz wasniewski blog</title>
         <link rel="canonical" href="https://awasn.github.io/hook-scripts-w-csharp/">
@@ -17,7 +17,7 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
-        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.f45a909800924faa836a73b82a1d4cb352f8053134a426a9dcafa61cf6a8c5d0.css" integrity="sha256-9FqQmACST6qDanO4Kh1Ms1L4BTE0pCap3K&#43;mHPaoxdA=" />
+        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.809247dcc0227e384b256fd9df3f1c82b2b752f0ca6ba0f97410d05bcdd60729.css" integrity="sha256-gJJH3MAifjhLJW/Z3z8cgrK3UvDKa6D5dBDQW83WByk=" />
 
     </head>
     <body>
@@ -67,7 +67,7 @@
 
         <p>W strukturze katalogów składających się na repozytorium Subversion znajduje się folder o nazwie <strong>hooks</strong>. Zawiera on skrypty przechwytujące (<strong>hook scripts</strong>). Skrypty te wywoływane są w momencie zajścia w repozytorium określonego zdarzenia. Może to być np. żądanie zablokowania zasobu czy próba zatwierdzenia zmian. Przypisanie do zdarzenia następuje poprzez nadanie skryptowi odpowiedniej, rozpoznawalnej przez SVN nazwy. Mimo stosowania pojęcia skrypt, mogą to być tak naprawdę dowolne pliki wykonywalne. Nic nie stoi na przeszkodzie, abyśmy wykorzystali w tej roli język C#.</p>
 <p>Domyślnie Subversion pozwala na zatwierdzenie zmian w repozytorium bez podania informacji (komunikatu). Najwłaściwszym miejscem do cofnięcia transakcji, która nie posiada wypełnionego logu jest zdarzenie <strong>pre-commit</strong> wywoływane przed ostatecznym zatwierdzeniem zmian. Tworzymy w związku z tym projekt typu <strong>ConsoleApplication</strong>, w którym zmieniamy wpierw nagłówek metody <code>Main</code> a następnie wypełniamy kodem:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> Main(<span style="color:#66d9ef">string</span>[] args)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> Main(<span style="color:#66d9ef">string</span>[] args)
     {
         <span style="color:#66d9ef">string</span> repositoryPath = args[<span style="color:#ae81ff">0</span>];
         <span style="color:#66d9ef">string</span> transactionName = args[<span style="color:#ae81ff">1</span>];

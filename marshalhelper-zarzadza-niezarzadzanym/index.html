@@ -4,7 +4,7 @@
         <meta name="theme-color" content="#405365"/>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="generator" content="Hugo 0.83.1" />
+        <meta name="generator" content="Hugo 0.90.1" />
         <meta name="description" content="Kod niezarządzany w .NET C# do operacji odczytu i zapisu plików DBF" />
         <title>MarshalHelper zarządza niezarządzanym - arkadiusz wasniewski blog</title>
         <link rel="canonical" href="https://awasn.github.io/marshalhelper-zarzadza-niezarzadzanym/">
@@ -17,7 +17,7 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
-        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.f45a909800924faa836a73b82a1d4cb352f8053134a426a9dcafa61cf6a8c5d0.css" integrity="sha256-9FqQmACST6qDanO4Kh1Ms1L4BTE0pCap3K&#43;mHPaoxdA=" />
+        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.809247dcc0227e384b256fd9df3f1c82b2b752f0ca6ba0f97410d05bcdd60729.css" integrity="sha256-gJJH3MAifjhLJW/Z3z8cgrK3UvDKa6D5dBDQW83WByk=" />
 
     </head>
     <body>
@@ -67,7 +67,7 @@
 
         <p>W notce dotyczącej <a href="https://awasn.github.io/iteratory/">iteratorów</a> czy też kiedy opisywałem operacje na plikach <a href="https://awasn.github.io/dbf-po-ludzku/">DBF</a> posługiwałem się klasą pomocniczą <code>MarshalHelper</code>, która wykonywała wszystkie niezbędne czynności przy konwersji typów z kodu zarządzanego do niezarządzanego i vice versa. Wykorzystanie klas przestrzeni <code>System.Runtime.InteropServices</code> było konieczne, ponieważ w kodzie zarządzanym nie mamy gwarancji, iż pola z danej struktury będą w pamięci ułożone w tej samej kolejności i wyrównane powiedzmy do 8 bajtów.</p>
 <p>Sama implementacja metod pomocniczych klasy nie jest skomplikowana. W sieci można znaleźć trochę pomysłów. Poniżej kod całej klasy:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MarshalHelper</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MarshalHelper</span>
     {
         <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Encoding encoding = Encoding.GetEncoding(<span style="color:#ae81ff">852</span>);
 

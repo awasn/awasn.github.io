@@ -4,7 +4,7 @@
         <meta name="theme-color" content="#405365"/>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="generator" content="Hugo 0.83.1" />
+        <meta name="generator" content="Hugo 0.90.1" />
         <meta name="description" content="" />
         <title>Blogs - arkadiusz wasniewski blog</title>
         <link rel="canonical" href="https://awasn.github.io/blog/">
@@ -15,7 +15,7 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
-        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.f45a909800924faa836a73b82a1d4cb352f8053134a426a9dcafa61cf6a8c5d0.css" integrity="sha256-9FqQmACST6qDanO4Kh1Ms1L4BTE0pCap3K&#43;mHPaoxdA=" />
+        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.809247dcc0227e384b256fd9df3f1c82b2b752f0ca6ba0f97410d05bcdd60729.css" integrity="sha256-gJJH3MAifjhLJW/Z3z8cgrK3UvDKa6D5dBDQW83WByk=" />
 
     </head>
     <body>
@@ -61,7 +61,7 @@
         </div>
     </div>
         </header>
-
+        <p>workflow test</p>
         <p>
         Kilkukrotnie już zdarzyło się, iż potrzebowałem klasy, która umożliwiłaby zapamiętanie typowanych (typed, generic) struktur hierarchicznych (hierarchical collection) czyli dowolnego obiektu wraz z jego elementami potomnymi. W ramach platformy .NET istnieją już klasy implementujące podobną funkcjonalność. Mowa tu oczywiście o TreeNode z TreeNodeCollection oraz o, bardziej hermetycznym, MenuItem wraz z wewnętrznym MenuItemCollection. Klasy przeznaczone do obsługi menu trudno byłoby użyć do własnych rozwiązań. TreeNode jest zaś &ldquo;ciężka&rdquo; i brak w niej typowania, czyli możliwości określenia typu przechowywanego obiektu (precz z rzutowaniem!
         </p>
@@ -97,7 +97,7 @@
         </div>
     </div>
         </header>
-
+        <p>workflow test</p>
         <p>
         &ldquo;Bo kultura tu naprawdę jest, świadczy o tym nasz wspaniały Dom Kultury&rdquo; śpiewał w 1988 roku w Jarocinie zespół &ldquo;Zielone Żabki&rdquo;. Ktoś pamięta? Dziś też będzie o kulturze, ale przez literę c czyli o Culture. Tekst zaś dotyczył będzie tak prozaicznej kwestii jak polskie znaki narodowe.
 Zacznijmy od początku. Utwórzmy, np. w Notatniku, plik w formacie CSV zawierający nazwy ptaków z polskimi znakami narodowymi:
@@ -135,7 +135,7 @@ id,nazwa 1,Gżegżółka 2,Żuraw 3,Łabędź I spróbujmy go wczytać korzystaj
         </div>
     </div>
         </header>
-
+        <p>workflow test</p>
         <p>
         Asumpt do poniższego rozwiązania dostarczył skrypt PowerShell, który kompiluje projekty pewnego mojego rozwiązania, i gdzie zapałałem chęcią automatycznego uaktualnienia numeru wersji we wszystkich plikach AssemblyInfo.cs. Ale gdzież są te wszystkie pliki? No w projektach…
 Najprostszy sposób dotarcia do projektów to odczytanie pliku .sln. Hm… ale to oznacza analizowanie zawartości. Z pomocą przyszły wyrażenia regularne oraz świadomość istnienia jasno określonej struktury pliku .sln.
@@ -173,7 +173,7 @@ Project\(&#34;\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC\}&#34;\) = &#34;(?&lt;proje
         </div>
     </div>
         </header>
-
+        <p>workflow test</p>
         <p>
         Jakiś czas temu podałem sposób na rozwiązanie problemu drukowania w ramach kontrolki List podraportów zaczynając każdorazowo od nowej strony. Efektem było niestety drukowanie na koniec pustej strony. Wydawałoby się, iż wystarczy jedynie kontrolkę Rectangle na koniec wyłączyć i marnotrawstwo papieru oraz nadszarpywanie naszej reputacji zostanie zlikwidowane. W tym celu właściwości Hidden przypisałem wyrażenie:
 =IIF(RowNumber(“DataSet”) &lt; CountRows(“DataSet”), False, True) Analiza jest trywialna: dopóki bieżący numer wiersza jest mniejszy od liczby wszystkich wierszy w danym zbiorze danych kontrolka Rectangle jest wyświetlana.
@@ -210,7 +210,7 @@ Project\(&#34;\{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC\}&#34;\) = &#34;(?&lt;proje
         </div>
     </div>
         </header>
-
+        <p>workflow test</p>
         <p>
         Dawno, dawno temu (choć może nie aż tak dawno) popełniłem notkę na temat skryptów przechwytujących (hook scripts) dla repozytoriów systemu kontroli wersji Subversion. Chodziło o uniemożliwienie zapisania w repozytorium zmian, jeśli nie został podany do nich żaden komentarz wyjaśniający. Proponowany kod wyglądał mniej więcej tak:
 private static int Main(string[] args) { string repositoryPath = args[0]; string transactionName = args[1]; var process = new Process(); process.StartInfo.FileName = &#34;svnlook.exe&#34;; process.StartInfo.Arguments = string.Format(&#34;log -t {0} {1}&#34;, transactionName, repositoryPath); process.
@@ -251,7 +251,7 @@ private static int Main(string[] args) { string repositoryPath = args[0]; string
         </div>
     </div>
         </header>
-
+        <p>workflow test</p>
         <p>
         W razie problemów z działaniem aplikacji w systemie Windows 7 można we właściwościach danego programu (Properties –&gt; Comaptibility) włączyć tryb zgodności (Compatibility mode) poprzez wybranie wcześniejszej wersji systemu operacyjnego. Do dyspozycji mamy:
  Windows 95; Windows 98 / Windows Me; Windows NT 4.0 z Service Pack 5; Windows 2000; Windows XP z Service Pack w wersji 2 lub 3; Windows Server 2003 z Service Pack 1; Windows Vista; Windows Vista z Service Pack 1 lub 2.
@@ -288,7 +288,7 @@ private static int Main(string[] args) { string repositoryPath = args[0]; string
         </div>
     </div>
         </header>
-
+        <p>workflow test</p>
         <p>
         Z przyczyn mniej lub bardziej zrozumiałych koniecznym było, aby usunąć z kilku projektów katalogi zawierające informacje o lokalnej kopii roboczej Subversion _svn. Przy braku połączenia z repozytorium kodu ręczne usuwanie to dłubanina i gwarantowana depresja. Z pomocą przyszedł PowerShell. Jak zwykle. Poniżej skrypt usuwający to co trzeba tam gdzie trzeba:
 Clear-Host $path = Read-Host &#34;Folder przeznaczony do wyczyszenia z katalogów _svn: &#34; Get-ChildItem -Path $path -Include _svn -Force -Recurse -Filter FullName | Remove-Item -Force -Recurse Write-Host &#34;Operacja usuwania katalogów _svn zakończona pomyślnie.
@@ -325,7 +325,7 @@ Clear-Host $path = Read-Host &#34;Folder przeznaczony do wyczyszenia z katalogó
         </div>
     </div>
         </header>
-
+        <p>workflow test</p>
         <p>
         Aneta Sidorowicz na swoim blogu (a jakże!) zrobiła małe, subiektywne zestawienie osób organizujących (mających wkład w) konferencję C2C 2009 (http://2009.communities2communities.org.pl). Zestawienie przeczytałem i ponieważ zabrakło mi w nim jednej osoby, popełniłem komentarz do wpisu. Jakież było moje zdziwienia (przerażenie wręcz) kiedy jako podpis osoby wystawiającej komentarz wyświetliła się moja nazwa użytkownika i hasło (!!!) mojego profilu Windows Live. Zgroza, to po prostu jest zgroza. Dobrze, że użytkownik dodający komentarz może też go usunąć.
         </p>
@@ -365,7 +365,7 @@ Clear-Host $path = Read-Host &#34;Folder przeznaczony do wyczyszenia z katalogó
         </div>
     </div>
         </header>
-
+        <p>workflow test</p>
         <p>
         Chciałbym poinformować, iż nastąpiła zmiana adresu Communities to Communities. Witryna konferencji dostępna jest obecnie pod adresem http://communities2communities.org.pl. Przepraszamy za zamieszanie i utrudnienia tym spowodowane.
         </p>
@@ -397,7 +397,7 @@ Clear-Host $path = Read-Host &#34;Folder przeznaczony do wyczyszenia z katalogó
         </div>
     </div>
         </header>
-
+        <p>workflow test</p>
         <p>
         Testy, testy, testy. Najpierw. Przed właściwym kodem. A może po? Co testować? Wszystko? Jeśli tworzymy zbiór publicznych typów (interfejs pakietu) to testowane powinno być jak najbardziej wszystko i to szczegółowo. To jest Test Dirven Driven Development (TDD). Część publiczna jest naszym kontraktem informującym jaki będzie rezultat operacji przy określonych parametrach. Niestety w chwili obecnej możliwości języków programowania są ograniczone jeśli chodzi o precyzyjne definiowanie dozwolonych wartości przekazywanych do metod i właściwości.
         </p>

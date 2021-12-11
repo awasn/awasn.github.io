@@ -4,7 +4,7 @@
         <meta name="theme-color" content="#405365"/>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="generator" content="Hugo 0.83.1" />
+        <meta name="generator" content="Hugo 0.90.1" />
         <meta name="description" content="Ustawienia klienta pocztowego .NET SmtpClient w pliku konfiguracyjnym aplikacji" />
         <title>SmtpClient i &lt;mailSettings&gt; - arkadiusz wasniewski blog</title>
         <link rel="canonical" href="https://awasn.github.io/smtpclient-i-mailsettings/">
@@ -17,7 +17,7 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
-        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.f45a909800924faa836a73b82a1d4cb352f8053134a426a9dcafa61cf6a8c5d0.css" integrity="sha256-9FqQmACST6qDanO4Kh1Ms1L4BTE0pCap3K&#43;mHPaoxdA=" />
+        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.809247dcc0227e384b256fd9df3f1c82b2b752f0ca6ba0f97410d05bcdd60729.css" integrity="sha256-gJJH3MAifjhLJW/Z3z8cgrK3UvDKa6D5dBDQW83WByk=" />
 
     </head>
     <body>
@@ -70,7 +70,7 @@
         </header>
 
         <p>Czasami małe rzeczy sprawiają dużo radości. Jedną z nich jest możliwość ustawienia klienta pocztowego <code>SmptClient</code> poprzez wpisy w pliku konfiguracyjnym aplikacji. Rozważmy przykład:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            <span style="color:#66d9ef">string</span> mailAddresses = ConfigurationManager.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            <span style="color:#66d9ef">string</span> mailAddresses = ConfigurationManager.
                 AppSettings[<span style="color:#e6db74">&#34;mailAddresses&#34;</span>];
             <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">string</span>.IsNullOrEmpty(mailAddresses)){
                 <span style="color:#66d9ef">return</span>;
@@ -89,7 +89,7 @@
             SmtpClient client = <span style="color:#66d9ef">new</span> SmtpClient();
             client.Send(message);
 </code></pre></div><p>Z pliku <strong>config</strong> aplikacji pobieram informację o adresach, do których należy pocztę wysłać. Następnie buduję wiadomość i wysyłam. Nie konfiguruję w kodzie programu zupełnie danych serwera SMTP, który posłuży do wysłania poczty. Zamiast tego pozwalam klasie <code>SmptClient</code> na samodzielne pobranie tych informacji z konfiguracji:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">          <span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34; ?&gt;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">          <span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34; ?&gt;</span>
           <span style="color:#f92672">&lt;configuration&gt;</span>
             <span style="color:#f92672">&lt;system.net&gt;</span>
               <span style="color:#f92672">&lt;mailSettings&gt;</span>

@@ -4,7 +4,7 @@
         <meta name="theme-color" content="#405365"/>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="generator" content="Hugo 0.83.1" />
+        <meta name="generator" content="Hugo 0.90.1" />
         <meta name="description" content="Przykład rozwiązania identyfikacji FormsAuthentication w Reporing Services" />
         <title>FormsAuthentication w Reporing Services - arkadiusz wasniewski blog</title>
         <link rel="canonical" href="https://awasn.github.io/formsauthentication-w-reporing-services/">
@@ -17,7 +17,7 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
-        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.f45a909800924faa836a73b82a1d4cb352f8053134a426a9dcafa61cf6a8c5d0.css" integrity="sha256-9FqQmACST6qDanO4Kh1Ms1L4BTE0pCap3K&#43;mHPaoxdA=" />
+        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.809247dcc0227e384b256fd9df3f1c82b2b752f0ca6ba0f97410d05bcdd60729.css" integrity="sha256-gJJH3MAifjhLJW/Z3z8cgrK3UvDKa6D5dBDQW83WByk=" />
 
     </head>
     <body>
@@ -68,7 +68,7 @@
         <p>Domyślnie usługi raportujące Microsoft SQL Server 2005 obsługują jedynie identyfikację Windows. Na szczęście w <a href="http://www.codeplex.com/SqlServerSamples">przykładach</a> dla Reporitng Services dostępnych na stronach <a href="http://www.codeplex.com">http://www.codeplex.com</a> dostępna jest implementacja rozszerzeń usług raportujących (interfejsy <code>IAuthenticationExtension</code> i <code>IAuthorizationExtension</code>), które umożliwiają skorzystanie z dobrodziejstw identyfikacji opartej o Forms. Jeśli zainstalujemy przykłady, to interesujące nas kody znajdziemy w katalogu <strong>C:\Program Files\Microsoft SQL Server\90\Samples\Reporting Services\Extension Samples\FormsAuthentication Sample</strong> zakładając oczywiście, iż wybraliśmy domyślną lokalizację.</p>
 <p>Przykładowe rozwiązanie korzysta z własnej bazy danych do przechowywania informacji o użytkownikach. Zazwyczaj jednak jest tak, iż w identyfikacji Forms korzystamy z własnych danych. Wdrożenie rozszerzeń Reporting Services powoduje poważną ingerencję w strukturę i konfigurację usług raportujących serwera SQL. Zmiana bazy danych (nazewnictwo) oznacza zasadniczą modyfikację przykładowej aplikacji. A co w przyszłości? Jeśli zechcemy za jakiś czas dokonać kolejnych modyfikacji? Ciągłe zmiany w ramach Reporting Services nie są dobrym pomysłem.</p>
 <p>Moja propozycja to zachowanie istniejącego przykładu w części weryfikującej użytkowników bez zmian. Modyfikacje natomiast wprowadzamy do skryptu tworzącego bazę danych. Usuwamy z niego kod tworzący tabelę <code>Users</code> oraz procedurę składowaną <code>RegisterUser</code> (wraz z uprawnieniami). Następnie modyfikujemy kod procedury składowanej <code>LookupUser</code>, która odpowiada za pobranie zaszyfrowanego hasła (hash) oraz wartości losowej (salt) utrudniającej złamanie hasła metodą słownikową. Zamiast sięgać do tabeli wewnątrz bazy rozszerzenia, pobierać będziemy dane z naszej własnej, zewnętrznej bazy danych. Dzięki temu wszelkie zmiany w przyszłości będą ograniczały się do niewielkiej modyfikacji kodu procedury <code>LookupUser</code> zamiast przebudowy kodu przykładowego rozszerzenia. Poniżej kod owej procedury przed modyfikacją:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">PROCEDURE</span> LookupUser
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">PROCEDURE</span> LookupUser
     <span style="color:#f92672">@</span>userName varchar(<span style="color:#ae81ff">255</span>)
 <span style="color:#66d9ef">AS</span>
     <span style="color:#66d9ef">SELECT</span> PasswordHash, salt
@@ -76,7 +76,7 @@
     <span style="color:#66d9ef">WHERE</span> UserName <span style="color:#f92672">=</span> <span style="color:#f92672">@</span>userName
 <span style="color:#66d9ef">GO</span>
 </code></pre></div><p>oraz po niej:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">PROCEDURE</span> LookupUser
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">PROCEDURE</span> LookupUser
     <span style="color:#f92672">@</span>userName varchar(<span style="color:#ae81ff">255</span>)
 <span style="color:#66d9ef">AS</span>
     <span style="color:#66d9ef">SELECT</span> u.PasswordHash, u.PasswordSalt

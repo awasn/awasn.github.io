@@ -4,7 +4,7 @@
         <meta name="theme-color" content="#405365"/>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="generator" content="Hugo 0.83.1" />
+        <meta name="generator" content="Hugo 0.90.1" />
         <meta name="description" content="Polskie znaki narodowe i kodowanie UTF8 plików w PowerShell" />
         <title>(K)Cultura w PowerShell - arkadiusz wasniewski blog</title>
         <link rel="canonical" href="https://awasn.github.io/k-cultura-w-powershell/">
@@ -17,7 +17,7 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
-        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.f45a909800924faa836a73b82a1d4cb352f8053134a426a9dcafa61cf6a8c5d0.css" integrity="sha256-9FqQmACST6qDanO4Kh1Ms1L4BTE0pCap3K&#43;mHPaoxdA=" />
+        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.809247dcc0227e384b256fd9df3f1c82b2b752f0ca6ba0f97410d05bcdd60729.css" integrity="sha256-gJJH3MAifjhLJW/Z3z8cgrK3UvDKa6D5dBDQW83WByk=" />
 
     </head>
     <body>
@@ -67,29 +67,29 @@
 
         <p>&ldquo;Bo kultura tu naprawdę jest, świadczy o tym nasz wspaniały Dom Kultury&rdquo; śpiewał w 1988 roku w Jarocinie zespół &ldquo;Zielone Żabki&rdquo;. Ktoś pamięta? Dziś też będzie o kulturze, ale przez literę c czyli o Culture. Tekst zaś dotyczył będzie tak prozaicznej kwestii jak polskie znaki narodowe.</p>
 <p>Zacznijmy od początku. Utwórzmy, np. w Notatniku, plik w formacie CSV zawierający nazwy ptaków z polskimi znakami narodowymi:</p>
-<pre><code class="language-csv" data-lang="csv">    id,nazwa
+<pre tabindex="0"><code class="language-csv" data-lang="csv">    id,nazwa
     1,Gżegżółka
     2,Żuraw
     3,Łabędź
 </code></pre><p>I spróbujmy go wczytać korzystając ze standardowego polecenia PowerShell:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    Import-Csv <span style="color:#e6db74">&#39;c:\ptaki.csv&#39;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    Import-Csv <span style="color:#e6db74">&#39;c:\ptaki.csv&#39;</span>
 </code></pre></div><p>Jak sie można domyśleć (wstęp to sugerował) to, co ujrzą nasze oczy nie będzie ładne. Zamiast polskich znaków będą mniej lub bardziej nieokreślone śmieci (zależy gdzie uruchomimy nasz kod) zgodne z UTF8. Skąd wiemy, że z UTF8? Empirycznie będzie można to sprawdzić za chwil kilka.</p>
 <p>Wstępnie problem został więc rozwiązany. Jak natomiast zmusić PowerShell do wczytania pliku CSV zgodnie z polską stroną kodową? Okazuje się, iż najłatwiej jest skorzystać z polecenia <code>Get-Content</code>, które domyślnie bierze pod uwagę ustawienia regionalne systemu operacyjnego komputera.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    Get-Content <span style="color:#e6db74">&#39;c:\ptaki.csv&#39;</span> | ConvertFrom-Csv
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    Get-Content <span style="color:#e6db74">&#39;c:\ptaki.csv&#39;</span> | ConvertFrom-Csv
 </code></pre></div><p>Dzięki zaś poleceniu <code>ConvertFrom-Csv</code> oraz skorzystania z potoku możemy cieszyć się poprawnością wyświetlania:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">    id  nazwa
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">    id  nazwa
     --  -----
     <span style="color:#ae81ff">1</span>   Gżegżółka
     <span style="color:#ae81ff">2</span>   Żuraw
     <span style="color:#ae81ff">3</span>   Łabędź
 </code></pre></div><p>Polecenie <code>Get-Content</code> posiada również, co ciekawe, parametr <code>Encoding</code>, który pozwala ustawić kilka możliwych stron kodowych. Nie są to powalające ilości, ale zawsze coś. W przypadku ustawienia kodowania na UTF8 otrzymamy dane w postaci identycznej jak w przypadku polecenia <code>Import-Csv</code>. Aby natomiast uzyskać efekt identyczny jak w przypadku wywołania tego polecenia bez strony kodowej należy parametr <code>Encoding</code> ustawić na wartość <code>String</code>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    Get-Content <span style="color:#e6db74">&#39;c:\ptaki.csv&#39;</span> -Encoding String | ConvertFrom-Csv
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    Get-Content <span style="color:#e6db74">&#39;c:\ptaki.csv&#39;</span> -Encoding String | ConvertFrom-Csv
 </code></pre></div><p>Co zaś w przypadku kiedy możliwości lingwistyczne standardowych poleceń PowerShell nas nie usatysfakcjonują? Zawsze możemy skorzystać z metod klas platformy .NET:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    <span style="color:#66d9ef">[System.IO.File]</span>::ReadAllText(
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    <span style="color:#66d9ef">[System.IO.File]</span>::ReadAllText(
         <span style="color:#e6db74">&#39;c:\ptaki.csv&#39;</span>,
         <span style="color:#66d9ef">[System.Text.Encoding]</span>::GetEncoding(1250)) | ConvertFrom-Csv
 </code></pre></div><p>I na koniec inny, niż skorzystanie z Notatnika, wariant tworzenia plików CSV:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    Set-Content <span style="color:#e6db74">&#39;c:\ptaki.csv&#39;</span> <span style="color:#e6db74">&#39;id,nazwa&#39;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">    Set-Content <span style="color:#e6db74">&#39;c:\ptaki.csv&#39;</span> <span style="color:#e6db74">&#39;id,nazwa&#39;</span>
     Add-Content <span style="color:#e6db74">&#39;c:\ptaki.csv&#39;</span> <span style="color:#e6db74">&#39;1,Gżegżółka&#39;</span>
     Add-Content <span style="color:#e6db74">&#39;c:\ptaki.csv&#39;</span> <span style="color:#e6db74">&#39;2,Żuraw&#39;</span>
     Add-Content <span style="color:#e6db74">&#39;c:\ptaki.csv&#39;</span> <span style="color:#e6db74">&#39;3,Łabędź&#39;</span>

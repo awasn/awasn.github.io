@@ -4,7 +4,7 @@
         <meta name="theme-color" content="#405365"/>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="generator" content="Hugo 0.83.1" />
+        <meta name="generator" content="Hugo 0.90.1" />
         <meta name="description" content="Skrypty przechwytujące hook scripts w PowerShell dla repozytoriów systemu kontroli wersji Subversion" />
         <title>Hook scripts w PowerShell - arkadiusz wasniewski blog</title>
         <link rel="canonical" href="https://awasn.github.io/hook-scripts-w-powershell/">
@@ -17,7 +17,7 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
-        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.f45a909800924faa836a73b82a1d4cb352f8053134a426a9dcafa61cf6a8c5d0.css" integrity="sha256-9FqQmACST6qDanO4Kh1Ms1L4BTE0pCap3K&#43;mHPaoxdA=" />
+        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.809247dcc0227e384b256fd9df3f1c82b2b752f0ca6ba0f97410d05bcdd60729.css" integrity="sha256-gJJH3MAifjhLJW/Z3z8cgrK3UvDKa6D5dBDQW83WByk=" />
 
     </head>
     <body>
@@ -66,7 +66,7 @@
         </header>
 
         <p>Dawno, dawno temu (choć może nie aż tak dawno) popełniłem <a href="https://awasn.github.io/hook-scripts-w-csharp/">notkę</a> na temat skryptów przechwytujących (<strong>hook scripts</strong>) dla repozytoriów systemu kontroli wersji <a href="http://www.open.collab.net/downloads/subversion/">Subversion</a>. Chodziło o uniemożliwienie zapisania w repozytorium zmian, jeśli nie został podany do nich żaden komentarz wyjaśniający. Proponowany kod wyglądał mniej więcej tak:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> Main(<span style="color:#66d9ef">string</span>[] args)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> Main(<span style="color:#66d9ef">string</span>[] args)
         {
             <span style="color:#66d9ef">string</span> repositoryPath = args[<span style="color:#ae81ff">0</span>];
             <span style="color:#66d9ef">string</span> transactionName = args[<span style="color:#ae81ff">1</span>];
@@ -92,7 +92,7 @@
         }
 </code></pre></div><p>Ostatnio pomyślałem czemu by nie wykorzystać do wspomożenia Subversion języka PowerShell. Wykoncypowałem, iż w katalogu, w którym są składowane repozytoria założę folder <strong>scripts</strong>, który będzie zawierał skrypty PowerShell, a do którego będą sięgały pliki wsadowe (<strong>batch files</strong>) wywoływane przez SVN w katalogu <strong>hooks</strong> danego repozytorium.</p>
 <p>Pierwsza wersja skryptu sprawdzającego istnienie komentarza do zachowywanych zmian była następująca:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">        $repositoryPath = $args[0]
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">        $repositoryPath = $args[0]
         $transactionName = $args[1]
 
         $message = svnlook.exe log -t $transactionName $repositoryPath
@@ -101,7 +101,7 @@
             <span style="color:#66d9ef">return</span> 1
         }
 </code></pre></div><p>Okazało się jednak, iż nie funkcjonuje on w zadowalający sposób. Po pierwsze niepoprawnie był zwracany do systemu status zakończenia skryptu (<strong>dos exit code</strong>). Rozwiązań znalezionych po poszukiwaniach w sieci było kilka. Ale najbardziej sensowne, w mojej opinii oczywiście, polegało na skorzystaniu ze specjalnej zmiennej PowerShell <code>$host</code>. Drugi problem wiązał się z komunikatem zwrotnym, który chciałem przekazać użytkownikowi próbującemu zatwierdzić zmiany. Aby wiadomość mogła być wyświetlona musi ona zostać wysłana do standardowego strumienia zawierającego błędy. Niestety okazało się, iż skorzystanie z polecenia Write-Error jest niemal tożsame z wyrzuceniem w tym miejscu wyjątku <code>throw</code>. Użytkownik, poza komunikatem zwrotnym, ze skryptu otrzymywał również dodatkowe informacje na temat kategorii błędów, miejsca wystąpienia etc. Niedobrze. Na szczęście PowerShell będąc opartym o platformę .NET pozwala bez problemów korzystać z jej bibliotek. Wiadomość dla użytkownika wysłałem więc tak jak w kodzie C# do standardowego strumienia błędów <code>System.Console.Error</code>. A oto końcowa wersja skryptu:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">        $repositoryPath = $args[0]
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">        $repositoryPath = $args[0]
         $transactionName = $args[1]
 
         $message = svnlook.exe log -t $transactionName $repositoryPath
@@ -110,14 +110,14 @@
             $host.SetShouldExit(1)
         }
 </code></pre></div><p>Jak już delikatnie powyżej zasugerowałem, skrypt PowerShell nie może być niestety wywołany bezpośrednio przez Subversion. Do tego konieczny jest pośredni plik wsadowy (<strong>batch file</strong>). I tutaj również nie obyło się bez niespodzianek. Pierwsza wersja pliku prezentowała się tak:</p>
-<pre><code class="language-dos" data-lang="dos">        powershell -noprofile ..\..\scripts\pre-commit.ps1 %1 %2
+<pre tabindex="0"><code class="language-dos" data-lang="dos">        powershell -noprofile ..\..\scripts\pre-commit.ps1 %1 %2
         exit errorlevel
 </code></pre><p>Okazało się jednak, iż ścieżka dostępu do katalogu ze skryptami nie jest tworzona poczynając od miejsca wywołania pliku wsadowego, tylko od ścieżki <strong>C:\Windows\system32</strong>. W ramach plików wsadowych można skorzystać ze zmiennej <strong>%CD%</strong>, która zawiera aktualny katalog. W tym wypadku nic to jednak nie dało. Nie pomogło nawet zapisanie wartości <strong>%CD%</strong> w zmiennej tymczasowej skryptu i późniejsze wykorzystanie jej przy tworzeniu ścieżki. Rozwiązaniem okazało się natomiast skorzystanie z makra <strong>%~dp0</strong>. Ostatecznie zawartość pliku wsadowego ustabilizowała się na poniższym zapisie:</p>
-<pre><code class="language-dos" data-lang="dos">        powershell -noprofile  %~dp0\..\..\scripts\pre-commit.ps1 %1 %2
+<pre tabindex="0"><code class="language-dos" data-lang="dos">        powershell -noprofile  %~dp0\..\..\scripts\pre-commit.ps1 %1 %2
         exit errorlevel
 </code></pre><p>Co ciekawe zupełnie nie sprawdziło się również polecane również sprawdzanie zmiennej <code>$LASTEXITCODE</code> zamiast <strong>ERRORLEVEL</strong>.</p>
 <p>Wiemy już, iż przedstawiane rozwiązanie posiada jedną niedogodność – konieczne jest posiłkowanie się plikami wsadowymi aby osiągnąć zamierzony efekt. Czy można to pominąć? Ano można. Należy skorzystać z parametru <code>–Command</code> w czasie wywołania powłoki PowerShell w pliku wsadowym i zapisać wewnątrz ciągu &ldquo;&amp; &quot; cały kod skryptu pamiętając, aby wszystko znalazło się w jednej linii oraz, by kolejne bloki kodu oddzielone były znakiem średnika.</p>
-<pre><code class="language-dos" data-lang="dos">        powershell.exe -noprofile -command &quot;&amp; {$message = svnlook.exe log -t $args[1] $args[0];if($message -notmatch '[a-zA-Z0-9]'){[System.Console]::Error.WriteLine('Brak opisu poczynionych zmian.');$host.SetShouldExit(1)}}&quot; %1 %2
+<pre tabindex="0"><code class="language-dos" data-lang="dos">        powershell.exe -noprofile -command &quot;&amp; {$message = svnlook.exe log -t $args[1] $args[0];if($message -notmatch '[a-zA-Z0-9]'){[System.Console]::Error.WriteLine('Brak opisu poczynionych zmian.');$host.SetShouldExit(1)}}&quot; %1 %2
         exit errorlevel
 </code></pre><p>Dla skrócenia zapisu parametry skryptu przekazuję bezpośrednio do aplikacji <strong>svnlook.exe</strong> bez tworzenia zmiennych pomocniczych <code>$repositoryPath</code> i <code>$transactionName</code>.</p>
 <p>Podsumowanie? Cóż. Skrypty przechwytujące (<strong>hook scripts</strong>) w PowerShell to chyba jednak w tym przypadku sztuka dla sztuki. Szybciej i sprawniej będzie skorzystanie z <a href="https://awasn.github.io/hook-scripts-w-csharp/">kodu C#</a>. Choć zawsze można się czegoś pożytecznego przy okazji nauczyć.</p>

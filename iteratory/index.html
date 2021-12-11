@@ -4,7 +4,7 @@
         <meta name="theme-color" content="#405365"/>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="generator" content="Hugo 0.83.1" />
+        <meta name="generator" content="Hugo 0.90.1" />
         <meta name="description" content="Mniejsze zużycie pamięci .NET przy korzystaniu z iteratorów" />
         <title>Iteratory - arkadiusz wasniewski blog</title>
         <link rel="canonical" href="https://awasn.github.io/iteratory/">
@@ -17,7 +17,7 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
-        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.f45a909800924faa836a73b82a1d4cb352f8053134a426a9dcafa61cf6a8c5d0.css" integrity="sha256-9FqQmACST6qDanO4Kh1Ms1L4BTE0pCap3K&#43;mHPaoxdA=" />
+        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.809247dcc0227e384b256fd9df3f1c82b2b752f0ca6ba0f97410d05bcdd60729.css" integrity="sha256-gJJH3MAifjhLJW/Z3z8cgrK3UvDKa6D5dBDQW83WByk=" />
 
     </head>
     <body>
@@ -72,7 +72,7 @@
         <p>Mój pierwszy blog znajdował się na portalu <code>developers.pl</code>. Niestety z różnych przyczyn serwis ten padł. A szkoda. Choćby dlatego, iż miałem tam kilka ciekawych wpisów. Nie chciałbym aby zostały one wszystkie stracone dlatego też postanowiłem jeden z nich przypomnieć (również sobie). Ciekawa była optymalizacja pierwotnego kodu w ramach komentarzy do tej notki&hellip;</p>
 <p>Jedną z nowości .NET w wersji 2.0 są (dzisiaj już możemy powiedzieć, że były) iteratory. Dzięki nim przekazywanie kolekcji obiektów czy struktur pomiędzy klasami nie musi już oznaczać zajmowania nowych, pomocniczych obszarów w pamięci, co konieczne było zwłaszcza jeśli nasze oprogramowanie zbudowane było w oparciu o warstwy (dostępu do danych, logiki biznesowej czy prezentacji).</p>
 <p>Załóżmy, iż tworzymy rozwiązanie, które będzie zapisywało różne obiekty do pliku. Strumień z danymi wyjściowymi będzie zawsze ten sam, ale dane wejściowe możemy odbierać różnymi kanałami: z bazy danych, innych plików itd. Jedna z zapisywanych klas wyglądać będzie następująco:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#a6e22e">    [StructLayout(LayoutKind.Sequential, Pack = 4)]</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#a6e22e">    [StructLayout(LayoutKind.Sequential, Pack = 4)]</span>
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ProductCategory</span>
     {
         <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">byte</span> CodeSize = <span style="color:#ae81ff">21</span>;
@@ -88,7 +88,7 @@
     }
 </code></pre></div><p>Zamiast klas można również próbować wykorzystać struktury. Okazuje się jednak, iż nie jest to dobry sposób, zwłaszcza jeśli będziemy korzystać z pętli <code>foreach</code>. Powodem są operacje <strong>boxing</strong> i <strong>unboxing</strong> (czyli rzutowania w obie strony pomiędzy klasą <code>Object</code> a naszym typem), które wykonywane są w czasie przechodzenia po kolejnych elementach dla <strong>value type</strong>, do których poza typami prymitywnymi należą właśnie struktury. Może się okazać, iż straty na tych operacjach będą nie do zaakceptowania.</p>
 <p>Obiekt zapisujący dane do strumienia wyjściowego, czyli do pliku będzie wspólny dla wszystkich struktur i będzie zawierał między innymi metodę <code>WriteEntities</code>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BusinessEntityProcess</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BusinessEntityProcess</span>
     {
 
         ...
@@ -109,7 +109,7 @@
 
     }
 </code></pre></div><p>Metoda <code>MarshalHelper.ToByteArray</code> korzysta z klasy <code>Marshal</code> aby miejsce w pamięci zajmowane przez dowolny obiekt zapisać do bufora bajtów. Jak widzimy, do metody <code>WriteEntities</code> przekazujemy obiekt implementujący interfejs <code>IEnumerable</code>. W .NET 1.1 obiekt tworzący odpowiednią kolekcję, która standardowo implementuje wymagany interfejs, mógł wyglądać następująco:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ProductCategoryData</span> : IProductCategoryData
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ProductCategoryData</span> : IProductCategoryData
     {
         <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">string</span> SqlSelect =
             <span style="color:#e6db74">&#34;SELECT Id, Skrot, Nazwa FROM P_Kategoria&#34;</span>;
@@ -141,7 +141,7 @@
 </span><span style="color:#75715e"></span>    }
 </code></pre></div><p>Obiekt <code>Database</code> zapewnia nam obsługę połączenia z bazą danych a metoda <code>MarshalHelper.EncodeToByteArray</code> dokonuje konwersji pomiędzy łańcuchem Unicode a dowolną stroną kodową. Zmienna <code>database</code> umożliwia nam wywołanie polecenia zwracającego nam z bazy SQL strumień danych typu <code>DbDataReader</code>. Pamięć dla tych elementów została już przydzielona. Wykonanie powyższej metody zwróci nam wymagany przez metodę <code>WriteEntities</code> interfejs <code>IEnumerable</code>. Ale skutkować to będzie zajęciem pamięci tym razem dla elementów listy. Zmienna <code>reader</code> jest zamykana, co nie oznacza, iż pamięć jest czyszczona. Przy dużych ilościach danych lub przy małej ilości pamięci (urządzenia mobilne) może mieć to spore znaczenie.</p>
 <p>Wprowadzone w .NET 2.0 iteratory diametralnie tę sytuację zmieniają. Poniżej klasy implementujące nowe możliwości języka C#:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BusinessEntityProcess</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BusinessEntityProcess</span>
     {
 
         ...
@@ -162,7 +162,7 @@
 
     }
 </code></pre></div><p>oraz</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ProductCategoryData</span> : IProductCategoryData
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ProductCategoryData</span> : IProductCategoryData
     {
         <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">string</span> SqlSelect =
             <span style="color:#e6db74">&#34;SELECT Id, Skrot, Nazwa FROM P_Kategoria&#34;</span>;

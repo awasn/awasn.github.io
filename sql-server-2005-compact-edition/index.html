@@ -4,7 +4,7 @@
         <meta name="theme-color" content="#405365"/>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="generator" content="Hugo 0.83.1" />
+        <meta name="generator" content="Hugo 0.90.1" />
         <meta name="description" content="Konfiguracja ASP.NET do korzystania z SQL Server 2005 Compact Edition bez rzucania wyjątkiem NotSupportedException" />
         <title>SQL Server 2005 Compact Edition - arkadiusz wasniewski blog</title>
         <link rel="canonical" href="https://awasn.github.io/sql-server-2005-compact-edition/">
@@ -17,7 +17,7 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
-        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.f45a909800924faa836a73b82a1d4cb352f8053134a426a9dcafa61cf6a8c5d0.css" integrity="sha256-9FqQmACST6qDanO4Kh1Ms1L4BTE0pCap3K&#43;mHPaoxdA=" />
+        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.809247dcc0227e384b256fd9df3f1c82b2b752f0ca6ba0f97410d05bcdd60729.css" integrity="sha256-gJJH3MAifjhLJW/Z3z8cgrK3UvDKa6D5dBDQW83WByk=" />
 
     </head>
     <body>
@@ -71,7 +71,7 @@
 
         <p>Pewną nowością było wprowadzenie przez Microsoft na komputery typu PC, dostępnej do tej pory we wcześniejszych wersjach w ramach urządzeń mobilnych, bazy danych SQL Server 2005 Compact Edition (<code>http://www.microsoft.com/sql/editions/compact/default.mspx</code>), która nie wymaga instalacji żadnego serwera bazodanowego a do obsługi potrzebuje jednej biblioteki System.Data.SqlServerCe.dll. Dzięki temu, zamiast przechowywać dane niezbędne do pracy aplikacji np. w plikach XML możemy skorzystać z możliwości silnika SQL. Z tego typu sytuacjami niejednokrotnie się spotykamy. Instalacja dowolnego serwera nie jest możliwa, a jednocześnie szukamy możliwości sprawnego zarządzania niedużą ilością danych.</p>
 <p>Osoby chcące wykorzystać SQL Server 2005 Compact Edition w ramach aplikacji ASP.NET spotka niestety przykra niespodzianka. Próba nawiązania połączenia z bazą danych spowoduje bowiem wygenerowanie wyjątku <code>NotSupportedException: SQL Server Compact Edition is not intended for ASP.NET development</code>. Okazuje się na szczęście, iż ograniczenie to można łatwo obejść wywołując w ramach kodu poniższą metodę:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            AppDomain.CurrentDomain.SetData(
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            AppDomain.CurrentDomain.SetData(
                 <span style="color:#e6db74">&#34;SQLServerCompactEditionUnderWebHosting&#34;</span>,
                 <span style="color:#66d9ef">true</span>);
 </code></pre></div><p>Polecam także zapoznanie się z konkurencyjnym rozwiązaniem <a href="https://firebirdsql.org/pdfmanual/html/fbmetasecur-embedded.html">Embedded Firebird</a>, które również posiada biblioteki przeznaczone na platformę .NET oraz możliwość integracji ze środowiskiem Visual Studio. Wśród zalet silnika <a href="https://firebirdsql.org">Firebird</a> jest między innymi brak ograniczeń co do rozmiaru bazy danych. Jako ciekawostkę podam fakt, iż tę wbudowaną bazę danych wykorzystuje między innymi AVG Anti-Virus.</p>

@@ -4,7 +4,7 @@
         <meta name="theme-color" content="#405365"/>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="generator" content="Hugo 0.83.1" />
+        <meta name="generator" content="Hugo 0.90.1" />
         <meta name="description" content="Obsługa operacji odczytu i zapisu plików DBF w .NET C#" />
         <title>DBF po ludzku - arkadiusz wasniewski blog</title>
         <link rel="canonical" href="https://awasn.github.io/dbf-po-ludzku/">
@@ -17,7 +17,7 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
-        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.f45a909800924faa836a73b82a1d4cb352f8053134a426a9dcafa61cf6a8c5d0.css" integrity="sha256-9FqQmACST6qDanO4Kh1Ms1L4BTE0pCap3K&#43;mHPaoxdA=" />
+        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.809247dcc0227e384b256fd9df3f1c82b2b752f0ca6ba0f97410d05bcdd60729.css" integrity="sha256-gJJH3MAifjhLJW/Z3z8cgrK3UvDKa6D5dBDQW83WByk=" />
 
     </head>
     <body>
@@ -68,7 +68,7 @@
         <p>Jakiś czas temu Sławek <a href="http://zine.net.pl/blogs/ucel/archive/2007/05/14/Dost_1901_p-do-danych-Excela-za-pomoc_0501_-ODBC.aspx">pisał</a> o dostępie poprzez sterowniki ODBC do tabel w formacie Excel. W podobny sposób można również próbować przetwarzać pliki DBF. Ale można też prościej&hellip; bardziej po ludzku&hellip;</p>
 <p>Wersji formatu DBF jest oczywiście wiele, ale my zajmiemy się wersją 3, bardzo popularną zwłaszcza w środowisku MS-DOS. Niezbędne będzie przy tym skorzystanie z przestrzeni nazw <code>InteropServices</code> umożliwiającej dostęp do kodu niezarządzanego.</p>
 <p>Każdy plik DBF składa się z nagłówka</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#a6e22e">    [StructLayout(LayoutKind.Sequential)]</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#a6e22e">    [StructLayout(LayoutKind.Sequential)]</span>
     <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Dbf3Header</span>
     {
         <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">byte</span> ReservedSize = <span style="color:#ae81ff">20</span>;
@@ -84,7 +84,7 @@
         <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">byte</span>[] Reserved;
     }
 </code></pre></div><p>który zawiera podstawowe informacje o przechowywanych wewnątrz danych. Nazwy pól są na tyle dosłowne, iż nie będziemy się na ich temat rozwodzić. Każde pole, które będzie występować w pliku, opisane jest w następujący sposób:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#a6e22e">    [StructLayout(LayoutKind.Sequential)]</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#a6e22e">    [StructLayout(LayoutKind.Sequential)]</span>
     <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Dbf3Field</span>
     {
         <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">byte</span> FieldNameSize = <span style="color:#ae81ff">11</span>;
@@ -107,7 +107,7 @@
 <li><code>N</code> dla pola numerycznego.</li>
 </ul>
 <p>Aby móc wykonywać operacje na pliku DBF musimy go wpierw otworzyć:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> OpenDbf()
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> OpenDbf()
         {
             header = MarshalHelper.FromStream&lt;Dbf3Header&gt;(<span style="color:#66d9ef">this</span>.stream);
             <span style="color:#66d9ef">int</span> fieldCount =
@@ -129,7 +129,7 @@
             buffer = <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">byte</span>[header.RecordSize];
         }
 </code></pre></div><p>lub utworzyć:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> CreateDbf()
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> CreateDbf()
         {
             header.Dbf = <span style="color:#ae81ff">0x03</span>;
             header.RecordCount = <span style="color:#ae81ff">0</span>;
@@ -142,7 +142,7 @@
             fields = <span style="color:#66d9ef">new</span> Dictionary&lt;<span style="color:#66d9ef">string</span>, Dbf3Field&gt;();
         }
 </code></pre></div><p>Jeśli plik został przez nas utworzony to powinniśmy dodać do niego definicje pól, które będą wewnątrz składowane (w poniższym przykładzie dla uproszczenia pominięto wszystkie pola poza rodzajem data):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> NewField(<span style="color:#66d9ef">string</span> fieldName, Dbf3FieldType fieldType,
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> NewField(<span style="color:#66d9ef">string</span> fieldName, Dbf3FieldType fieldType,
             <span style="color:#66d9ef">byte</span> length, <span style="color:#66d9ef">byte</span> precision)
         {
             Dbf3Field field = <span style="color:#66d9ef">new</span> Dbf3Field();
@@ -169,12 +169,12 @@
             fields.Add(fieldName.ToUpper(), field);
         }
 </code></pre></div><p>Mając przygotowany plik DBF możemy dodawać do niego nowe wiersze. Wpierw przygotowujemy bufor dla danych:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> NewRecord()
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> NewRecord()
         {
             buffer = <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">byte</span>[header.RecordSize];
         }
 </code></pre></div><p>a po wypełnieniu zapisujemy na dysk:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> Write()
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> Write()
         {
             stream.Position = header.HeaderSize +
                 header.RecordSize * header.RecordCount;
@@ -182,7 +182,7 @@
             stream.Write(buffer, <span style="color:#ae81ff">0</span>, buffer.Length);
         }
 </code></pre></div><p>Wszystkie dane w plikach DBF są składowane w postaci łańcuchów. Oznacza to, iż tak naprawdę potrzebujemy jednej głównej metody do zapisu danych:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> SetString(<span style="color:#66d9ef">string</span> fieldName, <span style="color:#66d9ef">string</span> <span style="color:#66d9ef">value</span>)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> SetString(<span style="color:#66d9ef">string</span> fieldName, <span style="color:#66d9ef">string</span> <span style="color:#66d9ef">value</span>)
         {
             Dbf3Field field = <span style="color:#66d9ef">this</span>.GetField(fieldName);
             <span style="color:#66d9ef">string</span> fieldValue;
@@ -196,13 +196,13 @@
             Buffer.BlockCopy(data, <span style="color:#ae81ff">0</span>, buffer, field.Offset, field.Length);
         }
 </code></pre></div><p>Reszta metod umożliwiających zapisywanie innych typów danych wywołuje wewnętrznie tę metodę wykonując rzutowanie na typ łańcuchowy np.:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> SetInt32(<span style="color:#66d9ef">string</span> fieldName, <span style="color:#66d9ef">int</span> <span style="color:#66d9ef">value</span>)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> SetInt32(<span style="color:#66d9ef">string</span> fieldName, <span style="color:#66d9ef">int</span> <span style="color:#66d9ef">value</span>)
         {
             <span style="color:#66d9ef">this</span>.SetString(fieldName, Convert.ToString(
                 <span style="color:#66d9ef">value</span>, dbfCultureInfo));
         }
 </code></pre></div><p>Przy konwersji musimy zwrócić uwagę na fakt, iż dane w pliku DBF są składowane według amerykańskich ustawień regionalnych. To samo dotyczy danych odczytywanych:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> GetInt32(<span style="color:#66d9ef">string</span> fieldName)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> GetInt32(<span style="color:#66d9ef">string</span> fieldName)
         {
             <span style="color:#66d9ef">return</span> Convert.ToInt32(<span style="color:#66d9ef">this</span>.GetString(fieldName),
                 dbfCultureInfo);

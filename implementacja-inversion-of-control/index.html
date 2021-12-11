@@ -4,7 +4,7 @@
         <meta name="theme-color" content="#405365"/>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="generator" content="Hugo 0.83.1" />
+        <meta name="generator" content="Hugo 0.90.1" />
         <meta name="description" content="Własna implementacja kontenera Inversion of Control w .NET C#" />
         <title>Implementacja Inversion of Control - arkadiusz wasniewski blog</title>
         <link rel="canonical" href="https://awasn.github.io/implementacja-inversion-of-control/">
@@ -17,7 +17,7 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
-        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.f45a909800924faa836a73b82a1d4cb352f8053134a426a9dcafa61cf6a8c5d0.css" integrity="sha256-9FqQmACST6qDanO4Kh1Ms1L4BTE0pCap3K&#43;mHPaoxdA=" />
+        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.809247dcc0227e384b256fd9df3f1c82b2b752f0ca6ba0f97410d05bcdd60729.css" integrity="sha256-gJJH3MAifjhLJW/Z3z8cgrK3UvDKa6D5dBDQW83WByk=" />
 
     </head>
     <body>
@@ -98,39 +98,39 @@
         <figcaption><h4>Implementacja Inversion of Control</h4></figcaption>
     </figure>
 <p>Rozpoczęcie pracy z kontenerem polega na zarejestrowaniu typu. W najprostszej formie będzie to zarejestrowanie klasy:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            ObjectLocator.Register&lt;ContactRepository&gt;();
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            ObjectLocator.Register&lt;ContactRepository&gt;();
 </code></pre></div><p>Oczywiście w tym przypadku klasa nie może być abstrakcyjna ponieważ nie można utworzyć instancji takiej klasy.</p>
 <p>Aby móc zarejestrować interfejs, klasę abstrakcyjną czy też skonfigurować typ musimy skorzystać z bardziej wyrafinowanych metod. Aby uniknąć tworzenia wielu wersji metody rejestrującej wybrano wariant, w którym w czasie rejestracji przez metodę <code>Register</code> zwracany jest skojarzony z typem obiekt <code>ObjectProfile</code> umożliwiający konfigurację. Dzięki wzorcowi Fluent Interface (metody konfigurujące zwracają referencję do obiektu, który je zawiera) nie jest konieczne ustalanie poszczególnych właściwości tego obiektu. Wszystko można wykonać w czasie jednego wywołania. Zobaczmy więc jak wygląda rejestracja interfejsu:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            ObjectLocator.Register&lt;IContactRepository&gt;().
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            ObjectLocator.Register&lt;IContactRepository&gt;().
                 WithType&lt;ContactRepository&gt;();
 </code></pre></div><p>Parametrem metody <code>WithType</code> jest klasa, która implementuje rejestrowany typ. Parametr ten nie powinien być oczywiście klasą abstrakcyjną. W wywołaniu metody <code>Register</code> możliwe jest również skorzystanie z typów generic:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            ObjectLocator.Register&lt;IRepository&lt;Contact&gt;&gt;().
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            ObjectLocator.Register&lt;IRepository&lt;Contact&gt;&gt;().
                 WithType&lt;ContactRepository&gt;();
 </code></pre></div><p>Identycznie jest w przypadku rejestrowania klas abstrakcyjnych.</p>
 <p>Domyślny czas życia obiektu w kontenerze to <code>LifetimeStyle.Singleton</code>, czyli wszystkie wywołania w kodzie będzie obsługiwała tylko jedna instancja klasy. Można oczywiście to zmienić tak, aby dla każdego wywołania tworzona była nowa instancja klasy:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            ObjectLocator.Register&lt;IContactRepository&gt;().
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            ObjectLocator.Register&lt;IContactRepository&gt;().
                 WithType&lt;ContactRepository&gt;().
                 AsSingleCall();
 </code></pre></div><p>Aby pobrać z kontenera instancję musimy wywołać metodę <code>GetInstance</code> podając w wywołaniu zarejestrowany typ. Poniżej wywołanie dla przypadku, kiedy zarejestrowaliśmy wcześniej interfejs:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            <span style="color:#66d9ef">var</span> repository = ObjectLocator.GetInstance&lt;IContactRepository&gt;();
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            <span style="color:#66d9ef">var</span> repository = ObjectLocator.GetInstance&lt;IContactRepository&gt;();
 </code></pre></div><p>Oczywiście konstruktor obiektu, którego instancję tworzymy może zawierać parametry. Dla takich przypadków korzystamy z przeciążonej metody <code>GetInstance</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            <span style="color:#66d9ef">var</span> repository = ObjectLocator.GetInstance&lt;IContactRepository&gt;(
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            <span style="color:#66d9ef">var</span> repository = ObjectLocator.GetInstance&lt;IContactRepository&gt;(
                 <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">object</span>[] { <span style="color:#66d9ef">new</span> Database() });
 </code></pre></div><p>W powyższym przykładzie przy tworzeniu obiektu korzystamy z konstruktora, który zawiera jeden parametr. Jeśli typ <code>Database</code> zostałby wcześniej zarejestrowany w kontenerze, możemy do konstruktora przekazać typ pobrany z IoC:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            <span style="color:#66d9ef">var</span> repository = ObjectLocator.GetInstance&lt;IContactRepository&gt;(
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            <span style="color:#66d9ef">var</span> repository = ObjectLocator.GetInstance&lt;IContactRepository&gt;(
                 <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">object</span>[] { ObjectLocator.GetInstance&lt;Database&gt;() });
 </code></pre></div><p>Wszystkie pokazane do tej pory wywołania metody <code>GetInstance</code> skutkowały utworzeniem instancji z wykorzystaniem refleksji, co nie zawsze jest dobrym rozwiązaniem. Dodatkowo wewnętrzna, statyczna klasa <code>ObjectCreator</code> może nie poradzić sobie w sytuacji kiedy klasa, której instancję chcemy utworzyć, posiada kilka konstruktorów o takiej samej liczbie parametrów i niektóre wartości przekazywane w wywołaniu metody <code>GetInstance</code> mają wartość <code>null</code>. Rozwiązaniem jest taka konfiguracja rejestrowanego typu, aby tworzenie instancji odbywało się poza kontenerem. Najprostszy sposób widzimy poniżej:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            ObjectLocator.Register&lt;IContactRepository&gt;().
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            ObjectLocator.Register&lt;IContactRepository&gt;().
                 WithInstance(<span style="color:#66d9ef">new</span> ContactRepository());
 </code></pre></div><p>Interfejs <code>IContactRepository</code> rejestrowany jest od razu z gotową instancją obiektu. Oczywiście powyższa konfiguracja ma sens tylko dla czasu życia obiektu <code>LifetimeStyle.Singleton</code> ponieważ przekazany obiekt będzie używany do obsługi wszystkich żądań.</p>
 <p>Zamiast przekazywać do kontenera gotowy obiekt, można proces tworzenia opóźnić do momentu, kiedy dana instancja rzeczywiście będzie potrzebna. Do tego służy metoda <code>CallWhenCreating</code> klasy <code>ObjectProfile</code> która jako parametr przyjmuje metodę zwrotną typu:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            Func&lt;ObjectProfile&lt;TRegisteredAs&gt;, <span style="color:#66d9ef">object</span>[], TRegisteredAs&gt;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            Func&lt;ObjectProfile&lt;TRegisteredAs&gt;, <span style="color:#66d9ef">object</span>[], TRegisteredAs&gt;
 </code></pre></div><p>Delegat <code>Fun</code> wprowadzony w .NET 3.5 i zawierający powyższe parametry odpowiada następującemu delegatowi z .NET 2.0:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            <span style="color:#66d9ef">delegate</span> TRegisteredAs ObjectCreatingCallback&lt;TRegisteredAs&gt;(
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            <span style="color:#66d9ef">delegate</span> TRegisteredAs ObjectCreatingCallback&lt;TRegisteredAs&gt;(
                 ObjectProfile&lt;TRegisteredAs&gt; profile, <span style="color:#66d9ef">object</span>[] parameters)
                 <span style="color:#66d9ef">where</span> TRegisteredAs : class;
 </code></pre></div><p>Jak widzimy metoda tworząca otrzymuje z kontenera obiekt zawierający ustawienia zarejestrowanego typu oraz parametry dla konstruktora. Użycie nie jest skomplikowane. Najpierw wywołanie wykorzystujące delegat anonimowy:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            ObjectLocator.Register&lt;IContactRepository&gt;().
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            ObjectLocator.Register&lt;IContactRepository&gt;().
                 WithType&lt;ContactRepository&gt;().
                 CallWhenCreating(
                 <span style="color:#66d9ef">delegate</span>(
@@ -141,7 +141,7 @@
                         <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> ContactRepository(database);
                     });
 </code></pre></div><p>I wyrażenie lambda, nowość w ramach platformy .NET 3.5:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            ObjectLocator.Register&lt;IContactRepository&gt;().
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            ObjectLocator.Register&lt;IContactRepository&gt;().
                 WithType&lt;ContactRepository&gt;().
                 CallWhenCreating((profile, parameters) =&gt;
                     {
@@ -149,7 +149,7 @@
                         <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> ContactRepository(database);
                     });
 </code></pre></div><p>Jeśli tworząc nowy obiekt nie potrzebujemy informacji dotyczących konfiguracji typu oraz nie przekazujemy do konstruktora wartości możemy w przypadku delegata pominąć parametry:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            ObjectLocator.Register&lt;IContactRepository&gt;().
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            ObjectLocator.Register&lt;IContactRepository&gt;().
                 WithType&lt;ContactRepository&gt;().
                 CallWhenCreating(
                 <span style="color:#66d9ef">delegate</span>
@@ -157,29 +157,29 @@
                         <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> ContactRepository();
                     });
 </code></pre></div><p>Ważna również jest możliwość wywołania zdefiniowanej metody zwrotnej po utworzenia obiektu. Przykładowo wskazane może być, aby dla każdego formularza w programie wstawić w tytule okna nazwę aplikacji, zdefiniować identyczne rozmiary itp. W celu zapewnienia spełnienia tych wymagań kontener zawiera metodę <code>CallWhenCreated</code> klasy <code>ObjectProfile</code> zadeklarowaną z następującym parametrem:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            Action&lt;ObjectProfile&lt;TRegisteredAs&gt;, TRegisteredAs&gt;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            Action&lt;ObjectProfile&lt;TRegisteredAs&gt;, TRegisteredAs&gt;
 </code></pre></div><p>Podobnie jak w przypadku metody zwrotnej wywoływanej w celu utworzenia obiektu, tak i tutaj delegat <code>Action</code> możemy przedstawić, jeśli chcielibyśmy korzystać z wcześniejszych wersji platformy .NET (zobacz uwagi na końcu notki), w postaci własnego delegata:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            <span style="color:#66d9ef">delegate</span> <span style="color:#66d9ef">void</span> ObjectCreatedCallback&lt;TRegisteredAs&gt;(
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            <span style="color:#66d9ef">delegate</span> <span style="color:#66d9ef">void</span> ObjectCreatedCallback&lt;TRegisteredAs&gt;(
                 ObjectProfile&lt;TRegisteredAs&gt; profile, TRegisteredAs instance)
                 <span style="color:#66d9ef">where</span> TRegisteredAs : class;
 </code></pre></div><p>Tradycyjnie przykład zastosowania. Tym razem użyjemy zdefiniowanej metody zwrotnej:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            ObjectLocator.Register&lt;IContactRepository&gt;().
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            ObjectLocator.Register&lt;IContactRepository&gt;().
                 WithType&lt;ContactRepository&gt;().
                 CallWhenCreated(RepositoryCreated);
 </code></pre></div><p>Na koniec procesu rejestracji możemy sobie zażyczyć, aby instancja danego typu została od razu utworzona. Tę właściwość możemy wykorzystywać w przypadku dużych klas, które na pewno będą używane w czasie działania aplikacji. Oczywiście ma to sens jedynie w przypadku tych klas, dla których tylko jedna instancja będzie obsługiwała wszystkie żądania w programie. Dobrym przykładem są tutaj formularze. Poniżej stosowny przykład:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            ObjectLocator.Register&lt;IContactRepository&gt;().
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            ObjectLocator.Register&lt;IContactRepository&gt;().
                 AsSingleton().
                 WithType&lt;ContactRepository&gt;().
                 AndBuildUp();
 </code></pre></div><p>Oczywiście na tym etapie również istnieje możliwość przekazania do konstruktora klasy wymaganych wartości:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            ObjectLocator.Register&lt;IContactRepository&gt;().
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            ObjectLocator.Register&lt;IContactRepository&gt;().
                 AsSingleton().
                 WithType&lt;ContactRepository&gt;().
                 AndBuildUp(<span style="color:#66d9ef">new</span> <span style="color:#66d9ef">object</span>[] { <span style="color:#e6db74">&#34;test&#34;</span> });
 </code></pre></div><p>Metoda <code>AndBuildUp</code> w przeciwieństwie do pozostałych metod klasy <code>ObjectProfile</code> zwraca utworzoną instancję klasy a nie wskazanie na obiekt konfigurujący.</p>
 <h2 id="w-praktyce">W praktyce</h2>
 <p>Najwłaściwsze miejsce konfiguracji kontenera to start programu. Osobiście korzystam z fabryki abstrakcyjnej, której konkretne implementacje decydują o sposobie działania programu np.:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ApplicationInitializer</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ApplicationInitializer</span>
     {
         <span style="color:#75715e">/// &lt;summary&gt;
 </span><span style="color:#75715e"></span>        <span style="color:#75715e">/// Rejestrowanie widoków.
@@ -202,7 +202,7 @@
 </span><span style="color:#75715e"></span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">void</span> RegisterRepositories();
     }
 </code></pre></div><p>Zastosowany podział, czyli nazewnictwo i przeznaczenie metod wytwórczych, wynika głównie ze wzorca <strong>Model-View-Presenter</strong> wykorzystywanego z lubością przeze mnie w aplikacjach. Poniżej kilka przykładowych rejestracji widoków, gdzie formularze są w programie traktowane jako interfejsy:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> RegisterViews()
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> RegisterViews()
         {
             ObjectLocator.Register&lt;IAuthenticateView&gt;().
                 WithType&lt;AuthenticateForm&gt;().
@@ -217,7 +217,7 @@
                 CallWhenCreated(ViewCreated);
         }
 </code></pre></div><p>Metoda <code>ViewCreated</code> pozwala na ustawienie parametrów wspólnych dla wszystkich formularzy takich jak widoczności wybranych kontrolek czy rozmiar. A tak wygląda rejestracja fabryk:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> RegisterFactories()
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> RegisterFactories()
         {
             ObjectLocator.Register&lt;BusinessEntityFactory&gt;();
             ObjectLocator.Register&lt;DataGridStyleBuilder&gt;();
@@ -225,7 +225,7 @@
         }
 </code></pre></div><p>W powyższym kodzie wszystkie fabryki są jednocześnie klasami implementującymi. Domyślnie obiekt tworzony jest w czasie pierwszego wywołania i istnieje przez cały czas pracy aplikacji. Zauważmy, iż dzięki takiemu podejściu jedynym singletonem w naszym kodzie pozostanie kontener IoC!</p>
 <p>Usługi dostarczają do prezenterów model:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> RegisterServices()
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> RegisterServices()
         {
             ObjectLocator.Register&lt;IAuthenticateService&gt;().
                 WithType&lt;AuthenticateService&gt;().
@@ -239,7 +239,7 @@
         }
 </code></pre></div><p>W przeciwieństwie do fabryk instancje usług będą tworzone dla każdego wywołania.</p>
 <p>Na koniec fragment odpowiadający za klasy umożliwiające dostęp do danych. Rejestracja powiązana jest z definicją delegatów odpowiedzialnych za tworzenie obiektów.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> RegisterRepositories()
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">void</span> RegisterRepositories()
         {
             ObjectLocator.Register&lt;Database&gt;().
                 AsSingleton().

@@ -4,7 +4,7 @@
         <meta name="theme-color" content="#405365"/>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="generator" content="Hugo 0.83.1" />
+        <meta name="generator" content="Hugo 0.90.1" />
         <meta name="description" content="Własna implementacja struktury hierarchicznej TreeNode w .NET C#" />
         <title>TreeNode w wersji koguciej - arkadiusz wasniewski blog</title>
         <link rel="canonical" href="https://awasn.github.io/treenode-w-wersji-koguciej/">
@@ -16,7 +16,7 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
-        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.f45a909800924faa836a73b82a1d4cb352f8053134a426a9dcafa61cf6a8c5d0.css" integrity="sha256-9FqQmACST6qDanO4Kh1Ms1L4BTE0pCap3K&#43;mHPaoxdA=" />
+        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.809247dcc0227e384b256fd9df3f1c82b2b752f0ca6ba0f97410d05bcdd60729.css" integrity="sha256-gJJH3MAifjhLJW/Z3z8cgrK3UvDKa6D5dBDQW83WByk=" />
 
     </head>
     <body>
@@ -66,7 +66,7 @@
 
         <p>Kilkukrotnie już zdarzyło się, iż potrzebowałem klasy, która umożliwiłaby zapamiętanie typowanych (typed, generic) struktur hierarchicznych (hierarchical collection) czyli dowolnego obiektu wraz z jego elementami potomnymi. W ramach platformy .NET istnieją już klasy implementujące podobną funkcjonalność. Mowa tu oczywiście o <code>TreeNode</code> z <code>TreeNodeCollection</code> oraz o, bardziej hermetycznym, <code>MenuItem</code> wraz z wewnętrznym <code>MenuItemCollection</code>. Klasy przeznaczone do obsługi menu trudno byłoby użyć do własnych rozwiązań. <code>TreeNode</code> jest zaś &ldquo;ciężka&rdquo; i brak w niej typowania, czyli możliwości określenia typu przechowywanego obiektu (precz z rzutowaniem!).</p>
 <p>Z tego też powodu stworzyłem razu pewnego własną implementację struktury hierarchicznej. Nie jest ona skomplikowana. Punktem wyjścia jest klasa przechowująca dane wraz z kolekcją elementów potomnych:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LightTreeNode</span>&lt;T&gt;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LightTreeNode</span>&lt;T&gt;
     {
         <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">readonly</span> T <span style="color:#ae81ff">_</span>item;
         <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">readonly</span> LightTreeNodeCollection&lt;T&gt; <span style="color:#ae81ff">_</span>nodes;
@@ -88,7 +88,7 @@
         }
     }
 </code></pre></div><p>Kolekcja przechowująca potomków dla ułatwienia operowania implementuje interfejs <code>ICollection&lt;T&gt;</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LightTreeNodeCollection</span>&lt;T&gt; : ICollection&lt;LightTreeNode&lt;T&gt;&gt;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LightTreeNodeCollection</span>&lt;T&gt; : ICollection&lt;LightTreeNode&lt;T&gt;&gt;
     {
         <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">readonly</span> List&lt;LightTreeNode&lt;T&gt;&gt; <span style="color:#ae81ff">_l</span>ist;
         <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">readonly</span> LightTreeNode&lt;T&gt; <span style="color:#ae81ff">_</span>owner;
@@ -174,7 +174,7 @@
         <span style="color:#75715e">#endregion
 </span><span style="color:#75715e"></span>    }
 </code></pre></div><p>Przykład zastosowania to chociażby przygotowanie dla widoku (<strong>View</strong>) poleceń menu z poziomu prezentera (<strong>Presenter</strong>, <strong>Presentation Model</strong>):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            <span style="color:#66d9ef">var</span> menu = <span style="color:#66d9ef">new</span> LightTreeNode&lt;Command&gt;(<span style="color:#66d9ef">new</span> Command(<span style="color:#e6db74">&#34;Opcje&#34;</span>));
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            <span style="color:#66d9ef">var</span> menu = <span style="color:#66d9ef">new</span> LightTreeNode&lt;Command&gt;(<span style="color:#66d9ef">new</span> Command(<span style="color:#e6db74">&#34;Opcje&#34;</span>));
             LightTreeNode&lt;Command&gt; submenu = menu.Nodes.Add(
                 <span style="color:#66d9ef">new</span> Command(<span style="color:#e6db74">&#34;Nawigacja&#34;</span>));
             submenu.Nodes.Add(<span style="color:#66d9ef">new</span> Command(<span style="color:#e6db74">&#34;Pierwszy&#34;</span>, MoveFirst));

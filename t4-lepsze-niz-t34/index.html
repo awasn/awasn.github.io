@@ -4,7 +4,7 @@
         <meta name="theme-color" content="#405365"/>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="generator" content="Hugo 0.83.1" />
+        <meta name="generator" content="Hugo 0.90.1" />
         <meta name="description" content="Wykorzystanie szablonów tekstowych T4 Text Template Transformation Toolkit do generowania kodu warstwy danych w .NET C# Visual Studio" />
         <title>T4 lepsze niż T34 - arkadiusz wasniewski blog</title>
         <link rel="canonical" href="https://awasn.github.io/t4-lepsze-niz-t34/">
@@ -16,7 +16,7 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
-        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.f45a909800924faa836a73b82a1d4cb352f8053134a426a9dcafa61cf6a8c5d0.css" integrity="sha256-9FqQmACST6qDanO4Kh1Ms1L4BTE0pCap3K&#43;mHPaoxdA=" />
+        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.809247dcc0227e384b256fd9df3f1c82b2b752f0ca6ba0f97410d05bcdd60729.css" integrity="sha256-gJJH3MAifjhLJW/Z3z8cgrK3UvDKa6D5dBDQW83WByk=" />
 
     </head>
     <body>
@@ -109,7 +109,7 @@
 <h2 id="wczytanie-struktury">Wczytanie struktury</h2>
 <p>Mając zdefiniowaną strukturę następnym krokiem jest wczytanie jej z dysku do pamięci. Korzystamy przy tym z możliwości dostarczanych przez przestrzeń nazw <code>System.Xml.Serialization</code>, która zawiera klasy umożliwiające serializację obiektów do formatu XML. Tworzymy w związku z tym dla każdego elementu z pliku XML klasę, której właściwościami są atrybuty i elementy tegoż elementu.</p>
 <p>Poniżej mamy przykład klasy, która reprezentuje element <code>definition</code>. Powiązanie pomiędzy atrybutami XML a polami klasy zapewnia atrybut <code>XmlAttribute</code> (<code>XmlAttributeAttrubite</code>). Odwołanie do elementów uzyskujemy korzystając z atrybutu <code>XmlElement</code> (<code>XmlElementAttribute</code>).</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#a6e22e">    [XmlRoot(&#34;definition&#34;, IsNullable = false, Namespace = &#34;DefinitionSchema.xsd&#34;)]</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#a6e22e">    [XmlRoot(&#34;definition&#34;, IsNullable = false, Namespace = &#34;DefinitionSchema.xsd&#34;)]</span>
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Definition</span>
     {
         <span style="color:#75715e">/// &lt;summary&gt;
@@ -131,7 +131,7 @@
         <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">string</span> Namespace;
     }
 </code></pre></div><p>Posiadając już utworzone klasy <code>Definition</code>, <code>Entity</code>, <code>Field</code> można wczytać je do pamięci. Operację tę wykonuje następujący kod:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Definition ReadDefinition()
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Definition ReadDefinition()
         {
             XmlReaderSettings settings = <span style="color:#66d9ef">new</span> XmlReaderSettings();
             settings.ValidationType = ValidationType.Schema;
@@ -147,7 +147,7 @@
 <h2 id="szablony">Szablony</h2>
 <p>Generowany kod powstaje w procesie transformacji na podstawie i przy współudziale szablonów tekstowych. Szablony poza tekstem zawierają dyrektywy (znaczniki &lt;#@&hellip;#&gt;), które przede wszystkim ustawiają parametry transformacji, importują konieczne przestrzenie nazw etc. Korzystając ze znaczników &lt;#…#&gt;, &lt;#=…#&gt;, &lt;#+…#&gt; możemy do szablonu wstawić kod język C# lub Visual Basic, który w czasie transformacji może wpływać na tworzony wyjściowy strumień znakowy. T4 umożliwia nam również zdefiniowanie własnego analizatora dyrektyw.</p>
 <p>Kod poniżej pokazuje początek szablonu <strong>Entity.cs.t4</strong>, który generuje klasy odwzorowujące zdefiniowane encje.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    &lt;<span style="color:#960050;background-color:#1e0010">#@</span> Assembly Name=<span style="color:#e6db74">&#34;t4.exe&#34;</span> <span style="color:#960050;background-color:#1e0010">#</span>&gt;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    &lt;<span style="color:#960050;background-color:#1e0010">#@</span> Assembly Name=<span style="color:#e6db74">&#34;t4.exe&#34;</span> <span style="color:#960050;background-color:#1e0010">#</span>&gt;
     &lt;<span style="color:#960050;background-color:#1e0010">#@</span> import namespace=<span style="color:#e6db74">&#34;T4&#34;</span> <span style="color:#960050;background-color:#1e0010">#</span>&gt;
     &lt;<span style="color:#960050;background-color:#1e0010">#@</span> import namespace=<span style="color:#e6db74">&#34;T4.Schema&#34;</span> <span style="color:#960050;background-color:#1e0010">#</span>&gt;
     &lt;<span style="color:#960050;background-color:#1e0010">#@</span> import namespace=<span style="color:#e6db74">&#34;T4.Helpers&#34;</span> <span style="color:#960050;background-color:#1e0010">#</span>&gt;
@@ -177,12 +177,12 @@
 </code></pre></div><p>Pierwsze cztery linie informują silnik T4 gdzie należy szukać w procesie transformacji wywoływanych metod pomocniczych. Następnie w linii szóstej ładujemy do pamięci zdefiniowaną strukturę. W linii ósmej oraz trzynastej włączamy do szablony zawartość zdefiniowaną w plikach zewnętrznych. Dalej następuje w pętli (linia dziewiętnasta) generowanie klas.</p>
 <h2 id="generowanie-kodu">Generowanie kodu</h2>
 <p>Na koniec pozostało nam wywołanie silnika T4. W Visual Studio 2005 SDK jak i w Guidance Automation Toolkit proces ten przebiega identycznie.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">                Engine engine = <span style="color:#66d9ef">new</span> Engine();
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">                Engine engine = <span style="color:#66d9ef">new</span> Engine();
                 Host host = <span style="color:#66d9ef">new</span> Host();
 
                 ProcessTemplate(engine, host, <span style="color:#e6db74">@&#34;Entity.cs.t4&#34;</span>);
 </code></pre></div><p>Wpierw tworzymy wpierw silnik T4 (<code>Engine</code>) oraz host czyli klasę implementującą interfejs <code>ITextTemplatingEngineHost</code> a odpowiadającą między innymi za interpretację dyrektyw znajdujących się w szablonach. Następnie wywołujemy metodę <code>ProcessTemplate</code> silnika przekazując mu zawartość szablonu oraz host.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> ProcessTemplate(Engine engine, Host host, <span style="color:#66d9ef">string</span> fileName)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> ProcessTemplate(Engine engine, Host host, <span style="color:#66d9ef">string</span> fileName)
             {
                 <span style="color:#66d9ef">string</span> filePath = <span style="color:#66d9ef">string</span>.Format(<span style="color:#e6db74">@&#34;.\Templates\{0}&#34;</span>, fileName);
 

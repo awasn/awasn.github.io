@@ -4,7 +4,7 @@
         <meta name="theme-color" content="#405365"/>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="generator" content="Hugo 0.83.1" />
+        <meta name="generator" content="Hugo 0.90.1" />
         <meta name="description" content="Wzorzec metoda fabryki w .NET C#" />
         <title>Metoda fabryki - arkadiusz wasniewski blog</title>
         <link rel="canonical" href="https://awasn.github.io/metoda-fabryki/">
@@ -17,7 +17,7 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
-        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.f45a909800924faa836a73b82a1d4cb352f8053134a426a9dcafa61cf6a8c5d0.css" integrity="sha256-9FqQmACST6qDanO4Kh1Ms1L4BTE0pCap3K&#43;mHPaoxdA=" />
+        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.809247dcc0227e384b256fd9df3f1c82b2b752f0ca6ba0f97410d05bcdd60729.css" integrity="sha256-gJJH3MAifjhLJW/Z3z8cgrK3UvDKa6D5dBDQW83WByk=" />
 
     </head>
     <body>
@@ -121,7 +121,7 @@
         <figcaption><h4>Factory Method - Przykład 1</h4></figcaption>
     </figure>
 <p>Zaczynamy od zdefiniowania interfejsu <code>IDiscountStrategy</code> dla obiektów obliczających rabat i tworzonych przez metodę wytwórczą. Będzie on zawierał jedną metodę o nazwie <code>Calculate</code>, która jako parametr będzie przyjmowała obiekt typu <code>Customer</code>, obliczała rabat i zwracała jego wartość w postaci liczby rzeczywistej. Klasy konkretyzujące ów interfejs to <code>SpecialDiscountStrategy</code> oraz <code>StandardDiscountStrategy</code>. Abstrakcyjna klasa zawierająca metodę fabryki, która umożliwi zwracanie konkretnego sposóbu obliczania rabatu, nazywa się <code>DiscountStrategyFactory</code>. Klasy potomne to <code>SpecialDiscountStrategyFactory</code> oraz <code>StandardDiscountStrategyFactory</code>. Proszę zwrócić uwagę na zastosowane konwencje nazewnicze. Są one zgodne z tym o czym wspominałem kilka chwil wcześniej. Przy okazji wprowadziliśmy niejawnie wzorzec strategii (ang. Strategy), którego zadaniem jest umożliwienie zbudowania rodziny algorytmów wykonujących określone zadanie i używanie ich wymiennie.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            Customer customer = <span style="color:#66d9ef">new</span> Customer();
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            Customer customer = <span style="color:#66d9ef">new</span> Customer();
 
             DiscountStrategyFactory factory =
                 <span style="color:#66d9ef">new</span> StandardDiscountStrategyFactory();
@@ -136,13 +136,13 @@
         <figcaption><h4>Factory Method - Przykład 2</h4></figcaption>
     </figure>
 <p>Założenia są identyczne jak w poprzednim przykładzie. Poniżej dwa warianty kodu wykorzystującego proponowaną implementację:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            Customer customer = <span style="color:#66d9ef">new</span> Customer();
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            Customer customer = <span style="color:#66d9ef">new</span> Customer();
 
             IDiscountStrategy discount =
                 DiscountStrategyFactory.CreateStandardDiscountStrategy();
             <span style="color:#66d9ef">double</span> <span style="color:#66d9ef">value</span> = discount.Calculate(customer);
 </code></pre></div><p>oraz</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            Customer customer = <span style="color:#66d9ef">new</span> Customer();
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            Customer customer = <span style="color:#66d9ef">new</span> Customer();
 
             StandardDiscountStrategy discount =
                 DiscountStrategyFactory.CreateStandardDiscountStrategy();
@@ -156,7 +156,7 @@
         <figcaption><h4>Factory Method - Przykład 3</h4></figcaption>
     </figure>
 <p>Przykład wykorzystania omawianej implementacji:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            Customer customer = <span style="color:#66d9ef">new</span> Customer();
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            Customer customer = <span style="color:#66d9ef">new</span> Customer();
 
             IDiscountStrategy discount =
                 DiscountStrategyFactory.Create(customer);
@@ -170,13 +170,13 @@
         <figcaption><h4>Factory Method - Przykład 4</h4></figcaption>
     </figure>
 <p>Uzyskany kod jest bardzo elastyczny. Zakładamy przy tym, iż programista decyduje o rodzaju rabatu w danym miejscu programu:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            Customer customer = <span style="color:#66d9ef">new</span> Customer();
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            Customer customer = <span style="color:#66d9ef">new</span> Customer();
 
             IDiscountStrategy discount = DiscountStrategyFactory.
                 Create&lt;StandardDiscountStrategy&gt;();
             <span style="color:#66d9ef">double</span> <span style="color:#66d9ef">value</span> = discount.Calculate(customer);
 </code></pre></div><p>Najprostsza z możliwych implementacji metody fabryki wykorzystuje refleksję do tworzenia instancji klas. W przypadku dużej liczby klas, które mają być tworzone i mają konstruktor domyślny lub konstruktor z takimi samymi typami parametrów etc. poniższe rozwiązanie automatyzuje tworzenie instancji klas danego typu przez co zaoszczędzamy cenny czas (ale tylko ze względu na proces wpisywania powtarzającego się wielokrotnie kodu. Refleksja sama w sobie jest bardzo czasożerna i należy ją używać z rozwagą).</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DiscountStrategyFactory</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DiscountStrategyFactory</span>
     {
         <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> TDiscount Create&lt;TDiscount&gt;()
             <span style="color:#66d9ef">where</span> TDiscount : IDiscountStrategy, <span style="color:#66d9ef">new</span>()
@@ -192,13 +192,13 @@
         <figcaption><h4>Factory Method - Przykład 5</h4></figcaption>
     </figure>
 <p>W tej implementacji znowu przekazujemy podjęcie decyzji o rodzaju konkretnego obiektu, który zostanie zwrócony do metody wytwórczej. Aczkolwiek inaczej niż w przykładzie numer 3 decyzja będzie podejmowana na podstawie interfejsu, który ma być zwrócony a nie na podstawie cech obiektu typu <code>Customer</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            Customer customer = <span style="color:#66d9ef">new</span> Customer();
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">            Customer customer = <span style="color:#66d9ef">new</span> Customer();
 
             ICustomerRepository repository = RepositoryFactory.
                 Create&lt;ICustomerRepository&gt;();
             repository.Add(customer);
 </code></pre></div><p>Podstawowa implementacja metody fabryki:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RepositoryFactory</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RepositoryFactory</span>
     {
         <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> TRepository Create&lt;TRepository&gt;()
             <span style="color:#66d9ef">where</span> TRepository : IRepository

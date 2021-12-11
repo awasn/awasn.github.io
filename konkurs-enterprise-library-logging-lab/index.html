@@ -4,7 +4,7 @@
         <meta name="theme-color" content="#405365"/>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="generator" content="Hugo 0.83.1" />
+        <meta name="generator" content="Hugo 0.90.1" />
         <meta name="description" content="Opis wymagań konkursu dotyczącego Microsoft Enterprise Library Logging Application Block" />
         <title>Konkurs Enterprise Library - Logging (LAB) - arkadiusz wasniewski blog</title>
         <link rel="canonical" href="https://awasn.github.io/konkurs-enterprise-library-logging-lab/">
@@ -17,7 +17,7 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
-        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.f45a909800924faa836a73b82a1d4cb352f8053134a426a9dcafa61cf6a8c5d0.css" integrity="sha256-9FqQmACST6qDanO4Kh1Ms1L4BTE0pCap3K&#43;mHPaoxdA=" />
+        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.809247dcc0227e384b256fd9df3f1c82b2b752f0ca6ba0f97410d05bcdd60729.css" integrity="sha256-gJJH3MAifjhLJW/Z3z8cgrK3UvDKa6D5dBDQW83WByk=" />
 
     </head>
     <body>
@@ -122,7 +122,7 @@
 <li>Błędy związane z parametrami np. z próbą dzielenia przez zero.</li>
 </ul>
 <p>Najważniejszy kod naszej aplikacji, zawierający już wymagane wpisy rejestrujące zdarzenia, wygląda następująco:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">        <span style="color:#75715e">/// &lt;summary&gt;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">        <span style="color:#75715e">/// &lt;summary&gt;
 </span><span style="color:#75715e"></span>        <span style="color:#75715e">/// Przetworzenia żądania klienta.
 </span><span style="color:#75715e"></span>        <span style="color:#75715e">/// &lt;/summary&gt;
 </span><span style="color:#75715e"></span>        <span style="color:#75715e">/// &lt;param name=&#34;context&#34;&gt;Kontekst żądania.&lt;/param&gt;
@@ -186,7 +186,7 @@
         }
 </code></pre></div><p>Procedura <code>ProcessRequest</code> przetwarza żądanie klienta: odczytuje w metodzie <code>ReceiveRequest</code> przekazane w zapytaniu parametry, wykonuje obliczenia a następnie korzystając z <code>SendResponse</code> wysyła odpowiedź. Jak widzimy początek <code>ProcessRequest</code> to zarejestrowanie informacji w logu o fakcie żądania dzielenia dwóch liczb całkowitych. Następnie ma miejsce odczytanie parametrów zapytania. Jakikolwiek błąd skutkuje jego rejestracją i zakończeniem obsługi żądania. Warto zwrócić uwagę, iż w przypadku błędu próbujemy również zarejestrować odczytane parametry żądania (stąd zresztą wynika konieczność inicjacji zmiennych dividend oraz divisior mimo, iż <code>ReceiveRequest</code> zwraca parametry poprzez out). Poprawne wykonanie operacji dzielenia powoduje wysłanie odpowiedzi oraz zarejestrowanie wyniku.</p>
 <p>Jak już wcześniej zostało powiedziane, istnieje możliwość definiowania również własnych kategorii zdarzeń. Prezentuje to poniższy kod:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">        <span style="color:#75715e">/// &lt;summary&gt;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">        <span style="color:#75715e">/// &lt;summary&gt;
 </span><span style="color:#75715e"></span>        <span style="color:#75715e">/// Metoda wywoływana w momencie zajścia w aplikacji nie obsłużonego wyjątku.
 </span><span style="color:#75715e"></span>        <span style="color:#75715e">/// &lt;/summary&gt;
 </span><span style="color:#75715e"></span>        <span style="color:#75715e">/// &lt;param name=&#34;sender&#34;&gt;Obiekt sygnalizujący zdarzenie.&lt;/param&gt;

@@ -4,7 +4,7 @@
         <meta name="theme-color" content="#405365"/>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="generator" content="Hugo 0.83.1" />
+        <meta name="generator" content="Hugo 0.90.1" />
         <meta name="description" content="Poprawne zapisywanie roku w pliku DBF" />
         <title>Y2K atakuje po latach - arkadiusz wasniewski blog</title>
         <link rel="canonical" href="https://awasn.github.io/y2k-atakuje-po-latach/">
@@ -17,7 +17,7 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css" integrity="sha256-YqnnS/cQ7vE7gfVjdfx+JMi5EFD6m6Zqdemj81rs6PU=" crossorigin="anonymous" />
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/agate.min.css">
-        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.f45a909800924faa836a73b82a1d4cb352f8053134a426a9dcafa61cf6a8c5d0.css" integrity="sha256-9FqQmACST6qDanO4Kh1Ms1L4BTE0pCap3K&#43;mHPaoxdA=" />
+        <link rel="stylesheet" href="https://awasn.github.io/awasn.min.809247dcc0227e384b256fd9df3f1c82b2b752f0ca6ba0f97410d05bcdd60729.css" integrity="sha256-gJJH3MAifjhLJW/Z3z8cgrK3UvDKa6D5dBDQW83WByk=" />
 
     </head>
     <body>
@@ -66,7 +66,7 @@
         </header>
 
         <p>Niektórzy pewnie pamiętają mój wpis dotyczący <a href="https://awasn.github.io/dbf-po-ludzku/">plików DBF</a>. Nagłówek pliku DBF zawiera datę, gdzie na rok, miesiąc i dzień przeznaczone jest po jednym bajcie.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#a6e22e">    [StructLayout(LayoutKind.Sequential)]</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#a6e22e">    [StructLayout(LayoutKind.Sequential)]</span>
     <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Dbf3Header</span>
     {
         <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">byte</span> ReservedSize = <span style="color:#ae81ff">20</span>;
@@ -83,7 +83,7 @@
     }
 </code></pre></div><p>W przypadku miesiąca i dnia jest to zakres wystarczający. Niestety jeśli chodzi o rok już nie. W zeszłym stuleciu (rany, ależ to poważnie brzmi) ze względu na niedostatek zasobów systemowych (pamiętacie stwierdzenie Gatesa, iż 640 KB każdemu wystarczy?) ograniczano do minimum przestrzeń dla dat zazwyczaj pamiętając dla roku tylko dwie ostatnie cyfry.</p>
 <p>Zamykając plik DBF wypada uaktualnić datę i czas. Fragment kodu poniżej:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">                    DateTime now = DateTime.Now;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp">                    DateTime now = DateTime.Now;
                     header.Year = (<span style="color:#66d9ef">byte</span>)(now.Year % <span style="color:#ae81ff">100</span>);
                     header.Mounth = (<span style="color:#66d9ef">byte</span>)now.Month;
                     header.Day = (<span style="color:#66d9ef">byte</span>)now.Day;
